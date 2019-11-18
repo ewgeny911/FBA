@@ -4137,20 +4137,6 @@
             Пример: ConnectionID=21;EnterMode=Work;
             </summary>
         </member>
-        <member name="M:FBA.sys.Application_ThreadException(System.Object,System.Threading.ThreadExceptionEventArgs)">
-            <summary>
-            Все исключения, выданные основным потоком, обрабатываются этим методом.
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:FBA.sys.CurrentDomain_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)">
-            <summary>
-            Все исключения, выданные дополнительными потоками, обрабатываются в этом методе
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
         <member name="M:FBA.sys.GetUserPassCrypt(System.String,System.String)">
             <summary>
             Получить зашифрованный пароль пользователя.
@@ -5879,6 +5865,20 @@
             <summary>
             Конструктор статического класса.
             </summary>
+        </member>
+        <member name="M:FBA.sys.Application_ThreadException(System.Object,System.Threading.ThreadExceptionEventArgs)">
+            <summary>
+            Все исключения, выданные основным потоком, обрабатываются этим методом.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:FBA.sys.CurrentDomain_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            Все исключения, выданные дополнительными потоками, обрабатываются в этом методе
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:FBA.sys.IsAdmin(System.String)">
             <summary>
