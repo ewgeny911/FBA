@@ -1,0 +1,1085 @@
+\hypertarget{class_f_b_a_1_1_sys_d_b_edit}{}\section{Класс F\+B\+A.\+Sys\+D\+B\+Edit}
+\label{class_f_b_a_1_1_sys_d_b_edit}\index{F\+B\+A.\+Sys\+D\+B\+Edit@{F\+B\+A.\+Sys\+D\+B\+Edit}}
+
+
+Компонент для выбора атрибута из БД и показа значения на форме.  
+
+
+Граф наследования\+:F\+B\+A.\+Sys\+D\+B\+Edit\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_f_b_a_1_1_sys_d_b_edit}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_afb61c970db1b5f88eb9c1edf6de88763}{Sys\+D\+B\+Edit}} ()
+\begin{DoxyCompactList}\small\item\em Конструктор. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a5143b157d4887de2b81e15dee6494717}{Load\+Data\+Drop\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Загрузка данных в компонент. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+System.\+Windows.\+Forms.\+Button \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_aa32c11601037955b3c19a6aa3a889109}{btn\+Delete}}
+\begin{DoxyCompactList}\small\item\em Кнопка Delete, public чтобы был доступ с вызывающего класса. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Button \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a915b06dd2badb68f00940c6b72c1d3a4}{btn\+Edit}}
+\begin{DoxyCompactList}\small\item\em Кнопка Edit, public чтобы был доступ с вызывающего класса. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_f_b_a_1_1_combo_box_f_b_a}{F\+B\+A.\+Combo\+Box\+F\+BA}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ad5e31c513dbdd736a9130300cb6c5807}{combo\+Box}}
+\begin{DoxyCompactList}\small\item\em Компонент \mbox{\hyperlink{class_f_b_a_1_1_combo_box_f_b_a}{F\+B\+A.\+Combo\+Box\+F\+BA}}, public чтобы был доступ с вызывающего класса. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a570a27be3be8242a8a47f8a90dfffc18}{On\+Drop\+Down}} (Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Cобытие Drop\+Down. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a8c75cc2a6eb78a19a152bf9d64766c38}{On\+Edit\+Click}} (Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Cобытие Edit\+Click. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a92ebba63c241ca90599192bd5e2fd244}{Dispose}} (bool disposing)
+\begin{DoxyCompactList}\small\item\em Dispose \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Свойства}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_adeb4184205de5251176a05fb3103002f}{Entity\+Brief}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Сокращение сущности \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af647d0263d8b61fdf559797c3e503550}{Object\+ID}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em ИД объекта \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a67f0d8cf7653dfe7fb11851461f30471}{Attr\+Brief}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Сокращение атрибута \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a01aa80df320ef07c05b309ff775e6299}{S\+QL}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Запрос S\+QL \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_aa06663e1062ce9cafbd46081b97cc4a3}{M\+S\+QL}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Запрос M\+S\+QL \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_abf2f3971a2805ea00e87fa08559df60f}{Save\+Type}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Указываем что сохранять свойство Text или Selected\+Index. I\+N\+D\+EX, T\+E\+XT, L\+O\+O\+K\+UP. ~\newline
+\end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ad2c7f363da69716c7679a316e6fdc1ea}{Button\+Delete\+Visible}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство видимость кнопки Delete \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a036bbd00b9024e2bb8684e7bfc04b32d}{Button\+Edit\+Visible}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство видимость кнопки Edit \end{DoxyCompactList}\item 
+override Color \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a8b79d6a473498e7558bb362204b3d3da}{Back\+Color}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box.\+Back\+Color \end{DoxyCompactList}\item 
+Dock\+Style \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_adc0915832fe0d8c4d563a46585e085fa}{Dock\+Style}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство Dock\+Style \end{DoxyCompactList}\item 
+override string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a5365a2a149bae1e99378b755df24951e}{Text}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box.\+Text \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a8955fa6989f89930e920f1ef20146f89}{Outer\+W\+H\+E\+RE}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Внешнее условие W\+H\+E\+RE. Добавляется при получении выпадающего списка. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_aa16f3747f60b174274e4d1cdfbbe19d9}{Object\+Max\+Count}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Количество объектов для выбора в выпадающий список. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a7ba43e07701e2e4624e7b462b7f50984}{Object\+Order\+By}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Order By, если нужен. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a1629909cf9051ebef2155968fae29dcb}{Сustom\+Query}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Произвольный запрос. Если введен, то используется он. Outer\+W\+H\+E\+RE в этом случае не используется. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_f_b_a_1_1_object_ref}{Object\+Ref}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a6ce47c52b2c961811b2754f31017c022}{Obj\+Ref}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ссылка на \mbox{\hyperlink{class_f_b_a_1_1_object_ref}{Object\+Ref}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ac6c5b5a75b67271359ed817242a3567b}{Edit\+Form\+Name}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Форма редактирования объекта. Название. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_aba734b2bfab5cf5d2e96f305b89f10a1}{Context\+Menu\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Если поставить False стандартное контекстное меню перестанет появляться. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a75ea9d530622afa51e9dd7a6cb97c4c4}{Text\+Additional}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Дополнительное поле с текстом. Для разных целей. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a58e553acebfbde3cf34399784797969b}{Value\+History\+In\+Items}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Показывать историю введённых значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af7bc6ecb90f3c91426bab85c7eeca4f4}{Save\+Param}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Признак что значение компонента можно сохранять/загружать в настройках, при выполнении команды Sys\+Common.\+Form\+Component\+Values\+Save/\+Sys\+Common.Form\+Component\+Values\+Load. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af96c8fa2b4e9ba8c1445365621c56328}{Group\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Имена компонентов со свойством на форме родителе, которое влияет на свойство Enabled/\+Disabled данного компонента. Работает через Var.\+control\+Enable\+Disable. ~\newline
+\end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a5144c4740f3a30ba8d3243bc533a968b}{Read\+Only}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Read\+Only \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a7931890e8811bb09e4c157de9758e091}{Error\+If\+Null}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Требуем заполнение компонента значениями. Проверка в Sys\+Form.\+Error\+If\+Null \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a94f3cdf712fd68883b1cad152efdbcda}{Max\+Drop\+Down\+Items}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Max\+Drop\+Down\+Items. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Auto\+Complete\+Mode \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ae85d47cfa67babb1396c9f3e687ea64f}{Auto\+Complete\+Mode}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Auto\+Complete\+Mode. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Auto\+Complete\+Source \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_afd35d2743464ba85a8619518aea516ee}{Auto\+Complete\+Source}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Auto\+Complete\+Source. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Auto\+Complete\+String\+Collection \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af7911aeab68cb2446e182a21e8bb1b18}{Auto\+Complete\+Custom\+Source}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Auto\+Complete\+Custom\+Source. \end{DoxyCompactList}\item 
+System.\+Object \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a84a3fd381f6d1e1c573de118ae14c021}{Data\+Source}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Data\+Source. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Draw\+Mode \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a3cee86c798ab7d85af90e150b6f0b5db}{Draw\+Mode}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Draw\+Mode. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a12bdaf101e742729cd6854886a01c92a}{Drop\+Down\+Width}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Drop\+Down\+Width. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_adfeeab974c8b58ecb995e38e8f700d6c}{Drop\+Down\+Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Drop\+Down\+Height. \end{DoxyCompactList}\item 
+System.\+Boolean \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a05b11f1697ac5dff66d7b7f13820f8ad}{Dropped\+Down}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Dropped\+Down. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Flat\+Style \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a570b940f70c506b1f6e7b600eb78b5fb}{Flat\+Style}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Flat\+Style. \end{DoxyCompactList}\item 
+System.\+Boolean \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_acd81e2f3e6d047df18d76f2aa1792b4e}{Integral\+Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Integral\+Height. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a4dd9a7601be6d85f6f699c550743426e}{Item\+Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Item\+Height. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Combo\+Box.\+Object\+Collection \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a2794d9711cc031f592158b0fa5d5ad2a}{Items}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Items. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af9f9d6c06b3aaf62ed388016db3c7853}{Max\+Length}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Max\+Length. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ad6a30a192aeb877d24faf47a9ec8c7ec}{Preferred\+Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Preferred\+Height. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_aef8f3fa71385908a050aba50d6ccdf5e}{Index}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selected\+Index. \end{DoxyCompactList}\item 
+System.\+Object \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ab7bc603ce3a4d91f18f65905b68832ea}{Selected\+Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selected\+Item. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ab32b98db2f7001d33f7c5b7d331062d9}{Selected\+Text}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selected\+Text. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a1dc7ba8fb759e70dd56b0c672ba496f4}{Selection\+Length}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selection\+Length. \end{DoxyCompactList}\item 
+System.\+Int32 \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a231db11fa090bab4c32809802b4641dc}{Selection\+Start}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selection\+Start. \end{DoxyCompactList}\item 
+System.\+Boolean \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a7b11d1d01e1722584df2b62a7b4a79d2}{Sorted}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Sorted. \end{DoxyCompactList}\item 
+System.\+Windows.\+Forms.\+Combo\+Box\+Style \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a7e799513c23c2c8a6b5aade7f0722481}{Drop\+Down\+Style}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Drop\+Down\+Style. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ada000c9a7c98c6ecbba7b3e956dd8bfb}{Display\+Member}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Display\+Member. \end{DoxyCompactList}\item 
+System.\+I\+Format\+Provider \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a6e439fc986c54ed3dc25e5fb95e3759d}{Format\+Info}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Format\+Info. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ad790c8289c315407ac6e23254bcef9fd}{Format\+String}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Format\+String. \end{DoxyCompactList}\item 
+System.\+Boolean \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_af9125dca573b441344e210447d8de783}{Formatting\+Enabled}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Formatting\+Enabled. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_ae73b6bb746f10f54a953ee479640de81}{Value\+Member}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Value\+Member. \end{DoxyCompactList}\item 
+System.\+Object \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a7cff77343646e851dd70f5351ece5cc4}{Selected\+Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Свойство combo\+Box1.\+Selected\+Value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{События}
+\begin{DoxyCompactItemize}
+\item 
+Event\+Handler \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a2547815fbfa8bbb59c456cef2e01825b}{Drop\+Down}}
+\begin{DoxyCompactList}\small\item\em Cобытие Drop\+Down. \end{DoxyCompactList}\item 
+Event\+Handler \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a33013d37e1be0fc2bd617ab95bf70d3f}{Delete\+Click}}
+\begin{DoxyCompactList}\small\item\em Cобытие Delete\+Click. \end{DoxyCompactList}\item 
+Event\+Handler \mbox{\hyperlink{class_f_b_a_1_1_sys_d_b_edit_a0c20f52d875a08e8847539a8c5a6181e}{Edit\+Click}}
+\begin{DoxyCompactList}\small\item\em Cобытие Edit\+Click. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Компонент для выбора атрибута из БД и показа значения на форме. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 17
+
+
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_afb61c970db1b5f88eb9c1edf6de88763}\label{class_f_b_a_1_1_sys_d_b_edit_afb61c970db1b5f88eb9c1edf6de88763}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Sys\+D\+B\+Edit@{Sys\+D\+B\+Edit}}
+\index{Sys\+D\+B\+Edit@{Sys\+D\+B\+Edit}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Sys\+D\+B\+Edit()}{SysDBEdit()}}
+{\footnotesize\ttfamily F\+B\+A.\+Sys\+D\+B\+Edit.\+Sys\+D\+B\+Edit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Конструктор. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 24
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a92ebba63c241ca90599192bd5e2fd244}\label{class_f_b_a_1_1_sys_d_b_edit_a92ebba63c241ca90599192bd5e2fd244}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily override void F\+B\+A.\+Sys\+D\+B\+Edit.\+Dispose (\begin{DoxyParamCaption}\item[{bool}]{disposing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Dispose 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em disposing} & \\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+Designer.\+cs строка 33
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a5143b157d4887de2b81e15dee6494717}\label{class_f_b_a_1_1_sys_d_b_edit_a5143b157d4887de2b81e15dee6494717}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Load\+Data\+Drop\+Down@{Load\+Data\+Drop\+Down}}
+\index{Load\+Data\+Drop\+Down@{Load\+Data\+Drop\+Down}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Load\+Data\+Drop\+Down()}{LoadDataDropDown()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Sys\+D\+B\+Edit.\+Load\+Data\+Drop\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Загрузка данных в компонент. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 727
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a570a27be3be8242a8a47f8a90dfffc18}\label{class_f_b_a_1_1_sys_d_b_edit_a570a27be3be8242a8a47f8a90dfffc18}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!On\+Drop\+Down@{On\+Drop\+Down}}
+\index{On\+Drop\+Down@{On\+Drop\+Down}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{On\+Drop\+Down()}{OnDropDown()}}
+{\footnotesize\ttfamily virtual void F\+B\+A.\+Sys\+D\+B\+Edit.\+On\+Drop\+Down (\begin{DoxyParamCaption}\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Cобытие Drop\+Down. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 681
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a8c75cc2a6eb78a19a152bf9d64766c38}\label{class_f_b_a_1_1_sys_d_b_edit_a8c75cc2a6eb78a19a152bf9d64766c38}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!On\+Edit\+Click@{On\+Edit\+Click}}
+\index{On\+Edit\+Click@{On\+Edit\+Click}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{On\+Edit\+Click()}{OnEditClick()}}
+{\footnotesize\ttfamily virtual void F\+B\+A.\+Sys\+D\+B\+Edit.\+On\+Edit\+Click (\begin{DoxyParamCaption}\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Cобытие Edit\+Click. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 827
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_aa32c11601037955b3c19a6aa3a889109}\label{class_f_b_a_1_1_sys_d_b_edit_aa32c11601037955b3c19a6aa3a889109}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!btn\+Delete@{btn\+Delete}}
+\index{btn\+Delete@{btn\+Delete}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{btn\+Delete}{btnDelete}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Button F\+B\+A.\+Sys\+D\+B\+Edit.\+btn\+Delete}
+
+
+
+Кнопка Delete, public чтобы был доступ с вызывающего класса. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+Designer.\+cs строка 17
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a915b06dd2badb68f00940c6b72c1d3a4}\label{class_f_b_a_1_1_sys_d_b_edit_a915b06dd2badb68f00940c6b72c1d3a4}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!btn\+Edit@{btn\+Edit}}
+\index{btn\+Edit@{btn\+Edit}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{btn\+Edit}{btnEdit}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Button F\+B\+A.\+Sys\+D\+B\+Edit.\+btn\+Edit}
+
+
+
+Кнопка Edit, public чтобы был доступ с вызывающего класса. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+Designer.\+cs строка 22
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ad5e31c513dbdd736a9130300cb6c5807}\label{class_f_b_a_1_1_sys_d_b_edit_ad5e31c513dbdd736a9130300cb6c5807}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!combo\+Box@{combo\+Box}}
+\index{combo\+Box@{combo\+Box}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{combo\+Box}{comboBox}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_f_b_a_1_1_combo_box_f_b_a}{F\+B\+A.\+Combo\+Box\+F\+BA}} F\+B\+A.\+Sys\+D\+B\+Edit.\+combo\+Box}
+
+
+
+Компонент \mbox{\hyperlink{class_f_b_a_1_1_combo_box_f_b_a}{F\+B\+A.\+Combo\+Box\+F\+BA}}, public чтобы был доступ с вызывающего класса. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+Designer.\+cs строка 27
+
+
+
+\subsection{Полный список свойств}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a67f0d8cf7653dfe7fb11851461f30471}\label{class_f_b_a_1_1_sys_d_b_edit_a67f0d8cf7653dfe7fb11851461f30471}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Attr\+Brief@{Attr\+Brief}}
+\index{Attr\+Brief@{Attr\+Brief}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Attr\+Brief}{AttrBrief}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Attr\+Brief\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Сокращение атрибута 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 106
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af7911aeab68cb2446e182a21e8bb1b18}\label{class_f_b_a_1_1_sys_d_b_edit_af7911aeab68cb2446e182a21e8bb1b18}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Auto\+Complete\+Custom\+Source@{Auto\+Complete\+Custom\+Source}}
+\index{Auto\+Complete\+Custom\+Source@{Auto\+Complete\+Custom\+Source}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Auto\+Complete\+Custom\+Source}{AutoCompleteCustomSource}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Auto\+Complete\+String\+Collection F\+B\+A.\+Sys\+D\+B\+Edit.\+Auto\+Complete\+Custom\+Source\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Auto\+Complete\+Custom\+Source. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 412
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ae85d47cfa67babb1396c9f3e687ea64f}\label{class_f_b_a_1_1_sys_d_b_edit_ae85d47cfa67babb1396c9f3e687ea64f}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Auto\+Complete\+Mode@{Auto\+Complete\+Mode}}
+\index{Auto\+Complete\+Mode@{Auto\+Complete\+Mode}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Auto\+Complete\+Mode}{AutoCompleteMode}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Auto\+Complete\+Mode F\+B\+A.\+Sys\+D\+B\+Edit.\+Auto\+Complete\+Mode\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Auto\+Complete\+Mode. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 392
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_afd35d2743464ba85a8619518aea516ee}\label{class_f_b_a_1_1_sys_d_b_edit_afd35d2743464ba85a8619518aea516ee}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Auto\+Complete\+Source@{Auto\+Complete\+Source}}
+\index{Auto\+Complete\+Source@{Auto\+Complete\+Source}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Auto\+Complete\+Source}{AutoCompleteSource}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Auto\+Complete\+Source F\+B\+A.\+Sys\+D\+B\+Edit.\+Auto\+Complete\+Source\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Auto\+Complete\+Source. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 402
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a8b79d6a473498e7558bb362204b3d3da}\label{class_f_b_a_1_1_sys_d_b_edit_a8b79d6a473498e7558bb362204b3d3da}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Back\+Color@{Back\+Color}}
+\index{Back\+Color@{Back\+Color}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Back\+Color}{BackColor}}
+{\footnotesize\ttfamily override Color F\+B\+A.\+Sys\+D\+B\+Edit.\+Back\+Color\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box.\+Back\+Color 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 172
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ad2c7f363da69716c7679a316e6fdc1ea}\label{class_f_b_a_1_1_sys_d_b_edit_ad2c7f363da69716c7679a316e6fdc1ea}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Button\+Delete\+Visible@{Button\+Delete\+Visible}}
+\index{Button\+Delete\+Visible@{Button\+Delete\+Visible}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Button\+Delete\+Visible}{ButtonDeleteVisible}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Button\+Delete\+Visible\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство видимость кнопки Delete 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 144
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a036bbd00b9024e2bb8684e7bfc04b32d}\label{class_f_b_a_1_1_sys_d_b_edit_a036bbd00b9024e2bb8684e7bfc04b32d}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Button\+Edit\+Visible@{Button\+Edit\+Visible}}
+\index{Button\+Edit\+Visible@{Button\+Edit\+Visible}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Button\+Edit\+Visible}{ButtonEditVisible}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Button\+Edit\+Visible\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство видимость кнопки Edit 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 158
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_aba734b2bfab5cf5d2e96f305b89f10a1}\label{class_f_b_a_1_1_sys_d_b_edit_aba734b2bfab5cf5d2e96f305b89f10a1}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Context\+Menu\+Enabled@{Context\+Menu\+Enabled}}
+\index{Context\+Menu\+Enabled@{Context\+Menu\+Enabled}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Context\+Menu\+Enabled}{ContextMenuEnabled}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Context\+Menu\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Если поставить False стандартное контекстное меню перестанет появляться. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 320
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a84a3fd381f6d1e1c573de118ae14c021}\label{class_f_b_a_1_1_sys_d_b_edit_a84a3fd381f6d1e1c573de118ae14c021}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Data\+Source@{Data\+Source}}
+\index{Data\+Source@{Data\+Source}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Data\+Source}{DataSource}}
+{\footnotesize\ttfamily System.\+Object F\+B\+A.\+Sys\+D\+B\+Edit.\+Data\+Source\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Data\+Source. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 422
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ada000c9a7c98c6ecbba7b3e956dd8bfb}\label{class_f_b_a_1_1_sys_d_b_edit_ada000c9a7c98c6ecbba7b3e956dd8bfb}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Display\+Member@{Display\+Member}}
+\index{Display\+Member@{Display\+Member}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Display\+Member}{DisplayMember}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} F\+B\+A.\+Sys\+D\+B\+Edit.\+Display\+Member\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Display\+Member. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 600
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_adc0915832fe0d8c4d563a46585e085fa}\label{class_f_b_a_1_1_sys_d_b_edit_adc0915832fe0d8c4d563a46585e085fa}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Dock\+Style@{Dock\+Style}}
+\index{Dock\+Style@{Dock\+Style}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Dock\+Style}{DockStyle}}
+{\footnotesize\ttfamily Dock\+Style F\+B\+A.\+Sys\+D\+B\+Edit.\+Dock\+Style\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство Dock\+Style 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 182
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a3cee86c798ab7d85af90e150b6f0b5db}\label{class_f_b_a_1_1_sys_d_b_edit_a3cee86c798ab7d85af90e150b6f0b5db}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Draw\+Mode@{Draw\+Mode}}
+\index{Draw\+Mode@{Draw\+Mode}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Draw\+Mode}{DrawMode}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Draw\+Mode F\+B\+A.\+Sys\+D\+B\+Edit.\+Draw\+Mode\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Draw\+Mode. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 432
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_adfeeab974c8b58ecb995e38e8f700d6c}\label{class_f_b_a_1_1_sys_d_b_edit_adfeeab974c8b58ecb995e38e8f700d6c}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Drop\+Down\+Height@{Drop\+Down\+Height}}
+\index{Drop\+Down\+Height@{Drop\+Down\+Height}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Drop\+Down\+Height}{DropDownHeight}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Drop\+Down\+Height\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Drop\+Down\+Height. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 452
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a7e799513c23c2c8a6b5aade7f0722481}\label{class_f_b_a_1_1_sys_d_b_edit_a7e799513c23c2c8a6b5aade7f0722481}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Drop\+Down\+Style@{Drop\+Down\+Style}}
+\index{Drop\+Down\+Style@{Drop\+Down\+Style}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Drop\+Down\+Style}{DropDownStyle}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Combo\+Box\+Style F\+B\+A.\+Sys\+D\+B\+Edit.\+Drop\+Down\+Style\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Drop\+Down\+Style. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 590
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a12bdaf101e742729cd6854886a01c92a}\label{class_f_b_a_1_1_sys_d_b_edit_a12bdaf101e742729cd6854886a01c92a}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Drop\+Down\+Width@{Drop\+Down\+Width}}
+\index{Drop\+Down\+Width@{Drop\+Down\+Width}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Drop\+Down\+Width}{DropDownWidth}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Drop\+Down\+Width\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Drop\+Down\+Width. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 442
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a05b11f1697ac5dff66d7b7f13820f8ad}\label{class_f_b_a_1_1_sys_d_b_edit_a05b11f1697ac5dff66d7b7f13820f8ad}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Dropped\+Down@{Dropped\+Down}}
+\index{Dropped\+Down@{Dropped\+Down}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Dropped\+Down}{DroppedDown}}
+{\footnotesize\ttfamily System.\+Boolean F\+B\+A.\+Sys\+D\+B\+Edit.\+Dropped\+Down\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Dropped\+Down. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 462
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ac6c5b5a75b67271359ed817242a3567b}\label{class_f_b_a_1_1_sys_d_b_edit_ac6c5b5a75b67271359ed817242a3567b}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Edit\+Form\+Name@{Edit\+Form\+Name}}
+\index{Edit\+Form\+Name@{Edit\+Form\+Name}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Edit\+Form\+Name}{EditFormName}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Edit\+Form\+Name\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Форма редактирования объекта. Название. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 242
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_adeb4184205de5251176a05fb3103002f}\label{class_f_b_a_1_1_sys_d_b_edit_adeb4184205de5251176a05fb3103002f}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Entity\+Brief@{Entity\+Brief}}
+\index{Entity\+Brief@{Entity\+Brief}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Entity\+Brief}{EntityBrief}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Entity\+Brief\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Сокращение сущности 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 84
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a7931890e8811bb09e4c157de9758e091}\label{class_f_b_a_1_1_sys_d_b_edit_a7931890e8811bb09e4c157de9758e091}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Error\+If\+Null@{Error\+If\+Null}}
+\index{Error\+If\+Null@{Error\+If\+Null}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Error\+If\+Null}{ErrorIfNull}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Error\+If\+Null\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Требуем заполнение компонента значениями. Проверка в Sys\+Form.\+Error\+If\+Null 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 375
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a570b940f70c506b1f6e7b600eb78b5fb}\label{class_f_b_a_1_1_sys_d_b_edit_a570b940f70c506b1f6e7b600eb78b5fb}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Flat\+Style@{Flat\+Style}}
+\index{Flat\+Style@{Flat\+Style}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Flat\+Style}{FlatStyle}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Flat\+Style F\+B\+A.\+Sys\+D\+B\+Edit.\+Flat\+Style\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Flat\+Style. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 472
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a6e439fc986c54ed3dc25e5fb95e3759d}\label{class_f_b_a_1_1_sys_d_b_edit_a6e439fc986c54ed3dc25e5fb95e3759d}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Format\+Info@{Format\+Info}}
+\index{Format\+Info@{Format\+Info}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Format\+Info}{FormatInfo}}
+{\footnotesize\ttfamily System.\+I\+Format\+Provider F\+B\+A.\+Sys\+D\+B\+Edit.\+Format\+Info\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Format\+Info. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 610
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ad790c8289c315407ac6e23254bcef9fd}\label{class_f_b_a_1_1_sys_d_b_edit_ad790c8289c315407ac6e23254bcef9fd}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Format\+String@{Format\+String}}
+\index{Format\+String@{Format\+String}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Format\+String}{FormatString}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} F\+B\+A.\+Sys\+D\+B\+Edit.\+Format\+String\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Format\+String. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 620
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af9125dca573b441344e210447d8de783}\label{class_f_b_a_1_1_sys_d_b_edit_af9125dca573b441344e210447d8de783}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Formatting\+Enabled@{Formatting\+Enabled}}
+\index{Formatting\+Enabled@{Formatting\+Enabled}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Formatting\+Enabled}{FormattingEnabled}}
+{\footnotesize\ttfamily System.\+Boolean F\+B\+A.\+Sys\+D\+B\+Edit.\+Formatting\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Formatting\+Enabled. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 630
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af96c8fa2b4e9ba8c1445365621c56328}\label{class_f_b_a_1_1_sys_d_b_edit_af96c8fa2b4e9ba8c1445365621c56328}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Group\+Enabled@{Group\+Enabled}}
+\index{Group\+Enabled@{Group\+Enabled}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Group\+Enabled}{GroupEnabled}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Group\+Enabled\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Имена компонентов со свойством на форме родителе, которое влияет на свойство Enabled/\+Disabled данного компонента. Работает через Var.\+control\+Enable\+Disable. ~\newline
+
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 354
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_aef8f3fa71385908a050aba50d6ccdf5e}\label{class_f_b_a_1_1_sys_d_b_edit_aef8f3fa71385908a050aba50d6ccdf5e}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Index@{Index}}
+\index{Index@{Index}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Index}{Index}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Index\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selected\+Index. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 530
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_acd81e2f3e6d047df18d76f2aa1792b4e}\label{class_f_b_a_1_1_sys_d_b_edit_acd81e2f3e6d047df18d76f2aa1792b4e}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Integral\+Height@{Integral\+Height}}
+\index{Integral\+Height@{Integral\+Height}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Integral\+Height}{IntegralHeight}}
+{\footnotesize\ttfamily System.\+Boolean F\+B\+A.\+Sys\+D\+B\+Edit.\+Integral\+Height\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Integral\+Height. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 482
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a4dd9a7601be6d85f6f699c550743426e}\label{class_f_b_a_1_1_sys_d_b_edit_a4dd9a7601be6d85f6f699c550743426e}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Item\+Height@{Item\+Height}}
+\index{Item\+Height@{Item\+Height}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Item\+Height}{ItemHeight}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Item\+Height\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Item\+Height. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 492
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a2794d9711cc031f592158b0fa5d5ad2a}\label{class_f_b_a_1_1_sys_d_b_edit_a2794d9711cc031f592158b0fa5d5ad2a}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Items@{Items}}
+\index{Items@{Items}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Items}{Items}}
+{\footnotesize\ttfamily System.\+Windows.\+Forms.\+Combo\+Box.\+Object\+Collection F\+B\+A.\+Sys\+D\+B\+Edit.\+Items\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Свойство combo\+Box1.\+Items. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 502
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a94f3cdf712fd68883b1cad152efdbcda}\label{class_f_b_a_1_1_sys_d_b_edit_a94f3cdf712fd68883b1cad152efdbcda}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Max\+Drop\+Down\+Items@{Max\+Drop\+Down\+Items}}
+\index{Max\+Drop\+Down\+Items@{Max\+Drop\+Down\+Items}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Max\+Drop\+Down\+Items}{MaxDropDownItems}}
+{\footnotesize\ttfamily int F\+B\+A.\+Sys\+D\+B\+Edit.\+Max\+Drop\+Down\+Items\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Max\+Drop\+Down\+Items. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 382
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af9f9d6c06b3aaf62ed388016db3c7853}\label{class_f_b_a_1_1_sys_d_b_edit_af9f9d6c06b3aaf62ed388016db3c7853}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Max\+Length@{Max\+Length}}
+\index{Max\+Length@{Max\+Length}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Max\+Length}{MaxLength}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Max\+Length\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Max\+Length. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 511
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_aa06663e1062ce9cafbd46081b97cc4a3}\label{class_f_b_a_1_1_sys_d_b_edit_aa06663e1062ce9cafbd46081b97cc4a3}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!M\+S\+QL@{M\+S\+QL}}
+\index{M\+S\+QL@{M\+S\+QL}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{M\+S\+QL}{MSQL}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+M\+S\+QL\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Запрос M\+S\+QL 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 128
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af647d0263d8b61fdf559797c3e503550}\label{class_f_b_a_1_1_sys_d_b_edit_af647d0263d8b61fdf559797c3e503550}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Object\+ID@{Object\+ID}}
+\index{Object\+ID@{Object\+ID}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Object\+ID}{ObjectID}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Object\+ID\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+ИД объекта 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 95
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_aa16f3747f60b174274e4d1cdfbbe19d9}\label{class_f_b_a_1_1_sys_d_b_edit_aa16f3747f60b174274e4d1cdfbbe19d9}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Object\+Max\+Count@{Object\+Max\+Count}}
+\index{Object\+Max\+Count@{Object\+Max\+Count}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Object\+Max\+Count}{ObjectMaxCount}}
+{\footnotesize\ttfamily int F\+B\+A.\+Sys\+D\+B\+Edit.\+Object\+Max\+Count\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Количество объектов для выбора в выпадающий список. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 207
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a7ba43e07701e2e4624e7b462b7f50984}\label{class_f_b_a_1_1_sys_d_b_edit_a7ba43e07701e2e4624e7b462b7f50984}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Object\+Order\+By@{Object\+Order\+By}}
+\index{Object\+Order\+By@{Object\+Order\+By}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Object\+Order\+By}{ObjectOrderBy}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Object\+Order\+By\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Order By, если нужен. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 216
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a6ce47c52b2c961811b2754f31017c022}\label{class_f_b_a_1_1_sys_d_b_edit_a6ce47c52b2c961811b2754f31017c022}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Obj\+Ref@{Obj\+Ref}}
+\index{Obj\+Ref@{Obj\+Ref}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Obj\+Ref}{ObjRef}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_f_b_a_1_1_object_ref}{Object\+Ref}} F\+B\+A.\+Sys\+D\+B\+Edit.\+Obj\+Ref\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Ссылка на \mbox{\hyperlink{class_f_b_a_1_1_object_ref}{Object\+Ref}}. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 236
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a8955fa6989f89930e920f1ef20146f89}\label{class_f_b_a_1_1_sys_d_b_edit_a8955fa6989f89930e920f1ef20146f89}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Outer\+W\+H\+E\+RE@{Outer\+W\+H\+E\+RE}}
+\index{Outer\+W\+H\+E\+RE@{Outer\+W\+H\+E\+RE}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Outer\+W\+H\+E\+RE}{OuterWHERE}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Outer\+W\+H\+E\+RE\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Внешнее условие W\+H\+E\+RE. Добавляется при получении выпадающего списка. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 201
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ad6a30a192aeb877d24faf47a9ec8c7ec}\label{class_f_b_a_1_1_sys_d_b_edit_ad6a30a192aeb877d24faf47a9ec8c7ec}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Preferred\+Height@{Preferred\+Height}}
+\index{Preferred\+Height@{Preferred\+Height}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Preferred\+Height}{PreferredHeight}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Preferred\+Height\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Свойство combo\+Box1.\+Preferred\+Height. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 521
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a5144c4740f3a30ba8d3243bc533a968b}\label{class_f_b_a_1_1_sys_d_b_edit_a5144c4740f3a30ba8d3243bc533a968b}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Read\+Only@{Read\+Only}}
+\index{Read\+Only@{Read\+Only}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Read\+Only}{ReadOnly}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Read\+Only\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Read\+Only 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 361
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_af7bc6ecb90f3c91426bab85c7eeca4f4}\label{class_f_b_a_1_1_sys_d_b_edit_af7bc6ecb90f3c91426bab85c7eeca4f4}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Save\+Param@{Save\+Param}}
+\index{Save\+Param@{Save\+Param}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Save\+Param}{SaveParam}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Save\+Param\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Признак что значение компонента можно сохранять/загружать в настройках, при выполнении команды Sys\+Common.\+Form\+Component\+Values\+Save/\+Sys\+Common.Form\+Component\+Values\+Load. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 345
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_abf2f3971a2805ea00e87fa08559df60f}\label{class_f_b_a_1_1_sys_d_b_edit_abf2f3971a2805ea00e87fa08559df60f}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Save\+Type@{Save\+Type}}
+\index{Save\+Type@{Save\+Type}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Save\+Type}{SaveType}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Save\+Type\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Указываем что сохранять свойство Text или Selected\+Index. I\+N\+D\+EX, T\+E\+XT, L\+O\+O\+K\+UP. ~\newline
+
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 137
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ab7bc603ce3a4d91f18f65905b68832ea}\label{class_f_b_a_1_1_sys_d_b_edit_ab7bc603ce3a4d91f18f65905b68832ea}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Selected\+Item@{Selected\+Item}}
+\index{Selected\+Item@{Selected\+Item}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Selected\+Item}{SelectedItem}}
+{\footnotesize\ttfamily System.\+Object F\+B\+A.\+Sys\+D\+B\+Edit.\+Selected\+Item\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selected\+Item. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 540
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ab32b98db2f7001d33f7c5b7d331062d9}\label{class_f_b_a_1_1_sys_d_b_edit_ab32b98db2f7001d33f7c5b7d331062d9}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Selected\+Text@{Selected\+Text}}
+\index{Selected\+Text@{Selected\+Text}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Selected\+Text}{SelectedText}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} F\+B\+A.\+Sys\+D\+B\+Edit.\+Selected\+Text\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selected\+Text. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 550
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a7cff77343646e851dd70f5351ece5cc4}\label{class_f_b_a_1_1_sys_d_b_edit_a7cff77343646e851dd70f5351ece5cc4}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Selected\+Value@{Selected\+Value}}
+\index{Selected\+Value@{Selected\+Value}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Selected\+Value}{SelectedValue}}
+{\footnotesize\ttfamily System.\+Object F\+B\+A.\+Sys\+D\+B\+Edit.\+Selected\+Value\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selected\+Value. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 650
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a1dc7ba8fb759e70dd56b0c672ba496f4}\label{class_f_b_a_1_1_sys_d_b_edit_a1dc7ba8fb759e70dd56b0c672ba496f4}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Selection\+Length@{Selection\+Length}}
+\index{Selection\+Length@{Selection\+Length}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Selection\+Length}{SelectionLength}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Selection\+Length\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selection\+Length. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 560
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a231db11fa090bab4c32809802b4641dc}\label{class_f_b_a_1_1_sys_d_b_edit_a231db11fa090bab4c32809802b4641dc}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Selection\+Start@{Selection\+Start}}
+\index{Selection\+Start@{Selection\+Start}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Selection\+Start}{SelectionStart}}
+{\footnotesize\ttfamily System.\+Int32 F\+B\+A.\+Sys\+D\+B\+Edit.\+Selection\+Start\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Selection\+Start. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 570
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a7b11d1d01e1722584df2b62a7b4a79d2}\label{class_f_b_a_1_1_sys_d_b_edit_a7b11d1d01e1722584df2b62a7b4a79d2}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Sorted@{Sorted}}
+\index{Sorted@{Sorted}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Sorted}{Sorted}}
+{\footnotesize\ttfamily System.\+Boolean F\+B\+A.\+Sys\+D\+B\+Edit.\+Sorted\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Sorted. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 580
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a01aa80df320ef07c05b309ff775e6299}\label{class_f_b_a_1_1_sys_d_b_edit_a01aa80df320ef07c05b309ff775e6299}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!S\+QL@{S\+QL}}
+\index{S\+QL@{S\+QL}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{S\+QL}{SQL}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+S\+QL\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Запрос S\+QL 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 117
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a5365a2a149bae1e99378b755df24951e}\label{class_f_b_a_1_1_sys_d_b_edit_a5365a2a149bae1e99378b755df24951e}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Text@{Text}}
+\index{Text@{Text}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Text}{Text}}
+{\footnotesize\ttfamily override string F\+B\+A.\+Sys\+D\+B\+Edit.\+Text\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box.\+Text 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 192
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a75ea9d530622afa51e9dd7a6cb97c4c4}\label{class_f_b_a_1_1_sys_d_b_edit_a75ea9d530622afa51e9dd7a6cb97c4c4}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Text\+Additional@{Text\+Additional}}
+\index{Text\+Additional@{Text\+Additional}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Text\+Additional}{TextAdditional}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Text\+Additional\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Дополнительное поле с текстом. Для разных целей. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 329
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a58e553acebfbde3cf34399784797969b}\label{class_f_b_a_1_1_sys_d_b_edit_a58e553acebfbde3cf34399784797969b}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Value\+History\+In\+Items@{Value\+History\+In\+Items}}
+\index{Value\+History\+In\+Items@{Value\+History\+In\+Items}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Value\+History\+In\+Items}{ValueHistoryInItems}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+D\+B\+Edit.\+Value\+History\+In\+Items\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Показывать историю введённых значений. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 335
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_ae73b6bb746f10f54a953ee479640de81}\label{class_f_b_a_1_1_sys_d_b_edit_ae73b6bb746f10f54a953ee479640de81}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Value\+Member@{Value\+Member}}
+\index{Value\+Member@{Value\+Member}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Value\+Member}{ValueMember}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{System.\+String}} F\+B\+A.\+Sys\+D\+B\+Edit.\+Value\+Member\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Свойство combo\+Box1.\+Value\+Member. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 640
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a1629909cf9051ebef2155968fae29dcb}\label{class_f_b_a_1_1_sys_d_b_edit_a1629909cf9051ebef2155968fae29dcb}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Сustom\+Query@{Сustom\+Query}}
+\index{Сustom\+Query@{Сustom\+Query}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Сustom\+Query}{СustomQuery}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+D\+B\+Edit.\+Сustom\+Query\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Произвольный запрос. Если введен, то используется он. Outer\+W\+H\+E\+RE в этом случае не используется. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 227
+
+
+
+\subsection{Cобытия}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a33013d37e1be0fc2bd617ab95bf70d3f}\label{class_f_b_a_1_1_sys_d_b_edit_a33013d37e1be0fc2bd617ab95bf70d3f}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Delete\+Click@{Delete\+Click}}
+\index{Delete\+Click@{Delete\+Click}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Delete\+Click}{DeleteClick}}
+{\footnotesize\ttfamily Event\+Handler F\+B\+A.\+Sys\+D\+B\+Edit.\+Delete\+Click}
+
+
+
+Cобытие Delete\+Click. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 742
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a2547815fbfa8bbb59c456cef2e01825b}\label{class_f_b_a_1_1_sys_d_b_edit_a2547815fbfa8bbb59c456cef2e01825b}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Drop\+Down@{Drop\+Down}}
+\index{Drop\+Down@{Drop\+Down}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Drop\+Down}{DropDown}}
+{\footnotesize\ttfamily Event\+Handler F\+B\+A.\+Sys\+D\+B\+Edit.\+Drop\+Down}
+
+
+
+Cобытие Drop\+Down. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 664
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_d_b_edit_a0c20f52d875a08e8847539a8c5a6181e}\label{class_f_b_a_1_1_sys_d_b_edit_a0c20f52d875a08e8847539a8c5a6181e}} 
+\index{F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}!Edit\+Click@{Edit\+Click}}
+\index{Edit\+Click@{Edit\+Click}!F\+B\+A\+::\+Sys\+D\+B\+Edit@{F\+B\+A\+::\+Sys\+D\+B\+Edit}}
+\subsubsection{\texorpdfstring{Edit\+Click}{EditClick}}
+{\footnotesize\ttfamily Event\+Handler F\+B\+A.\+Sys\+D\+B\+Edit.\+Edit\+Click}
+
+
+
+Cобытие Edit\+Click. 
+
+
+
+См. определение в файле Sys\+D\+B\+Edit.\+cs строка 773
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sys_d_b_edit_8cs}{Sys\+D\+B\+Edit.\+cs}}\item 
+\mbox{\hyperlink{_sys_d_b_edit_8_designer_8cs}{Sys\+D\+B\+Edit.\+Designer.\+cs}}\end{DoxyCompactItemize}

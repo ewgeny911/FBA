@@ -1,0 +1,5 @@
+SELECT LTrim(SUBSTRING(A, 1, CHI-1)) F1, SUBSTRING(A, CHI+1, CHI2-CHI-1) F2, SUBSTRING(A, CHI2+1, 1000) F3
+from (
+  select tt.Name A,  CHARINDEX(' ', tt.Name) CHI, CHARINDEX(' ', tt.Name, CHARINDEX(' ', tt.Name)+1) CHI2
+  from (select REPLACE('пюухланебю═дфюлхкю═пюухлдфнмнбмю', CHAR(160), ' ') Name) tt
+) t

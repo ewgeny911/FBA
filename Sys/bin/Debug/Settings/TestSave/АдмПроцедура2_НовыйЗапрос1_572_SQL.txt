@@ -1,0 +1,19 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура2 5, ''НовыйЗапрос1'' ', mtQuery);
+begin tran
+
+Select Top 10 EOT_1.DeliveryTime ВремяОтправки
+ , EOT_1.Contract ДогСтрах
+ , EOT_1.Performer Исполнитель
+ , EOT_1.LPUCode ЛПУ
+ , EOT_1.Komment НаимФайла
+ , EOT_1.RegNumber Номер
+ , EOT_1.TypeOfLetter ТипПисьма
+From LettersToLPU EOT_1
+Where EOT_1.DeliveryTime > convert ( datetime
+ , @Par1 )
+
+Select 'Выполнено.' as Result
+
+commit tran

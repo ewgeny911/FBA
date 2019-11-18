@@ -1,0 +1,25 @@
+Выбрать АС.Сокр "Атрибут", С.Сокр "Сущность", ТС.Наим "Таблица Атрибута", ТС2.Наим "Таблица Сущности", АС.Тип.Наим "Тип", АС.Вид.Наим "Вид"
+Из АтрибутСущности АС
+ join ТаблицаСущности ТС on АС.Таблица = ТС.ИДОбъекта
+ join Сущность С on С.ИДОбъекта = АС.Сущность
+ join ТаблицаСущности ТС2 on С.ИДОбъекта = ТС2.Сущность
+Где ТС.ИДОбъекта <> ТС2.ИДОбъекта
+and ТС.Тип <> 2
+and ТС2.Тип <> 2
+and АС.Тип <> 4
+
+/*
+ select ** into #T
+   from (select 1 col1, 1 col2 union all
+         select 1, 2 union all
+         select 1, 3 union all
+         select 1, 4) t1
+
+SELECT  'x', '0', '1', '2', '3'
+FROM
+   (SELECT COALESCE(CAST(col1 AS VARCHAR),'x') col1,
+           COALESCE(CAST(col2 AS VARCHAR),'x') col2
+   FROM #T) p
+PIVOT
+   (col2 FOR col1 IN ('1'))AS pvt
+*/

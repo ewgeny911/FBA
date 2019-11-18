@@ -1,0 +1,186 @@
+\hypertarget{class_f_b_a_1_1_money_to_string_provider_base}{}\section{Класс F\+B\+A.\+Money\+To\+String\+Provider\+Base}
+\label{class_f_b_a_1_1_money_to_string_provider_base}\index{F\+B\+A.\+Money\+To\+String\+Provider\+Base@{F\+B\+A.\+Money\+To\+String\+Provider\+Base}}
+
+
+Преобразование денег в сумму прописью.  
+
+
+Граф наследования\+:F\+B\+A.\+Money\+To\+String\+Provider\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.320755cm]{class_f_b_a_1_1_money_to_string_provider_base}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_a9626d1f4d19e788702a237cedb33fa5a}{Money\+To\+String\+Provider\+Base}} (bool short\+High, bool short\+Low, bool digit\+Low)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_a6b63e8303c389688a65c63aede49b4ee}{Get\+Format}} (Type format\+Type)
+\begin{DoxyCompactList}\small\item\em Реализация интерфейса \mbox{\hyperlink{interface_f_b_a_1_1_i_money_to_string_provider}{I\+Money\+To\+String\+Provider}} Метод родительского интерфейса I\+Format\+Provider \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_ac980731799d741d463f089b89e2534ab}{Money\+To\+String}} (\mbox{\hyperlink{struct_f_b_a_1_1_money}{Money}} m)
+\begin{DoxyCompactList}\small\item\em Функция возвращает число рублей и копеек прописью \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+abstract Number\+To\+Russian\+String.\+Word\+Gender \mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_a24e1e1dcd1a4c42773d3ec0034a4ca6d}{Get\+Gender}} (bool high)
+\begin{DoxyCompactList}\small\item\em Get\+Gender \end{DoxyCompactList}\item 
+abstract string \mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_aea712eaf4a5d84eed5624e3d48988502}{Get\+Name}} (Number\+To\+Russian\+String.\+Word\+Mode word\+Mode, bool high)
+\begin{DoxyCompactList}\small\item\em Функция возвращает наименование денежной единицы в соответствующей форме (1) рубль / (2) рубля / (5) рублей \end{DoxyCompactList}\item 
+abstract string \mbox{\hyperlink{class_f_b_a_1_1_money_to_string_provider_base_a88f493205be3da3950e2175f1e033595}{Get\+Short\+Name}} (bool high)
+\begin{DoxyCompactList}\small\item\em Функция возвращает сокращенное наименование денежной единицы \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Преобразование денег в сумму прописью. 
+
+
+
+См. определение в файле Sys\+Money.\+cs строка 721
+
+
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_a9626d1f4d19e788702a237cedb33fa5a}\label{class_f_b_a_1_1_money_to_string_provider_base_a9626d1f4d19e788702a237cedb33fa5a}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Money\+To\+String\+Provider\+Base@{Money\+To\+String\+Provider\+Base}}
+\index{Money\+To\+String\+Provider\+Base@{Money\+To\+String\+Provider\+Base}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Money\+To\+String\+Provider\+Base()}{MoneyToStringProviderBase()}}
+{\footnotesize\ttfamily F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Money\+To\+String\+Provider\+Base (\begin{DoxyParamCaption}\item[{bool}]{short\+High,  }\item[{bool}]{short\+Low,  }\item[{bool}]{digit\+Low }\end{DoxyParamCaption})}
+
+
+
+Конструктор 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em short\+High} & \\
+\hline
+{\em short\+Low} & \\
+\hline
+{\em digit\+Low} & \\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+Money.\+cs строка 762
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_a6b63e8303c389688a65c63aede49b4ee}\label{class_f_b_a_1_1_money_to_string_provider_base_a6b63e8303c389688a65c63aede49b4ee}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Get\+Format@{Get\+Format}}
+\index{Get\+Format@{Get\+Format}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Get\+Format()}{GetFormat()}}
+{\footnotesize\ttfamily object F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Get\+Format (\begin{DoxyParamCaption}\item[{Type}]{format\+Type }\end{DoxyParamCaption})}
+
+
+
+Реализация интерфейса \mbox{\hyperlink{interface_f_b_a_1_1_i_money_to_string_provider}{I\+Money\+To\+String\+Provider}} Метод родительского интерфейса I\+Format\+Provider 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em format\+Type} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Money.\+cs строка 775
+
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_a24e1e1dcd1a4c42773d3ec0034a4ca6d}\label{class_f_b_a_1_1_money_to_string_provider_base_a24e1e1dcd1a4c42773d3ec0034a4ca6d}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Get\+Gender@{Get\+Gender}}
+\index{Get\+Gender@{Get\+Gender}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Get\+Gender()}{GetGender()}}
+{\footnotesize\ttfamily abstract Number\+To\+Russian\+String.\+Word\+Gender F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Get\+Gender (\begin{DoxyParamCaption}\item[{bool}]{high }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Get\+Gender 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em high} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+Замещается в \mbox{\hyperlink{class_f_b_a_1_1_dollar_to_string_provider_a9eb995705420a105f5d0d6b7fb48fc90}{F\+B\+A.\+Dollar\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_rouble_to_string_provider_ae13f3d59cbca7fff82d3a20ad4e8b0d0}{F\+B\+A.\+Rouble\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_hryvna_to_string_provider_a7ba51229f701710f4aaa09db9cbfd3e4}{F\+B\+A.\+Hryvna\+To\+String\+Provider}} и \mbox{\hyperlink{class_f_b_a_1_1_euro_to_string_provider_aa2224b2f6f00b6f980ab4022b1db688c}{F\+B\+A.\+Euro\+To\+String\+Provider}}.
+
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_aea712eaf4a5d84eed5624e3d48988502}\label{class_f_b_a_1_1_money_to_string_provider_base_aea712eaf4a5d84eed5624e3d48988502}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Get\+Name@{Get\+Name}}
+\index{Get\+Name@{Get\+Name}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Get\+Name()}{GetName()}}
+{\footnotesize\ttfamily abstract string F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Get\+Name (\begin{DoxyParamCaption}\item[{Number\+To\+Russian\+String.\+Word\+Mode}]{word\+Mode,  }\item[{bool}]{high }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Функция возвращает наименование денежной единицы в соответствующей форме (1) рубль / (2) рубля / (5) рублей 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em word\+Mode} & \\
+\hline
+{\em high} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+Замещается в \mbox{\hyperlink{class_f_b_a_1_1_dollar_to_string_provider_aa76306e1936425f5c39e70ccdd79ba7a}{F\+B\+A.\+Dollar\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_rouble_to_string_provider_ac31a975f1a81e576344d431956bd6e5a}{F\+B\+A.\+Rouble\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_hryvna_to_string_provider_a7e7f7d7ca730dcb617c9218ca91866ef}{F\+B\+A.\+Hryvna\+To\+String\+Provider}} и \mbox{\hyperlink{class_f_b_a_1_1_euro_to_string_provider_a6b40c1dc54b209d90c3440b0c76b5bbe}{F\+B\+A.\+Euro\+To\+String\+Provider}}.
+
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_a88f493205be3da3950e2175f1e033595}\label{class_f_b_a_1_1_money_to_string_provider_base_a88f493205be3da3950e2175f1e033595}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Get\+Short\+Name@{Get\+Short\+Name}}
+\index{Get\+Short\+Name@{Get\+Short\+Name}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Get\+Short\+Name()}{GetShortName()}}
+{\footnotesize\ttfamily abstract string F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Get\+Short\+Name (\begin{DoxyParamCaption}\item[{bool}]{high }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Функция возвращает сокращенное наименование денежной единицы 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em high} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+Замещается в \mbox{\hyperlink{class_f_b_a_1_1_dollar_to_string_provider_a3da0b133efc7076214481a3c85819cde}{F\+B\+A.\+Dollar\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_rouble_to_string_provider_ab07e18dc82b66cbd58a7bcbd4a049c5f}{F\+B\+A.\+Rouble\+To\+String\+Provider}}, \mbox{\hyperlink{class_f_b_a_1_1_hryvna_to_string_provider_a6c6ffa9793f9d6ca8ee4b2fdc401e36a}{F\+B\+A.\+Hryvna\+To\+String\+Provider}} и \mbox{\hyperlink{class_f_b_a_1_1_euro_to_string_provider_a86d24c3da503faee3603d111a65228ea}{F\+B\+A.\+Euro\+To\+String\+Provider}}.
+
+\mbox{\Hypertarget{class_f_b_a_1_1_money_to_string_provider_base_ac980731799d741d463f089b89e2534ab}\label{class_f_b_a_1_1_money_to_string_provider_base_ac980731799d741d463f089b89e2534ab}} 
+\index{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}!Money\+To\+String@{Money\+To\+String}}
+\index{Money\+To\+String@{Money\+To\+String}!F\+B\+A\+::\+Money\+To\+String\+Provider\+Base@{F\+B\+A\+::\+Money\+To\+String\+Provider\+Base}}
+\subsubsection{\texorpdfstring{Money\+To\+String()}{MoneyToString()}}
+{\footnotesize\ttfamily string F\+B\+A.\+Money\+To\+String\+Provider\+Base.\+Money\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_f_b_a_1_1_money}{Money}}}]{m }\end{DoxyParamCaption})}
+
+
+
+Функция возвращает число рублей и копеек прописью 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em m} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Money.\+cs строка 788
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sys_money_8cs}{Sys\+Money.\+cs}}\end{DoxyCompactItemize}

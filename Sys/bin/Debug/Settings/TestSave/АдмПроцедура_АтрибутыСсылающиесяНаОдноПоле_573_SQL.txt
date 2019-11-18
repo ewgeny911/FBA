@@ -1,0 +1,36 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура 6, ''АтрибутыСсылающиесяНаОдноПоле'' ', mtQuery);
+
+
+Select  count  (  *  )  ,
+
+        А.TableID  Таблица  ,
+
+        А.FieldName  Поле  ,
+
+        (  Select  stuff  (
+
+                              (  Select  ', '  +  АС.Brief + ' (' + eE.Brief + ')'
+
+                                 From  enAttribute  АС
+
+                                   join enEntity eE on eE.ID = АС.AttributeEntityID
+
+                                 Where  АС.FieldName  =  А.FieldName  And  АС.TableID  =  А.TableID
+
+                                 For  XML  Path  (  ''  )
+
+                              )  ,  1  ,  2  ,  ''
+
+                          )
+
+        )  Сокр
+
+From  enAttribute  А
+
+Where  А.TableID  is  not  NULL and А.Type <> 4
+
+Group  by  А.FieldName  ,  А.TableID
+
+Having count(*) > 1

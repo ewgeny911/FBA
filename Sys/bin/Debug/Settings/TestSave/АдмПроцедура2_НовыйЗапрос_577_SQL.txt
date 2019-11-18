@@ -1,0 +1,53 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура2 10, ''НовыйЗапрос'' ', mtQuery);
+begin tran
+
+Select Row_Number () Over (
+Order by EOT_2.AttributeEntityID ) RN
+ , 0 Flag
+ , EOT_2.AttributeEntityID EntityID
+ , EOT_0_1.Brief EntityBrief
+ , EOT_2.Brief AttrBrief
+ , 'select count(*) from ' + EOT_0_2.Name + ' E1
+ left outer join ' + (
+Select EOT_1.Name + ' E2 on E2.' + EOT_1.IDFieldName + ' = ' + 'E1.' + EOT_2.FieldName + ' where E1.' + EOT_2.FieldName + ' is not null and E2.' + EOT_1.IDFieldName + ' is null'
+From enTable EOT_1
+Where EOT_1.TableEntityID = EOT_2.RefEntityID And EOT_1.Type = 1 ) QueryStr Into #t
+From enAttribute EOT_2
+ left outer join enEntity EOT_0_1 on EOT_2.AttributeEntityID=EOT_0_1.ID
+ left outer join enTable EOT_0_2 on EOT_2.TableID=EOT_0_2.TableID
+ left outer join enAttributeType EOT_0_3 on EOT_2.Type=EOT_0_3.AttributeTypeID
+Where EOT_0_3.Name = 'Ссылка' And EOT_0_2.Type <> 2 declare @i int, @j int
+
+set @i = 1
+
+set @j = (select count(*) from #t)
+
+declare @MyStr varchar(max) =''
+
+declare @MyT table (Cnt int)
+
+while @i <= @j
+
+begin
+
+ set @MyStr = (select top 1 QueryStr from #t where RN = @i)
+
+ insert into @MyT exec(@MyStr)
+
+ if (select Top 1 Cnt from @MyT) > 0
+
+ update #t set Flag = 1 where RN = @i
+
+ delete from @MyT
+
+ set @i = @i + 1
+
+end
+
+select * from #t */
+
+Select 'Выполнено.' as Result
+
+commit tran

@@ -1,0 +1,11 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.АдмПроцедура 568, ''НовыйЗапрос'' ', mtQuery);
+begin tran
+
+Select 1
+WHERE 2 = 2
+
+Select 'Выполнено.' as Result
+
+commit tran

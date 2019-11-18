@@ -1,0 +1,30 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.АдмПроцедура2 1386, ''Разделение ФИО на разные колонки'' ', mtQuery);
+begin tran
+
+Select LTrim ( SUBSTRING ( A
+ , 1
+ , CHI - 1 ) ) F1
+ , SUBSTRING ( A
+ , CHI + 1
+ , CHI2 - CHI - 1 ) F2
+ , SUBSTRING ( A
+ , CHI2 + 1
+ , 1000 ) F3
+FROM (
+SELECT tt.Name A
+ , CHARINDEX ( ' '
+ , tt.Name ) CHI
+ , CHARINDEX ( ' '
+ , tt.Name
+ , CHARINDEX ( ' '
+ , tt.Name ) + 1 ) CHI2
+FROM (
+SELECT REPLACE ( 'РАХИМБОЕВА ДЖАМИЛА РАХИМДЖОНОВНА'
+ , CHAR ( 160 )
+ , ' ' ) Name ) tt ) t
+
+Select 'Выполнено.' as Result
+
+commit tran

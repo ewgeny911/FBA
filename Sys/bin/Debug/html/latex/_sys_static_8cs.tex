@@ -1,0 +1,202 @@
+\hypertarget{_sys_static_8cs}{}\section{Файл Sys\+Static.\+cs}
+\label{_sys_static_8cs}\index{Sys\+Static.\+cs@{Sys\+Static.\+cs}}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries F\+B\+A.\+Var}
+\begin{DoxyCompactList}\small\item\em Статический класс. Переменные для всего решения, в том числе и для прикладного кода. \end{DoxyCompactList}\item 
+class {\bfseries F\+B\+A.\+Error}
+\begin{DoxyCompactList}\small\item\em Статический класс. Необходим для описания глобальных переменных по работе с ошибками. ~\newline
+\end{DoxyCompactList}\item 
+class {\bfseries F\+B\+A.\+F\+B\+A\+Path}
+\begin{DoxyCompactList}\small\item\em Статический класс. Все служебные папки всей системы. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Пространства имен}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_f_b_a}{F\+BA}}
+\end{DoxyCompactItemize}
+\subsection*{Определения типов}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{_sys_static_8cs_aebca081bab51630602cafdf0f52697a2}{Content\+Alignment}} = Dev\+Age.\+Drawing.\+Content\+Alignment
+\item 
+using \mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{Data\+Table}} = System.\+Data.\+Data\+Table
+\item 
+using \mbox{\hyperlink{_sys_static_8cs_af2f531236ed1669e770ac279b12ba146}{Text\+Box}} = System.\+Windows.\+Forms.\+Text\+Box
+\end{DoxyCompactItemize}
+\subsection*{Перечисления}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5}{F\+B\+A.\+Command\+Code}} \{ \newline
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a316d54b418d9a7186f9234f08cfb599f}{F\+B\+A.\+Command\+Code.\+Not\+Assigned}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a8558ce41f93e7f9048906608049daae7}{F\+B\+A.\+Command\+Code.\+C101}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a534942313d5b778f5abe49ceab904a61}{F\+B\+A.\+Command\+Code.\+C102}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5aae5564558d74139ea0c0a864610b0d09}{F\+B\+A.\+Command\+Code.\+C103}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5afbead1fd590a2934e8745090536dfca0}{F\+B\+A.\+Command\+Code.\+C104}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5acc715e79c1d842119f230546381302be}{F\+B\+A.\+Command\+Code.\+C105}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a16e2c492ecfcaf34b6cea8e9b7da8e7a}{F\+B\+A.\+Command\+Code.\+C106}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a888fe9c39a35934fb3f1fbb9c420980f}{F\+B\+A.\+Command\+Code.\+C107}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a61a9892c019c8b87729eaca49e65a8a3}{F\+B\+A.\+Command\+Code.\+S201}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5aac356eb25648db1ee96251d67e3f37dd}{F\+B\+A.\+Command\+Code.\+S202}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a27848dac4b6d5be8cf353dc45111c561}{F\+B\+A.\+Command\+Code.\+S203}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a127c51cbec6cd3908c55acbdbef3419d}{F\+B\+A.\+Command\+Code.\+S204}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5af8a1ffe9fe976cb472119adc5d5654e5}{F\+B\+A.\+Command\+Code.\+S205}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5ace4f9be313dca27b158bdd916feeea1f}{F\+B\+A.\+Command\+Code.\+S209}}, 
+\mbox{\hyperlink{namespace_f_b_a_abb5a0756c159f22dc419a5fcf5b6f3b5a0ffb3aa77f6992e7744897b6d5e93f0b}{F\+B\+A.\+Command\+Code.\+S210}}
+ \}
+\begin{DoxyCompactList}\small\item\em Команды от клиента серверу приложений, список возможных команд\+: Все возможные типы сообщений между сервером и клиентом. Список кодов сообщений. Command\+Code -\/ Команда от клиента, список возможных команд\+: Команда начинающиеся на C -\/ это команда клиента серверу. Команда начинающиеся на S -\/ Команды от сервера приложений к клиенту. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935}{F\+B\+A.\+Error\+Code}} \{ \newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935af28cd4b309d5d6418941970727cfd8d5}{F\+B\+A.\+Error\+Code.\+C115}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a4f654fcee068690e94c157bc8fd5ee27}{F\+B\+A.\+Error\+Code.\+C116}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a92469efeb3d9586b84bfbf928cf9781a}{F\+B\+A.\+Error\+Code.\+C117}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a41c516d1bfcacce8c4b58ca9a7c55576}{F\+B\+A.\+Error\+Code.\+C118}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a5c62f10ba4fa6dbd8546cc486bac43e1}{F\+B\+A.\+Error\+Code.\+C119}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935ae0e7d0fcdaba0488cd1afdc4d30b8c33}{F\+B\+A.\+Error\+Code.\+S501}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935afc2093544728f7183d4035b64a45eb8e}{F\+B\+A.\+Error\+Code.\+S502}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a6fcfe4fa593b67191ab790b0deeca8d8}{F\+B\+A.\+Error\+Code.\+S503}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a8c4105dcc56d72a0d571607b6228fc1c}{F\+B\+A.\+Error\+Code.\+S504}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935af5686174e5c7ec5b70193d528c3c5da3}{F\+B\+A.\+Error\+Code.\+S505}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935ab3878f2453497f15abd39811e7e77ba4}{F\+B\+A.\+Error\+Code.\+S506}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a230609679c3fbf858b6461fb2ed4108b}{F\+B\+A.\+Error\+Code.\+S507}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935adbafeb2aa446157c2c69cdecc97e937c}{F\+B\+A.\+Error\+Code.\+S508}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a2a2cbf8619b6d0facce03f859766b3f8}{F\+B\+A.\+Error\+Code.\+S509}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935afe0874cd4de53417550732e815156901}{F\+B\+A.\+Error\+Code.\+S510}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a4b6f07eff7943f7582297fd0f1e42ec0}{F\+B\+A.\+Error\+Code.\+S511}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935aaface7f29038d72a33ba60454b9efec5}{F\+B\+A.\+Error\+Code.\+S601}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935aeaaa6f5b9806302f783107d44b62edc2}{F\+B\+A.\+Error\+Code.\+S602}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935ad32e71829c87bbef409bd262f04dc2c6}{F\+B\+A.\+Error\+Code.\+S603}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a0e0faa72b3e009316b67348c1ca17d0c}{F\+B\+A.\+Error\+Code.\+S604}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a2bf10bfcd7116e3909cc22039ddaf4be}{F\+B\+A.\+Error\+Code.\+S605}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a9dfe84383c0eb63ed32d0a1f78dddbb4}{F\+B\+A.\+Error\+Code.\+S606}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935abb37c95273ac407300912c45533cf3e4}{F\+B\+A.\+Error\+Code.\+S607}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a4616f3c1944c4919f7a90b2dd22d2dd2}{F\+B\+A.\+Error\+Code.\+S608}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935aaa7a47f095ba05444ec05223869cb2dd}{F\+B\+A.\+Error\+Code.\+S609}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a070476d915fedffa1402d30541ddcafd}{F\+B\+A.\+Error\+Code.\+S610}}, 
+\mbox{\hyperlink{namespace_f_b_a_a5c9054908e699f0f81132622ba66a935a3d55231967e3217cb283a1d5a2bb5f55}{F\+B\+A.\+Error\+Code.\+S611}}
+ \}
+\begin{DoxyCompactList}\small\item\em Все возможные типы ошибок. C -\/ что это ошибка на клиенте. S -\/ на сервере \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6b}{F\+B\+A.\+Message\+Type}} \{ \newline
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6ba902b0d55fddef6f8d651fe1035b7d4bd}{F\+B\+A.\+Message\+Type.\+Error}}, 
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6bab932b91f686c2aa588adfd9a407155ca}{F\+B\+A.\+Message\+Type.\+System\+Error}}, 
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6ba098d3927e202722ba8fb3ecd0b717cd5}{F\+B\+A.\+Message\+Type.\+Error\+Question}}, 
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6ba11a755d598c0c417f9a36758c3da7481}{F\+B\+A.\+Message\+Type.\+Stop}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6baa82be0f551b8708bc08eb33cd9ded0cf}{F\+B\+A.\+Message\+Type.\+Information}}, 
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6ba0eaadb4fcb48a0a0ed7bc9868be9fbaa}{F\+B\+A.\+Message\+Type.\+Warning}}, 
+\mbox{\hyperlink{namespace_f_b_a_acb769874aa087305188bab1a2e276d6baa97ea56b0e00b2379736ae60869ff66a}{F\+B\+A.\+Message\+Type.\+Question}}
+ \}
+\begin{DoxyCompactList}\small\item\em Все возможные типы сообщений. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{F\+B\+A.\+Server\+Type}} \{ \newline
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a316d54b418d9a7186f9234f08cfb599f}{F\+B\+A.\+Server\+Type.\+Not\+Assigned}}, 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a1d37e2cfa8532be01d3f89c76ccfe4a9}{F\+B\+A.\+Server\+Type.\+M\+S\+S\+QL}}, 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a985e65dc09174c5a3177c0b80570b683}{F\+B\+A.\+Server\+Type.\+Postgre}}, 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a497757a9c5b2ec17ded656170b51c788}{F\+B\+A.\+Server\+Type.\+S\+Q\+Lite}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a01f5a36d50cbbb5a2300d19c738edb2b}{F\+B\+A.\+Server\+Type.\+Server\+App}}, 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a06b9281e396db002010bde1de57262eb}{F\+B\+A.\+Server\+Type.\+Auto}}
+ \}
+\begin{DoxyCompactList}\small\item\em Все поддерживаемые сервера\+: Not\+Assigned, M\+S\+S\+QL, Postgre, S\+Q\+Lite, Server\+App, Auto \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_ae3e8e3cf257baeeb6f393380f9abe802}{F\+B\+A.\+Type\+Query}} \{ \mbox{\hyperlink{namespace_f_b_a_ae3e8e3cf257baeeb6f393380f9abe802a63225f19fccb18e7c709f1fa11bc738e}{F\+B\+A.\+Type\+Query.\+S\+E\+L\+E\+CT}}, 
+\mbox{\hyperlink{namespace_f_b_a_ae3e8e3cf257baeeb6f393380f9abe802af28b3aad7d43b371527fde69de8d93ff}{F\+B\+A.\+Type\+Query.\+E\+X\+EC}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип запроса к серверу приложений\+: Not\+Assigned, S\+E\+L\+E\+CT, E\+X\+EC \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776}{F\+B\+A.\+Operation}} \{ \newline
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776a316d54b418d9a7186f9234f08cfb599f}{F\+B\+A.\+Operation.\+Not\+Assigned}}, 
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776a63a6a88c066880c5ac42394a22803ca6}{F\+B\+A.\+Operation.\+Refresh}}, 
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776aec211f7c20af43e742bf2570c3cb84f9}{F\+B\+A.\+Operation.\+Add}}, 
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776a57de60bdd8fe86847530a0468282acfc}{F\+B\+A.\+Operation.\+Add\+Child}}, 
+\newline
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776a7dce122004969d56ae2e0245cb754d35}{F\+B\+A.\+Operation.\+Edit}}, 
+\mbox{\hyperlink{namespace_f_b_a_a82a9536170086556d110a52b7698a776a5526d60feb55086fbd12dd96b071a093}{F\+B\+A.\+Operation.\+Del}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип операции с объектом\+: Not\+Assigned, Refresh, Add, Add\+Child, Edit, Del \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a73208cd254b643d096fa9a17ad6c1ffe}{F\+B\+A.\+S\+Q\+L\+Command}} \{ \mbox{\hyperlink{namespace_f_b_a_a73208cd254b643d096fa9a17ad6c1ffea06b9281e396db002010bde1de57262eb}{F\+B\+A.\+S\+Q\+L\+Command.\+Auto}}, 
+\mbox{\hyperlink{namespace_f_b_a_a73208cd254b643d096fa9a17ad6c1ffea06933067aafd48425d67bcb01bba5cb6}{F\+B\+A.\+S\+Q\+L\+Command.\+Update}}, 
+\mbox{\hyperlink{namespace_f_b_a_a73208cd254b643d096fa9a17ad6c1ffeaa458be0f08b7e4ff3c0f633c100176c0}{F\+B\+A.\+S\+Q\+L\+Command.\+Insert}}, 
+\mbox{\hyperlink{namespace_f_b_a_a73208cd254b643d096fa9a17ad6c1ffeaf2a6c498fb90ee345d997f888fce3b18}{F\+B\+A.\+S\+Q\+L\+Command.\+Delete}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип операции в БД\+: Not\+Assigned, Auto, Update, Insert, Delete \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_aa7137ed2c5f5027f13bb403ffc2b005e}{F\+B\+A.\+S\+Q\+L\+Lang}} \{ \mbox{\hyperlink{namespace_f_b_a_aa7137ed2c5f5027f13bb403ffc2b005ea0c1afcca37c20f3ebb923a15752dd1c1}{F\+B\+A.\+S\+Q\+L\+Lang.\+M\+S\+QL}}, 
+\mbox{\hyperlink{namespace_f_b_a_aa7137ed2c5f5027f13bb403ffc2b005ea9778840a0100cb30c982876741b0b5a2}{F\+B\+A.\+S\+Q\+L\+Lang.\+S\+QL}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип языка\+: M\+S\+QL, S\+QL \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_af87bc7599fc60514e1e5786d39387dfe}{F\+B\+A.\+Search\+Param}} \{ \mbox{\hyperlink{namespace_f_b_a_af87bc7599fc60514e1e5786d39387dfea1649aed298f99d587e2eb30c1db5946b}{F\+B\+A.\+Search\+Param.\+Exact}}, 
+\mbox{\hyperlink{namespace_f_b_a_af87bc7599fc60514e1e5786d39387dfeab270372be5b4433b4736daaf25e1c74e}{F\+B\+A.\+Search\+Param.\+Contains}}, 
+\mbox{\hyperlink{namespace_f_b_a_af87bc7599fc60514e1e5786d39387dfea1a06729125544cab7cee73195fc044f0}{F\+B\+A.\+Search\+Param.\+Begin}}, 
+\mbox{\hyperlink{namespace_f_b_a_af87bc7599fc60514e1e5786d39387dfea87557f11575c0ad78e4e28abedc13b6e}{F\+B\+A.\+Search\+Param.\+End}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип поиска\+: Not\+Assigned, Exact, Contains, Begin, End \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_aadfe3a0963c89fed76f70b1241bb7b2b}{F\+B\+A.\+Form\+Action}} \{ \mbox{\hyperlink{namespace_f_b_a_aadfe3a0963c89fed76f70b1241bb7b2ba6adf97f83acf6453d4a6a4b1070f3754}{F\+B\+A.\+Form\+Action.\+None}}, 
+\mbox{\hyperlink{namespace_f_b_a_aadfe3a0963c89fed76f70b1241bb7b2ba498f79c4c5bbde77f1bceb6c86fd0f6d}{F\+B\+A.\+Form\+Action.\+Show}}, 
+\mbox{\hyperlink{namespace_f_b_a_aadfe3a0963c89fed76f70b1241bb7b2ba6aeee0666925716cc20b7b4f4936e003}{F\+B\+A.\+Form\+Action.\+Show\+Dialog}}
+ \}
+\begin{DoxyCompactList}\small\item\em Способ вызова метода созданиия формы\+: Not\+Assigned, None, Show, Show\+Dialog \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a6ff7d5c242d98046d1980715b06d7300}{F\+B\+A.\+Direction\+Query}} \{ \mbox{\hyperlink{namespace_f_b_a_a6ff7d5c242d98046d1980715b06d7300af8508f576cd3f742dfc268258dcdf0dd}{F\+B\+A.\+Direction\+Query.\+Remote}}, 
+\mbox{\hyperlink{namespace_f_b_a_a6ff7d5c242d98046d1980715b06d7300a509820290d57f333403f490dde7316f4}{F\+B\+A.\+Direction\+Query.\+Local}}
+ \}
+\begin{DoxyCompactList}\small\item\em Направить запрос к локальной БД или удалённой\+: Not\+Assigned, Remote, Local \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a8f6da5d8d2dd8766bfe9052175a21970}{F\+B\+A.\+Time\+Action}} \{ \mbox{\hyperlink{namespace_f_b_a_a8f6da5d8d2dd8766bfe9052175a21970a9060587edeb01a63e3d3edc959678d1e}{F\+B\+A.\+Time\+Action.\+Before}}, 
+\mbox{\hyperlink{namespace_f_b_a_a8f6da5d8d2dd8766bfe9052175a21970a7bfcadb5535fe8aad5032762b7bfe159}{F\+B\+A.\+Time\+Action.\+After}}
+ \}
+\begin{DoxyCompactList}\small\item\em Время, после или до. Чтобы определить время до или после события. Используется в методах сущности\+: Before, After \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_ae06257c0c200c35284fec536bf589744}{F\+B\+A.\+Enter\+Mode}} \{ \mbox{\hyperlink{namespace_f_b_a_ae06257c0c200c35284fec536bf589744a0f9263536b9fc61ada745644735bfd8f}{F\+B\+A.\+Enter\+Mode.\+Work}}, 
+\mbox{\hyperlink{namespace_f_b_a_ae06257c0c200c35284fec536bf589744a0cbc6611f5540bd0809a388dc95a615b}{F\+B\+A.\+Enter\+Mode.\+Test}}, 
+\mbox{\hyperlink{namespace_f_b_a_ae06257c0c200c35284fec536bf589744a1bedc6fb14c15b2e99872ebdbc317bf2}{F\+B\+A.\+Enter\+Mode.\+Develop}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип входа в систему\+: Work, Test, Develop \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a31f4a0fbaafbf41e35e4589c7f489675}{F\+B\+A.\+Size\+Mode}} \{ \mbox{\hyperlink{namespace_f_b_a_a31f4a0fbaafbf41e35e4589c7f489675a2660064e68655415da2628c2ae2f7592}{F\+B\+A.\+Size\+Mode.\+Small}}, 
+\mbox{\hyperlink{namespace_f_b_a_a31f4a0fbaafbf41e35e4589c7f489675a3a69b34ce86dacb205936a8094f6c743}{F\+B\+A.\+Size\+Mode.\+Large}}
+ \}
+\begin{DoxyCompactList}\small\item\em Размер. Всего два значения\+: Small, Large. Используется в Form\+Value1 \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59}{F\+B\+A.\+Value\+Type}} \{ \mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59aa0faef0851b4294c06f2b94bb1cb2044}{F\+B\+A.\+Value\+Type.\+Integer}}, 
+\mbox{\hyperlink{namespace_f_b_a_a940b390561ecfbdb6e1606ec1711bd59a27118326006d3829667a400ad23d5d98}{F\+B\+A.\+Value\+Type.\+String}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип значения\+: Integer, String. Используется для Form\+Value1. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_f_b_a_a56f575149e60be6beeedc93ec1f6a0ef}{F\+B\+A.\+Project\+Type}} \{ \mbox{\hyperlink{namespace_f_b_a_a56f575149e60be6beeedc93ec1f6a0efa316d54b418d9a7186f9234f08cfb599f}{F\+B\+A.\+Project\+Type.\+Not\+Assigned}}, 
+\mbox{\hyperlink{namespace_f_b_a_a56f575149e60be6beeedc93ec1f6a0efaa02c83a7dbd96295beaefb72c2bee2de}{F\+B\+A.\+Project\+Type.\+Main}}, 
+\mbox{\hyperlink{namespace_f_b_a_a56f575149e60be6beeedc93ec1f6a0efaac863f346e618f9a959b5c95d5d28941}{F\+B\+A.\+Project\+Type.\+App}}, 
+\mbox{\hyperlink{namespace_f_b_a_a56f575149e60be6beeedc93ec1f6a0efacae35aa858bf0981840ab6826b3e9ed0}{F\+B\+A.\+Project\+Type.\+Dll}}
+ \}
+\begin{DoxyCompactList}\small\item\em Тип проекта\+: Not\+Assigned, Main, App, Dll \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Типы}
+\mbox{\Hypertarget{_sys_static_8cs_aebca081bab51630602cafdf0f52697a2}\label{_sys_static_8cs_aebca081bab51630602cafdf0f52697a2}} 
+\index{Sys\+Static.\+cs@{Sys\+Static.\+cs}!Content\+Alignment@{Content\+Alignment}}
+\index{Content\+Alignment@{Content\+Alignment}!Sys\+Static.\+cs@{Sys\+Static.\+cs}}
+\subsubsection{\texorpdfstring{Content\+Alignment}{ContentAlignment}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{_sys_comp_8cs_aebca081bab51630602cafdf0f52697a2}{Content\+Alignment}} =  Dev\+Age.\+Drawing.\+Content\+Alignment}
+
+
+
+См. определение в файле Sys\+Static.\+cs строка 18
+
+\mbox{\Hypertarget{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}\label{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}} 
+\index{Sys\+Static.\+cs@{Sys\+Static.\+cs}!Data\+Table@{Data\+Table}}
+\index{Data\+Table@{Data\+Table}!Sys\+Static.\+cs@{Sys\+Static.\+cs}}
+\subsubsection{\texorpdfstring{Data\+Table}{DataTable}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{_sys_data_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{Data\+Table}} =  System.\+Data.\+Data\+Table}
+
+
+
+См. определение в файле Sys\+Static.\+cs строка 19
+
+\mbox{\Hypertarget{_sys_static_8cs_af2f531236ed1669e770ac279b12ba146}\label{_sys_static_8cs_af2f531236ed1669e770ac279b12ba146}} 
+\index{Sys\+Static.\+cs@{Sys\+Static.\+cs}!Text\+Box@{Text\+Box}}
+\index{Text\+Box@{Text\+Box}!Sys\+Static.\+cs@{Sys\+Static.\+cs}}
+\subsubsection{\texorpdfstring{Text\+Box}{TextBox}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{_sys_data_8cs_af2f531236ed1669e770ac279b12ba146}{Text\+Box}} =  System.\+Windows.\+Forms.\+Text\+Box}
+
+
+
+См. определение в файле Sys\+Static.\+cs строка 20
+

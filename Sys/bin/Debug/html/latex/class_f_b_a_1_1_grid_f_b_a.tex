@@ -1,0 +1,450 @@
+\hypertarget{class_f_b_a_1_1_grid_f_b_a}{}\section{Класс F\+B\+A.\+Grid\+F\+BA}
+\label{class_f_b_a_1_1_grid_f_b_a}\index{F\+B\+A.\+Grid\+F\+BA@{F\+B\+A.\+Grid\+F\+BA}}
+
+
+Класс потомок Source\+Grid.\+Data\+Grid.  
+
+
+Граф наследования\+:F\+B\+A.\+Grid\+F\+BA\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_f_b_a_1_1_grid_f_b_a}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a04c3a780023d3791a39b0bc1fa37437f}{Grid\+F\+BA}} ()
+\begin{DoxyCompactList}\small\item\em Конструктор. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_aa1ff5c21ce47cf95da542f611070d40d}{Copy\+Region}} (bool copy\+With\+Captions, bool copy\+All)
+\begin{DoxyCompactList}\small\item\em Копировать выделенную облать из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} в буфер обмена с названиями столбцов. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_acb10ddc9ad434e7966a2eb2fbfc594b9}{Select\+All}} ()
+\begin{DoxyCompactList}\small\item\em Выделить всю таблицу. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a46bcb6ce2e842cd06d2798b3b641b078}{Source\+Grid\+To\+Excel}} ()
+\begin{DoxyCompactList}\small\item\em Открыть в Excel таблицу, открытую в \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a5ca323bec7fef57d7182cdce6eecee7a}{Source\+Grid\+To\+C\+SV}} ()
+\begin{DoxyCompactList}\small\item\em Открыть в Excel таблицу, открытую в \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a7cb1d7d7cee4041f258cfc38bfa4d52e}{Get\+Column\+Index}} (string column\+Name)
+\begin{DoxyCompactList}\small\item\em Получение номера колонки по её имени \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_aac34ab157c27f3f4cb88f542dbf408c9}{Value}} (int i\+Row, int i\+Col)
+\begin{DoxyCompactList}\small\item\em Получить текстовое значение ячейки \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} по номеру строки и номеру колонки. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_aa8d6a459be8af385dbbee050380f3375}{Value}} (int i\+Row, string column\+Name)
+\begin{DoxyCompactList}\small\item\em Получить текстовое значение ячейки \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} по номеру строки и названию колонки. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a71050c522a62ec9295152323af632fcc}{Value}} (string column\+Name, bool show\+Error=true)
+\begin{DoxyCompactList}\small\item\em Получение значения в колонке с именем первой выделенной строки. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a8b226bc27fbabf8371d76debeb1d9ce9}{Value}} (int column\+Index, bool show\+Error=true)
+\begin{DoxyCompactList}\small\item\em Получение значения в колонке с номером первой выделенной строки. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a984387c70f3d6c188008862af02f590c}{Get\+Selected\+Area}} (out int area\+Left, out int area\+Top, out int area\+Right, out int area\+Bottom)
+\begin{DoxyCompactList}\small\item\em Получение координат выделенной области из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a462ecf8ce1122570366b79c08c99f78d}{Get\+Data\+Table}} ()
+\begin{DoxyCompactList}\small\item\em Получение Data\+Table из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_aa68f0c933105dee7deaf07a06894e068}{Selected\+Rows\+To\+Data\+Table}} (bool only\+First\+Column)
+\begin{DoxyCompactList}\small\item\em Копирование выделенные строки из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} в Data\+Table. \end{DoxyCompactList}\item 
+string \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a1d3c3a44ac6397c8872d8d7f96467821}{Get\+Selected\+Values}} (int column\+Index, bool show\+Error)
+\begin{DoxyCompactList}\small\item\em Получение массива значений всех выделенных строк в колонке с индексом Column\+Index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a45710c3e15371e24e202223b2d49c411}{Set\+Data\+Source}} (\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} dt)
+\begin{DoxyCompactList}\small\item\em Функция присвоения Source\+Grid.\+Data\+Source = Data\+Table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_ab72346f05acaea7bee8f9bd26811ff42}{Select\+Column\+Row\+Cell}} (int i\+Row, int i\+Column, bool navigate)
+\begin{DoxyCompactList}\small\item\em В зависимости от типа выделения (строка, столбец или ячейка) выделяем цветом по индексу столбца и строки. Два отдельных цвета -\/ для выделения и для выбора. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a675569672fd3cd42cb66cbefeba15611}{Grid\+Information}} ()
+\end{DoxyCompactItemize}
+\subsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a_a0463f19d3f7bb46245cc928c088023e9}{Preview\+Key\+Down1}} (object sender, Preview\+Key\+Down\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em По C\+T\+R\+L+L выводим форму с инфой по таблице. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Класс потомок Source\+Grid.\+Data\+Grid. 
+
+
+
+См. определение в файле Sys\+Comp.\+cs строка 131
+
+
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a04c3a780023d3791a39b0bc1fa37437f}\label{class_f_b_a_1_1_grid_f_b_a_a04c3a780023d3791a39b0bc1fa37437f}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Grid\+F\+BA@{Grid\+F\+BA}}
+\index{Grid\+F\+BA@{Grid\+F\+BA}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Grid\+F\+B\+A()}{GridFBA()}}
+{\footnotesize\ttfamily F\+B\+A.\+Grid\+F\+B\+A.\+Grid\+F\+BA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Конструктор. 
+
+
+
+См. определение в файле Sys\+Comp.\+cs строка 136
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_aa1ff5c21ce47cf95da542f611070d40d}\label{class_f_b_a_1_1_grid_f_b_a_aa1ff5c21ce47cf95da542f611070d40d}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Copy\+Region@{Copy\+Region}}
+\index{Copy\+Region@{Copy\+Region}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Copy\+Region()}{CopyRegion()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Grid\+F\+B\+A.\+Copy\+Region (\begin{DoxyParamCaption}\item[{bool}]{copy\+With\+Captions,  }\item[{bool}]{copy\+All }\end{DoxyParamCaption})}
+
+
+
+Копировать выделенную облать из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} в буфер обмена с названиями столбцов. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em copy\+With\+Captions} & Если true, то в результат попадает шапка таблицы\\
+\hline
+{\em copy\+All} & Если false берётся для копирования выделенная область, иначе вся таблица.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 176
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a7cb1d7d7cee4041f258cfc38bfa4d52e}\label{class_f_b_a_1_1_grid_f_b_a_a7cb1d7d7cee4041f258cfc38bfa4d52e}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Get\+Column\+Index@{Get\+Column\+Index}}
+\index{Get\+Column\+Index@{Get\+Column\+Index}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Get\+Column\+Index()}{GetColumnIndex()}}
+{\footnotesize\ttfamily int F\+B\+A.\+Grid\+F\+B\+A.\+Get\+Column\+Index (\begin{DoxyParamCaption}\item[{string}]{column\+Name }\end{DoxyParamCaption})}
+
+
+
+Получение номера колонки по её имени 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em column\+Name} & Имя колонки\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Номер полонки
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 269
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a462ecf8ce1122570366b79c08c99f78d}\label{class_f_b_a_1_1_grid_f_b_a_a462ecf8ce1122570366b79c08c99f78d}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Get\+Data\+Table@{Get\+Data\+Table}}
+\index{Get\+Data\+Table@{Get\+Data\+Table}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Get\+Data\+Table()}{GetDataTable()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} F\+B\+A.\+Grid\+F\+B\+A.\+Get\+Data\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получение Data\+Table из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. 
+
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 377
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a984387c70f3d6c188008862af02f590c}\label{class_f_b_a_1_1_grid_f_b_a_a984387c70f3d6c188008862af02f590c}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Get\+Selected\+Area@{Get\+Selected\+Area}}
+\index{Get\+Selected\+Area@{Get\+Selected\+Area}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Get\+Selected\+Area()}{GetSelectedArea()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Grid\+F\+B\+A.\+Get\+Selected\+Area (\begin{DoxyParamCaption}\item[{out int}]{area\+Left,  }\item[{out int}]{area\+Top,  }\item[{out int}]{area\+Right,  }\item[{out int}]{area\+Bottom }\end{DoxyParamCaption})}
+
+
+
+Получение координат выделенной области из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em area\+Left} & Left\\
+\hline
+{\em area\+Top} & Top\\
+\hline
+{\em area\+Right} & Right\\
+\hline
+{\em area\+Bottom} & Bottom\\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 358
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a1d3c3a44ac6397c8872d8d7f96467821}\label{class_f_b_a_1_1_grid_f_b_a_a1d3c3a44ac6397c8872d8d7f96467821}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Get\+Selected\+Values@{Get\+Selected\+Values}}
+\index{Get\+Selected\+Values@{Get\+Selected\+Values}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Get\+Selected\+Values()}{GetSelectedValues()}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} F\+B\+A.\+Grid\+F\+B\+A.\+Get\+Selected\+Values (\begin{DoxyParamCaption}\item[{int}]{column\+Index,  }\item[{bool}]{show\+Error }\end{DoxyParamCaption})}
+
+
+
+Получение массива значений всех выделенных строк в колонке с индексом Column\+Index. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em column\+Index} & Номер колонки\\
+\hline
+{\em show\+Error} & Показывать ошибки\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Список значений колонки в массиве saring\mbox{[}\mbox{]}
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 421
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a675569672fd3cd42cb66cbefeba15611}\label{class_f_b_a_1_1_grid_f_b_a_a675569672fd3cd42cb66cbefeba15611}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Grid\+Information@{Grid\+Information}}
+\index{Grid\+Information@{Grid\+Information}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Grid\+Information()}{GridInformation()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Grid\+F\+B\+A.\+Grid\+Information (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+
+
+Показать информацию о таблице. 
+
+См. определение в файле Sys\+Comp.\+cs строка 550
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a0463f19d3f7bb46245cc928c088023e9}\label{class_f_b_a_1_1_grid_f_b_a_a0463f19d3f7bb46245cc928c088023e9}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Preview\+Key\+Down1@{Preview\+Key\+Down1}}
+\index{Preview\+Key\+Down1@{Preview\+Key\+Down1}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Preview\+Key\+Down1()}{PreviewKeyDown1()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Grid\+F\+B\+A.\+Preview\+Key\+Down1 (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Preview\+Key\+Down\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+По C\+T\+R\+L+L выводим форму с инфой по таблице. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sender} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 541
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_acb10ddc9ad434e7966a2eb2fbfc594b9}\label{class_f_b_a_1_1_grid_f_b_a_acb10ddc9ad434e7966a2eb2fbfc594b9}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Select\+All@{Select\+All}}
+\index{Select\+All@{Select\+All}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Select\+All()}{SelectAll()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Grid\+F\+B\+A.\+Select\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Выделить всю таблицу. 
+
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 223
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_ab72346f05acaea7bee8f9bd26811ff42}\label{class_f_b_a_1_1_grid_f_b_a_ab72346f05acaea7bee8f9bd26811ff42}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Select\+Column\+Row\+Cell@{Select\+Column\+Row\+Cell}}
+\index{Select\+Column\+Row\+Cell@{Select\+Column\+Row\+Cell}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Select\+Column\+Row\+Cell()}{SelectColumnRowCell()}}
+{\footnotesize\ttfamily void F\+B\+A.\+Grid\+F\+B\+A.\+Select\+Column\+Row\+Cell (\begin{DoxyParamCaption}\item[{int}]{i\+Row,  }\item[{int}]{i\+Column,  }\item[{bool}]{navigate }\end{DoxyParamCaption})}
+
+
+
+В зависимости от типа выделения (строка, столбец или ячейка) выделяем цветом по индексу столбца и строки. Два отдельных цвета -\/ для выделения и для выбора. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em i\+Row} & Номер строки\\
+\hline
+{\em i\+Column} & Номер колонки\\
+\hline
+{\em navigate} & Выделять отдельным цветом выбора (выбирать) строку, колонку или область.\\
+\hline
+\end{DoxyParams}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 510
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_aa68f0c933105dee7deaf07a06894e068}\label{class_f_b_a_1_1_grid_f_b_a_aa68f0c933105dee7deaf07a06894e068}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Selected\+Rows\+To\+Data\+Table@{Selected\+Rows\+To\+Data\+Table}}
+\index{Selected\+Rows\+To\+Data\+Table@{Selected\+Rows\+To\+Data\+Table}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Selected\+Rows\+To\+Data\+Table()}{SelectedRowsToDataTable()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} F\+B\+A.\+Grid\+F\+B\+A.\+Selected\+Rows\+To\+Data\+Table (\begin{DoxyParamCaption}\item[{bool}]{only\+First\+Column }\end{DoxyParamCaption})}
+
+
+
+Копирование выделенные строки из \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} в Data\+Table. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em only\+First\+Column} & Если Only\+First\+Column = true, то возвращается только первая колонка, иначе все колонки.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+System.\+Data.\+Data\+Table
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 387
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a45710c3e15371e24e202223b2d49c411}\label{class_f_b_a_1_1_grid_f_b_a_a45710c3e15371e24e202223b2d49c411}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Set\+Data\+Source@{Set\+Data\+Source}}
+\index{Set\+Data\+Source@{Set\+Data\+Source}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Set\+Data\+Source()}{SetDataSource()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Grid\+F\+B\+A.\+Set\+Data\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}}}]{dt }\end{DoxyParamCaption})}
+
+
+
+Функция присвоения Source\+Grid.\+Data\+Source = Data\+Table. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em dt} & Data\+Table\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 448
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a5ca323bec7fef57d7182cdce6eecee7a}\label{class_f_b_a_1_1_grid_f_b_a_a5ca323bec7fef57d7182cdce6eecee7a}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Source\+Grid\+To\+C\+SV@{Source\+Grid\+To\+C\+SV}}
+\index{Source\+Grid\+To\+C\+SV@{Source\+Grid\+To\+C\+SV}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Source\+Grid\+To\+C\+S\+V()}{SourceGridToCSV()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Grid\+F\+B\+A.\+Source\+Grid\+To\+C\+SV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Открыть в Excel таблицу, открытую в \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. 
+
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 249
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a46bcb6ce2e842cd06d2798b3b641b078}\label{class_f_b_a_1_1_grid_f_b_a_a46bcb6ce2e842cd06d2798b3b641b078}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Source\+Grid\+To\+Excel@{Source\+Grid\+To\+Excel}}
+\index{Source\+Grid\+To\+Excel@{Source\+Grid\+To\+Excel}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Source\+Grid\+To\+Excel()}{SourceGridToExcel()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Grid\+F\+B\+A.\+Source\+Grid\+To\+Excel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Открыть в Excel таблицу, открытую в \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}}. 
+
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 233
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_aac34ab157c27f3f4cb88f542dbf408c9}\label{class_f_b_a_1_1_grid_f_b_a_aac34ab157c27f3f4cb88f542dbf408c9}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Value@{Value}}
+\index{Value@{Value}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Value()}{Value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily string F\+B\+A.\+Grid\+F\+B\+A.\+Value (\begin{DoxyParamCaption}\item[{int}]{i\+Row,  }\item[{int}]{i\+Col }\end{DoxyParamCaption})}
+
+
+
+Получить текстовое значение ячейки \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} по номеру строки и номеру колонки. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em i\+Row} & \\
+\hline
+{\em i\+Col} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Текстовое значение ячейки
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 284
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_aa8d6a459be8af385dbbee050380f3375}\label{class_f_b_a_1_1_grid_f_b_a_aa8d6a459be8af385dbbee050380f3375}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Value@{Value}}
+\index{Value@{Value}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Value()}{Value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily string F\+B\+A.\+Grid\+F\+B\+A.\+Value (\begin{DoxyParamCaption}\item[{int}]{i\+Row,  }\item[{string}]{column\+Name }\end{DoxyParamCaption})}
+
+
+
+Получить текстовое значение ячейки \mbox{\hyperlink{class_f_b_a_1_1_grid_f_b_a}{F\+B\+A.\+Grid\+F\+BA}} по номеру строки и названию колонки. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em i\+Row} & Номер строки\\
+\hline
+{\em column\+Name} & Название колонки\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Текстовое значение ячейки
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 299
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a71050c522a62ec9295152323af632fcc}\label{class_f_b_a_1_1_grid_f_b_a_a71050c522a62ec9295152323af632fcc}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Value@{Value}}
+\index{Value@{Value}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Value()}{Value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily string F\+B\+A.\+Grid\+F\+B\+A.\+Value (\begin{DoxyParamCaption}\item[{string}]{column\+Name,  }\item[{bool}]{show\+Error = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Получение значения в колонке с именем первой выделенной строки. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em column\+Name} & \\
+\hline
+{\em show\+Error} & Показывать ошибки, если false и возникнет ошибка, то вернёт null\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Текстовое значение ячейки
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 310
+
+\mbox{\Hypertarget{class_f_b_a_1_1_grid_f_b_a_a8b226bc27fbabf8371d76debeb1d9ce9}\label{class_f_b_a_1_1_grid_f_b_a_a8b226bc27fbabf8371d76debeb1d9ce9}} 
+\index{F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}!Value@{Value}}
+\index{Value@{Value}!F\+B\+A\+::\+Grid\+F\+BA@{F\+B\+A\+::\+Grid\+F\+BA}}
+\subsubsection{\texorpdfstring{Value()}{Value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily string F\+B\+A.\+Grid\+F\+B\+A.\+Value (\begin{DoxyParamCaption}\item[{int}]{column\+Index,  }\item[{bool}]{show\+Error = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Получение значения в колонке с номером первой выделенной строки. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em column\+Index} & Если Column\+Index ==-\/1 берём значение из первой выделенной колонки\\
+\hline
+{\em show\+Error} & Показывать ошибки, если false и возникнет ошибка, то вернёт null\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Текстовое значение ячейки
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Comp.\+cs строка 321
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sys_comp_8cs}{Sys\+Comp.\+cs}}\end{DoxyCompactItemize}

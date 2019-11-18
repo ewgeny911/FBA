@@ -1,0 +1,38 @@
+USE DIASOFT_test2
+
+DROP FUNCTION dbo.fn_ParserMSQL;
+DROP PROCEDURE dbo.spen_ExecMSQL;
+DROP PROCEDURE dbo.spen_ParserRefresh;
+DROP ASSEMBLY [ParserDLL];
+CREATE ASSEMBLY ParserDLL FROM 'D:\Travin\ParserDLL.dll' WITH PERMISSION_SET = UNSAFE; --EXTERNAL_ACCESS
+
+GO
+--Функция парсинг MSQL --> SQL. На выходе текст SQL.
+CREATE FUNCTION dbo.fn_ParserMSQL(@MSQL NVARCHAR(1000))
+RETURNS  NVARCHAR(max)
+AS
+EXTERNAL NAME ParserDLL.[FBA.Parser].ParsePipe;
+GO
+
+
+--Процедура. парсинг MSQL --> SQL. И выполнение SQL. На выходе одна или несколько таблиц.
+CREATE PROCEDURE dbo.spen_ExecMSQL (@MSQL VARCHAR(MAX)) 
+AS 
+BEGIN
+  --Пример: EXEC dbo.spen_ExecMSQL 'select top 10 * from ДокНаВхОплату'
+  DECLARE @SQL VARCHAR(MAX) 
+  SELECT @SQL = dbo.fn_ParserMSQL(@MSQL) 
+  EXEC (@SQL)
+END;
+GO
+
+--Процедура обновления таблиц парсера, котрую нужно запускать после обновления в структуре словарной таблицы.
+CREATE PROCEDURE dbo.spen_ParserRefresh
+AS EXTERNAL NAME ParserDLL.[FBA.Parser].ParserRefresh;
+
+--Проверка:
+--SELECT dbo.fn_ParserMSQL('select top 10 * from ДокНаВхОплату')
+--EXEC dbo.spen_ExecMSQL 'select top 10 * from ДокНаВхОплату' 
+--EXEC dbo.spen_ExecMSQL 'Select 1 as gfg; Select 2 as ff;'
+
+

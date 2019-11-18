@@ -1,0 +1,328 @@
+﻿--select * from fbaAttrParent
+--select * from fbaAttribute
+--Подготовка таблиц для парсера.
+
+/*
+DROP TABLE fbaEntityParent; 
+DROP TABLE fbaAttrParser;
+DROP TABLE fbaAttrParent;
+
+CREATE TABLE fbaEntityParser (
+    Pos                 TEXT,
+    ID                  INTEGER,
+    EntityID            INTEGER,
+    Name                TEXT,
+    Brief               TEXT,
+    ParentID            INTEGER,
+    ClassKey            TEXT,
+    Feature             INTEGER,
+    Description         TEXT,
+    SecurityDataClassId INTEGER,
+    Table_ID            TEXT,
+    Table_Name          TEXT,
+    Table_IDFieldName   TEXT
+);
+
+CREATE TABLE fbaEntityParent (
+   EnChildID INTEGER,
+   EnBrief2  TEXT, 
+   EnID      INTEGER, 
+   EnBrief1  TEXT,  
+   ParentID  INTEGER, 
+   EnBriefName2 TEXT,  
+   EnBriefName1 TEXT,
+   NumLevel  INTEGER,
+   EnBrief2_TableName TEXT,         --Главная таблица сущности EnBrief2.  
+   EnBrief2_TableIDFieldName TEXT,  --ИД поля автоинкремента таблицы сущности EnBrief2.   
+   EnBrief1_TableName TEXT,         --Главная таблица сущности EnBrief1.  
+   EnBrief1_TableIDFieldName TEXT  --ИД поля автоинкремента таблицы сущности EnBrief1.   
+);
+
+CREATE TABLE fbaAttrParser (
+  ID                  INTEGER,                                             
+  EntityID            INTEGER,                                       
+  Attr_EntityID       INTEGER,                                   
+  Attr_Name           TEXT,                            
+  Attr_Brief          TEXT,                            
+  Attr_Type           TEXT,                            
+  Attr_Kind           TEXT,                            
+  Attr_Mask           TEXT,                            
+  Attr_Feature        TEXT,                            
+  Attr_NameOrder      TEXT,                            
+  Attr_Code           TEXT,                            
+  Attr_Comment        TEXT,                            
+  Table_ID            INTEGER,                                       
+  Table_Field         TEXT,                            
+  Table_Field2        TEXT,                            
+  Ref_EntityID        INTEGER,                                   
+  Ref_AttrID          INTEGER,  
+  Table_Name          TEXT,     --Данные по таблице, в которой находится атрибут. Имя таблицы.   
+  Table_IDFieldName   TEXT,     --Данные по таблице, в которой находится атрибут. ID поля автоинкремена в таблице. (Поле внешенего ключа)"
+  Table_Type          INTEGER,  --Тип таблицы (Главная или Историчная)           
+  Table_Feature       INTEGER,  --Свойства таблицы.                              
+  Ref_EntityBrief     TEXT,     --Сокращение сущности для атрибута Ссылки или Массива            "
+  Ref_AttrBrief       TEXT,     --Сокращение атрибута сущности для атрибута Ссылки или Массива   "
+  Ref_AttrName        TEXT,     --Наименование атрибута сущности для атрибута Ссылки или Массива "
+  Attr_EntityBrief    TEXT      --Сокращение сущности, к которой относится атрибут.     
+);
+
+--=====================================================================
+--Таблица #AttrParent с атрибутами. Для каждой сущности весь полный список атрибутов, включая предков. "
+--DROP TABLE fbaAttrParent;
+CREATE TABLE fbaAttrParent (
+    Pos                       INTEGER,
+    ID                        INTEGER,
+    EntityID                  INTEGER,
+    Attr_EntityID             INTEGER,
+    Attr_Name                 TEXT,
+    Attr_Brief                TEXT,
+    Attr_Type                 INTEGER,
+    Attr_Kind                 INTEGER,
+    Attr_Mask                 TEXT,
+    Attr_Feature              INTEGER,
+    Attr_NameOrder            INTEGER,
+    Attr_Code                 TEXT,
+    Attr_Comment              TEXT,
+    Table_ID                  INTEGER,
+    Table_Field               TEXT,
+    Table_Field2              TEXT,
+    Ref_EntityID              INTEGER,
+    Ref_AttrID                INTEGER,
+    Table_Name                TEXT,
+    Table_IDFieldName         TEXT,
+    Table_Type                INTEGER,
+    Table_Feature             INTEGER,
+    Ref_EntityBrief           TEXT,
+    Ref_AttrBrief             TEXT,
+    Ref_AttrName              TEXT,
+    Attr_EntityBrief          TEXT,
+    EnChildID                 INTEGER,
+    EnBrief2                  TEXT,
+    EnID                      INTEGER,
+    EnBrief1                  TEXT,
+    ParentID                  INTEGER,
+    EnBriefName2              TEXT,
+    EnBriefName1              TEXT,
+    NumLevel                  INTEGER,
+    EnBrief2_TableName        TEXT,
+    EnBrief2_TableIDFieldName TEXT,
+    EnBrief1_TableName        TEXT,
+    EnBrief1_TableIDFieldName TEXT,
+    DATA_TYPE                 TEXT,
+    CHARACTER_MAXIMUM_LENGTH  INTEGER,
+    NUMERIC_PRECISION         INTEGER,
+    NUMERIC_PRECISION_RADIX   INTEGER
+);
+
+
+*/ 
+
+DELETE FROM fbaEntityParent; 
+DELETE FROM fbaAttrParser;
+DELETE FROM fbaAttrParent;
+DELETE FROM fbaEntityParser; 
+
+INSERT INTO fbaEntityParser
+SELECT 
+  ((select count(*) from fbaEntity b where t1.id >= b.id) - 1) as Pos,
+  t1.ID,
+  t1.EntityID,
+  t1.Name,
+  t1.Brief,
+  t1.ParentID,
+   '' as ClassKey,
+  t1.Feature,
+  t1.Comment,
+  '' as SecurityDataClassId,
+  t2.ID AS Table_ID,
+  t2.Name AS Table_Name,
+  t2.IDFieldName AS Table_IDFieldName
+FROM fbaEntity t1
+LEFT JOIN fbaTable t2 ON t2.TableEntityID = t1.ID;
+
+--Таблица #EntityParent с деревом сущностей.  
+INSERT INTO  fbaEntityParent (EnChildID, EnBrief2, EnID, EnBrief1, ParentID, EnBriefName2, EnBriefName1, NumLevel)
+SELECT * FROM
+(WITH Parents (EnChildID, EnBrief2, EnID, EnBrief1, ParentID, EnBriefName2, EnBriefName1, NumLevel) AS  
+      (                                                                
+        SELECT                                                         
+          ID       AS EnChildID,                                             
+          Brief    AS EnBrief2,                                           
+          ID       AS EnID,                                                  
+          Brief    AS EnBrief1,                                           
+          ParentID,                                                    
+          Name     AS EnBriefName2,                                        
+          Name     AS EnBriefName1,                                        
+          0        AS NumLevel                                                
+        FROM fbaEntity                                                  
+        UNION ALL                                                      
+        SELECT                                                         
+          p.EnChildID,                                                   
+          p.EnBrief2,                                                    
+          e.ID     AS EnID,                                                
+          e.Brief  AS EnBrief1,                                         
+          e.ParentID,                                                  
+          p.EnBriefName2 AS EnBriefName2,                              
+          e.Name   AS EnBriefName1,                                      
+          (p.NumLevel + 1) as NumLevel                                 
+        FROM fbaEntity e INNER JOIN Parents p ON p.ParentID = e.ID      
+      ) SELECT * FROM Parents ORDER BY EnBrief2, EnBrief1
+);       
+--select * from fbaEntityParent 
+
+
+--Данные по таблице для сущности EnBrief2 
+--EnID - это EnBrief1
+--EnChildID - это EnBrief2 
+UPDATE fbaEntityParent SET EnBrief2_TableName        = (SELECT Name        FROM fbaTable t1 WHERE fbaEntityParent.EnChildID = t1.TableEntityID);
+UPDATE fbaEntityParent SET EnBrief2_TableIDFieldName = (SELECT IDFieldName FROM fbaTable t1 WHERE fbaEntityParent.EnChildID = t1.TableEntityID);
+                                                                      
+--Данные по таблице для сущности EnBrief1                               
+UPDATE fbaEntityParent SET EnBrief1_TableName        = (SELECT Name        FROM fbaTable t1 WHERE fbaEntityParent.EnID = t1.TableEntityID);
+UPDATE fbaEntityParent SET EnBrief1_TableIDFieldName = (SELECT IDFieldName FROM fbaTable t1 WHERE fbaEntityParent.EnID = t1.TableEntityID); 
+--select * from fbatable
+--=====================================================================
+
+--Таблица #AttrParser с атрибутами  
+INSERT INTO fbaAttrParser (
+  ID,                                             
+  EntityID,                                       
+  Attr_EntityID,                                  
+  Attr_Name,                                      
+  Attr_Brief,                                     
+  Attr_Type,                                      
+  Attr_Kind,                                      
+  Attr_Mask,                                      
+  Attr_Feature,                                   
+  Attr_NameOrder,                                 
+  Attr_Code,                                      
+  Attr_Comment,                                   
+  Table_ID,                                       
+  Table_Field,                                    
+  Table_Field2,                                   
+  Ref_EntityID,                                   
+  Ref_AttrID) 
+SELECT 
+  ID ,                                            
+  EntityID,                                    
+  AttributeEntityID,                                
+  Name,                                   
+  Brief,                                     
+  Type,                                  
+  Kind,                                     
+  Mask,                                    
+  Feature,                                  
+  ObjectNameOrder,                                 
+  Code,                                     
+  Comment,                                 
+  TableID,                                     
+  FieldName,                                 
+  FieldName2,                                  
+  RefEntityID,                               
+  RefAttributeID FROM fbaAttribute;                  
+
+--select * from fbaAttribute
+--Данные по таблице атрибута 
+--select * from fbaAttrParser;
+UPDATE fbaAttrParser SET Table_Name        = (SELECT t1.Name        FROM fbaTable t1 WHERE fbaAttrParser.Table_ID = t1.ID);         
+UPDATE fbaAttrParser SET Table_IDFieldName = (SELECT t1.IDFieldName FROM fbaTable t1 WHERE fbaAttrParser.Table_ID = t1.ID);    
+UPDATE fbaAttrParser SET Table_Feature     = (SELECT t1.Feature     FROM fbaTable t1 WHERE fbaAttrParser.Table_ID = t1.ID);    
+UPDATE fbaAttrParser SET Table_Type        = (SELECT t1.Type        FROM fbaTable t1 WHERE fbaAttrParser.Table_ID = t1.ID);                                      
+--Данные для атрибута Ссылки или Массива.
+UPDATE fbaAttrParser SET Ref_EntityBrief = (SELECT t1.Brief FROM fbaEntity t1    WHERE fbaAttrParser.Ref_EntityID = t1.ID);                               
+UPDATE fbaAttrParser SET Ref_AttrBrief   = (SELECT t1.Brief FROM fbaAttribute t1 WHERE fbaAttrParser.Ref_AttrID = t1.ID and fbaAttrParser.Ref_EntityID = t1.AttributeEntityID);
+UPDATE fbaAttrParser SET Ref_AttrName   = (SELECT t1.Name FROM fbaAttribute t1 WHERE fbaAttrParser.Ref_AttrID = t1.ID and fbaAttrParser.Ref_EntityID = t1.AttributeEntityID);
+--Сущность атрибута 
+UPDATE fbaAttrParser SET  Attr_EntityBrief = (SELECT  t1.Brief FROM fbaEntity t1 WHERE fbaAttrParser.Attr_EntityID = t1.ID);                                                  
+--select * from fbaAttrParser order by Attr_entityID;    
+--select * from fbaEntity order by ID;        
+--select * from fbaAttribute order by AttributeEntityID;   
+               
+
+--delete from fbaAttrParent
+INSERT INTO fbaAttrParent
+   (--fbaAttrParser
+    Pos,
+    ID,
+    EntityID,
+    Attr_EntityID,
+    Attr_Name,
+    Attr_Brief,
+    Attr_Type,
+    Attr_Kind,
+    Attr_Mask,
+    Attr_Feature,
+    Attr_NameOrder,
+    Attr_Code,
+    Attr_Comment,
+    Table_ID,
+    Table_Field,
+    Table_Field2,
+    Ref_EntityID,
+    Ref_AttrID,
+    Table_Name,
+    Table_IDFieldName,
+    Table_Type,
+    Table_Feature,
+    Ref_EntityBrief,
+    Ref_AttrBrief,
+    Ref_AttrName,
+    Attr_EntityBrief,
+    --fbaEntityParent
+    EnChildID,
+    EnBrief2,
+    EnID,
+    EnBrief1,
+    ParentID,
+    EnBriefName2,
+    EnBriefName1,
+    NumLevel,
+    EnBrief2_TableName,
+    EnBrief2_TableIDFieldName,
+    EnBrief1_TableName,
+    EnBrief1_TableIDFieldName) 
+SELECT ((select count(*) from fbaAttrParser b  where t1.id >= b.id)-1) as Pos, 
+    t1.ID,
+    t1.EntityID,
+    t1.Attr_EntityID,
+    t1.Attr_Name,
+    t1.Attr_Brief,
+    t1.Attr_Type,
+    t1.Attr_Kind,
+    t1.Attr_Mask,
+    t1.Attr_Feature,
+    t1.Attr_NameOrder,
+    t1.Attr_Code,
+    t1.Attr_Comment,
+    t1.Table_ID,
+    t1.Table_Field,
+    t1.Table_Field2,
+    t1.Ref_EntityID,
+    t1.Ref_AttrID,
+    t1.Table_Name,
+    t1.Table_IDFieldName,
+    t1.Table_Type,
+    t1.Table_Feature,
+    t1.Ref_EntityBrief,
+    t1.Ref_AttrBrief,
+    t1.Ref_AttrName,
+    t1.Attr_EntityBrief, 
+    t2.EnChildID,
+    t2.EnBrief2,
+    t2.EnID,
+    t2.EnBrief1,
+    t2.ParentID,
+    t2.EnBriefName2,
+    t2.EnBriefName1,
+    t2.NumLevel,
+    t2.EnBrief2_TableName,
+    t2.EnBrief2_TableIDFieldName,
+    t2.EnBrief1_TableName,
+    t2.EnBrief1_TableIDFieldName            
+  --INTO #AttrParent 
+FROM fbaAttrParser t1                                 
+LEFT JOIN fbaEntityParent t2 ON t2.EnID = t1.Attr_EntityID             
+ORDER BY EnBrief2, NumLevel desc, Table_Type, Table_Name, t1.Attr_Brief      
+  
+
+

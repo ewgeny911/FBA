@@ -1,0 +1,68 @@
+#>>exec EOA_CreateTable 1
+/*
+CREATE PROCEDURE [dbo].[EOA_CreateTable](@i int) AS
+  --Пересоздание таблиц для атрибутов и сущностей
+  --Параметр @i пока не используется.
+  DROP TABLE dbo.mtEntity
+  DROP TABLE dbo.mtAttr
+  --===============================================================================
+  --Создание таблицы, в которой будут собраны все атрибуты, сущности,
+  --и таблицы и имя главного поля в таблице.
+  ;WITH Parents(EnChildID, EnBrief2, EnID, EnBrief1, ParentID) AS
+      (
+        SELECT ID AS EnChildID, Brief AS EnBrief2, ID as EnID, Brief as EnBrief1, ParentID from enEntity
+        --where ID = 1717
+        UNION ALL
+        SELECT EnChildID, EnBrief2, e.ID as EnID, e.Brief as EnBrief1, e.ParentID
+         FROM enEntity e INNER JOIN Parents p ON p.ParentID = e.ID
+      ) SELECT * INTO #Tabl2 FROM Parents ORDER BY EnBrief2, EnBrief1
+
+
+  --Добавляем все таблицы, соединяя по ID
+  SELECT t1.TableID, t1.Name as TableName, t1.IDFieldName, t1.Type as TableType, t1.Feature,
+         t2.EnChildID, t2.EnBrief2, t2.EnID, t2.EnBrief1, t2.ParentID INTO dbo.mtEntity
+  FROM #Tabl2 t2
+    LEFT JOIN enTable t1 ON t1.TableEntityID = t2.EnID ORDER BY t2.EnBrief1
+  --===============================================================================
+
+
+  --===============================================================================
+  --Создание таблицы в котрой будут все атрибуты
+  SELECT
+     EOT_1.AttributeID "AttrID",
+     EOT_1.Brief "AttrBrief",
+     EOT_1.Name "AttrName",
+     EOT_1.Code "AttrCode",
+     EOT_1.Mask "AttrMask",
+     EOT_1.Feature "AttrFeature",
+     EOT_1.FieldName "Field1",
+     EOT_1.FieldName2 "Field2",
+     EOT_1.Type "AttrTypeID",
+     EOT_1.Kind "AttrViewID",
+     EOT_2.Name "AttrTypeName",
+     EOT_3.Name "AttrViewName",
+     EOT_4.ID "EntityID",
+     EOT_4.Brief "EntityBrief",
+     EOT_5.Brief "LinkTo",
+     EOT_6.Name "TableName",
+     EOT_6.Type "TableType",
+     EOT_6.Feature "TableFeature",
+     EOT_6.IDFieldName "TableFieldID"
+     INTO dbo.mtAttr
+  FROM
+     enAttribute EOT_1
+     Left Outer Join enTable EOT_6
+       On EOT_6.TableID = EOT_1.TableID
+     Left Outer Join enEntity EOT_5
+       On EOT_5.ID = EOT_1.RefEntityID
+     Left Outer Join enEntity EOT_4
+       On EOT_4.ID = EOT_1.AttributeEntityID
+     Left Outer Join enAttributeKind EOT_3
+       On EOT_3.AttributeKindID = EOT_1.Kind
+     Left Outer Join enAttributeType EOT_2
+       On EOT_2.AttributeTypeID = EOT_1.Type
+  --ORDER BY
+     --EOT_1.AttributeID Desc
+  --===============================================================================
+
+  SELECT 1 AS Result  */

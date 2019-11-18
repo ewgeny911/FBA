@@ -1,0 +1,56 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура2 9, ''ЗапросНаОтображениеДерева'' ', mtQuery);
+begin tran
+
+select ID, ParentID, Brief, convert(varchar(max), Row_NUMBER() OVER (Partition by ParentID
+Order by ID)) RN into #t
+
+from enEntity;
+
+
+
+ with tree(ID, ParentID, Brief, RN, level) as
+
+(
+
+ select ID, ParentID, Brief, RN, 0
+
+ from #t
+
+ where ParentID is Null
+
+ union all
+
+ select e.ID, e.ParentID, e.Brief, t.RN+'.'+e.RN, t.level + 1
+
+ from #t e
+
+ inner join tree t on t.id = e.ParentID
+
+)
+
+
+
+ select eE.ID, tr.Brief, tr.ParentID, t.A, Coalesce(eT.Name, eA.Brief) 'Таблица / атрибут', eE.Name Наим, /*eE.EngBrief АнглСокр,*/ eE.ClassKey Класс,
+
+ eE.Feature Признаки, eE.Description Комментарий, eE.parentid Родитель, eT.Name Таблица, eT.IdFieldName ПолеИдентификатор, eT.TableEntityID ИДТаблицы
+
+ from tree tr
+
+ cross join (select 0 A union all select 1 union all select 2) t
+
+
+ left outer join enTable eT on eT.tableentityid = tr.ID and t.A = 1
+
+
+ left outer join enAttribute eA on eA.attributeentityid = tr.ID and t.A = 2
+
+
+ left outer join enEntity eE on eE.ID = tr.ID
+
+ order by RN;
+
+Select 'Выполнено.' as Result
+
+commit tran

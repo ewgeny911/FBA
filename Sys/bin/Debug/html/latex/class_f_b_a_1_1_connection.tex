@@ -1,0 +1,1178 @@
+\hypertarget{class_f_b_a_1_1_connection}{}\section{Класс F\+B\+A.\+Connection}
+\label{class_f_b_a_1_1_connection}\index{F\+B\+A.\+Connection@{F\+B\+A.\+Connection}}
+
+
+Класс соединения с БД.  
+
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_f_b_a_1_1_connection_ae4e944521bb94857288224ca9f20245a}{Connection}} ()
+\begin{DoxyCompactList}\small\item\em Конструктор без инициализацией подключения. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_f_b_a_1_1_connection_a085fd480090159a0192a3cfdc2075574}{Connection}} (\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} \mbox{\hyperlink{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}{server\+Type}}, string \mbox{\hyperlink{class_f_b_a_1_1_connection_a6a04e4e09b3be5fc37491234ccf46a61}{Server\+Name}}, string \mbox{\hyperlink{class_f_b_a_1_1_connection_aa20952e5caba14009de078611bffc06e}{Database\+Login}}, string \mbox{\hyperlink{class_f_b_a_1_1_connection_afb9f211ad33869d0d3ff480a8593cba0}{Database\+Pass}}, string \mbox{\hyperlink{class_f_b_a_1_1_connection_a7af426539c14090db733c18b37cfc1f5}{Database\+Name}})
+\begin{DoxyCompactList}\small\item\em Конструктор с инициализацией подключения. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a226d4baf3be0676551817c1ae46fbaa9}{Connection\+Set\+Local}} ()
+\begin{DoxyCompactList}\small\item\em Установка соединения с S\+Q\+Lite; \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a35e9a07c0120bdca37b4a7459b7e6a21}{Connection\+Init}} (\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} \mbox{\hyperlink{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}{server\+Type}}, string server\+Name, string database\+Login, string database\+Pass, string database\+Name)
+\begin{DoxyCompactList}\small\item\em Соединение с БД \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a9f13d1affbfe468eeaca4daffa9b21d1}{Connection\+Get\+Param\+Name}} (string connection\+Name, out string connection\+ID, out string \mbox{\hyperlink{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}{server\+Type}}, out string server\+Name, out string database\+Name, out string database\+Login, out string database\+Pass, out string user\+Form, out string user\+Login, out string user\+Pass, out string windows\+Login)
+\begin{DoxyCompactList}\small\item\em Метод возвращает все настройки соединения по имени соединения из табицы Connection\+List. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a766238aedcab93fcd7d4836db4550e31}{Connection\+Close}} ()
+\begin{DoxyCompactList}\small\item\em Функция закрытия соединения с БД. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a9d5433bfc95420f963f932439dd5a838}{Get\+Value}} (string sql)
+\begin{DoxyCompactList}\small\item\em Получение одного значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a01944c325a50484e95d952ac35445380}{Get\+Value2}} (string sql, out string s1, out string s2)
+\begin{DoxyCompactList}\small\item\em Получение 2-\/х значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_abeada204d24cae01cbf5f73e0b505e99}{Get\+Value3}} (string sql, out string s1, out string s2, out string s3)
+\begin{DoxyCompactList}\small\item\em Получение 3-\/х значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a99f3a0c81f814bb49d075ea382e51b71}{Get\+Value4}} (string sql, out string s1, out string s2, out string s3, out string s4)
+\begin{DoxyCompactList}\small\item\em Получение 4-\/ми значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_ab11d0b86feaf69fbb49846f4537145ce}{Get\+Value5}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5)
+\begin{DoxyCompactList}\small\item\em Получение 5-\/ми значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a50231c21a05c72ecab89a5b347941462}{Get\+Value6}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5, out string s6)
+\begin{DoxyCompactList}\small\item\em Получение 6-\/ми значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a220dc571237011f2e0afddd935cacd6d}{Get\+Value7}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5, out string s6, out string s7)
+\begin{DoxyCompactList}\small\item\em Получение 7-\/ми значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a79f620faffaf2bc26837bfe8d4ef368b}{Get\+Value8}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5, out string s6, out string s7, out string s8)
+\begin{DoxyCompactList}\small\item\em Получение 8-\/ми значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a963bce9db48309a24f9e5360255f7f5e}{Get\+Value9}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5, out string s6, out string s7, out string s8, out string s9)
+\begin{DoxyCompactList}\small\item\em Получение 9-\/х значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_acc4bb0104ca9cb3f480999e5ab9a3116}{Get\+Value10}} (string sql, out string s1, out string s2, out string s3, out string s4, out string s5, out string s6, out string s7, out string s8, out string s9, out string s10)
+\begin{DoxyCompactList}\small\item\em Получение 10-\/ти значений. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a49b48dd82db1f15bdaa4ede9eab9c2cc}{Get\+Value\+Arr}} (string sql, ref string\mbox{[}$\,$\mbox{]} arr)
+\begin{DoxyCompactList}\small\item\em Получение больше 10-\/ти значений. В массиве строк. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_ab741e12a89628ff1afe3aa50e019d836}{Select\+GV}} (string sql, Data\+Grid\+View grid)
+\begin{DoxyCompactList}\small\item\em Функции получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Grid\+View. ~\newline
+\end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a17c79b7810deb7e632187a146a27d725}{Select\+DT}} (string sql, out \mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} dt)
+\begin{DoxyCompactList}\small\item\em Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Table. Возвращает только одну таблицу. ~\newline
+\end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a05684a6c70de969923339bbaebe82f5f}{Select\+DS}} (string sql, out Data\+Set ds)
+\begin{DoxyCompactList}\small\item\em Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Set. Возвращает несколько таблиц. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_ae384f24ee6f026cd580a76202560445a}{Select\+DS}} (string sql, out Data\+Set ds, out string error\+Mes, bool error\+Show)
+\begin{DoxyCompactList}\small\item\em Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Set. Возвращает несколько таблиц. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a167e00898afa701230592d060c6d2e2c}{Get\+Insert\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Получить код для получения ID вставленной/изменённой записи. Postgre\+: \char`\"{}; R\+E\+T\+U\+R\+N\+I\+N\+G id; \char`\"{}; ~\newline
+M\+S\+S\+QL\+: \char`\"{}; S\+E\+L\+E\+C\+T @@\+I\+D\+E\+N\+T\+I\+T\+Y A\+S id; \char`\"{}; ~\newline
+S\+Q\+Lite\+: \char`\"{}; S\+E\+L\+E\+C\+T last\+\_\+insert\+\_\+rowid() A\+S id; \char`\"{}; \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_aad46a834def484b00f7930ca4ec880be}{Exec}} (string sql)
+\begin{DoxyCompactList}\small\item\em Выполнить запрос S\+QL. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_aa58e35746bf7d3176e982770ae60c83e}{Exec}} (string sql, bool add\+Insert\+ID, out string id)
+\begin{DoxyCompactList}\small\item\em Выполнить запрос S\+QL \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_connection_a832beb0a31c62baefdb724e94537e97c}{Select\+Count}} (string sql)
+\begin{DoxyCompactList}\small\item\em Возвращает количество записей, которые получаются после выполнения запроса S\+QL. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_ab06c1ddb28525efd92457b44392378c4}{Select\+CB}} (string sql, Combo\+Box cb)
+\begin{DoxyCompactList}\small\item\em Функции получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Combo\+Box. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a55e0e003b04b9ee54c49e47a6cebf0b4}{Get\+Server\+Date}} ()
+\begin{DoxyCompactList}\small\item\em Текущая дата на сервере. Postgre = S\+E\+L\+E\+CT current\+\_\+timestamp AS Current\+Date\+Time ~\newline
+M\+S\+S\+QL = S\+E\+L\+E\+CT datetime(\textquotesingle{}now\textquotesingle{}, \textquotesingle{}localtime\textquotesingle{}) AS Current\+Date\+Time ~\newline
+S\+Q\+Lite = S\+E\+L\+E\+CT Get\+Date() AS Current\+Date\+Time \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a2639fc83e1f04830b26312cdd19b5948}{M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server}} (\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}} dt, string table\+Name)
+\begin{DoxyCompactList}\small\item\em Копирование таблицы Data\+Table на сервер M\+S\+S\+QL. Для S\+Q\+Lite и Postrgres нужно действовать через создание I\+N\+S\+E\+RT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_ad362a30163e3a237460e0d5b2cb124d2}{Connection\+ID}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em ИД соединения. Это G\+U\+ID. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_ae89cedd48e08f769139faa24d29941aa}{Connection\+Active}} = false
+\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_connection_a7e224aeb6f3f7aa7fa641f2bd9330520}{Connection\+Direct}} = false
+\begin{DoxyCompactList}\small\item\em Работа с запросами через сервер прилоежений (false) или прямое подключение (true). ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a3cd37446a3a7203f48d984526b4849e5}{Connection\+G\+U\+ID}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Текущий G\+U\+ID, выданый сервером проложений по которому определяется \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}} к БД. Это основой G\+U\+ID сессии приложения, возвращенный сервером приложений. В рамках сессии выполняются транзакции. Для того чтобы выполнить новую транзакцию, пока не закончилась предыдущая, нужно получить от сервера приложений новый G\+U\+ID соединения с БД (т.\+е. новый \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}}). \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_ad06450c04a115c5f49848d0bc861b63e}{Name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Имя данного объекта \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}}. Используется для того чтобы разделить команды к серверу приложений. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_aae6e7e372a0df905fdbe5ae1844d3279}{Connection\+Name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Имя соединения в локальной базе S\+Q\+Lite. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a6a04e4e09b3be5fc37491234ccf46a61}{Server\+Name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Имя сервера СУБД. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} \mbox{\hyperlink{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}{server\+Type}}
+\begin{DoxyCompactList}\small\item\em Допустимые значения\+: M\+S\+S\+QL, Postgre, S\+Q\+Lite, Server\+App. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} \mbox{\hyperlink{class_f_b_a_1_1_connection_ada46cb57e3fc2bea5b69c026d2eba248}{server\+Type\+Remote}} = \mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a316d54b418d9a7186f9234f08cfb599f}{Server\+Type.\+Not\+Assigned}}
+\begin{DoxyCompactList}\small\item\em Это тип удаленного подключения, если соединение через сервер приложений. Если подключение к БД локальное, то Connection\+Direct = true и тогда в server\+Type что-\/то одно из M\+S\+S\+QL, Postgre, S\+Q\+Lite. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a7af426539c14090db733c18b37cfc1f5}{Database\+Name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em База СУБД на сервере. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_aa20952e5caba14009de078611bffc06e}{Database\+Login}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em База СУБД -\/ логин. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_afb9f211ad33869d0d3ff480a8593cba0}{Database\+Pass}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em База СУБД -\/ пароль. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a6ce212094097c98af886a3417b1510cc}{User\+Form}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Имя формы для запуска. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a4da6cc26b934f060dc0c3ca79e9791d0}{User\+Login}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Логин пользователя в таблице fba\+User. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a9b58e4b1c4ca9af6571431806c0e17a9}{User\+Pass}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Пароль пользователя в таблице fba\+User. ~\newline
+\end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a24c27a6a036bb03da1bbe1cdd29b1f16}{Server\+App\+IP}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em IP сервера приложений. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_af8d3357489e91efcf98ebf7b56110348}{Server\+App\+Name}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Имя сервера прилоежний. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_connection_a556479c8ba68bce8cee63c53e8583c14}{Server\+App\+Port}} = 0
+\begin{DoxyCompactList}\small\item\em На каком порту обмениваемся сообщениями с сервером приложений. По умолчанию 7145. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_connection_a3f41df8459a0eaf38857a233720dd1d0}{Windows\+Login}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Признак что авторизация через логин Windows. \end{DoxyCompactList}\item 
+Date\+Time \mbox{\hyperlink{class_f_b_a_1_1_connection_a11c6e4dac8775fc197a3b468dcff23cc}{Last\+Query\+Date\+Time}} = Date\+Time.\+Now
+\begin{DoxyCompactList}\small\item\em Дата и время последнего запроса. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Класс соединения с БД. 
+
+См. определение в файле Sys\+Connect.\+cs строка 49
+
+
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ae4e944521bb94857288224ca9f20245a}\label{class_f_b_a_1_1_connection_ae4e944521bb94857288224ca9f20245a}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection@{Connection}}
+\index{Connection@{Connection}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection()}{Connection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+B\+A.\+Connection.\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Конструктор без инициализацией подключения. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 173
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a085fd480090159a0192a3cfdc2075574}\label{class_f_b_a_1_1_connection_a085fd480090159a0192a3cfdc2075574}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection@{Connection}}
+\index{Connection@{Connection}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection()}{Connection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+B\+A.\+Connection.\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}}}]{server\+Type,  }\item[{string}]{Server\+Name,  }\item[{string}]{Database\+Login,  }\item[{string}]{Database\+Pass,  }\item[{string}]{Database\+Name }\end{DoxyParamCaption})}
+
+
+
+Конструктор с инициализацией подключения. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 179
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a766238aedcab93fcd7d4836db4550e31}\label{class_f_b_a_1_1_connection_a766238aedcab93fcd7d4836db4550e31}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Close@{Connection\+Close}}
+\index{Connection\+Close@{Connection\+Close}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Close()}{ConnectionClose()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Функция закрытия соединения с БД. ~\newline
+
+
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 450
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a9f13d1affbfe468eeaca4daffa9b21d1}\label{class_f_b_a_1_1_connection_a9f13d1affbfe468eeaca4daffa9b21d1}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Get\+Param\+Name@{Connection\+Get\+Param\+Name}}
+\index{Connection\+Get\+Param\+Name@{Connection\+Get\+Param\+Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Get\+Param\+Name()}{ConnectionGetParamName()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Get\+Param\+Name (\begin{DoxyParamCaption}\item[{string}]{connection\+Name,  }\item[{out string}]{connection\+ID,  }\item[{out string}]{server\+Type,  }\item[{out string}]{server\+Name,  }\item[{out string}]{database\+Name,  }\item[{out string}]{database\+Login,  }\item[{out string}]{database\+Pass,  }\item[{out string}]{user\+Form,  }\item[{out string}]{user\+Login,  }\item[{out string}]{user\+Pass,  }\item[{out string}]{windows\+Login }\end{DoxyParamCaption})}
+
+
+
+Метод возвращает все настройки соединения по имени соединения из табицы Connection\+List. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em connection\+Name} & \\
+\hline
+{\em connection\+ID} & \\
+\hline
+{\em server\+Type} & \\
+\hline
+{\em server\+Name} & \\
+\hline
+{\em database\+Name} & \\
+\hline
+{\em database\+Login} & \\
+\hline
+{\em database\+Pass} & \\
+\hline
+{\em user\+Form} & \\
+\hline
+{\em user\+Login} & \\
+\hline
+{\em user\+Pass} & \\
+\hline
+{\em windows\+Login} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 416
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a35e9a07c0120bdca37b4a7459b7e6a21}\label{class_f_b_a_1_1_connection_a35e9a07c0120bdca37b4a7459b7e6a21}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Init@{Connection\+Init}}
+\index{Connection\+Init@{Connection\+Init}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Init()}{ConnectionInit()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}}}]{server\+Type,  }\item[{string}]{server\+Name,  }\item[{string}]{database\+Login,  }\item[{string}]{database\+Pass,  }\item[{string}]{database\+Name }\end{DoxyParamCaption})}
+
+
+
+Соединение с БД 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em server\+Type} & Server\+Type\+: M\+S\+QL, Postrgre, S\+Q\+Lite\\
+\hline
+{\em server\+Name} & Имя сервера и порт, пример \href{http://MyServer:9590}{\tt http\+://\+My\+Server\+:9590}\\
+\hline
+{\em database\+Login} & Логин к БД\\
+\hline
+{\em database\+Pass} & Пароль к БД\\
+\hline
+{\em database\+Name} & Имя БД\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 215
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a226d4baf3be0676551817c1ae46fbaa9}\label{class_f_b_a_1_1_connection_a226d4baf3be0676551817c1ae46fbaa9}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Set\+Local@{Connection\+Set\+Local}}
+\index{Connection\+Set\+Local@{Connection\+Set\+Local}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Set\+Local()}{ConnectionSetLocal()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Set\+Local (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Установка соединения с S\+Q\+Lite; 
+
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 192
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_aad46a834def484b00f7930ca4ec880be}\label{class_f_b_a_1_1_connection_aad46a834def484b00f7930ca4ec880be}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Exec@{Exec}}
+\index{Exec@{Exec}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Exec()}{Exec()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Exec (\begin{DoxyParamCaption}\item[{string}]{sql }\end{DoxyParamCaption})}
+
+
+
+Выполнить запрос S\+QL. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 889
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_aa58e35746bf7d3176e982770ae60c83e}\label{class_f_b_a_1_1_connection_aa58e35746bf7d3176e982770ae60c83e}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Exec@{Exec}}
+\index{Exec@{Exec}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Exec()}{Exec()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Exec (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{bool}]{add\+Insert\+ID,  }\item[{out string}]{id }\end{DoxyParamCaption})}
+
+
+
+Выполнить запрос S\+QL 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & \\
+\hline
+{\em add\+Insert\+ID} & Если true, то добавляется код для получения ИД последней изменённой записи Postgre\+: \char`\"{}; R\+E\+T\+U\+R\+N\+I\+N\+G id; \char`\"{}; ~\newline
+M\+S\+S\+QL\+: \char`\"{}; S\+E\+L\+E\+C\+T @@\+I\+D\+E\+N\+T\+I\+T\+Y A\+S id; \char`\"{}; ~\newline
+S\+Q\+Lite\+: \char`\"{}; S\+E\+L\+E\+C\+T last\+\_\+insert\+\_\+rowid() A\+S id; \char`\"{}; \\
+\hline
+{\em id} & ИД последней изменённой записи\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 906
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a167e00898afa701230592d060c6d2e2c}\label{class_f_b_a_1_1_connection_a167e00898afa701230592d060c6d2e2c}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Insert\+ID@{Get\+Insert\+ID}}
+\index{Get\+Insert\+ID@{Get\+Insert\+ID}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Insert\+I\+D()}{GetInsertID()}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Get\+Insert\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Получить код для получения ID вставленной/изменённой записи. Postgre\+: \char`\"{}; R\+E\+T\+U\+R\+N\+I\+N\+G id; \char`\"{}; ~\newline
+M\+S\+S\+QL\+: \char`\"{}; S\+E\+L\+E\+C\+T @@\+I\+D\+E\+N\+T\+I\+T\+Y A\+S id; \char`\"{}; ~\newline
+S\+Q\+Lite\+: \char`\"{}; S\+E\+L\+E\+C\+T last\+\_\+insert\+\_\+rowid() A\+S id; \char`\"{}; 
+
+\begin{DoxyReturn}{Возвращает}
+Одно из трёх текстовых значений
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 876
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a55e0e003b04b9ee54c49e47a6cebf0b4}\label{class_f_b_a_1_1_connection_a55e0e003b04b9ee54c49e47a6cebf0b4}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Server\+Date@{Get\+Server\+Date}}
+\index{Get\+Server\+Date@{Get\+Server\+Date}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Server\+Date()}{GetServerDate()}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Get\+Server\+Date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Текущая дата на сервере. Postgre = S\+E\+L\+E\+CT current\+\_\+timestamp AS Current\+Date\+Time ~\newline
+M\+S\+S\+QL = S\+E\+L\+E\+CT datetime(\textquotesingle{}now\textquotesingle{}, \textquotesingle{}localtime\textquotesingle{}) AS Current\+Date\+Time ~\newline
+S\+Q\+Lite = S\+E\+L\+E\+CT Get\+Date() AS Current\+Date\+Time 
+
+\begin{DoxyReturn}{Возвращает}
+Дата на сервере
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 1044
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a9d5433bfc95420f963f932439dd5a838}\label{class_f_b_a_1_1_connection_a9d5433bfc95420f963f932439dd5a838}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value@{Get\+Value}}
+\index{Get\+Value@{Get\+Value}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value()}{GetValue()}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Get\+Value (\begin{DoxyParamCaption}\item[{string}]{sql }\end{DoxyParamCaption})}
+
+
+
+Получение одного значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Одно значение полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 491
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_acc4bb0104ca9cb3f480999e5ab9a3116}\label{class_f_b_a_1_1_connection_acc4bb0104ca9cb3f480999e5ab9a3116}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value10@{Get\+Value10}}
+\index{Get\+Value10@{Get\+Value10}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value10()}{GetValue10()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value10 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5,  }\item[{out string}]{s6,  }\item[{out string}]{s7,  }\item[{out string}]{s8,  }\item[{out string}]{s9,  }\item[{out string}]{s10 }\end{DoxyParamCaption})}
+
+
+
+Получение 10-\/ти значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+{\em s6} & \\
+\hline
+{\em s7} & \\
+\hline
+{\em s8} & \\
+\hline
+{\em s9} & \\
+\hline
+{\em s10} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+10 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 683
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a01944c325a50484e95d952ac35445380}\label{class_f_b_a_1_1_connection_a01944c325a50484e95d952ac35445380}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value2@{Get\+Value2}}
+\index{Get\+Value2@{Get\+Value2}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value2()}{GetValue2()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value2 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2 }\end{DoxyParamCaption})}
+
+
+
+Получение 2-\/х значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+2 значения полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 515
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_abeada204d24cae01cbf5f73e0b505e99}\label{class_f_b_a_1_1_connection_abeada204d24cae01cbf5f73e0b505e99}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value3@{Get\+Value3}}
+\index{Get\+Value3@{Get\+Value3}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value3()}{GetValue3()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value3 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3 }\end{DoxyParamCaption})}
+
+
+
+Получение 3-\/х значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+3 значения полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 536
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a99f3a0c81f814bb49d075ea382e51b71}\label{class_f_b_a_1_1_connection_a99f3a0c81f814bb49d075ea382e51b71}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value4@{Get\+Value4}}
+\index{Get\+Value4@{Get\+Value4}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value4()}{GetValue4()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value4 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4 }\end{DoxyParamCaption})}
+
+
+
+Получение 4-\/ми значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+4 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 557
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ab11d0b86feaf69fbb49846f4537145ce}\label{class_f_b_a_1_1_connection_ab11d0b86feaf69fbb49846f4537145ce}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value5@{Get\+Value5}}
+\index{Get\+Value5@{Get\+Value5}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value5()}{GetValue5()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value5 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5 }\end{DoxyParamCaption})}
+
+
+
+Получение 5-\/ми значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+5 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 578
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a50231c21a05c72ecab89a5b347941462}\label{class_f_b_a_1_1_connection_a50231c21a05c72ecab89a5b347941462}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value6@{Get\+Value6}}
+\index{Get\+Value6@{Get\+Value6}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value6()}{GetValue6()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value6 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5,  }\item[{out string}]{s6 }\end{DoxyParamCaption})}
+
+
+
+Получение 6-\/ми значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+{\em s6} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+6 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 599
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a220dc571237011f2e0afddd935cacd6d}\label{class_f_b_a_1_1_connection_a220dc571237011f2e0afddd935cacd6d}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value7@{Get\+Value7}}
+\index{Get\+Value7@{Get\+Value7}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value7()}{GetValue7()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value7 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5,  }\item[{out string}]{s6,  }\item[{out string}]{s7 }\end{DoxyParamCaption})}
+
+
+
+Получение 7-\/ми значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+{\em s6} & \\
+\hline
+{\em s7} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+7 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 620
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a79f620faffaf2bc26837bfe8d4ef368b}\label{class_f_b_a_1_1_connection_a79f620faffaf2bc26837bfe8d4ef368b}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value8@{Get\+Value8}}
+\index{Get\+Value8@{Get\+Value8}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value8()}{GetValue8()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value8 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5,  }\item[{out string}]{s6,  }\item[{out string}]{s7,  }\item[{out string}]{s8 }\end{DoxyParamCaption})}
+
+
+
+Получение 8-\/ми значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+{\em s6} & \\
+\hline
+{\em s7} & \\
+\hline
+{\em s8} & \\
+\hline
+\end{DoxyParams}
+~\newline
+\begin{DoxyReturn}{Возвращает}
+8 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 641
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a963bce9db48309a24f9e5360255f7f5e}\label{class_f_b_a_1_1_connection_a963bce9db48309a24f9e5360255f7f5e}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value9@{Get\+Value9}}
+\index{Get\+Value9@{Get\+Value9}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value9()}{GetValue9()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value9 (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out string}]{s1,  }\item[{out string}]{s2,  }\item[{out string}]{s3,  }\item[{out string}]{s4,  }\item[{out string}]{s5,  }\item[{out string}]{s6,  }\item[{out string}]{s7,  }\item[{out string}]{s8,  }\item[{out string}]{s9 }\end{DoxyParamCaption})}
+
+
+
+Получение 9-\/х значений. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос S\+QL\\
+\hline
+{\em s1} & \\
+\hline
+{\em s2} & \\
+\hline
+{\em s3} & \\
+\hline
+{\em s4} & \\
+\hline
+{\em s5} & \\
+\hline
+{\em s6} & \\
+\hline
+{\em s7} & \\
+\hline
+{\em s8} & \\
+\hline
+{\em s9} & \\
+\hline
+\end{DoxyParams}
+~\newline
+\begin{DoxyReturn}{Возвращает}
+9 значений полученных запросом. Запрос должен возвращать одну строку
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 662
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a49b48dd82db1f15bdaa4ede9eab9c2cc}\label{class_f_b_a_1_1_connection_a49b48dd82db1f15bdaa4ede9eab9c2cc}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Get\+Value\+Arr@{Get\+Value\+Arr}}
+\index{Get\+Value\+Arr@{Get\+Value\+Arr}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Get\+Value\+Arr()}{GetValueArr()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Get\+Value\+Arr (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{ref string \mbox{[}$\,$\mbox{]}}]{arr }\end{DoxyParamCaption})}
+
+
+
+Получение больше 10-\/ти значений. В массиве строк. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & \\
+\hline
+{\em arr} & Возвращает список значений в виде массива\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 735
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a2639fc83e1f04830b26312cdd19b5948}\label{class_f_b_a_1_1_connection_a2639fc83e1f04830b26312cdd19b5948}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server@{M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server}}
+\index{M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server@{M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server()}{MSSQLCopyTableToServer()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+M\+S\+S\+Q\+L\+Copy\+Table\+To\+Server (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}}}]{dt,  }\item[{string}]{table\+Name }\end{DoxyParamCaption})}
+
+
+
+Копирование таблицы Data\+Table на сервер M\+S\+S\+QL. Для S\+Q\+Lite и Postrgres нужно действовать через создание I\+N\+S\+E\+RT. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em dt} & Data\+Table\\
+\hline
+{\em table\+Name} & В какую таблицу на сервере копируем\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 1060
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ab06c1ddb28525efd92457b44392378c4}\label{class_f_b_a_1_1_connection_ab06c1ddb28525efd92457b44392378c4}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+CB@{Select\+CB}}
+\index{Select\+CB@{Select\+CB}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+C\+B()}{SelectCB()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Select\+CB (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{Combo\+Box}]{cb }\end{DoxyParamCaption})}
+
+
+
+Функции получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Combo\+Box. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+{\em cb} & Combo\+Box\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 1029
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a832beb0a31c62baefdb724e94537e97c}\label{class_f_b_a_1_1_connection_a832beb0a31c62baefdb724e94537e97c}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+Count@{Select\+Count}}
+\index{Select\+Count@{Select\+Count}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+Count()}{SelectCount()}}
+{\footnotesize\ttfamily int F\+B\+A.\+Connection.\+Select\+Count (\begin{DoxyParamCaption}\item[{string}]{sql }\end{DoxyParamCaption})}
+
+
+
+Возвращает количество записей, которые получаются после выполнения запроса S\+QL. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 1016
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a05684a6c70de969923339bbaebe82f5f}\label{class_f_b_a_1_1_connection_a05684a6c70de969923339bbaebe82f5f}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+DS@{Select\+DS}}
+\index{Select\+DS@{Select\+DS}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+D\+S()}{SelectDS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Select\+DS (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out Data\+Set}]{ds }\end{DoxyParamCaption})}
+
+
+
+Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Set. Возвращает несколько таблиц. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+{\em ds} & Data\+Set -\/ набор таблиц\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 798
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ae384f24ee6f026cd580a76202560445a}\label{class_f_b_a_1_1_connection_ae384f24ee6f026cd580a76202560445a}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+DS@{Select\+DS}}
+\index{Select\+DS@{Select\+DS}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+D\+S()}{SelectDS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Select\+DS (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out Data\+Set}]{ds,  }\item[{out string}]{error\+Mes,  }\item[{bool}]{error\+Show }\end{DoxyParamCaption})}
+
+
+
+Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Set. Возвращает несколько таблиц. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+{\em ds} & Data\+Set -\/ набор таблиц\\
+\hline
+{\em error\+Mes} & Сообщение об ошибке\\
+\hline
+{\em error\+Show} & Показывать или нет ошибки\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 813
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a17c79b7810deb7e632187a146a27d725}\label{class_f_b_a_1_1_connection_a17c79b7810deb7e632187a146a27d725}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+DT@{Select\+DT}}
+\index{Select\+DT@{Select\+DT}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+D\+T()}{SelectDT()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Select\+DT (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{out \mbox{\hyperlink{_sys_static_8cs_a6542cfcff2f8e81f06ade15aa0bfe2b7}{System.\+Data.\+Data\+Table}}}]{dt }\end{DoxyParamCaption})}
+
+
+
+Функция получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Table. Возвращает только одну таблицу. ~\newline
+
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+{\em dt} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 778
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ab741e12a89628ff1afe3aa50e019d836}\label{class_f_b_a_1_1_connection_ab741e12a89628ff1afe3aa50e019d836}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Select\+GV@{Select\+GV}}
+\index{Select\+GV@{Select\+GV}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Select\+G\+V()}{SelectGV()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Select\+GV (\begin{DoxyParamCaption}\item[{string}]{sql,  }\item[{Data\+Grid\+View}]{grid }\end{DoxyParamCaption})}
+
+
+
+Функции получения данных для M\+S\+S\+QL, Postgre, S\+Q\+Lite. Результат в Data\+Grid\+View. ~\newline
+
+
+
+\begin{DoxyParams}{Аргументы}
+{\em sql} & Запрос любой, select, update, delete, ddl\\
+\hline
+{\em grid} & Data\+Grid\+View\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Connect.\+cs строка 764
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ae89cedd48e08f769139faa24d29941aa}\label{class_f_b_a_1_1_connection_ae89cedd48e08f769139faa24d29941aa}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Active@{Connection\+Active}}
+\index{Connection\+Active@{Connection\+Active}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Active}{ConnectionActive}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Active = false}
+
+
+
+
+
+Признак активного соединения. 
+
+См. определение в файле Sys\+Connect.\+cs строка 63
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a7e224aeb6f3f7aa7fa641f2bd9330520}\label{class_f_b_a_1_1_connection_a7e224aeb6f3f7aa7fa641f2bd9330520}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Direct@{Connection\+Direct}}
+\index{Connection\+Direct@{Connection\+Direct}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Direct}{ConnectionDirect}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Connection.\+Connection\+Direct = false}
+
+
+
+Работа с запросами через сервер прилоежений (false) или прямое подключение (true). ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 68
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a3cd37446a3a7203f48d984526b4849e5}\label{class_f_b_a_1_1_connection_a3cd37446a3a7203f48d984526b4849e5}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+G\+U\+ID@{Connection\+G\+U\+ID}}
+\index{Connection\+G\+U\+ID@{Connection\+G\+U\+ID}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+G\+U\+ID}{ConnectionGUID}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Connection\+G\+U\+ID = \char`\"{}\char`\"{}}
+
+
+
+Текущий G\+U\+ID, выданый сервером проложений по которому определяется \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}} к БД. Это основой G\+U\+ID сессии приложения, возвращенный сервером приложений. В рамках сессии выполняются транзакции. Для того чтобы выполнить новую транзакцию, пока не закончилась предыдущая, нужно получить от сервера приложений новый G\+U\+ID соединения с БД (т.\+е. новый \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}}). 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 76
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ad362a30163e3a237460e0d5b2cb124d2}\label{class_f_b_a_1_1_connection_ad362a30163e3a237460e0d5b2cb124d2}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+ID@{Connection\+ID}}
+\index{Connection\+ID@{Connection\+ID}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+ID}{ConnectionID}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Connection\+ID = \char`\"{}\char`\"{}}
+
+
+
+ИД соединения. Это G\+U\+ID. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 58
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_aae6e7e372a0df905fdbe5ae1844d3279}\label{class_f_b_a_1_1_connection_aae6e7e372a0df905fdbe5ae1844d3279}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Connection\+Name@{Connection\+Name}}
+\index{Connection\+Name@{Connection\+Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Connection\+Name}{ConnectionName}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Connection\+Name = \char`\"{}\char`\"{}}
+
+
+
+Имя соединения в локальной базе S\+Q\+Lite. ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 87
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_aa20952e5caba14009de078611bffc06e}\label{class_f_b_a_1_1_connection_aa20952e5caba14009de078611bffc06e}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Database\+Login@{Database\+Login}}
+\index{Database\+Login@{Database\+Login}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Database\+Login}{DatabaseLogin}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Database\+Login = \char`\"{}\char`\"{}}
+
+
+
+База СУБД -\/ логин. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 116
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a7af426539c14090db733c18b37cfc1f5}\label{class_f_b_a_1_1_connection_a7af426539c14090db733c18b37cfc1f5}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Database\+Name@{Database\+Name}}
+\index{Database\+Name@{Database\+Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Database\+Name}{DatabaseName}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Database\+Name = \char`\"{}\char`\"{}}
+
+
+
+База СУБД на сервере. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 111
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_afb9f211ad33869d0d3ff480a8593cba0}\label{class_f_b_a_1_1_connection_afb9f211ad33869d0d3ff480a8593cba0}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Database\+Pass@{Database\+Pass}}
+\index{Database\+Pass@{Database\+Pass}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Database\+Pass}{DatabasePass}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Database\+Pass = \char`\"{}\char`\"{}}
+
+
+
+База СУБД -\/ пароль. ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 121
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a11c6e4dac8775fc197a3b468dcff23cc}\label{class_f_b_a_1_1_connection_a11c6e4dac8775fc197a3b468dcff23cc}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Last\+Query\+Date\+Time@{Last\+Query\+Date\+Time}}
+\index{Last\+Query\+Date\+Time@{Last\+Query\+Date\+Time}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Last\+Query\+Date\+Time}{LastQueryDateTime}}
+{\footnotesize\ttfamily Date\+Time F\+B\+A.\+Connection.\+Last\+Query\+Date\+Time = Date\+Time.\+Now}
+
+
+
+Дата и время последнего запроса. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 168
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ad06450c04a115c5f49848d0bc861b63e}\label{class_f_b_a_1_1_connection_ad06450c04a115c5f49848d0bc861b63e}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Name@{Name}}
+\index{Name@{Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Name}{Name}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Name = \char`\"{}\char`\"{}}
+
+
+
+Имя данного объекта \mbox{\hyperlink{class_f_b_a_1_1_connection}{Connection}}. Используется для того чтобы разделить команды к серверу приложений. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 82
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a24c27a6a036bb03da1bbe1cdd29b1f16}\label{class_f_b_a_1_1_connection_a24c27a6a036bb03da1bbe1cdd29b1f16}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Server\+App\+IP@{Server\+App\+IP}}
+\index{Server\+App\+IP@{Server\+App\+IP}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Server\+App\+IP}{ServerAppIP}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Server\+App\+IP = \char`\"{}\char`\"{}}
+
+
+
+IP сервера приложений. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 141
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_af8d3357489e91efcf98ebf7b56110348}\label{class_f_b_a_1_1_connection_af8d3357489e91efcf98ebf7b56110348}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Server\+App\+Name@{Server\+App\+Name}}
+\index{Server\+App\+Name@{Server\+App\+Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Server\+App\+Name}{ServerAppName}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Server\+App\+Name = \char`\"{}\char`\"{}}
+
+
+
+Имя сервера прилоежний. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 146
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a556479c8ba68bce8cee63c53e8583c14}\label{class_f_b_a_1_1_connection_a556479c8ba68bce8cee63c53e8583c14}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Server\+App\+Port@{Server\+App\+Port}}
+\index{Server\+App\+Port@{Server\+App\+Port}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Server\+App\+Port}{ServerAppPort}}
+{\footnotesize\ttfamily int F\+B\+A.\+Connection.\+Server\+App\+Port = 0}
+
+
+
+На каком порту обмениваемся сообщениями с сервером приложений. По умолчанию 7145. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 151
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a6a04e4e09b3be5fc37491234ccf46a61}\label{class_f_b_a_1_1_connection_a6a04e4e09b3be5fc37491234ccf46a61}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Server\+Name@{Server\+Name}}
+\index{Server\+Name@{Server\+Name}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Server\+Name}{ServerName}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Server\+Name = \char`\"{}\char`\"{}}
+
+
+
+Имя сервера СУБД. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 92
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}\label{class_f_b_a_1_1_connection_ad5c6e7969020c242db56e1910c6e353f}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!server\+Type@{server\+Type}}
+\index{server\+Type@{server\+Type}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{server\+Type}{serverType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} F\+B\+A.\+Connection.\+server\+Type}
+
+
+
+Допустимые значения\+: M\+S\+S\+QL, Postgre, S\+Q\+Lite, Server\+App. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 97
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_ada46cb57e3fc2bea5b69c026d2eba248}\label{class_f_b_a_1_1_connection_ada46cb57e3fc2bea5b69c026d2eba248}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!server\+Type\+Remote@{server\+Type\+Remote}}
+\index{server\+Type\+Remote@{server\+Type\+Remote}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{server\+Type\+Remote}{serverTypeRemote}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413}{Server\+Type}} F\+B\+A.\+Connection.\+server\+Type\+Remote = \mbox{\hyperlink{namespace_f_b_a_a54b34d51226fe01d01f79d9fcb237413a316d54b418d9a7186f9234f08cfb599f}{Server\+Type.\+Not\+Assigned}}}
+
+
+
+Это тип удаленного подключения, если соединение через сервер приложений. Если подключение к БД локальное, то Connection\+Direct = true и тогда в server\+Type что-\/то одно из M\+S\+S\+QL, Postgre, S\+Q\+Lite. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 106
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a6ce212094097c98af886a3417b1510cc}\label{class_f_b_a_1_1_connection_a6ce212094097c98af886a3417b1510cc}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!User\+Form@{User\+Form}}
+\index{User\+Form@{User\+Form}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{User\+Form}{UserForm}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+User\+Form = \char`\"{}\char`\"{}}
+
+
+
+Имя формы для запуска. ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 126
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a4da6cc26b934f060dc0c3ca79e9791d0}\label{class_f_b_a_1_1_connection_a4da6cc26b934f060dc0c3ca79e9791d0}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!User\+Login@{User\+Login}}
+\index{User\+Login@{User\+Login}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{User\+Login}{UserLogin}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+User\+Login = \char`\"{}\char`\"{}}
+
+
+
+Логин пользователя в таблице fba\+User. ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 131
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a9b58e4b1c4ca9af6571431806c0e17a9}\label{class_f_b_a_1_1_connection_a9b58e4b1c4ca9af6571431806c0e17a9}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!User\+Pass@{User\+Pass}}
+\index{User\+Pass@{User\+Pass}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{User\+Pass}{UserPass}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+User\+Pass = \char`\"{}\char`\"{}}
+
+
+
+Пароль пользователя в таблице fba\+User. ~\newline
+
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 136
+
+\mbox{\Hypertarget{class_f_b_a_1_1_connection_a3f41df8459a0eaf38857a233720dd1d0}\label{class_f_b_a_1_1_connection_a3f41df8459a0eaf38857a233720dd1d0}} 
+\index{F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}!Windows\+Login@{Windows\+Login}}
+\index{Windows\+Login@{Windows\+Login}!F\+B\+A\+::\+Connection@{F\+B\+A\+::\+Connection}}
+\subsubsection{\texorpdfstring{Windows\+Login}{WindowsLogin}}
+{\footnotesize\ttfamily string F\+B\+A.\+Connection.\+Windows\+Login = \char`\"{}\char`\"{}}
+
+
+
+Признак что авторизация через логин Windows. 
+
+
+
+См. определение в файле Sys\+Connect.\+cs строка 156
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sys_connect_8cs}{Sys\+Connect.\+cs}}\end{DoxyCompactItemize}

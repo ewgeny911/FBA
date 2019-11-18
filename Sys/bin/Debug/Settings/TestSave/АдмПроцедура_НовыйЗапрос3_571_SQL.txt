@@ -1,0 +1,4 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура 4, ''НовыйЗапрос3'' ', mtQuery);
+Select  Top  1  EOT_3.Name  Нафа  From  ContractIns  ДС  left outer join Document EOT_1 on ДС.CID=EOT_1.DocumentID   Join  OrgStructure  СО  left outer join FaceJuridical EOT_2 on СО.FaceID=EOT_2.FaceID   On  EOT_1.OrgStructureID  =  СО.OrgStructureID  left outer join Face EOT_3 on EOT_2.FaceID=EOT_3.FaceID

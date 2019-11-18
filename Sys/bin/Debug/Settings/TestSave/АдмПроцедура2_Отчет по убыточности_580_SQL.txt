@@ -1,0 +1,43 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура2 13, ''Отчет по убыточности'' ', mtQuery);
+begin tran
+
+Select t.Insured Insured
+ , t.Vnt Vnt
+ , t.LPU LPU
+ , t.Summ Summ
+ , SUM ( Summ ) Over ( Partition by t.Insured
+Order by t.Insured ) Summa
+From (
+Select ( EOT_1_5.Name + Case When EOT_1_5.OldName1 is not NULL Then ' (' + EOT_1_5.OldName1 + ')' Else '' End + Case When EOT_1_5.FirstName is not NULL Then ' ' + EOT_1_5.FirstName + Case When EOT_1_5.OldName2 is not NULL Then ' (' + EOT_1_5.OldName2 + ')' Else '' End + Case When EOT_1_5.SecondName is not NULL Then ' ' + EOT_1_5.SecondName Else '' End + Case When EOT_1_5.OldName3 is not NULL Then ' (' + EOT_1_5.OldName3 + ')' Else '' End Else '' End ) Insured
+ , EOT_1_12.Name Vnt
+ , EOT_1_10.Brief LPU
+ , SUM ( ОУ.Amount ) Summ
+From ServicesRendered ОУ
+ left outer join InsPolicy EOT_1_1 on ОУ.Policy=EOT_1_1.ID
+ left outer join ServiceList EOT_1_2 on ОУ.ServiceList=EOT_1_2.ID
+ left outer join RelContFace EOT_1_3 on EOT_1_1.RelContFace=EOT_1_3.ID
+ left outer join BillLPU EOT_1_4 on EOT_1_2.Bill=EOT_1_4.ID
+ left outer join FacePerson EOT_1_5 on EOT_1_3.FaceID=EOT_1_5.FaceID
+ left outer join RelContFace_Hist_FaceVariant EOT_1_6 on EOT_1_3.ID=EOT_1_6.ID and (EOT_1_6.StateDate = (
+Select Max(StateDate)
+From RelContFace_Hist_FaceVariant
+Where (StateDate <= '20150910 23:59:59.000') and EOT_1_3.ID=ID))
+ left outer join ContractLPU EOT_1_7 on EOT_1_4.ContractLPU=EOT_1_7.ID
+ left outer join ContractIns EOT_1_8 on EOT_1_3.ContractID=EOT_1_8.CID
+ left outer join FaceVariant EOT_1_9 on EOT_1_6.FaceVariant=EOT_1_9.ID
+ left outer join FaceJuridical EOT_1_10 on EOT_1_7.LPU=EOT_1_10.FaceID
+ left outer join Document EOT_1_11 on EOT_1_8.CID=EOT_1_11.DocumentID
+ left outer join ContractVariant EOT_1_12 on EOT_1_9.ContractVariantID=EOT_1_12.ID
+Where EOT_1_11.Number = '77050103-00012' And ОУ.DateService Between '20131225' And '20161224' And EOT_1_12.Name Like '78%' And ОУ.TypeMedAidID = 1
+Group by ( EOT_1_5.Name + Case When EOT_1_5.OldName1 is not NULL Then ' (' + EOT_1_5.OldName1 + ')' Else '' End + Case When EOT_1_5.FirstName is not NULL Then ' ' + EOT_1_5.FirstName + Case When EOT_1_5.OldName2 is not NULL Then ' (' + EOT_1_5.OldName2 + ')' Else '' End + Case When EOT_1_5.SecondName is not NULL Then ' ' + EOT_1_5.SecondName Else '' End + Case When EOT_1_5.OldName3 is not NULL Then ' (' + EOT_1_5.OldName3 + ')' Else '' End Else '' End )
+ , EOT_1_12.Name
+ , EOT_1_10.Brief ) t
+Order by Summa
+ , t.Insured
+ , t.Summ
+
+Select 'Выполнено.' as Result
+
+commit tran

@@ -1,0 +1,19 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура 578, ''НовыйЗапрос111'' ', mtQuery);
+begin tran
+
+Select Top 1000 EOT_1.ErrorMessage ОписаниеОшибки
+ , EOT_1.StatusText Статус
+ , EOT_0_1.Name 'Пользователь'
+ , EOT_1.DateEnd ДатаОкончанияПостроения
+FROM BuildReportHistory EOT_1
+ LEFT OUTER JOIN ApplicationUser EOT_0_1 on EOT_1.UserID=EOT_0_1.UserID
+WHERE EOT_1.ReportID is NULL And EOT_1.DateEnd > CONVERT ( date
+ , GetDate () - 5 ) And EOT_1.StatusText not in ( 'Ошибка'
+ , 'Успешно' )
+ORDER by EOT_1.DateEnd Desc
+
+Select 'Выполнено.' as Result
+
+commit tran

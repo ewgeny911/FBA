@@ -1,0 +1,43 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура 8, ''СравнениеТелИАдр'' ', mtQuery);
+begin tran
+
+
+Select EOT_1.FaceID, EOT_1.Phone1, F.Phone1, EOT_1.Phone2, F.Phone2
+
+From
+
+ FacePerson EOT_1
+
+ join Face F on F.FaceID = EOT_1.FaceID
+
+Where EOT_1.Address1 <> F.Address1 or EOT_1.Address2 <> F.Address2 or EOT_1.Phone1 <> F.Phone1 or EOT_1.Phone2 <> F.Phone2
+
+
+
+
+Select Top 1 EOT_1.Kind Вид
+ , EOT_1.Code Код
+ , EOT_1.CodeORA КодOracle
+ , EOT_1.Description Комментарий
+ , EOT_1.Mask Маска
+ , EOT_1.Name Наим
+ , EOT_1.SameCode ОдинаковыйКод
+ , EOT_1.FieldName Поле
+ , EOT_1.FieldName2 Поле2
+ , EOT_1.ObjectNameOrder ПорядокВНаимОбъекта
+ , EOT_1.Feature Признаки
+ , EOT_1.Brief Сокр
+ , EOT_1.RefAttributeID СсылкаНаАтрибут
+ , EOT_1.RefEntityID СсылкаНаСущность
+ , EOT_1.AttributeEntityID Сущность
+ , EOT_1.TableID Таблица
+ , EOT_1.Type Тип
+From enAttribute EOT_1
+ left outer join enAttributeType EOT_0_1 on EOT_1.Type=EOT_0_1.AttributeTypeID
+Where EOT_0_1.Name = 'Универсальная ссылка'
+
+Select 'Выполнено.' as Result
+
+commit tran

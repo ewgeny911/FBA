@@ -1,0 +1,212 @@
+\hypertarget{class_f_b_a_1_1_sys_email}{}\section{Класс F\+B\+A.\+Sys\+Email}
+\label{class_f_b_a_1_1_sys_email}\index{F\+B\+A.\+Sys\+Email@{F\+B\+A.\+Sys\+Email}}
+
+
+Класс для рассылки писем  
+
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_email_ad587f740e698d8c199cec34655e69a96}{Send\+Email}} ()
+\begin{DoxyCompactList}\small\item\em Послать почтовое сообщение через S\+M\+TP. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_a8e115c41139040518c849daa5178ecd0}{Subject}}
+\begin{DoxyCompactList}\small\item\em Тема письма \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_aa325838d1b75ea901f439449f6707df0}{Body}}
+\begin{DoxyCompactList}\small\item\em Содержимое письма \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_ac0c362c82fb69187163633a611af03eb}{Host}}
+\begin{DoxyCompactList}\small\item\em Адрес постового сервера S\+M\+TP \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_f_b_a_1_1_sys_email_a737e4967e6cb0c397b259b12c515d988}{Port}} = 25
+\begin{DoxyCompactList}\small\item\em Порт. По умолчанию 25. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_ad09bcb462dcdd51123896d6f7ae08a63}{Email\+From}}
+\begin{DoxyCompactList}\small\item\em Email от кого. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_aed2c49fcdc15ad4fa1d00ccafba59f94}{Email\+To}}
+\begin{DoxyCompactList}\small\item\em Email кому. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_f_b_a_1_1_sys_email_a207aa6714c78d8ccfc0ec31d9176c0eb}{Password}}
+\begin{DoxyCompactList}\small\item\em Пароль от почты с которой шлём \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_email_a7f701209c457ade0739b3356660be0a3}{Enable\+Ssl}} = true
+\begin{DoxyCompactList}\small\item\em Включить S\+SL. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_f_b_a_1_1_sys_email_ab13133b3f422c69bec9f9912f77bb445}{Is\+Body\+Html}} = false
+\begin{DoxyCompactList}\small\item\em Содержимое письма в H\+T\+ML \end{DoxyCompactList}\item 
+string \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_f_b_a_1_1_sys_email_aa2240ff06fb06d45f579d870bb15e9be}{Attachments}}
+\begin{DoxyCompactList}\small\item\em Список имен файлов с полными путями, для вложения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Класс для рассылки писем 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 22
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_ad587f740e698d8c199cec34655e69a96}\label{class_f_b_a_1_1_sys_email_ad587f740e698d8c199cec34655e69a96}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Send\+Email@{Send\+Email}}
+\index{Send\+Email@{Send\+Email}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Send\+Email()}{SendEmail()}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+Email.\+Send\+Email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Послать почтовое сообщение через S\+M\+TP. 
+
+\begin{DoxyReturn}{Возвращает}
+Если успешно, то true
+\end{DoxyReturn}
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 78
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_aa2240ff06fb06d45f579d870bb15e9be}\label{class_f_b_a_1_1_sys_email_aa2240ff06fb06d45f579d870bb15e9be}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Attachments@{Attachments}}
+\index{Attachments@{Attachments}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Attachments}{Attachments}}
+{\footnotesize\ttfamily string \mbox{[}$\,$\mbox{]} F\+B\+A.\+Sys\+Email.\+Attachments}
+
+
+
+Список имен файлов с полными путями, для вложения. 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 72
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_aa325838d1b75ea901f439449f6707df0}\label{class_f_b_a_1_1_sys_email_aa325838d1b75ea901f439449f6707df0}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Body@{Body}}
+\index{Body@{Body}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Body}{Body}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Body}
+
+
+
+Содержимое письма 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 32
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_ad09bcb462dcdd51123896d6f7ae08a63}\label{class_f_b_a_1_1_sys_email_ad09bcb462dcdd51123896d6f7ae08a63}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Email\+From@{Email\+From}}
+\index{Email\+From@{Email\+From}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Email\+From}{EmailFrom}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Email\+From}
+
+
+
+Email от кого. 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 47
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_aed2c49fcdc15ad4fa1d00ccafba59f94}\label{class_f_b_a_1_1_sys_email_aed2c49fcdc15ad4fa1d00ccafba59f94}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Email\+To@{Email\+To}}
+\index{Email\+To@{Email\+To}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Email\+To}{EmailTo}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Email\+To}
+
+
+
+Email кому. 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 52
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_a7f701209c457ade0739b3356660be0a3}\label{class_f_b_a_1_1_sys_email_a7f701209c457ade0739b3356660be0a3}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Enable\+Ssl@{Enable\+Ssl}}
+\index{Enable\+Ssl@{Enable\+Ssl}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Enable\+Ssl}{EnableSsl}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+Email.\+Enable\+Ssl = true}
+
+
+
+Включить S\+SL. 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 62
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_ac0c362c82fb69187163633a611af03eb}\label{class_f_b_a_1_1_sys_email_ac0c362c82fb69187163633a611af03eb}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Host@{Host}}
+\index{Host@{Host}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Host}{Host}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Host}
+
+
+
+Адрес постового сервера S\+M\+TP 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 37
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_ab13133b3f422c69bec9f9912f77bb445}\label{class_f_b_a_1_1_sys_email_ab13133b3f422c69bec9f9912f77bb445}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Is\+Body\+Html@{Is\+Body\+Html}}
+\index{Is\+Body\+Html@{Is\+Body\+Html}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Is\+Body\+Html}{IsBodyHtml}}
+{\footnotesize\ttfamily bool F\+B\+A.\+Sys\+Email.\+Is\+Body\+Html = false}
+
+
+
+Содержимое письма в H\+T\+ML 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 67
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_a207aa6714c78d8ccfc0ec31d9176c0eb}\label{class_f_b_a_1_1_sys_email_a207aa6714c78d8ccfc0ec31d9176c0eb}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Password@{Password}}
+\index{Password@{Password}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Password}{Password}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Password}
+
+
+
+Пароль от почты с которой шлём 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 57
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_a737e4967e6cb0c397b259b12c515d988}\label{class_f_b_a_1_1_sys_email_a737e4967e6cb0c397b259b12c515d988}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Port@{Port}}
+\index{Port@{Port}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Port}{Port}}
+{\footnotesize\ttfamily int F\+B\+A.\+Sys\+Email.\+Port = 25}
+
+
+
+Порт. По умолчанию 25. 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 42
+
+\mbox{\Hypertarget{class_f_b_a_1_1_sys_email_a8e115c41139040518c849daa5178ecd0}\label{class_f_b_a_1_1_sys_email_a8e115c41139040518c849daa5178ecd0}} 
+\index{F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}!Subject@{Subject}}
+\index{Subject@{Subject}!F\+B\+A\+::\+Sys\+Email@{F\+B\+A\+::\+Sys\+Email}}
+\subsubsection{\texorpdfstring{Subject}{Subject}}
+{\footnotesize\ttfamily string F\+B\+A.\+Sys\+Email.\+Subject}
+
+
+
+Тема письма 
+
+
+
+См. определение в файле Sys\+Exchange.\+cs строка 27
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_sys_exchange_8cs}{Sys\+Exchange.\+cs}}\end{DoxyCompactItemize}

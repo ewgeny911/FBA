@@ -1,0 +1,29 @@
+Select 1
+/*
+#>select Row_Number() OVER (Order by Сущность) RN,
+         0 Flag,
+         Сущность EntityID,
+         Сущность.Сокр EntityBrief,
+         Сокр AttrBrief,
+         'select count(*) from '+Таблица.Наим+' E1 left outer join ' +
+         (Select Наим + ' E2 on E2.'+ПолеИДОбъекта+' = '+'E1.'+АтрибутСущности.Поле+' where E1.'+АтрибутСущности.Поле+' is not null and E2.'+ПолеИДОбъекта+' is null'
+          From ТаблицаСущности
+          где Сущность = АтрибутСущности.СсылкаНаСущность and Тип = 1)
+          QueryStr
+         into #t
+  from АтрибутСущности где Тип.Наим = 'Ссылка' and Таблица.Тип <> 2
+#>> declare @i int, @j int
+set @i = 1
+set @j = (select count(*) from #t)
+declare @MyStr varchar(max) =''
+declare @MyT table (Cnt int)
+while @i <= @j
+begin
+  set @MyStr = (select top 1 QueryStr from #t where RN = @i)
+  insert into @MyT exec(@MyStr)
+  if (select Top 1 Cnt from @MyT) > 0
+    update #t set Flag = 1 where RN = @i
+  delete from @MyT
+  set @i = @i + 1
+end
+select * from #t      */

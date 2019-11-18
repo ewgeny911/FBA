@@ -1,0 +1,42 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 01.11.2017
+ * Время: 17:47
+ */
+ 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{   
+    
+    ///Шаблон формы. Необходим для создания новых прикладных форм в проекте. 
+    public partial class ReportSample1 : FormObj
+    {
+        public ReportSample1()
+        {                
+            InitializeComponent();
+            //sys.ConnectLocal();
+            //sys.ConnectRemote();
+        }
+        void ReportSample1_Shown(object sender, EventArgs e)
+        {
+          
+        }
+    }
+    
+    internal sealed class Program
+    {         
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);            
+            Application.Run(new ReportSample1());
+        }
+        
+    }
+}

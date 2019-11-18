@@ -1,0 +1,16 @@
+#> Выбрать ДС.Номер Номер,
+           replace(replace(IsNULL(ДС.Страхователь.Нафа, '')+' '+IsNULL(Fl.Имя,'')+' '+IsNULL(Fl.Отчество, ''), '  ', ' '), '  ', ' ') ДССтрахФИО,
+           ДС.Страхователь СтраховательИД,
+           З.ФЛ ЗФЛИД,
+           (case when ДС.Страхователь.Нафа+' '+Fl.Имя+' '+Fl.Отчество <> ATT.Column_2 then "Не совпадает страхователь!!!"
+                 when replace(replace(ATT.Column_16, '  ', ' '), '  ', ' ') <> replace(replace(IsNULL(Face1.Нафа, '')+' '+IsNULL(IFL.Имя,'')+' '+IsNULL(IFL.Отчество, ''), '  ', ' '), '  ', ' ') then "Не совпадает ФЛ!!!"
+                 else "" end) Внимание,
+           (case when ДС.Страхователь <> З.ФЛ then "Отличаются!"
+                 else "" end) ОтличаютсяСЗ,
+           (case when З.ИДОбъекта is NULL then "где же застрахованный?!!" else "Он есть: "+convert(varchar(max), З.ИДОбъекта) end) ЗастрахованногоНет
+   Из ДогСтрах ДС
+     join A_Table20_Test ATT on ATT.Column_1 = ДС.Номер
+     left outer join Застрахованный З on З.ДогСтрах = ДС.ИДОбъекта
+     left outer join ФЛ IFL on З.ФЛ = IFL.ИДОбъекта
+     left outer join Лицо Face1 on Face1.ИДОбъекта = IFL.ИДОбъекта
+     left outer join ФЛ Fl on ДС.Страхователь = Fl.ИДОбъекта

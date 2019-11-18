@@ -1,0 +1,19 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.НоваяПроцедура 7, ''НеИсторАттрибНеВСвоихТаблицах'' ', mtQuery);
+begin tran
+
+Select АС.Brief 'Атрибут'
+ , С.Brief 'Сущность'
+ , ТС.Name 'Таблица Атрибута'
+ , ТС2.Name 'Таблица Сущности'
+ , EOT_0_1.Name 'Тип'
+ , EOT_0_2.Name 'Вид'
+From enAttribute АС
+ left outer join enAttributeType EOT_0_1 on АС.Type=EOT_0_1.AttributeTypeID
+ left outer join enAttributeKind EOT_0_2 on АС.Kind=EOT_0_2.AttributeKindID join enTable ТС On АС.TableID = ТС.TableID join enEntity С On С.ID = АС.AttributeEntityID join enTable ТС2 On С.ID = ТС2.TableEntityID
+Where ТС.TableID <> ТС2.TableID And ТС.Type <> 2 And ТС2.Type <> 2 And АС.Type <> 4
+
+Select 'Выполнено.' as Result
+
+commit tran

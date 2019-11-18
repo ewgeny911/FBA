@@ -1,0 +1,26 @@
+-- var mtQuery: TmcMemTable;
+-- mtQuery := TmcMemTable.Create(Application);
+-- SelectSQL('exec dbo.АдмПроцедура 569, ''Индивидуальные шаблоны'' ', mtQuery);
+begin tran
+
+Select Top 1000 count ( * ) 'Количество построений'
+ , EOT_0_1.Name 'Отчет'
+ , EOT_0_2.Name 'Пользователь'
+ , Max ( EOT_1.DateEnd - EOT_1.DateBegin ) 'Максимальное'
+ , convert ( datetime
+ , avg ( convert ( float
+ , ( EOT_1.DateEnd - EOT_1.DateBegin ) ) ) ) 'Среднее'
+ , Max ( EOT_1.DateEnd ) 'Время окончания последнего построения'
+FROM BuildReportHistory EOT_1
+ LEFT OUTER JOIN Report EOT_0_1 on EOT_1.ReportID=EOT_0_1.ReportID
+ LEFT OUTER JOIN ApplicationUser EOT_0_2 on EOT_1.UserID=EOT_0_2.UserID
+WHERE EOT_0_1.Name Like '%Индивид%' And EOT_0_2.Name <> 'asd' And EOT_0_2.Name <> 'diasoft' And EOT_1.DateEnd > CONVERT ( date
+ , GetDate () )
+GROUP by EOT_0_1.Name
+ , EOT_0_1.Brief
+ , EOT_0_2.Name
+ORDER by Max ( EOT_1.DateEnd ) Desc
+
+Select 'Выполнено.' as Result
+
+commit tran
