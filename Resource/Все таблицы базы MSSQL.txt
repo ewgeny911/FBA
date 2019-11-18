@@ -1,0 +1,476 @@
+CREATE TABLE [dbo].[arhAttr]
+(
+	  [AttributeID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [AttributeEntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Brief] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Type] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Kind] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TableID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FieldName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FieldName2] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Mask] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [RefEntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [RefAttributeID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Feature] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ObjectNameOrder] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Code] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Description] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CODEORA] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [samecode] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhAttrParent]
+(
+	  [Pos] BIGINT NULL
+	, [ID] INT NOT NULL
+	, [EntityID] INT NOT NULL
+	, [Attr_EntityID] INT NULL
+	, [Attr_Name] VARCHAR(150) COLLATE Cyrillic_General_CI_AS NOT NULL
+	, [Attr_Brief] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NOT NULL
+	, [Attr_Type] INT NOT NULL
+	, [Attr_Kind] INT NOT NULL
+	, [Attr_Mask] VARCHAR(10) COLLATE Cyrillic_General_CI_AS NULL
+	, [Attr_Feature] INT NULL
+	, [Attr_NameOrder] INT NULL
+	, [Attr_Code] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Attr_Comment] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_ID] INT NULL
+	, [Table_Field] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_Field2] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NULL
+	, [Ref_EntityID] INT NULL
+	, [Ref_AttrID] INT NULL
+	, [Table_Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_IDFieldName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_Type] INT NULL
+	, [Table_Feature] INT NULL
+	, [Ref_EntityBrief] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Ref_AttrBrief] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Ref_AttrName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Attr_EntityBrief] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnChildID] INT NULL
+	, [EnBrief2] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnID] INT NULL
+	, [EnBrief1] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NULL
+	, [ParentID] INT NULL
+	, [EnBriefName2] VARCHAR(150) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnBriefName1] VARCHAR(150) COLLATE Cyrillic_General_CI_AS NULL
+	, [NumLevel] INT NULL
+	, [EnBrief2_TableName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnBrief2_TableIDFieldName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnBrief1_TableName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnBrief1_TableIDFieldName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhClientAll]
+(
+	  [ID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Number] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [LocalPort] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserCheck] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnterDate] DATETIME NULL
+	, [LocalIP] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [LocalHost] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineUserName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ConnectionGUID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhClientCurrent]
+(
+	  [ID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Number] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [LocalPort] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserCheck] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnterDate] DATETIME NULL
+	, [LocalIP] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [LocalHost] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineUserName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ConnectionGUID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhConnectionList]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((105))
+	, [ConnectionName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ServerName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ServerType] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DatabaseName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DatabaseLogin] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DatabasePass] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserForm] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserLogin] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserPass] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhConnectionList] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhEnterHist]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((103))
+	, [ConnectionName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MachineUserName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserForm] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserID] INT NULL
+	, [SystemName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnterDate] DATETIME NULL
+	, [EnterMode] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhEnterHist] PRIMARY KEY ([ID] ASC)
+)
+
+ALTER TABLE [dbo].[arhEnterHist] WITH CHECK ADD CONSTRAINT [FK__arhEnterH__UserI__6B3E872C] FOREIGN KEY([UserID]) REFERENCES [dbo].[arhUser] ([ID])
+ALTER TABLE [dbo].[arhEnterHist] CHECK CONSTRAINT [FK__arhEnterH__UserI__6B3E872C]
+CREATE TABLE [dbo].[arhEnterLast]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((106))
+	, [ConnectionName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EnterDate] DATETIME NULL
+	, [EnterMode] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, [SystemName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhEnterLast] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhEntity]
+(
+	  [ID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Brief] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ParentID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ClassKey] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Feature] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Description] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [SecurityDataClassId] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhEntityParser]
+(
+	  [Pos] BIGINT NULL
+	, [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NOT NULL
+	, [Name] VARCHAR(150) COLLATE Cyrillic_General_CI_AS NOT NULL
+	, [Brief] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NOT NULL
+	, [ParentID] INT NULL
+	, [ClassKey] VARCHAR(50) COLLATE Cyrillic_General_CI_AS NOT NULL
+	, [Feature] INT NOT NULL
+	, [Description] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, [SecurityDataClassId] INT NULL
+	, [Table_ID] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Table_IDFieldName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhFilter]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [DateChange] DATETIME NULL
+	, [UserChangeID] INT NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityRefID] INT NULL
+	, [UserID] INT NULL
+	, [FilterGlobal] INT NULL
+	, [FilterStatic] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FilterStaticWHERE] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FilterCustom] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FilterCustomWHERE] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FilterUniversal] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CheckedStatic] INT NULL
+	, [CheckedCustom] INT NULL
+	, [CheckedUniversal] INT NULL
+	, [Attr] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FilterLast] INT NULL
+	, [FullQuery] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [MaxRecords] INT NULL
+	, CONSTRAINT [PK__arhFilte__3214EC277EF42370] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhForm]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((107))
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Type] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DEL] INT NULL
+	, [Block] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [DateCreateTest] DATETIME NULL
+	, [DateChange] DATETIME NULL
+	, [DateChangeTest] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [UserCreateTestID] INT NULL
+	, [UserChangeID] INT NULL
+	, [UserChangeTestID] INT NULL
+	, [FormXML] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormXMLTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormCode] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormCodeTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextCode] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextCodeTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormDLL] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormDLLTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CountRows] INT NULL
+	, [CountRowsTest] INT NULL
+	, [Description] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Hash] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [HashTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextAssembly] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextAssemblyTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextUsing] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextUsingTest] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Query] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [QueryTest] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, [ProjectZIP] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhForm] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhFormHist]
+(
+	  [ID] INT NULL
+	, [EntityID] INT NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Type] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DEL] INT NULL
+	, [Block] INT NULL
+	, [FormXML] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormCode] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TextCode] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormDLL] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CountRows] INT NULL
+	, [FormID] INT NULL
+	, [UserCopyID] INT NULL
+	, [DateCopy] DATETIME NULL
+	, [Hash] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Query] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [ProjectZip] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhFormPosition]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [DateChange] DATETIME NULL
+	, [UserID] INT NULL
+	, [FormID] INT NULL
+	, [FormName] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormX] INT NULL
+	, [FormY] INT NULL
+	, [FormWidth] INT NULL
+	, [FormHeight] INT NULL
+	, CONSTRAINT [PK__arhFormP__3214EC27CF6C873B] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhImage]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [DateChange] DATETIME NULL
+	, [UserChangeID] INT NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Image] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FileName] VARCHAR(1000) COLLATE Cyrillic_General_CI_AS NULL
+	, [FileNameFull] VARCHAR(1000) COLLATE Cyrillic_General_CI_AS NULL
+	, [Width] INT NULL
+	, [Height] INT NULL
+	, [Format] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK__arhImage__3214EC27A4010DA1] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhParam]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [DateChange] DATETIME NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [FormID] INT NULL
+	, [UserID] INT NULL
+	, [Global] INT NULL
+	, [Type] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Value] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Comment] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [UserChangeID] INT NULL
+	, CONSTRAINT [PK__arhParam__3214EC2709817465] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhProgUpdate]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((112))
+	, [NumberFile] INT NULL
+	, [NumberUpdate] INT NULL
+	, [DateRecord] DATETIME NULL
+	, [UserUpdate] INT NULL
+	, [ContentType] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Operation] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Version] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CurrentVersion] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FullName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Path] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Extension] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [CreationTime] DATETIME NULL
+	, [LastWriteTime] DATETIME NULL
+	, [LastAccessTime] DATETIME NULL
+	, [Size] INT NULL
+	, [MD5] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [FileData] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhProgUpdate] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhQueries]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((112))
+	, [SQL] TEXT(16) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhQueries] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhRelRoleForm]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((108))
+	, [FormID] INT NULL
+	, [RoleID] INT NULL
+	, [UserID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, CONSTRAINT [PK_arhRelRoleForm] PRIMARY KEY ([ID] ASC)
+)
+
+ALTER TABLE [dbo].[arhRelRoleForm] WITH CHECK ADD CONSTRAINT [FK__arhRelRol__FormI__73D3CD2D] FOREIGN KEY([FormID]) REFERENCES [dbo].[arhForm] ([ID])
+ALTER TABLE [dbo].[arhRelRoleForm] CHECK CONSTRAINT [FK__arhRelRol__FormI__73D3CD2D]
+
+ALTER TABLE [dbo].[arhRelRoleForm] WITH CHECK ADD CONSTRAINT [FK__arhRelRol__RoleI__74C7F166] FOREIGN KEY([RoleID]) REFERENCES [dbo].[arhRole] ([ID])
+ALTER TABLE [dbo].[arhRelRoleForm] CHECK CONSTRAINT [FK__arhRelRol__RoleI__74C7F166]
+
+ALTER TABLE [dbo].[arhRelRoleForm] WITH CHECK ADD CONSTRAINT [FK__arhRelRol__UserI__75BC159F] FOREIGN KEY([UserID]) REFERENCES [dbo].[arhUser] ([ID])
+ALTER TABLE [dbo].[arhRelRoleForm] CHECK CONSTRAINT [FK__arhRelRol__UserI__75BC159F]
+CREATE TABLE [dbo].[arhRelRoleRight]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [RightID] INT NULL
+	, [RoleID] INT NULL
+	, [UserCreateID] INT NULL
+	, [DateCreate] DATETIME NULL
+)
+CREATE TABLE [dbo].[arhRelRoleUser]
+(
+	  [ID] INT NOT NULL
+	, [EntityID] INT NULL DEFAULT((104))
+	, [UserID] INT NULL
+	, [RoleID] INT NULL
+	, CONSTRAINT [PK_arhRelRoleUser] PRIMARY KEY ([ID] ASC)
+)
+
+ALTER TABLE [dbo].[arhRelRoleUser] WITH CHECK ADD CONSTRAINT [FK__arhRelRol__UserI__6F0F1810] FOREIGN KEY([UserID]) REFERENCES [dbo].[arhUser] ([ID])
+ALTER TABLE [dbo].[arhRelRoleUser] CHECK CONSTRAINT [FK__arhRelRol__UserI__6F0F1810]
+
+ALTER TABLE [dbo].[arhRelRoleUser] WITH CHECK ADD CONSTRAINT [FK__arhRelRol__RoleI__70033C49] FOREIGN KEY([RoleID]) REFERENCES [dbo].[arhRole] ([ID])
+ALTER TABLE [dbo].[arhRelRoleUser] CHECK CONSTRAINT [FK__arhRelRol__RoleI__70033C49]
+CREATE TABLE [dbo].[arhRight]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Brief] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [DateChange] DATETIME NULL
+	, [UserChangeID] INT NULL
+)
+CREATE TABLE [dbo].[arhRole]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((101))
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Brief] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DateCreate] DATETIME NULL
+	, [DateChange] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [UserChangeID] INT NULL
+	, CONSTRAINT [PK_arhRole] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhStatus]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK__arhStatu__3214EC27ECF29469] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhStatusChange]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [StatusEntityID] INT NULL
+	, [StatusParentID] INT NULL
+	, [StatusID] INT NULL
+	, CONSTRAINT [PK__arhStatu__3214EC2765A9F539] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhStatusEntity]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [EntityRefID] INT NULL
+	, CONSTRAINT [PK__arhStatu__3214EC27115E13CF] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhStatusParent]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [StatusEntityID] INT NULL
+	, [StatusID] INT NULL
+	, CONSTRAINT [PK__arhStatu__3214EC271AFA9D16] PRIMARY KEY ([ID] ASC)
+)
+CREATE TABLE [dbo].[arhTable]
+(
+	  [TableID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [EntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [TableEntityID] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [IDFieldName] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Type] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Feature] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhText]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [DateChange] DATETIME NULL
+	, [UserChangeID] INT NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Value] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+)
+CREATE TABLE [dbo].[arhUser]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((102))
+	, [Login] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [RoleID] INT NULL
+	, [Block] INT NULL
+	, [Pass] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [DateCreate] DATETIME NULL
+	, [DateChange] DATETIME NULL
+	, CONSTRAINT [PK_arhUser] PRIMARY KEY ([ID] ASC)
+)
+
+ALTER TABLE [dbo].[arhUser] WITH CHECK ADD CONSTRAINT [FK__arhUser__RoleID__5B081F63] FOREIGN KEY([RoleID]) REFERENCES [dbo].[arhRole] ([ID])
+ALTER TABLE [dbo].[arhUser] CHECK CONSTRAINT [FK__arhUser__RoleID__5B081F63]
+
+
+CREATE TABLE [dbo].[arhReport]
+(
+	  [ID] INT NOT NULL IDENTITY(1,1)
+	, [EntityID] INT NULL DEFAULT((102))
+	, [DateCreate] DATETIME NULL
+	, [UserCreateID] INT NULL
+	, [DateChange] DATETIME NULL
+	, [UserChangeID] INT NULL
+	, [ReportType] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Brief] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [Name] VARCHAR(100) COLLATE Cyrillic_General_CI_AS NULL
+	, [TemplateFileName] VARCHAR(1000) COLLATE Cyrillic_General_CI_AS NULL
+	, [TemplateFileData] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, [Comment] VARCHAR(MAX) COLLATE Cyrillic_General_CI_AS NULL
+	, CONSTRAINT [PK_arhReport] PRIMARY KEY ([ID] ASC)
+)

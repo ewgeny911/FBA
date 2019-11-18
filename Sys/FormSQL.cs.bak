@@ -1,0 +1,340 @@
+
+﻿/*
+ * Сделано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 28.09.2017
+ * Время: 17:22
+*/
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
+using System.IO;
+using System.Data;  
+using System.Security.Cryptography;
+using System.Text;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using Npgsql;
+using System.Data.SQLite;
+using System.Drawing;
+using System.Runtime.Serialization.Json;
+using System.CodeDom.Compiler;
+using Microsoft.CSharp;
+using System.Collections;
+//using Microsoft.Office.Interop.Excel; //Для экспорта в Excel
+using System.Runtime.InteropServices; //Для экспорта в Excel
+using System.Deployment.Application;
+using System.Text.RegularExpressions;
+//using FastColoredTextBoxNS;
+//using Npgsql.BulkCopy;
+//using Npgsql.BulkCopy.Native;
+//using Npgsql.BulkCopy.Native.Versions;      
+using System.Net;
+using System.Net.Sockets;
+using FastColoredTextBoxNS; 
+using System.Diagnostics;
+//using SourceGrid;
+//using Padeg.dll;
+//using iTextSharp;
+//using iTextSharp.text.pdf;
+//using iTextSharp.text;
+using System.Xml;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Security.Permissions;
+    
+namespace FBA
+{	  
+	///Форма для выполнения кода SQL при запросах к локальной или удаленной БД.	
+	public partial class FormSQL : FormSim
+	{
+		public int TabIndexSQL = 1; 
+		
+		public FormSQL()
+		{		  
+			InitializeComponent();			
+            this.MdiParent = sys.FormMainObj;
+            this.Icon = this.MdiParent.Icon;         
+		} 
+		
+		#region Вкладка Database.
+        
+		///Добавление новой вкладки для редактора запросов.
+        public static void TabControlPageAdd(TabControl tabControSQL, 
+                                             SplitContainer     splitContainerExample, 
+                                             FastColoredTextBox textSQLExample,
+                                             Panel              pnlResultSQLExample,
+                                             System.Windows.Forms.TextBox  tbSQLResultExample,
+                                             FBA.DataGridViewFBA       dgvSQLExample,
+                                             ContextMenuStrip GridContextMenu,
+                                             ref int TabIndexSQL)
+        {                      
+            TabIndexSQL += 1;
+            string newindexstr = TabIndexSQL.ToString();   
+            tabControSQL.TabPages.Add("Query" + TabIndexSQL.ToString());                                
+            tabControSQL.TabPages[tabControSQL.TabPages.Count-1].Tag = TabIndexSQL;               
+            
+            var sc1 = new SplitContainer();
+            tabControSQL.TabPages[tabControSQL.TabPages.Count-1].Controls.Add(sc1);
+            sc1.Dock = DockStyle.Fill;
+            sc1.Orientation      = System.Windows.Forms.Orientation.Horizontal;
+            sc1.SplitterDistance = splitContainerExample.SplitterDistance;
+            sc1.BackColor        = splitContainerExample.BackColor;          
+            
+            var fctb1 = new FastColoredTextBox();
+            sc1.Panel1.Controls.Add(fctb1);
+            fctb1.Dock                          = textSQLExample.Dock;
+            fctb1.AutoCompleteBrackets          = textSQLExample.AutoCompleteBrackets;
+            fctb1.AutoScrollMinSize             = textSQLExample.AutoScrollMinSize;
+            fctb1.BookmarkColor                 = textSQLExample.BookmarkColor;
+            fctb1.BracketsHighlightStrategy     = textSQLExample.BracketsHighlightStrategy;
+            fctb1.Cursor                        = textSQLExample.Cursor;
+            fctb1.DisabledColor                 = textSQLExample.DisabledColor;
+            fctb1.FindEndOfFoldingBlockStrategy = textSQLExample.FindEndOfFoldingBlockStrategy;
+            fctb1.Font                          = textSQLExample.Font;
+            fctb1.Language                      = textSQLExample.Language;
+            fctb1.LeftBracket                   = textSQLExample.LeftBracket;
+            fctb1.RightBracket                  = textSQLExample.RightBracket;
+            //fctb1.Padding                       = textSQLExample.Padding;                
+            fctb1.SelectionColor                = textSQLExample.SelectionColor;
+            fctb1.VirtualSpace                  = textSQLExample.VirtualSpace;
+            fctb1.Name = "textSQL" + newindexstr;
+            fctb1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;           
+            if (GridContextMenu != null) fctb1.ContextMenuStrip = GridContextMenu;
+            
+            var pnl = new Panel();
+            sc1.Panel2.Controls.Add(pnl);
+            pnl.Dock      = DockStyle.Top;
+            pnl.Height    = pnlResultSQLExample.Height;
+            pnl.BackColor = Color.Blue;
+            
+            var tb1 = new System.Windows.Forms.TextBox();
+            tb1.Font        = tbSQLResultExample.Font;
+            tb1.Location    = tbSQLResultExample.Location;
+            tb1.ForeColor   = tbSQLResultExample.ForeColor;
+            tb1.Text        = "Result";
+            tb1.BorderStyle = tbSQLResultExample.BorderStyle; 
+            tb1.BackColor   = tbSQLResultExample.BackColor;
+            tb1.Width       = tbSQLResultExample.Width;           
+            tb1.Name        = "tbSQLResult" + newindexstr;                
+            pnl.Controls.Add(tb1);
+              
+            var dgv1 = new DataGridView();                
+            sc1.Panel2.Controls.Add(dgv1);                 
+            dgv1.Dock = DockStyle.Fill;
+            dgv1.AllowUserToAddRows              = dgvSQLExample.AllowUserToAddRows;
+            dgv1.AllowUserToDeleteRows           = dgvSQLExample.AllowUserToDeleteRows;
+            dgv1.AllowUserToOrderColumns         = dgvSQLExample.AllowUserToOrderColumns;
+            dgv1.AlternatingRowsDefaultCellStyle = dgvSQLExample.AlternatingRowsDefaultCellStyle;
+            dgv1.AutoSizeColumnsMode             = dgvSQLExample.AutoSizeColumnsMode;
+            dgv1.BackgroundColor                 = dgvSQLExample.BackgroundColor;
+            dgv1.ClipboardCopyMode               = dgvSQLExample.ClipboardCopyMode;               
+            dgv1.ColumnHeadersBorderStyle        = dgvSQLExample.ColumnHeadersBorderStyle;
+            dgv1.ColumnHeadersHeightSizeMode     = dgvSQLExample.ColumnHeadersHeightSizeMode;
+            dgv1.ContextMenuStrip                = dgvSQLExample.ContextMenuStrip;
+            dgv1.DefaultCellStyle                = dgvSQLExample.DefaultCellStyle;                    
+            dgv1.EditMode                        = dgvSQLExample.EditMode;                             
+            dgv1.Margin                          = dgvSQLExample.Margin;                    
+            dgv1.ReadOnly                        = dgvSQLExample.ReadOnly;                
+            dgv1.RowHeadersVisible               = dgvSQLExample.RowHeadersVisible;
+            dgv1.RowsDefaultCellStyle            = dgvSQLExample.RowsDefaultCellStyle;
+            dgv1.RowTemplate                     = dgvSQLExample.RowTemplate; 
+            dgv1.BringToFront();
+            dgv1.Name                            = "dgvSQL" + newindexstr;    
+            tabControSQL.SelectedIndex = tabControSQL.TabPages.Count-1;                            
+        }
+        
+        ///Событие. Кнопки редактора запросов        
+        private void TbSQL1Click(object sender, EventArgs e)
+        {                      
+            string SenderName = sys.GetSenderName(sender);
+            string indexstr = tabControSQL.SelectedTab.Tag.ToString(); 
+            //FastColoredTextBox f;
+            //var textSQL11 = tabControSQL.Controls.Find("sdF").
+            var textSQL = (FastColoredTextBox)tabControSQL.Controls.Find("textSQL" + indexstr, true).First();                
+            var dgvSQL  = (DataGridViewFBA)tabControSQL.Controls.Find("dgvSQL" + indexstr, true).First();
+            
+            if ((SenderName == "textSQL1") && (textSQL1.Text == "")) textSQL.AppendText("SELECT * FROM arhEnterHist");
+            
+            if (SenderName == "tbSQL1")
+            {                     
+                var tbSQLResult = (TextBox)tabControSQL.Controls.Find("tbSQLResult" + indexstr, true).First();                                                                    
+                string SQL = textSQL.SelectedText;
+                if (SQL == "") SQL = textSQL.Text; 
+                DateTime DateTime1 = DateTime.Now;
+                sys.RefreshGrid(tbSQL5.Text, SQL, dgvSQL);                                                         
+                tbSQLResult.Text = "Rows: " + dgvSQL.RowCount + "    Execute time: " + sys.GetTimeDiff(DateTime1, DateTime.Now);
+            }
+            
+            //Очистка редактора запросов
+            if (SenderName == "tbSQL2") textSQL.Clear();                               
+                                 
+            //Export to Excel
+            if (SenderName == "cmSQLN1") sys.DGToExcel(dgvSQL);
+            
+            //Новая вкладка.
+            //В процедуру передаются компоненты с перовй вкладки (которая никогда не удаляется)
+            //чтобы на их примере сделать новую вкладку.
+            //Можно было бы и без них - но тогда пришлось бы каждый раз в коде изменять свойства компонентов.
+            if (SenderName == "tbSQL3")                           
+                TabControlPageAdd(tabControSQL, splitContainerSQL, textSQL1, pnlResultSQL1, tbSQLResult1, dgvSQL1, cmGrid, ref TabIndexSQL);
+                          
+            //Удалить вкладку
+            if ((SenderName == "tbSQL4") && (tabControSQL.TabPages.Count > 1)) tabControSQL.SelectedTab.Dispose(); 
+            //Открыть из CSV.
+            if (SenderName == "tbSQL5")
+            {
+                string FileName = "";
+                string ErrorMes = "";
+                const bool ErrorShow = true;
+                const string InitialDirectory = "";
+                if (!sys.OpenFileName("", "CSV Files|*.csv|All Files|*.*", InitialDirectory, ref FileName)) return;
+                System.Data.DataTable DT;
+                sys.DTFromCSV(out DT, FileName, out ErrorMes, ErrorShow);
+                dgvSQL.DataSource = DT;
+            }
+            
+            //Copy to Remote Database
+            if (SenderName == "cm1")
+            {
+                string SQL;
+                string ServerTableName = "MyTableName";
+                if (sys.ServerTypeRemote == "MSSQL") ServerTableName = "dbo.MyTableName";                                
+                if (!sys.InputValue("Имя таблицы на сервере", "Имя таблицы", "TEXT1", ref ServerTableName)) return; 
+                var DT = (DataTable)dgvSQL.DataSource;                                
+                if (sys.ServerTypeRemote == "MSSQL")
+                {                        
+                    //Способ sys.con.MSSQLCopyTableToServer работает быстрее для MSSQL, чем sys.GetTextTableToDatabase.
+                    sys.con.MSSQLCopyTableToServer(DT, ServerTableName);
+                } 
+                if (sys.ServerTypeRemote == "Postgres")
+                {
+                    SQL = sys.GetTextTableToDatabase(sys.con.ServerType, ServerTableName, DT, true);                
+                    sys.Exec("Remote", SQL); 
+                }                 
+                sys.SM("Таблица " + ServerTableName + " загружена на сервер " + sys.con.ServerType, "Information");    
+            } 
+            
+            //Copy to Local Database
+            if (SenderName == "cm2")
+            {
+                string ServerTableName = "MyTableName";                                  
+                if (!sys.InputValue("Имя таблицы на сервере", "Имя таблицы", "TEXT1", ref ServerTableName)) return; 
+                var DT = (DataTable)dgvSQL.DataSource;                           
+                string SQL = sys.GetTextTableToDatabase("SQLite", ServerTableName, DT, true);                
+                sys.conLite.Exec(SQL);   
+                sys.SM("Таблица " + ServerTableName + " сохранена в локальной базе данных SQLite", "Information");                
+            } 
+            
+            //Export to CSV
+            if (SenderName == "cm3")
+            {
+                string FileName = "Table_" + sys.GetDate4FileName(DateTime.Now) + ".csv";
+                var DT = (DataTable)dgvSQL.DataSource;       
+                const string InitialDirectory = "";
+                if (!sys.SaveFileName("Import object", "XLS Files|*.xls|All Files|*.*", InitialDirectory, ref FileName)) return;
+                if (!sys.DTToCSV(DT, FileName)) return;
+                //sys.SM("Таблица сохранена в файл: " + FileName, "Information");  
+                //sys.FileRunSimple(FileName);
+                sys.FileRunNotebook(FileName);                     
+            }
+            
+            //Export to XLS            
+            if (SenderName == "cm4")
+            {                  
+                var DT = (DataTable)dgvSQL.DataSource;                      
+                if (!sys.DTToExcel(DT)) return;
+                sys.SM("Таблица выгружена в файл XLS", "Information");  
+            }                           
+        }
+        
+             
+         
+        internal static XmlReader ToXmlReader(string value)
+        {
+            var settings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment, IgnoreWhitespace = true, IgnoreComments = true };
+            var xmlReader = XmlReader.Create(new StringReader(value), settings);
+            xmlReader.Read();
+            return xmlReader;
+        }
+        
+        ///События контекстного меню на гриде.
+        private void cmGrid_N1_Click(object sender, EventArgs e)
+        {
+            string SenderName = sys.GetSenderName(sender);
+            string indexstr = tabControSQL.SelectedTab.Tag.ToString(); 
+            
+            var textSQL = (FastColoredTextBox)tabControSQL.Controls.Find("textSQL" + indexstr, true).First();                
+            //var dgvSQL  = (DataGridView)tabControSQL.Controls.Find("dgvSQL" + indexstr, true).First();
+            
+            //Обрамление кавычками.
+            if (SenderName == "cmGrid_N1")
+            {
+                StringBuilder TempText = new StringBuilder();
+                for (int i = 0; i < textSQL.Lines.Count(); i++) 
+                {
+                    if (i < (textSQL.Lines.Count() - 1))
+                        TempText.Append("\"" + textSQL.Lines[i] + "\" + sys.CR +" + sys.CR);
+                    else
+                        TempText.Append("\"" + textSQL.Lines[i] + "\";");                
+                }
+                textSQL.Text = TempText.ToString();
+            }
+            
+            //Очистка текста.
+            if (SenderName == "cmGrid_N2") textSQL.Text = "";
+            
+            //Преобразовать в Insert.
+            if (SenderName == "cmGrid_N3")
+            {               
+                TextBox tb1 = new TextBox();
+                tb1.Text = Clipboard.GetText();   
+                if (tb1.Text == "") return;
+                StringBuilder TempText = new StringBuilder();
+                TempText.Append("SELECT * INTO #TempTable" + sys.CR + "FROM (" + sys.CR);
+                     
+                for (int i = 0; i < tb1.Lines.Count(); i++) 
+                {                   
+                    string TempS = tb1.Lines[i];
+                    if (TempS == "") continue;
+                    string Columns = "";
+                    if (i == 0) Columns = GetColumnNames(TempS, true);
+                    else Columns = GetColumnNames(TempS, false); 
+                    if (i < (tb1.Lines.Count() - 2)) 
+                    {
+                        if (tb1.Lines[i + 1] != "")
+                        Columns = Columns + " UNION ALL";
+                    }
+                    TempText.Append(Columns + sys.CR);
+                } 
+                TempText.Append(") t" + sys.CR + "SELECT * FROM #TempTable");
+                textSQL.Text = TempText.ToString();
+            }            
+        }
+        
+        ///Получить строку с названиями колонок Column1, Column2, Column3...
+        private string GetColumnNames(string InputStr, bool AddColumns)
+        {             
+            int N = InputStr.IndexOf((char)9);
+            if (N == -1) return InputStr;           
+            int ColumnCount = 1;
+            while (N > -1)
+            {
+                InputStr = InputStr.Remove(N, 1);
+                if (AddColumns) 
+                    InputStr = InputStr.Insert(N, "' AS Column" + ColumnCount.ToString() + ", '");
+                else
+                    InputStr = InputStr.Insert(N, "', '"); 
+                ColumnCount++;
+                N = InputStr.IndexOf((char)9);
+            } 
+            if (AddColumns) InputStr = "SELECT '" + InputStr + "' AS Column" + ColumnCount.ToString();
+            else InputStr = "SELECT '" + InputStr + "'";
+            return InputStr;
+        }
+        
+        #endregion
+		
+	}
+}

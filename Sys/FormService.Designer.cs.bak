@@ -1,0 +1,629 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 15.09.2017
+ * Время: 16:08
+ * 
+ 
+ */
+namespace FBA
+{
+    partial class FormService
+    {
+        private System.ComponentModel.IContainer components = null;
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) {
+                if (components != null) {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+        
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dgvForm = new FBA.DataGridViewFBA();
+            this.cmForm = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmFormN25 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN26 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN27 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN28 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN24 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN23 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN22 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN21 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN21_1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN21_2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN21_3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN30 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN19 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN18 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN17 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormN16 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmFormN29 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbFormName = new System.Windows.Forms.TextBox();
+            this.label2 = new FBA.LabelFBA();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tbForm = new System.Windows.Forms.TabPage();
+            this.tbHist = new System.Windows.Forms.TabPage();
+            this.dgvHist = new FBA.DataGridViewFBA();
+            this.cmFormHist = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmFormHistN1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormHistN2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormHistN3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmFormHistN4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbCode = new System.Windows.Forms.TabPage();
+            this.TextBoxCode = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxCodeProp = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvForm)).BeginInit();
+            this.cmForm.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tbForm.SuspendLayout();
+            this.tbHist.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).BeginInit();
+            this.cmFormHist.SuspendLayout();
+            this.tbCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TextBoxCode)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // dgvForm
+            // 
+            this.dgvForm.AllowUserToAddRows = false;
+            this.dgvForm.AllowUserToDeleteRows = false;
+            this.dgvForm.AllowUserToOrderColumns = true;
+            this.dgvForm.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvForm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvForm.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvForm.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dgvForm.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            this.dgvForm.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvForm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvForm.ContextMenuStrip = this.cmForm;
+            this.dgvForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvForm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvForm.Location = new System.Drawing.Point(4, 4);
+            this.dgvForm.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvForm.MultiSelect = false;
+            this.dgvForm.Name = "dgvForm";
+            this.dgvForm.ReadOnly = true;
+            this.dgvForm.RowHeadersVisible = false;
+            this.dgvForm.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvForm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvForm.Size = new System.Drawing.Size(584, 320);
+            this.dgvForm.TabIndex = 15;
+            // 
+            // cmForm
+            // 
+            this.cmForm.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.cmForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmFormN25,
+            this.cmFormN26,
+            this.toolStripMenuItem5,
+            this.cmFormN27,
+            this.cmFormN28,
+            this.toolStripMenuItem4,
+            this.cmFormN14,
+            this.cmFormN15,
+            this.toolStripMenuItem3,
+            this.cmFormN24,
+            this.cmFormN23,
+            this.cmFormN22,
+            this.cmFormN13,
+            this.cmFormN21,
+            this.cmFormN20,
+            this.cmFormN30,
+            this.toolStripMenuItem1,
+            this.cmFormN19,
+            this.cmFormN18,
+            this.toolStripMenuItem2,
+            this.cmFormN17,
+            this.cmFormN16,
+            this.toolStripMenuItem6,
+            this.cmFormN29});
+            this.cmForm.Name = "cmForm";
+            this.cmForm.Size = new System.Drawing.Size(208, 436);
+            this.cmForm.Text = "Show code work";
+            // 
+            // cmFormN25
+            // 
+            this.cmFormN25.Name = "cmFormN25";
+            this.cmFormN25.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN25.Text = "Save current project";
+            this.cmFormN25.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN26
+            // 
+            this.cmFormN26.Name = "cmFormN26";
+            this.cmFormN26.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN26.Text = "Load current project";
+            this.cmFormN26.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN27
+            // 
+            this.cmFormN27.Name = "cmFormN27";
+            this.cmFormN27.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN27.Text = "Save project";
+            this.cmFormN27.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN28
+            // 
+            this.cmFormN28.Name = "cmFormN28";
+            this.cmFormN28.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN28.Text = "Load project";
+            this.cmFormN28.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN14
+            // 
+            this.cmFormN14.Name = "cmFormN14";
+            this.cmFormN14.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN14.Text = "Show code Work";
+            this.cmFormN14.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN15
+            // 
+            this.cmFormN15.Name = "cmFormN15";
+            this.cmFormN15.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN15.Text = "Show code Test";
+            this.cmFormN15.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN24
+            // 
+            this.cmFormN24.Name = "cmFormN24";
+            this.cmFormN24.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN24.Text = "New";
+            this.cmFormN24.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN23
+            // 
+            this.cmFormN23.Name = "cmFormN23";
+            this.cmFormN23.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN23.Text = "Rename";
+            this.cmFormN23.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN22
+            // 
+            this.cmFormN22.Name = "cmFormN22";
+            this.cmFormN22.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN22.Text = "Copy To Work";
+            this.cmFormN22.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN13
+            // 
+            this.cmFormN13.Name = "cmFormN13";
+            this.cmFormN13.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN13.Text = "Copy Test as New";
+            this.cmFormN13.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN21
+            // 
+            this.cmFormN21.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmFormN21_1,
+            this.cmFormN21_2,
+            this.cmFormN21_3});
+            this.cmFormN21.Name = "cmFormN21";
+            this.cmFormN21.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN21.Text = "Set Type Form";
+            // 
+            // cmFormN21_1
+            // 
+            this.cmFormN21_1.Name = "cmFormN21_1";
+            this.cmFormN21_1.Size = new System.Drawing.Size(145, 22);
+            this.cmFormN21_1.Text = "Main Form";
+            this.cmFormN21_1.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN21_2
+            // 
+            this.cmFormN21_2.Name = "cmFormN21_2";
+            this.cmFormN21_2.Size = new System.Drawing.Size(145, 22);
+            this.cmFormN21_2.Text = "App Form";
+            this.cmFormN21_2.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN21_3
+            // 
+            this.cmFormN21_3.Name = "cmFormN21_3";
+            this.cmFormN21_3.Size = new System.Drawing.Size(145, 22);
+            this.cmFormN21_3.Text = "DLL";
+            this.cmFormN21_3.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN20
+            // 
+            this.cmFormN20.Name = "cmFormN20";
+            this.cmFormN20.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN20.Text = "Delete";
+            this.cmFormN20.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN30
+            // 
+            this.cmFormN30.Name = "cmFormN30";
+            this.cmFormN30.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN30.Text = "Find";
+            this.cmFormN30.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN19
+            // 
+            this.cmFormN19.Name = "cmFormN19";
+            this.cmFormN19.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN19.Text = "Export";
+            this.cmFormN19.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN18
+            // 
+            this.cmFormN18.Name = "cmFormN18";
+            this.cmFormN18.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN18.Text = "Import";
+            this.cmFormN18.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN17
+            // 
+            this.cmFormN17.Name = "cmFormN17";
+            this.cmFormN17.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN17.Text = "Set Active";
+            this.cmFormN17.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // cmFormN16
+            // 
+            this.cmFormN16.Name = "cmFormN16";
+            this.cmFormN16.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN16.Text = "Set Deleted";
+            this.cmFormN16.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(204, 6);
+            // 
+            // cmFormN29
+            // 
+            this.cmFormN29.Name = "cmFormN29";
+            this.cmFormN29.Size = new System.Drawing.Size(207, 22);
+            this.cmFormN29.Text = "Refresh";
+            this.cmFormN29.Click += new System.EventHandler(this.CmFormN14Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbFormName);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(600, 34);
+            this.panel1.TabIndex = 16;
+            // 
+            // tbFormName
+            // 
+            this.tbFormName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFormName.BackColor = System.Drawing.SystemColors.Info;
+            this.tbFormName.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbFormName.Location = new System.Drawing.Point(155, 5);
+            this.tbFormName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbFormName.Name = "tbFormName";
+            this.tbFormName.Size = new System.Drawing.Size(436, 25);
+            this.tbFormName.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(7, 8);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(150, 19);
+            this.label2.StarColor = System.Drawing.Color.Crimson;
+            this.label2.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label2.StarOffsetX = 2;
+            this.label2.StarOffsetY = 0;
+            this.label2.StarShow = false;
+            this.label2.StarText = "*";
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Current Form Name:";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tbForm);
+            this.tabControl1.Controls.Add(this.tbHist);
+            this.tabControl1.Controls.Add(this.tbCode);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 34);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(600, 358);
+            this.tabControl1.TabIndex = 18;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1SelectedIndexChanged);
+            // 
+            // tbForm
+            // 
+            this.tbForm.Controls.Add(this.dgvForm);
+            this.tbForm.Location = new System.Drawing.Point(4, 26);
+            this.tbForm.Margin = new System.Windows.Forms.Padding(4);
+            this.tbForm.Name = "tbForm";
+            this.tbForm.Padding = new System.Windows.Forms.Padding(4);
+            this.tbForm.Size = new System.Drawing.Size(592, 328);
+            this.tbForm.TabIndex = 0;
+            this.tbForm.Text = "Forms";
+            this.tbForm.UseVisualStyleBackColor = true;
+            // 
+            // tbHist
+            // 
+            this.tbHist.Controls.Add(this.dgvHist);
+            this.tbHist.Location = new System.Drawing.Point(4, 26);
+            this.tbHist.Margin = new System.Windows.Forms.Padding(4);
+            this.tbHist.Name = "tbHist";
+            this.tbHist.Padding = new System.Windows.Forms.Padding(4);
+            this.tbHist.Size = new System.Drawing.Size(592, 328);
+            this.tbHist.TabIndex = 2;
+            this.tbHist.Text = "Hist";
+            this.tbHist.UseVisualStyleBackColor = true;
+            // 
+            // dgvHist
+            // 
+            this.dgvHist.AllowUserToAddRows = false;
+            this.dgvHist.AllowUserToDeleteRows = false;
+            this.dgvHist.AllowUserToOrderColumns = true;
+            this.dgvHist.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvHist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvHist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvHist.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.dgvHist.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            this.dgvHist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHist.ContextMenuStrip = this.cmFormHist;
+            this.dgvHist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvHist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvHist.Location = new System.Drawing.Point(4, 4);
+            this.dgvHist.Margin = new System.Windows.Forms.Padding(1);
+            this.dgvHist.MultiSelect = false;
+            this.dgvHist.Name = "dgvHist";
+            this.dgvHist.ReadOnly = true;
+            this.dgvHist.RowHeadersVisible = false;
+            this.dgvHist.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvHist.Size = new System.Drawing.Size(584, 320);
+            this.dgvHist.TabIndex = 16;
+            // 
+            // cmFormHist
+            // 
+            this.cmFormHist.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmFormHistN1,
+            this.cmFormHistN2,
+            this.cmFormHistN3,
+            this.cmFormHistN4});
+            this.cmFormHist.Name = "cmFormHist";
+            this.cmFormHist.Size = new System.Drawing.Size(163, 92);
+            // 
+            // cmFormHistN1
+            // 
+            this.cmFormHistN1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmFormHistN1.Name = "cmFormHistN1";
+            this.cmFormHistN1.Size = new System.Drawing.Size(162, 22);
+            this.cmFormHistN1.Text = "Show code";
+            this.cmFormHistN1.Click += new System.EventHandler(this.CmFormHistN1Click);
+            // 
+            // cmFormHistN2
+            // 
+            this.cmFormHistN2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmFormHistN2.Name = "cmFormHistN2";
+            this.cmFormHistN2.Size = new System.Drawing.Size(162, 22);
+            this.cmFormHistN2.Text = "Restore";
+            this.cmFormHistN2.Click += new System.EventHandler(this.CmFormHistN1Click);
+            // 
+            // cmFormHistN3
+            // 
+            this.cmFormHistN3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmFormHistN3.Name = "cmFormHistN3";
+            this.cmFormHistN3.Size = new System.Drawing.Size(162, 22);
+            this.cmFormHistN3.Text = "Delete";
+            this.cmFormHistN3.Click += new System.EventHandler(this.CmFormHistN1Click);
+            // 
+            // cmFormHistN4
+            // 
+            this.cmFormHistN4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cmFormHistN4.Name = "cmFormHistN4";
+            this.cmFormHistN4.Size = new System.Drawing.Size(162, 22);
+            this.cmFormHistN4.Text = "Copy as New";
+            this.cmFormHistN4.Click += new System.EventHandler(this.CmFormHistN1Click);
+            // 
+            // tbCode
+            // 
+            this.tbCode.Controls.Add(this.TextBoxCode);
+            this.tbCode.Controls.Add(this.panel2);
+            this.tbCode.Location = new System.Drawing.Point(4, 26);
+            this.tbCode.Margin = new System.Windows.Forms.Padding(4);
+            this.tbCode.Name = "tbCode";
+            this.tbCode.Padding = new System.Windows.Forms.Padding(4);
+            this.tbCode.Size = new System.Drawing.Size(592, 328);
+            this.tbCode.TabIndex = 1;
+            this.tbCode.Text = "Code";
+            this.tbCode.UseVisualStyleBackColor = true;
+            // 
+            // TextBoxCode
+            // 
+            this.TextBoxCode.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.TextBoxCode.AutoIndentCharsPatterns = "\r\n^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;]+);\r\n^\\s*(case|default)\\s*[^:]" +
+    "*(?<range>:)\\s*(?<range>[^;]+);\r\n";
+            this.TextBoxCode.AutoScrollMinSize = new System.Drawing.Size(2, 16);
+            this.TextBoxCode.BackBrush = null;
+            this.TextBoxCode.BackColor = System.Drawing.Color.Transparent;
+            this.TextBoxCode.BookmarkColor = System.Drawing.Color.Red;
+            this.TextBoxCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TextBoxCode.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
+            this.TextBoxCode.CharHeight = 16;
+            this.TextBoxCode.CharWidth = 9;
+            this.TextBoxCode.CurrentLineColor = System.Drawing.Color.MediumAquamarine;
+            this.TextBoxCode.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TextBoxCode.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.TextBoxCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextBoxCode.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2;
+            this.TextBoxCode.Font = new System.Drawing.Font("Courier New", 11.25F);
+            this.TextBoxCode.IsReplaceMode = false;
+            this.TextBoxCode.Language = FastColoredTextBoxNS.Language.CSharp;
+            this.TextBoxCode.LeftBracket = '(';
+            this.TextBoxCode.LeftBracket2 = '{';
+            this.TextBoxCode.Location = new System.Drawing.Point(4, 38);
+            this.TextBoxCode.Margin = new System.Windows.Forms.Padding(4);
+            this.TextBoxCode.Name = "TextBoxCode";
+            this.TextBoxCode.Paddings = new System.Windows.Forms.Padding(0);
+            this.TextBoxCode.RightBracket = ')';
+            this.TextBoxCode.RightBracket2 = '}';
+            this.TextBoxCode.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.TextBoxCode.Size = new System.Drawing.Size(584, 286);
+            this.TextBoxCode.TabIndex = 17;
+            this.TextBoxCode.VirtualSpace = true;
+            this.TextBoxCode.Zoom = 100;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.textBoxCodeProp);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(584, 34);
+            this.panel2.TabIndex = 18;
+            // 
+            // textBoxCodeProp
+            // 
+            this.textBoxCodeProp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCodeProp.BackColor = System.Drawing.SystemColors.Info;
+            this.textBoxCodeProp.Location = new System.Drawing.Point(7, 5);
+            this.textBoxCodeProp.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxCodeProp.Name = "textBoxCodeProp";
+            this.textBoxCodeProp.Size = new System.Drawing.Size(569, 25);
+            this.textBoxCodeProp.TabIndex = 0;
+            // 
+            // FormService
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(600, 392);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FormService";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Operation with forms";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvForm)).EndInit();
+            this.cmForm.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tbForm.ResumeLayout(false);
+            this.tbHist.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHist)).EndInit();
+            this.cmFormHist.ResumeLayout(false);
+            this.tbCode.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TextBoxCode)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.ResumeLayout(false);
+        }
+        private FBA.LabelFBA label2;
+        private System.Windows.Forms.TextBox tbFormName;
+        private System.Windows.Forms.Panel panel1;
+        private FBA.DataGridViewFBA dgvForm;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tbForm;
+        private System.Windows.Forms.TabPage tbCode;
+        public FastColoredTextBoxNS.FastColoredTextBox TextBoxCode;
+        private System.Windows.Forms.ContextMenuStrip cmForm;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN24;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN23;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN22;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN18;
+        private System.Windows.Forms.TabPage tbHist;
+        private FBA.DataGridViewFBA dgvHist;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN20;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN21;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN21_1;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN21_2;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN21_3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN19;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN17;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN16;
+        private System.Windows.Forms.ContextMenuStrip cmFormHist;
+        private System.Windows.Forms.ToolStripMenuItem cmFormHistN1;
+        private System.Windows.Forms.ToolStripMenuItem cmFormHistN2;
+        private System.Windows.Forms.ToolStripMenuItem cmFormHistN3;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN15;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN14;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox textBoxCodeProp;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN13;
+        private System.Windows.Forms.ToolStripMenuItem cmFormHistN4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN25;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN26;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN27;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN28;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN29;
+        private System.Windows.Forms.ToolStripMenuItem cmFormN30;
+    }
+}

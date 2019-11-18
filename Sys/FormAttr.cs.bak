@@ -1,0 +1,469 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 14.08.2017
+ * Время: 16:08
+ */
+ 
+using System;
+using System.Linq;
+using System.Data;
+using System.Windows.Forms;
+namespace FBA
+{
+    ///Форма добавления и редактирования атрибута сущности.
+	public partial class FormAttr : FormObj //Здесь нужен FormObj!  
+    {
+        #region Region. Переменные и конструтор.
+          
+	    public int StatusClose  = 0;              
+        public string Operation;
+        public string AttributeEntityID;
+        public string ObjID;         
+        public string ObjBrief;
+        public string ObjName;
+        public FBA.ObjectRef Obj;
+         
+        private bool EventDo = true;
+        
+        ///Конструктор.
+        public FormAttr(string Operation, string AttributeEntityID, string ObjID, string ObjBrief = "", string ObjName = "")
+        {
+        	InitializeComponent();          
+        	if (Operation == "Add") ObjID = "0"; 
+        	this.Operation = Operation;  
+        	this.AttributeEntityID = AttributeEntityID; 
+        	this.ObjID     = ObjID;
+            this.ObjBrief  = ObjBrief;
+            this.ObjName   = ObjName;    
+            tbAttributeEntityID.Text = AttributeEntityID;
+            if (Operation == "Del") SetShowOnly();             
+            SetTextButtonOk(Operation, btnOk);                               
+                     
+        	//this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            //this.btnOk.DialogResult     = System.Windows.Forms.DialogResult.OK; 
+            //this.MdiParent              = sys.FormMainObj;   
+        }
+        
+        #endregion Region. Переменные и конструтор.
+        
+        #region Region. Наполнение списков данными.
+           
+        ///Присвоить tbTable список таблиц для выбора из БД.
+        private bool GetListAvalibleTables(string EntityID)
+        {             
+            string SQL = "SELECT Name FROM arhTable WHERE TableEntityID = " + EntityID;
+            var DT = new System.Data.DataTable();
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false;  
+            string TempStr = tbTableStr.Text;    
+            sys.CBSetDataSourse(tbTableStr, DT);
+            tbTableStr.Text = TempStr;
+          
+            return true;
+        }
+        
+        ///Присвоить tbField1 список полей таблицы TableName.
+        private bool GetListAvalibleFields(string TableName)
+        {
+            /*var DT1 = new System.Data.DataTable();
+            string SQL = "";
+            if (sys.con.ServerType == "SQLite")
+            {
+                SQL = "pragma table_info('" + TableName + "')";           
+                if (!sys.SelectDT("Remote", SQL, out DT1)) return false;
+                //sys.DTView(DT, "DT1", "DT1");
+                DT1.Columns.RemoveAt(5);
+                DT1.Columns.RemoveAt(4);
+                DT1.Columns.RemoveAt(3);
+                DT1.Columns.RemoveAt(2);
+                DT1.Columns.RemoveAt(0);
+                //sys.DTView(DT, "DT2", "DT2");
+                var dataView = new DataView(DT1);
+                dataView.Sort = "Name ASC";
+            }
+            if (sys.con.ServerType == "MSSQL")
+            {
+                SQL = "SELECT COLUMN_NAME AS Name FROM information_schema.columns WHERE table_name = '" + TableName + "'";
+                if (!sys.SelectDT("Remote", SQL, out DT1)) return false;   
+            } 
+            
+            if (sys.con.ServerType == "Postgres")
+            {
+                SQL = "SELECT table_name, column_name from information_schema.columns WHERE table_schema = 'public' and table_name = '" + TableName + "'";
+                if (!sys.SelectDT("Remote", SQL, out DT1)) return false;                               
+            }    
+            */
+           
+            System.Data.DataTable DT1;
+            sys.GetTableFields(TableName, out DT1);
+                
+            var DT2 = new System.Data.DataTable();
+            if (DT1 == null) return false;
+            DT2 = DT1.Copy();
+            
+            string TempStr = tbField1.Text;         
+            sys.CBSetDataSourse(tbField1, DT1);
+            tbField1.Text = TempStr;
+                        
+            sys.CBSetDataSourse(tbField2, DT2); 
+            tbField2.Text = "";
+            return true;
+        }
+               
+        ///Присвоить tbLinkToStr список сущностей для выбора.
+        private bool GetListLinkTo()
+        {                   
+            const string SQL = "SELECT Brief FROM arhEntity";                                
+            var DT = new System.Data.DataTable();
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false; 
+            string TempStr = tbLinkToStr.Text;            
+            sys.CBSetDataSourse(tbLinkToStr, DT);
+            tbLinkToStr.Text = TempStr;
+            return true;            
+        }
+        
+        ///Присвоить tbAttrLinkStr список сущностей для выбора.
+        private bool GetListtbAttrLink(string EntityBrief)
+        {                        
+            string SQL = " SELECT Brief FROM arhAttr WHERE AttributeEntityID = (SELECT ID FROM arhEntity WHERE Brief = '" + EntityBrief + "') ";                                
+            var DT = new System.Data.DataTable();
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false;
+            string TempStr = tbAttrLinkStr.Text;            
+            sys.CBSetDataSourse(tbAttrLinkStr, DT); 
+            tbAttrLinkStr.Text = TempStr;
+            return true;            
+        }
+        
+        #endregion  Region. Наполнение списков данными.
+                
+        ///Заполнение свойств компонентов значениями.
+        private void FillData()
+        { 
+            EventDo = false;
+            Obj = new FBA.ObjectRef();
+            Obj.SetQueryTable(this, "Main1", "arhAttr", ObjID, "AttributeID", "", "Remote");
+            Obj.Read();
+            int ValueType = -1;            
+            if (tbTypeInt.Text != "") ValueType = tbTypeInt.Text.ToInt() - 1;           
+            if (tbTypeStr.Items.Count > ValueType) tbTypeStr.SelectedIndex = ValueType;
+            else tbTypeStr.Text = "";
+            
+            int ValueKind = -1;            
+            if (tbKindInt.Text != "") ValueKind = tbKindInt.Text.ToInt() - 1;           
+            if (tbKindStr.Items.Count > ValueKind) tbKindStr.SelectedIndex = ValueKind;
+            else tbKindStr.Text = "";                    
+            
+            tbLinkToStr.Text = "";
+            if (tbLinkToInt.Text != "")   tbLinkToStr.Text = sys.GetEntityBrief(tbLinkToInt.Text);
+           
+            tbAttrLinkStr.Text = "";
+            if (tbAttrLinkInt.Text != "") tbAttrLinkStr.Text = sys.GetAttrBrief(tbAttrLinkInt.Text);     
+            tbTableStr.Text = "";
+            if (tbTableInt.Text != "")    tbTableStr.Text = sys.GetTableName(tbTableInt.Text);     
+                           
+            GetListAvalibleTables(tbAttributeEntityID.Text);
+            GetListAvalibleFields(tbTableStr.Text);
+            GetListLinkTo();
+            GetListtbAttrLink(tbLinkToStr.Text);
+            EnableDisable();
+            EventDo = true;
+            //Obj.ShowArray("Ent");
+            //Obj.ShowArray("Ref");
+            //Obj.ShowArray("Tbl");           
+        }
+        
+        ///Перед записью в базу очищаем значения компонентов, чтобы не записать в базу лишнее.
+        private void ClearValuesBeforeWrite()
+        {
+            if (!tbTableStr.Enabled)       tbTableStr.Text     = "";           
+            if (!tbField1.Enabled)      tbField1.Text    = "";       
+            if (!tbField2.Enabled)      tbField2.Text    = "";                             
+            if (!tbKindStr.Enabled)     tbKindStr.Text   = "";                   
+            if (!tbCode.Enabled)        tbCode.Text      = "";           
+            if (!tbMask.Enabled)        tbMask.Text      = "";  
+            if (!tbLinkToStr.Enabled)   
+            {
+                tbLinkToStr.Text = "";
+                tbLinkToInt.Text = "";
+            }
+            if (!tbAttrLinkStr.Enabled) 
+            {
+                tbAttrLinkStr.Text = "";
+                tbAttrLinkInt.Text = "";
+            }            
+        }       
+                
+        ///Запись в базу изменений.
+        private bool ObjectWrite()
+        {
+            //Очистка полей, чтобы лишего не записать в базу.
+            ClearValuesBeforeWrite();
+            return Obj.Write();   
+        }
+        
+        ///Кнопка Cancel.
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            StatusClose = 2;
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+        
+        ///Запись объекта.
+        private bool AttrObjectWrite()
+        {
+            if (!CreateForeignKey()) return false;
+            
+            return ObjectWrite();
+        }
+        
+        ///Кнопка Ok.
+        private void BtnOkClick(object sender, EventArgs e)
+        {
+            string SenderName = sys.GetSenderName(sender); 
+            if (tbTypeStr.Text     != "") tbTypeInt.Text     = (tbTypeStr.SelectedIndex     + 1).ToString();
+            if (tbKindStr.Text     != "") tbKindInt.Text     = (tbKindStr.SelectedIndex     + 1).ToString();
+           
+            if (tbLinkToStr.Text   != "") tbLinkToInt.Text   = sys.GetEntityID(tbLinkToStr.Text);
+            if (tbAttrLinkStr.Text != "") tbAttrLinkInt.Text = sys.GetAttrID(tbLinkToInt.Text, tbAttrLinkStr.Text);
+            if (tbTableStr.Text    != "") tbTableInt.Text    = sys.GetTableID(tbTableStr.Text);
+            
+            bool Result = false;
+            if (Operation == "Del")      Result = OperationDelete();
+            if (Operation == "Add")      Result = AttrObjectWrite();
+            if (Operation == "Edit")     Result = AttrObjectWrite();
+            if (Result)
+            {
+                DialogResult = DialogResult.OK;
+                StatusClose = 1;
+            } else           
+            {
+                DialogResult = DialogResult.Cancel;
+                StatusClose = 2;            
+            }
+            Close();                                          
+        } 
+        
+        ///Проверка возможности удаления атрибута.
+        private bool CheckDeleteAttr()
+        {                           
+            //Проверка на атрибутам.
+            string SQL = "SELECT * FROM arhAttr WHERE RefAttributeID = " + ObjID;
+            var DT = new System.Data.DataTable();   
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false;          
+            if (DT.Rows.Count != 0) 
+            {
+                sys.SM("Ошибка. На атрибуты ссылаются ддругие атрибуты. Удаление невозможно.");
+                sys.DTView(DT, "Список ссылающихся атрибутов",  "Cсылающиеся атрибуты");
+                return false;
+            } 
+            //Пока полная проверка только для MSSQL.
+            if (sys.con.ServerType != "MSSQL") return true;
+            
+            //Проверка по таблицам в базе.
+            string TableName = tbTableStr.Text;
+            string FieldName = tbField1.Text;                         
+            string QueryTextStr = string.Join(sys.CR, this.QueryText);
+            SQL = sys.GetSection(QueryTextStr, "AttrDelete");
+            SQL = SQL.Replace("TableNameAtt",  TableName);
+            SQL = SQL.Replace("FieldNameAttr", FieldName);
+            sys.SelectDT("Remote", SQL, out DT);
+            if (DT.Rows.Count != 0) 
+            {
+                sys.SM("Ошибка. На поле таблицы с данным атрибутом есть внешние ключи в других таблицах. Удаление невозможно.");
+                sys.DTView(DT, "Список таблиц и полей, которые ссылаются на данное поле",  "Cсылающиеся таблицы и поля");
+                return false;
+            }
+            return true;            
+        }
+               
+        ///Удаление атрибута.
+        private bool OperationDelete()
+        {
+            if (!sys.SM("Вы хотите действительно удалить атрибут?", "Question", "Удаление атрибута")) return false;            
+            if (!CheckDeleteAttr()) return false;                                 
+            return Obj.DeleteObj("Main1");         
+        }
+        
+        ///Событие выбора ссылки на сущность. 
+        private void tbLinkToStr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!EventDo) return;
+            GetListtbAttrLink(tbLinkToStr.Text);
+        }
+        
+        ///Событие выбора таблицы.
+        private void tbTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!EventDo) return; 
+            GetListAvalibleFields(tbTableStr.Text);
+        }
+        
+        ///Поле tbField2 доступно только в том случае, если у нас Массив связанных объектов.      
+        private void tbTypeStr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableDisable();
+        }                                
+                
+        ///Интересно, если повесить FillData на конструктор, то текст (свойство текст) в 
+        ///комбобоксах переписывается почему-то.. а на Shown нет.
+        private void FormAttr_Shown(object sender, EventArgs e)
+        {
+             FillData();  
+        }
+        
+        ///Контекстное меню с пунктом Clear.
+        private void cmMenuItem_Click(object sender, EventArgs e)
+        {            
+            string ControlName = sys.GetControlNameByMenuStripItem(sender);
+            string SenderName = sys.GetSenderName(sender);  
+            if (SenderName == "cmAttr_N1")
+            {
+                if (ControlName == "tbLinkToStr")   tbLinkToStr.Text   = "";
+                if (ControlName == "tbAttrLinkStr") tbAttrLinkStr.Text = "";
+                if (ControlName == "tbTable")       tbTableStr.Text       = "";
+                if (ControlName == "tbField1")      tbField1.Text      = "";
+                if (ControlName == "tbField2")      tbField2.Text      = "";
+                if (ControlName == "tbComment")     tbComment.Text     = "";  
+            }
+            if (SenderName == "cmAttr_N2")
+            { 
+                ReadArrayHist();
+                object control = sys.GetControlByMenuStripItem(sender);
+                string Value = GetHistoryValue(control);
+                sys.SM(Value, "I");                                        
+            }
+            if (SenderName == "cmAttr_N3")
+            { 
+                WriteArrayHist();
+            } 
+            
+        }
+        
+        ///Доступность компонентов.        
+        private void EnableDisable()
+        {          
+            if ((tbKindStr.Text == "Вычисляемые на MSQL") && (tbTypeStr.Text == "Массив связанных объектов"))
+            {
+                sys.SM("Wrong combination of Kind and Type!");
+                return;
+            }
+            
+            //Поле + Атрибут из базы данных: Table, Field1, Mask, Comment
+            //Поле + Системный: Comment
+            //Поле + Вычисляемый: Код, Mask, Comment
+            
+            //Сcылка + Атрибут из базы данных: LinkTo, Table, Field1, Comment
+            //Сcылка + Системный: Comment
+            //Сcылка + Вычисляемый: LinkTo, Код, Comment.
+            
+            //Универсальная ссылка + Атрибут из базы данных:  Table, Field1, Field2, Comment
+            //Универсальная ссылка + Системный: Comment 
+            //Универсальная ссылка + Вычисляемый: Код, Comment
+           
+            //Массив + Атрибут из базы данных: LinkTo, LinkAttr, Table, Field1, Comment + Events.
+            //Массив + Системный: Comment
+            //Массив + Вычисляемый: Ошибка!!!
+             
+                        
+            tbTableStr.Enabled       = (tbKindStr.Text  == "Атрибут из базы данных");
+            tbField1.Enabled      = (tbKindStr.Text  == "Атрибут из базы данных");
+            tbField2.Enabled      = ((tbKindStr.Text == "Атрибут из базы данных") && (tbTypeStr.Text == "Универсальная ссылка"));
+            
+            bool IntLink = false;           
+            if ((tbKindStr.Text == "Атрибут из базы данных") && (tbTypeStr.Text == "Ссылка")) IntLink = true;
+            if ((tbKindStr.Text == "Атрибут из базы данных") && (tbTypeStr.Text == "Массив связанных объектов")) IntLink = true;
+            if ((tbKindStr.Text == "Вычисляемые на MSQL") && (tbTypeStr.Text == "Ссылка")) IntLink = true;               
+            tbLinkToStr.Enabled   = IntLink;
+            cbForeignKey.Enabled  = IntLink;
+            
+            tbAttrLinkStr.Enabled = ((tbKindStr.Text == "Атрибут из базы данных") && (tbTypeStr.Text == "Массив связанных объектов"));
+            tbCode.Enabled        = (tbKindStr.Text  == "Вычисляемые на MSQL"); 
+            tbMask.Enabled        = ((tbTypeStr.Text == "Поле") && (((tbKindStr.Text  == "Атрибут из базы данных")) || ((tbKindStr.Text  == "Вычисляемые на MSQL"))));
+                
+            rb1.Enabled = tbAttrLinkStr.Enabled;
+            rb2.Enabled = tbAttrLinkStr.Enabled;
+            rb3.Enabled = tbAttrLinkStr.Enabled;
+            rb4.Enabled = tbAttrLinkStr.Enabled; 
+            
+             
+            //tbTypeStr.Text
+            //Поле 
+            //Ссылка
+            //Универсальная ссылка
+            //Массив связанных объектов
+            
+            //tbKindStr.Text
+            //Атрибут из базы данных
+            //Системные
+            //Вычисляемые на MSQL                  
+        }
+        
+        ///Создание внешнего ключа.
+        private bool CreateForeignKey()
+        {           
+            //Пока только для MSSQL.
+            if (sys.con.ServerType != "MSSQL") return true;
+            if (tbTypeStr.Text != "Ссылка") return true;
+            
+            //Поиск внешнего ключа.
+            string TableNameFrom = tbTableStr.Text;
+            string FieldNameFrom = tbField1.Text;
+            string SQL = "SELECT t1.Name AS TableNameTo, t1.IDFieldName AS FieldNameTo FROM arhTable t1 INNER JOIN arhEntity t2 ON t1.TableEntityID = t2.ID " +
+                         "WHERE t2.Name = '" + tbLinkToStr.Text + "' AND t1.Type = 1";
+            var DT = new System.Data.DataTable();   
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false;          
+            if (DT.Rows.Count == 0) 
+            {
+                sys.SM("Ошибка. Сущность на котрую происходит ссылка не имеет главной таблицы.");
+                return false;
+            }
+                                
+            string TableNameTo = sys.DTValue(DT, "TableNameTo");
+            string FieldNameTo = sys.DTValue(DT, "FieldNameTo"); 
+                                                   
+            SQL = 
+            string.Format("SELECT                    " + sys.CR +
+            "FK.CONSTRAINT_NAME as ForeignKey,       " + sys.CR +
+            "  FK.TABLE_NAME    as FROM_TABLE_NAME,  " + sys.CR +
+            "  FK.COLUMN_NAME   as FROM_COLUMN_NAME, " + sys.CR +
+            "  PK.TABLE_NAME    as TO_TABLE_NAME,    " + sys.CR +
+            "  PK.COLUMN_NAME   as TO_COLUMN_NAME    " + sys.CR +
+            "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE PK  " + sys.CR +
+            "  JOIN INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS C ON PK.CONSTRAINT_CATALOG=C.UNIQUE_CONSTRAINT_CATALOG AND PK.CONSTRAINT_SCHEMA=C.UNIQUE_CONSTRAINT_SCHEMA AND PK.CONSTRAINT_NAME=C.UNIQUE_CONSTRAINT_NAME " + sys.CR +
+            "  JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE FK ON C.CONSTRAINT_CATALOG=PK.CONSTRAINT_CATALOG AND C.CONSTRAINT_SCHEMA=FK.CONSTRAINT_SCHEMA AND C.CONSTRAINT_NAME=FK.CONSTRAINT_NAME AND PK.ORDINAL_POSITION=FK.ORDINAL_POSITION " + sys.CR +
+            "WHERE                                   " + sys.CR +
+            "      FK.TABLE_NAME  = '{0}'  " + sys.CR + //TableNameFrom
+            "  AND FK.COLUMN_NAME = '{1}'  " + sys.CR + //FieldNameFrom
+            "  AND PK.TABLE_NAME  = '{2}'  " + sys.CR + //TableNameTo
+            "  AND FK.COLUMN_NAME = '{3}'  " + sys.CR + //FieldNameTo
+            "ORDER BY FK.CONSTRAINT_NAME, PK.ORDINAL_POSITION ", TableNameFrom, FieldNameFrom, TableNameTo, FieldNameTo) ;
+            
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false;          
+            if (DT.Rows.Count != 0) 
+            {
+                //Внешний ключ уже есть, выходим.
+                return true;
+            }
+            
+            //ALTER TABLE [dbo].[Filial]  WITH NOCHECK ADD  CONSTRAINT [FK_Filial_FaceJuridical] FOREIGN KEY([MainFaceJuridical])
+            //REFERENCES [dbo].[FaceJuridical] ([FaceID])           
+            string ForeignKeyName = "FK_" + TableNameFrom + "_" + FieldNameFrom;
+            SQL = string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} FOREIGN KEY({2}) REFERENCES {3}({4});", TableNameFrom, ForeignKeyName, FieldNameFrom, TableNameTo, FieldNameTo);
+            return sys.Exec("Remote", SQL);
+        }
+         
+        // void Button5Click(object sender, EventArgs e)
+        //{
+             //this.SetValue("Main2.Сокр", "Вид8");
+             //string s = this.GetValue("Main2.Сокр");    
+             //this.Write();
+            
+             //System.Data.DataTable DTArray;
+            //string ErrorText = ErrorIfNull(Controls, out DTArray);
+            //sys.DTView(DTArray, "DTArray", "DTArray");
+            //sys.SM(ErrorText);             
+        //}                     
+	}
+}

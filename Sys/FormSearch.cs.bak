@@ -1,0 +1,292 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 15.02.2018
+ * Время: 10:33
+ */
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{   
+    public partial class FormSearch : FormSim
+    {
+        FBA.DataGridViewFBA DG;
+        string FormName = "";
+       // bool Collapsed  = true;         
+        string TextSearchPrev = "";
+        ///Конструктор.
+        public FormSearch(string FormName, FBA.DataGridViewFBA DG)
+        {           
+            InitializeComponent();           
+            this.DG       = DG; 
+            this.FormName = FormName; 
+            this.Height = 261;            
+        }   
+       
+        ///Метод СТАТИЧЕСКИЙ для вызова данной формы.
+        public static FormSearch FormSearchShow(string FormName, FBA.DataGridViewFBA DGIN)
+        {              
+            if (sys.FormSearchParam.Contains(FormName + ";")) return null;
+            sys.FormSearchParam = sys.FormSearchParam + FormName + ";";
+            FormSearch F1 = new FormSearch(FormName, DGIN);
+            
+            //Установка местоположения появления формы.            
+            Point p1 = new Point(DGIN.Left, DGIN.Top);
+            Point p2 = DGIN.PointToScreen(p1);
+            F1.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            F1.Left = p2.X + 70;
+            F1.Top  = p2.Y - 20;
+            //sys.SM("X1 = " + p1.X + sys.CR + "Y1 = " + p1.Y + sys.CR + 
+            //       "X2 = " + p2.X + sys.CR + "Y2 = " + p2.Y);   
+            
+            F1.Show();           
+            return F1;
+        }
+        
+        ///Здесь собраны действия всех кнопок.  
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            string SenderName = sys.GetSenderName(sender);           
+            
+            //Поиск с закрытием формы поиска.
+            if (SenderName == "btnOk") 
+            {
+                GoSearsh(false);
+                Close();
+            }
+                      
+            //Выход.
+            if (SenderName == "btnCancel") Close();        
+            //Поиск с показом результатов поиска.
+            if (SenderName == "btnResult")
+            {
+                GoSearsh(true); 
+                this.Height = 500;
+                //if (TextSearchPrev == tbSearchText.Text)
+                //{
+                //    Collapsed = !Collapsed;
+                //    if (Collapsed) this.Height = 261;
+                //    else this.Height = 500;
+                //} else
+                //{
+                //    Collapsed = false;
+                //    this.Height = 500;
+                //}
+            }
+            
+            //if (!Collapsed) this.btnResult.Image = global::FBA.Resource.Collapse2_24;
+            //else this.btnResult.Image = global::FBA.Resource.Expand2_24;            
+        }
+        
+        private void GoSearsh(bool ShowResult)
+        {
+            if (TextSearchPrev == tbSearchText.Text) return;
+            DGResult.Rows.Clear();
+            DGResult.Columns.Clear();
+            int SearchPart     = -1;
+            int FindCount      = 0;
+            int SelectedColumn = 0;
+            int SelectedRow    = 0;
+            if (DG.SelectedCells.Count > 0)
+            {
+                SelectedColumn = DG.SelectedCells[0].ColumnIndex;
+                SelectedRow    = DG.SelectedCells[0].RowIndex; 
+            }                     
+            if (rbPart1.Checked) SearchPart = 1;
+            if (rbPart2.Checked) SearchPart = 2;
+            if (rbPart3.Checked) SearchPart = 3;
+            if (rbPart4.Checked) SearchPart = 4;
+            if (!cbOnlyColumn.Checked) SelectedColumn = -1;
+            TextSearchPrev = tbSearchText.Text;
+            sys.DGSerchText(DG,
+                            DGResult, 
+                            TextSearchPrev,
+                            ShowResult,
+                            cbCaseSensitivity.Checked,
+                            cbSearchAll.Checked,
+                            cbHighlight.Checked,
+                            rbDown.Checked,
+                            SelectedColumn,
+                            SelectedRow,
+                            SearchPart,
+                            ref FindCount);
+            lbResultCount.Text = "Found values: " + FindCount; 
+        }
+        
+        ///Настройки направления поиска доступны только при отключенной галке Search all matches.
+        private void cbSearchAll_CheckedChanged(object sender, EventArgs e)
+        {
+            gbDirection.Enabled = !cbSearchAll.Checked;
+            TextSearchPrev = "";
+        }
+        
+        //Для того чтобы повторно не открывать форму поиска, если она уже полнята.
+        //При закрытии формы поиска убирается информация из перенной FormSearchParam, что форма поиска поднята.
+        //FormSearchParam - текстовая переменная в котрой через ; перечислены все поднятые в настоящий момент формы поиска.
+        private void FormSearch_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            sys.FormSearchParam = sys.FormSearchParam.Replace(FormName + ";", "");
+        }
+        
+        //Событие изменения параметров поиска, для того чтобы не блокировать запус поиска строкой выше: if (TextSearchPrev == tbSearchText.Text) return;.
+        private void rbPart1_CheckedChanged(object sender, EventArgs e)
+        {
+            TextSearchPrev = "";
+        }
+       
+       
+                
+                   //if (DG[i, j].Value.ToString() == SearchText)
+                   //{
+                      // DG.CurrentCell = DG[i, j];
+                       //findrow = Table0.CurrentRow.Index + 1;
+                       //DG.Rows[i].Selected = true;
+                         
+                              
+                       //return;
+                   //}
+                   
+                         //if (Value.ToLower().Contains(textBox1.Text.ToLower()));
+                   
+                   
+        /*private void search1( )
+        {
+            DataGridView dataGridView;
+            
+            if (!newFind)
+            {
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.BackColor = oldBackColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.SelectionBackColor = oldBackColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.ForeColor = oldForeColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.SelectionForeColor = oldForeColor;
+            }
+            if (searchTextBox.Text != null && searchTextBox.Text != String.Empty)
+            {
+                bool finded = false;
+                int n = lastFindRow;
+                lastFindCell--;
+                for (int i = lastFindRow; i >= 0; i--)
+                {
+                    if (dataGridView.Rows[i].Visible)
+                    {
+                        if (i != lastFindRow)
+                            lastFindCell = dataGridView.Rows[i].Cells.Count - 1;
+                        finded = false;
+                        for (int k = lastFindCell; k >= 0; k--)
+                        {
+                            if (dataGridView.Rows[i].Cells[k].Value != null && dataGridView.Rows[i].Cells[k].Visible)
+                            {
+                                if (dataGridView.Rows[i].Cells[k].Value.ToString().IndexOf( searchTextBox.Text, StringComparison.OrdinalIgnoreCase ) >= 0)
+                                {
+                                    lastFindCell = k;
+                                    oldBackColor = dataGridView.Rows[i].Cells[k].Style.BackColor;
+                                    oldForeColor = dataGridView.Rows[i].Cells[k].Style.ForeColor;
+                                    finded = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (finded)
+                        {
+                            dataGridView.Rows[i].Cells[lastFindCell].Style.SelectionBackColor = Color.Lime;
+                            dataGridView.Rows[i].Cells[lastFindCell].Style.SelectionForeColor = Color.Black;
+                            dataGridView.CurrentCell = dataGridView.Rows[i].Cells[lastFindCell];
+                            newFind = false;
+                            lastFindRow = i;
+                            break;
+                        }
+                        n = i;
+                    }
+                }
+                if (!finded)
+                {
+                    newFind = true;
+                    lastFindRow = dataGridView.Rows.Count - 1;
+                    if (dataGridView.Rows.Count > 0)
+                        lastFindCell = dataGridView.Rows[0].Cells.Count - 1;
+ 
+                    if (n <= 0)
+                    {
+                        if (MessageBox.Show( "Поиск достиг начала таблицы! Начать поиск заново с конца?", "Информация!", MessageBoxButtons.YesNo, MessageBoxIcon.Information ) == DialogResult.Yes)
+                        {
+                            searchUpBtn.PerformClick();
+                        }
+                    }
+                    else
+                        MessageBox.Show( "Искомый текст не найден!", "Информация!", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                }
+            }
+        }*/ 
+        
+        
+        
+                
+        /*private void searchDownBtn_Click( object sender, EventArgs e )
+        {
+            if (!newFind)
+            {
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.BackColor = oldBackColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.SelectionBackColor = oldBackColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.ForeColor = oldForeColor;
+                dataGridView.Rows[lastFindRow].Cells[lastFindCell].Style.SelectionForeColor = oldForeColor;
+            }
+            if (searchTextBox.Text != null && searchTextBox.Text != String.Empty)
+            {
+                bool finded = false;
+                int n = lastFindRow;
+                lastFindCell++;
+                for (int i = lastFindRow; i < dataGridView.Rows.Count; i++)
+                {
+                    if (dataGridView.Rows[i].Visible)
+                    {
+                        if (i != lastFindRow)
+                            lastFindCell = 0;
+                        finded = false;
+                        for (int k = lastFindCell; k < dataGridView.Rows[i].Cells.Count; k++)
+                        {
+                            if (dataGridView.Rows[i].Cells[k].Value != null && dataGridView.Rows[i].Cells[k].Visible)
+                            {
+                                if (dataGridView.Rows[i].Cells[k].Value.ToString().IndexOf( searchTextBox.Text, StringComparison.OrdinalIgnoreCase ) >= 0)
+                                {
+                                    lastFindCell = k;
+                                    oldBackColor = dataGridView.Rows[i].Cells[k].Style.BackColor;
+                                    oldForeColor = dataGridView.Rows[i].Cells[k].Style.ForeColor;
+                                    finded = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (finded)
+                        {
+                            dataGridView.Rows[i].Cells[lastFindCell].Style.SelectionBackColor = Color.Lime;
+                            dataGridView.Rows[i].Cells[lastFindCell].Style.SelectionForeColor = Color.Black;
+                            dataGridView.CurrentCell = dataGridView.Rows[i].Cells[lastFindCell];
+                            newFind = false;
+                            lastFindRow = i;
+                            break;
+                        }
+                        n = i;
+                    }
+                }
+                if (!finded)
+                {
+                    newFind = true;
+                    lastFindRow = 0;
+                    lastFindCell = 0;
+                    if (n + 1 >= dataGridView.Rows.Count)
+                    {
+                        if (MessageBox.Show( "Поиск достиг конца таблицы! Начать поиск заново сначала?", "Информация!", MessageBoxButtons.YesNo, MessageBoxIcon.Information ) == DialogResult.Yes)
+                        {
+                            searchDownBtn.PerformClick();
+                        }
+                    }
+                    else
+                        MessageBox.Show( "Искомый текст не найден!", "Информация!", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                }
+            }
+        } */
+         
+    }
+}

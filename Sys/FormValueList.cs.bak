@@ -1,0 +1,81 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 22.11.2017
+ * Время: 17:43
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{      
+    ///Форма для выбора одного изи нескольких строк из таблицы, котрая получается после выполенния запроса SQL.
+    ///MultiSelect - Допускается выбор одной строки или нескольких.
+    public partial class FormValueList : FormSim
+    {        
+        public string[,] SelectedValue;       
+        
+        ///Два перегруженных конструктора.
+        public FormValueList(string SQL, bool MultiSelect)
+        {             
+            InitializeComponent();
+            if (this.Owner != null) this.Icon = this.Owner.Icon;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult     = System.Windows.Forms.DialogResult.OK;
+            dgvList.MultiSelect = MultiSelect;           
+            //Заполнение таблицы.     
+            if (!sys.SelectGV("Remote", SQL, dgvList)) return;                           
+        }
+        
+        ///Два перегруженных конструктора.
+        public FormValueList(System.Data.DataTable DT, bool MultiSelect)
+        {             
+            InitializeComponent();
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult     = System.Windows.Forms.DialogResult.OK;
+            dgvList.MultiSelect = MultiSelect;
+            dgvList.DataSource = DT;         
+        }
+        
+        ///Очистить всеь массив выбранных значений.
+        private void SetEmpty()
+        {
+            SelectedValue.ArrayClear();          
+        }
+        
+        ///Заполнить массив выбранными значениями.
+        private void SelectValue()
+        {            
+            SelectedValue = new string[dgvList.SelectedRows.Count, dgvList.Columns.Count];
+            int RowCount = dgvList.SelectedRows.Count;
+            int ColCount = dgvList.Columns.Count;                                 
+            for (int i = 0; i < RowCount; i++)
+                for (int j = 0; j < ColCount; j++)
+                     SelectedValue[i, j] = dgvList.SelectedRows[i].Cells[j].Value.ToString();
+       }
+             
+        ///Отмена выбора.
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            SetEmpty();
+            Close();
+        }   
+        
+        ///Выбор значений и закрытие формы по кнопке Ок.
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+           SelectValue(); 
+           Close();
+        }
+  
+        ///Выбор значений и закрытие формы по двойному клику на гриде.
+        private void dgvList_DoubleClick(object sender, EventArgs e)
+        {
+           this.DialogResult = DialogResult.OK;
+           SelectValue();
+           Close();
+        }
+    }
+}

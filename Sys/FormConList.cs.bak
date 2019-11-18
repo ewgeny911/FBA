@@ -1,0 +1,272 @@
+
+﻿/*
+ * Сделано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 12.01.2017
+ * Время: 16:31
+*/
+using System;
+using System.Windows.Forms;  
+namespace FBA
+{
+	//Форма для создания подключения к БД или серверу приложений.
+    public partial class FormConList : FormSim 
+	{            
+		bool DoNotUpdateText;
+		public string SelectConnectionName = "";
+		
+        //Это для того чтобы количество звездочек при показе пароля было больше,
+        //и нельзя было понять какая длина пароля на самом деле.
+        const string AddTextPass = "$---5634---$";
+		
+        public FormConList()
+		{
+            InitializeComponent();                     	    
+			ConnectionListRefresh(); 
+            DialogResult = DialogResult.Cancel;			
+		}
+		
+		///Закрытие формы.
+		private void BtnOkClick(object sender, EventArgs e)
+		{
+		    SelectConnectionName = tbConnectionName.Text;
+		    DialogResult = DialogResult.OK;
+		    Close();
+		}
+		
+        ///Обновление списка подключений в гриде.		
+		private void ConnectionListRefresh()
+		{		
+			DoNotUpdateText = true;		
+			const string SQL = "SELECT ID, ConnectionName, ServerName, ServerType, DatabaseName, " + 
+				  	  "(CASE WHEN DatabaseLogin <> '' THEN '**********' ELSE DatabaseLogin END) AS DatabaseLogin, " + 				     	
+				      "(CASE WHEN DatabasePass <> '' THEN '**********' ELSE DatabasePass END) AS DatabasePass, " + 				     
+			          "UserForm, UserLogin, " +
+				      "(CASE WHEN UserPass <> '' THEN '**********' ELSE UserPass END) AS UserPass " +		  
+  				      "FROM arhConList ORDER BY ConnectionName; ";		
+			sys.conLite.SelectGV(SQL, dgvConnectionList);				
+			DoNotUpdateText = false;
+		}
+		
+		///Событие. Кнопка добавления подключения.
+		private void BtnAddClick(object sender, EventArgs e)
+		{				
+			ConnectionAdd();     			
+		}
+		
+		///Добавление подключения.
+		private void ConnectionAdd()
+		{    
+		    string ConnectionName    = tbConnectionName.Text;
+			string ServerType        = cbType.Text;
+			string ServerName        = tbServerName.Text;			 
+			string DatabaseName      = tbDatabaseName.Text;
+			string DatabaseLogin     = Crypto.EncryptAES(tbDatabaseLogin.Text.Replace(AddTextPass, ""));
+			string DatabasePass      = Crypto.EncryptAES(tbDatabasePass.Text.Replace(AddTextPass, ""));
+			string UserForm          = tbUserForm.Text;
+			string UserLogin         = tbUserLogin.Text;
+			string UserPass          = sys.GetUserPassCrypt(tbUserLogin.Text, tbUserPass.Text);    				
+			string WindowsLogin      = cbWindowsLogin.Checked.ToInt().ToString();
+            string SQL = "INSERT INTO arhConList (ConnectionName, ServerType, ServerName, DatabaseName, DatabaseLogin, DatabasePass, UserForm, UserLogin, UserPass, WindowsLogin) VALUES (" +
+				  "'" + ConnectionName + "'," +
+				  "'" + ServerType     + "'," +
+				  "'" + ServerName     + "'," +				   
+				  "'" + DatabaseName   + "'," +
+            	  "'" + DatabaseLogin  + "'," +
+            	  "'" + DatabasePass   + "'," +
+                  "'" + UserForm       + "'," +
+            	  "'" + UserLogin      + "'," +
+            	  "'" + UserPass       + "'," +
+                  "'" + WindowsLogin   + "'" +
+				  ")";		
+			sys.conLite.Exec(SQL);
+            ConnectionListRefresh();	
+		}
+		  
+		///Тест подключения.
+		private void BtnConnectionTestClick(object sender, EventArgs e)
+	    {			           
+		    //Crypto.EncryptAES(tbUserPass.Text.Replace(AddTextPass, ""));                
+            if (!sys.Enter(tbConnectionName.Text, "TRY", tbUserLogin.Text, tbUserPass.Text)) return;                                
+		    sys.SM("Подключение выполнено успешно!", "Information", "Подключение к базе данных");      	
+		}
+		
+        ///Удаление подключения.		
+		private void BtnDelClick(object sender, EventArgs e)
+		{
+			 string ID = sys.DGSelected(dgvConnectionList, "ID");
+			 string SQL = "DELETE FROM arhConList WHERE ID = " + ID;	
+			 sys.conLite.Exec(SQL);
+             ConnectionListRefresh();     			 
+		}
+		
+		///Пример значений полей ввода для подключения.
+		private void BtnExampleClick(object sender, EventArgs e)
+		{		    		    		   
+			const string example =
+			    "Connection Name:" + "\t\t" + "Current"      + sys.CR +
+			    "Server Name or IP: " + "\t\t" + "10.77.177.10" + sys.CR +			 
+			    "Database Name:  " + "\t\t" + "dbtest"       + sys.CR +
+			    "Database Login: " + "\t\t" + "ivanov"       + sys.CR +
+			    "Database Pass:  " + "\t\t" + "935642"       + sys.CR +
+			    "User Form:      " + "\t\t" + "Form1"        + sys.CR +
+			    "User Login:     " + "\t\t" + "Иванов"       + sys.CR +
+			    "User Pass:      " + "\t\t" + "554774";
+			 sys.SM(example, "Information");
+		}
+ 
+		///При навигации по таблице списку подключений показываем значения параметров.
+		private void UpdateFormText()
+		{			  
+			string ID   = sys.DGSelected(dgvConnectionList,   "ID");
+			if (ID  == "") return;
+		    string SQL;
+		    string ConnectionName;
+			string ServerType;
+			string ServerName;
+			string DatabaseLogin;
+			string DatabasePass;
+			string DatabaseName;
+			string UserLogin;
+			string UserPass;
+			string UserForm;
+			string WindowsLogin;
+			SQL = "SELECT ConnectionName, ServerType, ServerName, DatabaseLogin, DatabasePass, " +
+				  "DatabaseName, UserLogin, UserPass, UserForm, WindowsLogin " + 
+				  "FROM arhConList WHERE ID = " + ID;
+			
+            sys.conLite.GetValue10(SQL, out ConnectionName,
+			                            out ServerType,
+			                            out ServerName, 
+			                            out DatabaseLogin,
+			                            out DatabasePass, 
+			                            out DatabaseName, 
+			                            out UserLogin,
+			                            out UserPass,
+			                            out UserForm,
+			                            out WindowsLogin);
+				
+			tbConnectionName.Text  = ConnectionName;
+			tbServerName.Text      = ServerName;			 
+			tbDatabaseName.Text    = DatabaseName;
+			tbDatabaseLogin.Text   = Crypto.DecryptAES(DatabaseLogin) + AddTextPass;
+			tbDatabasePass.Text    = Crypto.DecryptAES(DatabasePass) + AddTextPass;
+			tbUserForm.Text        = UserForm;	
+			tbUserLogin.Text       = UserLogin;	
+			tbUserPass.Text        = UserPass; //Crypto.DecryptAES(UserPass) + AddTextPass;
+			cbWindowsLogin.Checked = WindowsLogin.ToBool(); //Crypto.DecryptAES(UserPass) + AddTextPass;.Text       = UserPass; //Crypto.DecryptAES(UserPass) + AddTextPass;
+		    sys.CBSetStr(cbType, ServerType);
+		    EnableOrDisable();
+		}
+		
+		///При навигации по таблице списку подключений показываем значения параметров.
+		private void DgvConnectionListSelectionChanged(object sender, EventArgs e)
+		{
+			if (DoNotUpdateText == false) UpdateFormText();
+		}
+		
+		///Сохранение текущего подключения.
+		private void BtnSaveClick(object sender, EventArgs e)
+		{			
+			string ID = sys.DGSelected(dgvConnectionList, "ID");
+			if (ID == "") 
+			{
+				ConnectionAdd();
+				return;
+			}
+			if (sys.SM("Подключение будет перезаписано. Продолжить?", "Question", "Сохранение подключения") == false) return;
+						
+			string ConnectionName = tbConnectionName.Text;
+			string ServerType     = cbType.Text;
+			string ServerName     = tbServerName.Text;			 
+			string DatabaseName   = tbDatabaseName.Text;
+			string DatabaseLogin  = Crypto.EncryptAES(tbDatabaseLogin.Text.Replace(AddTextPass, ""));
+			string DatabasePass   = Crypto.EncryptAES(tbDatabasePass.Text.Replace(AddTextPass, ""));
+			string UserForm       = tbUserForm.Text;
+			string UserLogin      = tbUserLogin.Text;		
+			string UserPass       = sys.GetUserPassCrypt(tbUserLogin.Text, tbUserPass.Text);     						 		
+			string WindowsLogin   = cbWindowsLogin.Checked.ToInt().ToString();
+            string SQL = "UPDATE arhConList SET " +
+				  "ConnectionName = '" + ConnectionName + "'," +
+				  "ServerType     = '" + ServerType     + "'," +
+				  "ServerName     = '" + ServerName     + "'," +				   
+				  "DatabaseName   = '" + DatabaseName   + "'," +
+            	  "DatabaseLogin  = '" + DatabaseLogin  + "'," +
+            	  "DatabasePass   = '" + DatabasePass   + "'," +
+                  "UserForm       = '" + UserForm       + "'," +
+                  "UserLogin      = '" + UserLogin      + "'," +             	
+            	  "UserPass       = '" + UserPass       + "',"  +
+                  "WindowsLogin   = '" + WindowsLogin   + "'"  +
+            	  " WHERE ID = " + ID;
+			sys.conLite.Exec(SQL);
+            ConnectionListRefresh();
+		}
+ 
+		///Выбор типа подключения из выпадающего списка.
+		private void CbTypeSelectedIndexChanged(object sender, EventArgs e)
+		{                   
+		    EnableOrDisable();
+		}
+		
+		///Доступные или недоступны компоненты.
+		private void EnableOrDisable()
+		{
+		    bool fenable = (cbType.SelectedIndex != 3);
+		    lbDatabaseName.Enabled  = fenable;
+            lbDatabaseLogin.Enabled = fenable;
+            lbDatabasePass.Enabled  = fenable;
+            lbUserLogin.Enabled     = !cbWindowsLogin.Checked;
+            lbUserPass.Enabled      = !cbWindowsLogin.Checked;
+            
+		    tbDatabaseName.Enabled  = fenable;
+            
+            tbDatabaseLogin.Enabled = fenable;
+            tbDatabasePass.Enabled  = fenable;               
+                      
+            tbUserLogin.Enabled     = !cbWindowsLogin.Checked;
+            tbUserPass.Enabled      = !cbWindowsLogin.Checked;                                                            
+            
+            if (!tbDatabaseName.Enabled)  
+            {
+                tbDatabaseName.Text          = ""; 
+                tbDatabaseName.BackColor     = System.Drawing.SystemColors.Control;
+            } else  tbDatabaseName.BackColor = System.Drawing.SystemColors.Info;
+            
+            if (!tbDatabaseLogin.Enabled)
+            {
+                tbDatabaseLogin.Text          = "";
+                tbDatabaseLogin.BackColor     = System.Drawing.SystemColors.Control;
+            } else  tbDatabaseLogin.BackColor = System.Drawing.SystemColors.Info;
+            
+            if (!tbDatabasePass.Enabled)
+            {
+                tbDatabasePass.Text          = "";
+                tbDatabasePass.BackColor     = System.Drawing.SystemColors.Control;
+            } else  tbDatabasePass.BackColor = System.Drawing.SystemColors.Info;
+            
+            if (!tbUserLogin.Enabled)
+            {              
+                tbUserLogin.Text          =  Environment.UserDomainName + @"\" + Environment.UserName;
+                tbUserLogin.BackColor     = System.Drawing.SystemColors.Control;
+            } else  tbUserLogin.BackColor = System.Drawing.SystemColors.Info;
+            
+            if (!tbUserPass.Enabled)
+            {              
+                tbUserPass.Text = "";
+                tbUserPass.BackColor     = System.Drawing.SystemColors.Control;
+            } else  tbUserPass.BackColor = System.Drawing.SystemColors.Info;
+		}
+		
+		///Галка - Windows авторизация.
+        private void cbWindowsLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableOrDisable();
+        }
+        
+        ///Закрытие формы по двойному клику на таблице подключений.
+        private void dgvConnectionList_DoubleClick(object sender, EventArgs e)
+        {
+            BtnOkClick(sender, e);                 
+        }
+	}
+}

@@ -1,0 +1,44 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 07.10.2017
+ * Время: 21:41
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{
+    ///Свойства параметра приложения.
+    public partial class FormParamValue : FormSim
+    {             
+        public string ParamName    = "";
+        public string ParamComment = ""; 
+        public string ParamValue   = "";        
+        
+        public FormParamValue(string ParamName, string ParamComment, string ParamValue)
+        {            
+            InitializeComponent();              
+            this.ParamName    = ParamName;
+            this.ParamComment = ParamComment;
+            this.ParamValue   = ParamValue;
+            
+            tbName.Text       = ParamName;
+            tbComment.Text    = ParamComment;
+            tbValue.Text      = ParamValue;                                
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;         
+        }
+        
+        ///Закрытие формы.
+        private void FormParamValueFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult != System.Windows.Forms.DialogResult.OK) return;        
+            ParamName    = tbName.Text;
+            ParamComment = tbComment.Text;
+            ParamValue   = tbValue.Text;         
+        }
+    }
+}

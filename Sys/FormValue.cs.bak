@@ -1,0 +1,110 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 30.09.2017
+ * Время: 23:13
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{
+    ///Универсальная форма для ввода одного значения.
+    public partial class FormValue : Form
+    {
+        public string Format;
+        
+        public FormValue(string CapForm, string CapText, string Format, string ValueText = "")
+        {            
+            InitializeComponent();          
+            this.Format = Format;
+            if (CapForm   != "") Text        = CapForm;
+            if (CapText   != "") lbCap.Text  = CapText;
+            if (ValueText != "") tbText.Text = ValueText;
+            if (Format == "TEXT1")
+            {
+                tbText.VerticalScroll.Visible = false;
+                //ScrollBars = ScrollBars.None;
+                Height = 146;
+                lbCount.Visible    = false;
+                cbWordWrap.Visible = false;
+                tbText.WordWrap    = false;                 
+            }
+            if (Format == "TEXT2")
+            {
+                //tbText.ScrollBars = ScrollBars.Vertical;  
+                tbText.VerticalScroll.Visible = true;
+                Height = 255;
+                lbCount.Visible    = true;
+                cbWordWrap.Visible = true;
+                tbText.WordWrap    = false;  
+            }
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;            
+        }
+                      
+        private void FormValue_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Format.ToUpper() != "INT") return;
+            int num;
+            if (!int.TryParse(tbText.Text , out num)) 
+            {
+                sys.SM("Требуется ввести число!");
+                e.Cancel = true;
+            }                        
+        }
+        
+        private void cbWordWrap_CheckedChanged(object sender, EventArgs e)
+        {
+            tbText.WordWrap = cbWordWrap.Checked;
+        }
+        
+        private void tbText_TextChanged(object sender, EventArgs e)
+        {
+            lbCount.Text = "Rows count: " + tbText.Lines.Count.ToString();
+        }
+                       
+        /*
+        private void AddTextLine(int LineCount, string LableText, string Valuetext)
+        {              
+            System.Windows.Forms.Panel   pnlValue;
+            FBA.LabelFBA   lbCap;
+            System.Windows.Forms.TextBox tbText;                      
+            // 
+            // lbCap
+            // 
+            this.lbCap = new FBA.LabelFBA();
+            this.lbCap.AutoSize = true;
+            this.lbCap.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lbCap.Font = sys.font1;
+            //this.lbCap.Location = new System.Drawing.Point(0, 0);
+            this.lbCap.Name = "lbCap";
+            //this.lbCap.Size = new System.Drawing.Size(117, 18);
+            //this.lbCap.TabIndex = 0;
+            this.lbCap.Text = "lbCap";
+            // 
+            // tbText
+            //
+            this.tbText = new System.Windows.Forms.TextBox(); 
+            this.tbText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbText.Font = sys.font1;
+            //this.tbText.Location = new System.Drawing.Point(117, 0);
+            //this.tbText.Margin = new System.Windows.Forms.Padding(3, 3, 10, 10);
+            this.tbText.Name = "tbText";
+            //this.tbText.Size = new System.Drawing.Size(346, 24);
+            //this.tbText.TabIndex = 7;
+            // 
+            // pnlValue
+            //
+            this.pnlValuegdf.Controls.Add(this.tbText);
+            this.pnlValuegdf.Controls.Add(this.lbCap);
+            this.pnlValuegdf.Dock = System.Windows.Forms.DockStyle.Top;
+            //this.pnlValue.Location = new System.Drawing.Point(0, 0);
+            this.pnlValuegdf.Name = "pnlValue";
+            //this.pnlValue.Size = new System.Drawing.Size(463, 31);
+            //this.pnlValue.TabIndex = 6;
+        }*/                   
+    }
+}

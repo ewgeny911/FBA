@@ -1,0 +1,224 @@
+USE [DIASOFT_test]
+GO
+/****** Object:  StoredProcedure [dbo].[EOD_GetTables]    Script Date: 26.10.2015 20:08:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Травин Е.В.
+-- Create date: 30.12.2014
+-- Description:	Получениие таблиц для составного атрибута
+/* 
+
+  DECLARE @ParseStr varchar(max)
+  SET @ParseStr =  
+  'Select ОрганизационноПравовойСтатус.Сокр FROM ЮЛ Where ИДОбъекта = 456456 ' 
+  exec [dbo].[EOD_GetAnaliz] @ParseStr, ''
+
+  DECLARE @ParseStr varchar(max)
+  --SET @ParseStr = 
+  --'Выбрать Top 1 ИДОбъекта '' sdfsdf'' -- 
+  --''-- ИДОбъекта '' -- aaaa   
+  --Из ДогСтрах'
+
+  
+
+  exec [dbo].[EOD_GetAnaliz] @ParseStr, ''
+
+  
+  DECLARE @ParseStr varchar(max) 
+  SET @ParseStr =  'select FL.ИДСущностиОбъекта FROM ФЛ FL WHERE Фамилия = ''Иванов''' 
+  EXEC [dbo].[EOD_GetAnaliz] @ParseStr, ''
+  
+  DECLARE @ParseStr varchar(max)
+  SET @ParseStr =  'select СокрСущностиОбъекта FROM ФЛ WHERE Фамилия = ''Иванов''' 
+  EXEC [dbo].[EOD_GetAnaliz] @ParseStr, ''
+
+
+
+
+  DECLARE @ParseStr varchar(max)
+  SET @ParseStr =  'CASE WHEN ПсевдонимСущности.ОрганизационноПравовойСтатус is NULL THEN ПсевдонимСущности.НаФа ELSE ПсевдонимСущности.ОрганизационноПравовойСтатус.Сокр + '' '' + ПсевдонимСущности.НаФа END'
+  exec [dbo].[EOD_GetAnaliz] @ParseStr, ''
+
+
+  DECLARE @ParseStr varchar(max)
+  SET @ParseStr =  'CASE ' +
+ 'WHEN ПсевдонимСущности.НаимСущностиОбъекта = ''Физическое лицо'' THEN ' +
+ ' (SELECT FL.ПолноеНаим_SQL FROM ФЛ FL WHERE FL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'ELSE ' +
+ ' (SELECT UL.СокращенноеНаим_SQL FROM ЮЛ UL WHERE UL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'END '
+  exec [dbo].[EOD_GetAnaliz] @ParseStr, 'ФЛ'
+  
+  DECLARE @ParseStr varchar(max)
+  SET @ParseStr =  'select НаимSQL, EMail FROM ФЛ WHERE ФИОПолные = ''Иванов''' 
+  EXEC [dbo].[EOD_GetAnaliz] @ParseStr, ''
+
+*/
+---==============================================
+
+ALTER PROCEDURE [dbo].[EOD_GetAnaliz] (@ParseStr varchar(max), @EntityAlias varchar(max)) 
+AS
+  --drop table #Tables
+  CREATE TABLE #Lex (
+             SQLLevel int, 
+             AliasForAttr varchar(100),
+             EntityBriefCalc  varchar(max), 
+             ID int,                    --Порядковый номер лексемы.
+             Lex varchar(max),          --Лексема.
+						 PrevLex varchar(max),      --Предыдущая лексема.
+						 NextLex varchar(max),      --Следующая лексема.
+						 QuoteStr varchar(max),     --Строка в запросе.
+						 BracketOpen int,           --Если это открывающая скобка, то здесь номер строки.
+						 BracketClose int,          --Это номер закрывающей скобки для открывающей. Проставляется рядом с открывающими скобками.
+						 BracketLevel int,          --Номер пары скобок. Это не уровень вложенности, а порядковый номер обхода пары скобок.
+						 LexID int,                 --ИД лексемы. 
+						 PrevLexID int,             --Предыдущий ИД лексемы.
+						 NextLexID int,             --Следующий ИД лексемы.
+						 LexType int,               --Тип лексемы. 
+						 PrevLexType int,           --Предыдущий тип лексемы в строке.
+						 NextLexType int,           --Следужщий тип лексемы в строке.
+						 QueryClose int,            --Номер строки где кончается подзапрос.
+						 QueryLevel int,            --Уровень подзапроса.
+             BlockClose int,            --Номер строки, где заканчивается блок.
+						 Block varchar(10),		      --Имя блока SELECT, FROM, WHERE и т.д.				 
+						 Alias int,                 --Признак что это Алиас. 1 = Алиас сущности, 2 - Алиас атрибута, 3 - Алиас выращенияю
+						 AliasBrief varchar(100),   --Показывает какая сущность скрывается за псевдонимом. Например SELECT ДС.Номер FROM ДогСтрах ДС WHERE...						 
+						 Entity int,                --Признак 1 - сущность, NULL - не сущность.
+						 EntityBrief varchar(100),  --Сокращение сущности первого атрибута.
+						 Attr int,                  --Признак 1 - атрибут, NULL - не атрибут.
+						 LinkTo 	varchar(100),     --Имя таблицы для первого атрибута.
+						 TableType int,             --Тип таблицы основная или историчная.
+						 TableFieldID varchar(100), --Поле ID таблицы сущности для всех первых атрибутов (и сущностей в блоке FROM) в запросе.
+						 EntityID int,              --ИД Сущности из котрого берется первый атрибут (из составного) FirstAttr.
+						 FirstAttr varchar(100),    --Это первый атрибут в составном атрибуте (алиас не в счет)
+						 AttrBrief varchar(100)     --Это полное наименование составного атрибута со всеми входящими в него точками, но без алиаса.						 			 	
+						 ) 
+
+  CREATE TABLE #Tables (
+             SQLLevel int,	
+             EntityBriefCalc  varchar(max),  
+	           Num int,
+             ID int, 
+             EntityID int, 
+             JoinText varchar(500),  
+	           AttrBrief varchar(100),
+             AttrBriefOne varchar(100),
+	           LinkTo   varchar(100),
+             TableName   varchar(100),
+             AttrCode varchar(max),
+             AttrTypeID int,	
+             TableType int,
+	           TableFieldID varchar(100), 
+             FieldAttr varchar(100), 
+             Field1 varchar(100),        --Поле куда указывает ссылка
+             Field2 varchar(100),        --Поле второе, которое используется в универсальных ссылках.
+	           QueryLevel int,             --Уровень подзапроса.
+             TableAlias varchar(100),
+             Attr int,
+             Entity int
+	           )
+ 
+  select top 0 * into #Words from #Lex 
+  --select top 0 * into #Tables0 from #Tables 
+  --drop table #Words
+  --drop table #Lex
+  --drop table #Tables
+  --DECLARE @ParseStr varchar(max)
+  --SET @ParseStr =  'select НаимSQL FROM ФЛ WHERE ИДОБъекта = 23345' 
+  
+ /* SET @ParseStr =  'CASE ' +
+ 'WHEN ПсевдонимСущности.НаимСущностиОбъекта = ''Физическое лицо'' THEN ' +
+ ' (SELECT FL.ПолноеНаим_SQL FROM ФЛ FL WHERE FL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'ELSE ' +
+ ' (SELECT UL.СокращенноеНаим_SQL FROM ЮЛ UL WHERE UL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'END '
+ */
+
+
+  DECLARE @SQLLevel int
+  --DECLARE @EntityAlias varchar(max) 
+  --SET @EntityAlias = ''
+  SET @SQLLevel = 1
+  EXEC [dbo].[EOD_GetLex] @SQLLevel, @EntityAlias, @ParseStr
+ 
+
+  --select * into dbo.A_TempLex from #Lex
+  select * from #Lex   
+  select * from #Tables
+  return
+
+ 
+ --SELECT ROW_NUMBER () OVER (ORDER BY ID) as iNum, 
+  --       SQLLevel, ID, EntityID, AttrBrief, EntityBrief, 
+  --       LinkTo, TableFieldID, QueryLevel, EntityBriefCalc, Attr, Entity 
+  --   FROM dbo.A_TempLex  WHERE Attr = 1 OR Entity = 1
+
+
+  --Цикл по вычисляемым атрибутам1.  
+  /*DECLARE @AttrCode varchar(max)
+  DECLARE ListResult CURSOR FOR SELECT AttrCode FROM #Tables WHERE SQLLevel = 1 AND AttrTypeID = 1 --1-Вычисляемый атрибут.
+  SET @SQLLevel = 2
+  OPEN ListResult 
+  FETCH FROM ListResult INTO @AttrCode
+  WHILE @@Fetch_Status = 0
+  BEGIN
+    EXEC [dbo].[EOD_GetLex] @SQLLevel, @EntityAlias, @AttrCode 
+    FETCH FROM ListResult INTO @AttrCode
+  END
+  CLOSE ListResult
+  DEALLOCATE ListResult
+  */
+  
+  --return
+  --select * from #Lex 
+  --select * from #Tables
+  --SELECT AttrCode FROM #Tables WHERE SQLLevel = 2 AND AttrTypeID = 1
+
+  --Цикл по вычисляемым атрибутам2. 
+  /* DECLARE ListResult CURSOR FOR SELECT AttrCode FROM #Tables WHERE SQLLevel = 2 AND AttrTypeID = 1 --1-Вычисляемый атрибут.
+  SET @SQLLevel = 3
+  OPEN ListResult 
+  FETCH FROM ListResult INTO @AttrCode
+  WHILE @@Fetch_Status = 0
+  BEGIN
+    EXEC [dbo].[EOD_GetLex] @SQLLevel, @EntityAlias, @AttrCode 
+    FETCH FROM ListResult INTO @AttrCode
+  END
+  CLOSE ListResult
+  DEALLOCATE ListResult
+
+  update #Tables set TableAlias = 'EOT_' + CAST(t1.Num as varchar(100)) + CAST(t1.ID as varchar(100)) FROM
+  (select t2.TableName, t2.QueryLevel, Max(t2.ID) as ID, Max(t2.Num) as Num from #Tables t2 group by t2.TableName, t2.QueryLevel) t1
+  WHERE #Tables.TableName = t1.TableName AND #Tables.QueryLevel = t1.QueryLevel
+  */
+
+  --UPDATE #Lex set AliasForAttr = TableAlias 
+  --  FROM #Tables WHERE #Lex.QueryLevel = #Tables.QueryLevel AND 
+
+  --drop table dbo.A_testTables
+  --select * into dbo.A_testTables from #Tables
+  select * from #Lex 
+  select * from #Tables 
+  
+
+  --select TableName, QueryLevel, Max(ID) as ID, Max(Num) as Num from dbo.A_testTables group by TableName, QueryLevel
+  
+
+  --select * from dbo.A_testTables
+  
+
+ --update #Tables set TableAlias = 'EOT
+ --select * from mtEntity 
+
+
+--SELECT at.AttrBrief, at.EntityBrief from mtEntity en 
+       --LEFT JOIN mtAttr at ON en.EnBrief1 = at.EntityBrief
+       --WHERE en.EnBrief2 = 'ФЛ'
+
+
+       --select * from mtEntity order by EnBrief2
+       

@@ -1,0 +1,192 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 07.10.2017
+ * Время: 16:21
+ */
+ 
+using System;    
+using System.Windows.Forms;
+namespace FBA
+{   
+    ///Форма для работы с параметрами приложения.
+    public partial class FormParam : FormSim
+    {              
+        string OldFilter   = "";
+        string Filter      = "";       
+        string FilterName  = "";
+        string FilterValue = "";
+        
+        ///Конструктор.
+        public FormParam()
+        {              
+            InitializeComponent();                       
+            this.MdiParent = sys.FormMainObj;
+            this.Icon = this.MdiParent.Icon;
+            RefreshUser();
+        }
+        
+        ///Обновить таблицу пользователей.
+        private bool RefreshUser()
+        {
+            const string SQL = "SELECT 0 AS ID, 'Global' AS Login UNION ALL SELECT ID, Login FROM arhUser ORDER BY Login";
+            if (!sys.SelectGV("Remote", SQL, dgvUser)) return false;    
+            return true;   
+        }
+        
+        ///Обновить таблицу параметров текущего пользователя.
+        private bool RefreshParam(string UserID)
+        {           
+            string SQL = "";
+            if (UserID == "") return false;
+            if (UserID == "0")
+                SQL = "SELECT t1.ID, t1.Global, t1.Name, t1.Comment, SUBSTR(t1.Value, 1, 50) AS Value, t1.DateCreate, t2.Login AS UserCreate, t1.DateChange, t3.Login AS UserChange " +                       
+                      "FROM arhParam t1 " +
+                      "LEFT JOIN arhUser t2 ON t1.UserID = t2.ID " +
+                      "LEFT JOIN arhUser t3 ON t1.UserID = t3.ID " +
+                      "WHERE t1.Global = 1 " + this.Filter + " ORDER BY t1.Name";
+            else
+                SQL = "SELECT t1.ID, t1.Global, t1.Name, t1.Comment, SUBSTR(t1.Value, 1, 50) AS Value, t1.DateCreate, t2.Login AS UserCreate " +                       
+                      "FROM arhParam t1 " +
+                      "LEFT JOIN arhUser t2 ON t1.UserID = t2.ID " +                                                             
+                      "WHERE t1.UserID = " + UserID + " " + this.Filter + " ORDER BY t1.Name";
+            if (!sys.SelectGV("Remote", SQL, dgvParam)) return false;
+            return true;                
+        }
+    
+        ///Добавить параметр пользователя.
+        private bool ParamAdd (string UserID)
+        {                                       
+            if (UserID == "") return false;                   
+            string ParamName    = "";
+            string ParamComment = "";
+            string ParamValue   = ""; 
+            var frm = new FormParamValue(ParamName, ParamComment, ParamValue);           
+            if (frm.ShowDialog() != DialogResult.OK) return false;                                                                  
+            ParamName    = frm.ParamName;
+            ParamComment = frm.ParamComment;
+            ParamValue   = frm.ParamValue; 
+            string SQL = "";
+            if (UserID == "0")
+                SQL = "INSERT INTO arhParam (EntityID, Global, Type, Name, Comment, Value, DateCreate, UserID) " +
+                "VALUES (235, 1, 'User','" + ParamName + "','" + ParamComment + "','" + ParamValue + "'," + sys.DateTimeCurrent() + "," + sys.UserID + ")";
+            else
+                SQL = "INSERT INTO arhParam (EntityID, Global, Type, Name, Comment, Value, UserID, DateCreate, UserID) " +
+                "VALUES (235, 0, 'User','" + ParamName + "','" + ParamComment + "','" + ParamValue + "'," + UserID + "," + sys.DateTimeCurrent() + "," + sys.UserID + ")";
+                
+            if (!sys.Exec("Remote", SQL)) return false;
+            RefreshParam(UserID);
+            return true;
+        }
+        
+        ///Редактировать параметр текущего пользователя.
+        private bool ParamEdit (string UserID, string ParamID)
+        {
+            if (UserID  == "") return false;
+            if (ParamID == "") return false;
+            string ParamGlobal  = "";            
+            string ParamName    = "";
+            string ParamComment = "";
+            string ParamValue   = "";
+            string SQL = "SELECT ID, Name, Comment, Value FROM arhParam WHERE ID = " + ParamID;
+            if (!sys.GetValue4("Remote", SQL, out ParamGlobal, out ParamName, out ParamComment, out ParamValue)) return false;                                
+            var frm = new FormParamValue(ParamName, ParamComment, ParamValue);           
+            if (frm.ShowDialog() != DialogResult.OK) return false;                                                                      
+            ParamName    = frm.ParamName;
+            ParamComment = frm.ParamComment;
+            ParamValue   = frm.ParamValue;               
+            SQL = "UPDATE arhParam SET " +                              
+                  " Name    = '" + ParamName    + "'" +
+                  ",Comment = '" + ParamComment + "'" +
+                  ",Value   = '" + ParamValue   + "'" +
+                  ",DateChange   = " + sys.DateTimeCurrent() +
+                  ",UserChangeID = " + sys.UserID +  
+                  " WHERE ID = " + ParamID;
+            if (!sys.Exec("Remote", SQL)) return false;           
+            RefreshParam(UserID);
+            return true;         
+        }
+        
+        ///Удалить параметр текущего пользователя.
+        private bool ParamDel (string UserID, string ParamID)
+        {
+            if (UserID  == "") return false;
+            if (ParamID == "") return false;
+            string SQL = "DELETE FROM arhParam WHERE ID = " + ParamID;
+            if (!sys.Exec("Remote", SQL)) return false;
+            RefreshParam(UserID);
+            return true;             
+        }
+        
+        ///Поиск параметра.
+        private bool ParamFind (string UserID)
+        {            
+            if (!sys.InputValue2("Search parameter", "Parameter name:", "Parameter value:", ref FilterName, ref FilterValue)) return false;
+            if ((FilterName  == "") && (FilterValue == "")) return true;               
+            Filter = "";
+            cbParamFilter.Checked = true;
+            if (FilterName  != "") Filter = Filter + " AND t1.Name  LIKE '%" + FilterName  + "%' ";
+            if (FilterValue != "") Filter = Filter + " AND t1.Value LIKE '%" + FilterValue + "%' ";       
+            RefreshParam(UserID);
+            return true;
+        }       
+        
+        ///Контекстное меню таблицы параметров.
+        private void tbParamN1_Click(object sender, EventArgs e)
+        {
+            string SenderName = sys.GetSenderName(sender);
+            string UserID     = sys.DGSelected(dgvUser,  "ID"); 
+            string ParamID    = sys.DGSelected(dgvParam, "ID"); 
+            
+            //Add.
+            if (SenderName == "tbParamN1") ParamAdd(UserID);
+                      
+            //Edit.
+            if (SenderName == "tbParamN2") ParamEdit(UserID, ParamID);
+                                     
+            //Del.
+            if (SenderName == "tbParamN3") ParamDel(UserID, ParamID);
+                                                 
+            //Find.
+            if (SenderName == "tbParamN4")  ParamFind (UserID);
+            //Refresh - обновить список параметров.
+            if (SenderName == "tbParamN5")  RefreshParam(UserID);
+            
+            //DoubleClick на dgvUser - обновить список параметров.
+            if (SenderName == "dgvUser") RefreshParam(UserID); 
+            
+            //Refresh UserList - обновить список пользователей.
+            if (SenderName == "tbUserN1") RefreshUser();           
+        }
+        
+        ///Галка применить фильтр. 
+        private void cbParamFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            string UserID   = sys.DGSelected(dgvUser,  "ID"); 
+            if (UserID == "") return;
+            if (cbParamFilter.Checked)
+            {
+                if (Filter != OldFilter)
+                {
+                    Filter = OldFilter;
+                    RefreshParam(UserID);
+                }
+            } else
+            {
+                OldFilter = Filter;
+                Filter = "";
+                RefreshParam(UserID);
+            }
+                   
+        }
+        
+        ///При изменении пользователя в списке пользователей.
+        private void dgvUser_SelectionChanged(object sender, EventArgs e)
+        {
+            string UserID     = sys.DGSelected(dgvUser,  "ID");
+            RefreshParam(UserID);
+        }                                                  
+    }
+}
+             

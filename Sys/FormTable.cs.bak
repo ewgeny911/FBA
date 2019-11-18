@@ -1,0 +1,158 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 17.12.2017
+ * Время: 3:01
+ */
+ 
+using System;
+using System.Windows.Forms;
+namespace FBA
+{              
+    ///Редактирование списка таблиц сущности.
+    public partial class FormTable : FormObj
+    {
+        public int StatusClose    = 0;
+        private string TableEntityID;
+        private string Operation;
+        private string ObjID;
+        private string ObjBrief;
+        private string ObjName;   
+        private FBA.ObjectRef Obj;   
+        
+        public FormTable(string Operation, string ObjID, string ObjBrief, string ObjName, string TableEntityID)
+        {             
+            InitializeComponent();                           
+            this.TableEntityID = TableEntityID; 
+            tbTableEntityID.Text = TableEntityID;
+            this.Operation = Operation; 
+            if (Operation == "Add") ObjID = "0";             
+            this.ObjID     = ObjID;
+            this.ObjBrief  = ObjBrief;
+            this.ObjName   = ObjName;                                                                                            
+            if (Operation == "Del") SetShowOnly();             
+            SetTextButtonOk(Operation, btnOk);                      
+          
+        }       
+        
+        ///Заполнение свойств компонентов значениями.
+        private void FillData()
+        {                     
+            Obj = new FBA.ObjectRef();            
+            Obj.SetQueryTable(this, "Main1", "arhTable", ObjID, "TableID", "", "Remote");     
+            Obj.Read();   
+            if (tbTypeInt.Text != "")
+                 tbTypeStr.SelectedIndex = tbTypeInt.Text.ToInt() - 1;
+            else tbTypeStr.Text = "";
+        }
+        
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            StatusClose = 2;
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+        
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (tbTypeStr.Text != "") tbTypeInt.Text = (tbTypeStr.SelectedIndex + 1).ToString();
+                                     
+            bool Result = false;
+            if (Operation == "Del")      Result = OperationDelete();
+            if (Operation == "Add")      Result = Obj.Write();           
+            if (Operation == "Edit")     Result = Obj.Write();
+            if (Result)
+            {
+                DialogResult = DialogResult.OK;
+                StatusClose = 1;
+            } else           
+            {
+                DialogResult = DialogResult.Cancel;
+                StatusClose = 2;            
+            }
+            Close();
+        }
+        ///Проверка возможности удаления таблицы из БД.
+        private bool CheckDeleteTable()
+        {                           
+            //Проверка на атрибутам.
+            string SQL = "SELECT Count(*) AS cnt FROM arhAttr WHERE TableID = " + ObjID;           
+            string AttrCount = sys.GetValue("Remote", SQL);
+            if (AttrCount != "0") 
+            {
+                sys.SM("Ошибка. У таблицы есть атрибуты. Удаление невозможно.");
+                return false;
+            }
+            if (sys.con.ServerType != "MSSQL") return true;
+            
+            //Проверка по таблицам в базе.
+            var DT = new System.Data.DataTable();               
+            string TableName = tbName.Text;                               
+            string QueryTextStr = string.Join(sys.CR, this.QueryText);
+            SQL = sys.GetSection(QueryTextStr, "AttrDelete");
+            SQL = SQL.Replace("TableNameAtt",  TableName);            
+            sys.SelectDT("Remote", SQL, out DT);
+            if (DT.Rows.Count != 0) 
+            {
+                sys.SM("Ошибка. На данную таблицу есть внешние ключи из других таблиц. Удаление невозможно.");
+                sys.DTView(DT, "Список таблиц и полей, которые ссылаются на данную таблицу",  "Cсылающиеся таблицы и поля");
+                return false;
+            }
+            return true;
+        }
+               
+        ///Удаление таблицы.
+        private bool OperationDelete()
+        {
+            if (!sys.SM("Вы хотите действительно удалить таблицу?", "Question", "Удаление таблицу")) return false;            
+            if (!CheckDeleteTable()) return false;   
+            return Obj.DeleteObj("Main1");         
+        }
+                        
+        ///Получить список таблиц для выбора.
+        private bool GetTableList()
+        {
+            string SQL = "";
+            
+            if (sys.con.ServerType == "SQLite")
+                SQL = "SELECT Name FROM sqlite_master WHERE type = 'table' AND Name NOT IN (SELECT Name FROM arhTable) ORDER BY Name";
+                       
+            if (sys.con.ServerType == "MSSQL") 
+                SQL = "SELECT Table_Name AS Name FROM information_schema.tables WHERE Name NOT IN (SELECT Name FROM arhTable) ORDER BY Table_Name ";
+            
+            var DT = new System.Data.DataTable();
+            if (!sys.SelectDT("Remote", SQL, out DT)) return false; 
+            string TempStr = tbName.Text;    
+            sys.CBSetDataSourse(tbName, DT);
+            tbName.Text = TempStr;
+            tbIDFieldName.Text = "";
+            return true;           
+        }
+        
+        //Список полей таблицы.
+        private void FieldsForTable()
+        {
+            System.Data.DataTable DT;
+            sys.GetTableFields(tbName.Text, out DT);
+            string TempStr = tbIDFieldName.Text;         
+            sys.CBSetDataSourse(tbIDFieldName, DT);
+            tbIDFieldName.Text = TempStr;
+        }
+        
+        //Список полей таблицы.
+        private void tbName_Leave(object sender, EventArgs e)
+        {
+            FieldsForTable();
+        }
+        
+        ///Интересно, если повесить FillData на конструктор, то текст (свойство текст) в 
+        ///комбобоксах переписывается почему-то.. а на Shown нет.
+        private void FormTable_Shown(object sender, EventArgs e)
+        {
+            FillData(); 
+            GetTableList();
+            FieldsForTable();
+        }        
+    }
+}

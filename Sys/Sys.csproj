@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <GenerateResourceNeverLockTypeAssemblies>true</GenerateResourceNeverLockTypeAssemblies>
+    <ProjectGuid>{C86D7050-06D8-40DD-9E65-9E5A8A341F7F}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FBA</RootNamespace>
+    <AssemblyName>sys</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkProfile />
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>..\Obj\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Bin\sys.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\Bin\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>..\Obj\</BaseIntermediateOutputPath>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\DotNetZip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>bin\Debug\Bin\FastColoredTextBox.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>bin\Debug\Bin\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel" />
+    <Reference Include="Microsoft.Office.Interop.Word" />
+    <Reference Include="Npgsql">
+      <HintPath>bin\Debug\Bin\Npgsql.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\NPOI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\NPOI.OOXML.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ParserDLL">
+      <HintPath>bin\Debug\Bin\ParserDLL.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SourceGrid, Version=4.40.6368.30434, Culture=neutral, PublicKeyToken=df6f5e538749e85d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bin\SourceGrid.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>bin\Debug\Bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Runtime.Serialization.Json" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\FormValue.cs" />
+    <Compile Include="Forms\FormValue.Designer.cs">
+      <DependentUpon>FormValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sysArray.cs" />
+    <Compile Include="Forms\FormError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormError.Designer.cs">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormImport.Designer.cs">
+      <DependentUpon>FormImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMethod.cs" />
+    <Compile Include="Forms\FormMethod.Designer.cs">
+      <DependentUpon>FormMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReport.Designer.cs">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAttr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAttr.Designer.cs">
+      <DependentUpon>FormAttr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConList.Designer.cs">
+      <DependentUpon>FormConList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDDL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDDL.Designer.cs">
+      <DependentUpon>FormDDL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDirectory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDirectory.Designer.cs">
+      <DependentUpon>FormDirectory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEnter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEnter.Designer.cs">
+      <DependentUpon>FormEnter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEntity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEntity.Designer.cs">
+      <DependentUpon>FormEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormFilter.Designer.cs">
+      <DependentUpon>FormFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormFilterAttr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormFilterAttr.Designer.cs">
+      <DependentUpon>FormFilterAttr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGetAttr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGetAttr.Designer.cs">
+      <DependentUpon>FormGetAttr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGetEntity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGetEntity.Designer.cs">
+      <DependentUpon>FormGetEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGrant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGrant.Designer.cs">
+      <DependentUpon>FormGrant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormImage.Designer.cs">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormModel.Designer.cs">
+      <DependentUpon>FormModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormNewProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNewProject.Designer.cs">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormParam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormParam.Designer.cs">
+      <DependentUpon>FormParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormParamValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormParamValue.Designer.cs">
+      <DependentUpon>FormParamValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormProgress.Designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormReg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReg.Designer.cs">
+      <DependentUpon>FormReg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormReportProperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormReportProperty.Designer.cs">
+      <DependentUpon>FormReportProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRight.Designer.cs">
+      <DependentUpon>FormRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRole.Designer.cs">
+      <DependentUpon>FormRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearch.Designer.cs">
+      <DependentUpon>FormSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormService.Designer.cs">
+      <DependentUpon>FormService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSM.Designer.cs">
+      <DependentUpon>FormSM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSQL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSQL.Designer.cs">
+      <DependentUpon>FormSQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormStatus.Designer.cs">
+      <DependentUpon>FormStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTable.Designer.cs">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormText.Designer.cs">
+      <DependentUpon>FormText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUniEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUniEdit.Designer.cs">
+      <DependentUpon>FormUniEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUpdate.Designer.cs">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUser.Designer.cs">
+      <DependentUpon>FormUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormValueList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormValueList.Designer.cs">
+      <DependentUpon>FormValueList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormViewEntity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormViewEntity.Designer.cs">
+      <DependentUpon>FormViewEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormViewTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormViewTable.Designer.cs">
+      <DependentUpon>FormViewTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysEnter.cs" />
+    <Compile Include="SysHelp.cs" />
+    <Compile Include="SysCompComboStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SysCompComboStatus.Designer.cs">
+      <DependentUpon>SysCompComboStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysCompAttrTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SysCompAttrTree.Designer.cs">
+      <DependentUpon>SysCompAttrTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resource.Designer.cs">
+      <DependentUpon>Resource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SysStatic.cs" />
+    <Compile Include="SysComp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SysCompEntityTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SysCompEntityTree.Designer.cs">
+      <DependentUpon>SysCompEntityTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysData.cs" />
+    <Compile Include="SysExchange.cs" />
+    <Compile Include="SysImage.cs" />
+    <Compile Include="SysImport.cs" />
+    <Compile Include="SysLink.cs" />
+    <Compile Include="SysModel.cs" />
+    <Compile Include="SysNumber.cs" />
+    <Compile Include="SysCompObjAdd.cs" />
+    <Compile Include="SysCompObjAdd.Designer.cs">
+      <DependentUpon>SysCompObjAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysParam.cs" />
+    <Compile Include="SysObjectRef.cs" />
+    <Compile Include="SysReportXLSX.cs" />
+    <Compile Include="SysServer.cs" />
+    <Compile Include="SysConnect.cs" />
+    <Compile Include="SysCrypto.cs" />
+    <Compile Include="SysMoney.cs" />
+    <Compile Include="SysTODO.cs" />
+    <Compile Include="SysUpdate.cs" />
+    <Compile Include="SysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysText.cs" />
+    <Compile Include="SysFile.cs" />
+    <Compile Include="SysDateTime.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SysCommon.cs" />
+    <Compile Include="SysWinAPI.cs" />
+    <Compile Include="SysCompEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SysCompEdit.Designer.cs">
+      <DependentUpon>SysCompEdit.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAttr.resx">
+      <DependentUpon>FormAttr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConList.resx">
+      <DependentUpon>FormConList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDDL.resx">
+      <DependentUpon>FormDDL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDirectory.resx">
+      <DependentUpon>FormDirectory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEnter.resx">
+      <DependentUpon>FormEnter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEntity.resx">
+      <DependentUpon>FormEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormError.resx">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormFilter.resx">
+      <DependentUpon>FormFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormFilterAttr.resx">
+      <DependentUpon>FormFilterAttr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGetAttr.resx">
+      <DependentUpon>FormGetAttr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGetEntity.resx">
+      <DependentUpon>FormGetEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGrant.resx">
+      <DependentUpon>FormGrant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImage.resx">
+      <DependentUpon>FormImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImport.resx">
+      <DependentUpon>FormImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMethod.resx">
+      <DependentUpon>FormMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormValue.resx">
+      <DependentUpon>FormValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormModel.resx">
+      <DependentUpon>FormModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNewProject.resx">
+      <DependentUpon>FormNewProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormParam.resx">
+      <DependentUpon>FormParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormParamValue.resx">
+      <DependentUpon>FormParamValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReg.resx">
+      <DependentUpon>FormReg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReport.resx">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormReportProperty.resx">
+      <DependentUpon>FormReportProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRight.resx">
+      <DependentUpon>FormRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRole.resx">
+      <DependentUpon>FormRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearch.resx">
+      <DependentUpon>FormSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormService.resx">
+      <DependentUpon>FormService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSM.resx">
+      <DependentUpon>FormSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSQL.resx">
+      <DependentUpon>FormSQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormStatus.resx">
+      <DependentUpon>FormStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTable.resx">
+      <DependentUpon>FormTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormText.resx">
+      <DependentUpon>FormText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUniEdit.resx">
+      <DependentUpon>FormUniEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpdate.resx">
+      <DependentUpon>FormUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUser.resx">
+      <DependentUpon>FormUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormValueList.resx">
+      <DependentUpon>FormValueList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormViewEntity.resx">
+      <DependentUpon>FormViewEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormViewTable.resx">
+      <DependentUpon>FormViewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysCompComboStatus.resx">
+      <DependentUpon>SysCompComboStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysCompAttrTree.resx">
+      <DependentUpon>SysCompAttrTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysCompEntityTree.resx">
+      <DependentUpon>SysCompEntityTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysCompEdit.resx">
+      <DependentUpon>SysCompEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysCompObjAdd.resx">
+      <DependentUpon>SysCompObjAdd.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

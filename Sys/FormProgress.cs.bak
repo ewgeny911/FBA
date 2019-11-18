@@ -1,0 +1,74 @@
+
+﻿/*
+ * Сделано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 01.05.2017
+ * Время: 22:50
+*/
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{   
+	public partial class FormProgress : FormObj
+	{
+		public bool PressCancel;
+		   
+		public FormProgress()
+		{			
+			InitializeComponent();
+            this.MdiParent = sys.FormMainObj;			
+		}
+		
+		//Конструктор.
+		public FormProgress(string Caption, string Label, int Max)
+		{			
+			InitializeComponent();			  
+			Text                 = Caption;
+			label1.Text          = Label;
+			progressBar1.Maximum = Max;
+			PressCancel          = false;			
+		}
+		
+		public void Progress(int i)
+		{
+			progressBar1.Value = i;			 
+		}
+		
+		public void Inc()
+		{
+			Application.DoEvents();
+		    progressBar1.Value = progressBar1.Value + 1;
+            			
+		}
+		
+		public void Dec()
+		{
+			Application.DoEvents();
+		    progressBar1.Value = progressBar1.Value - 1;
+		}
+		
+		public void Clear()
+		{
+			Application.DoEvents();
+		    progressBar1.Value = 0;
+		}
+				 
+		private void BtnCancelClick(object sender, EventArgs e)
+		{
+			PressCancel = true;
+			Close();
+		}
+		
+		private void FormProgressFormClosing(object sender, FormClosingEventArgs e)
+		{
+		    if (PressCancel) return;
+		    if (e.CloseReason != CloseReason.UserClosing) return;
+            e.Cancel = (DialogResult.Yes != MessageBox.Show("Вы действительно хотите выйти?", "Внимание",
+		                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question));
+		    PressCancel = e.Cancel;
+		}
+		
+		
+	}
+}

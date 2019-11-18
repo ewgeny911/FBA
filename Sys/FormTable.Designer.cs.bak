@@ -1,0 +1,483 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 17.12.2017
+ * Время: 3:01
+ */
+namespace FBA
+{
+    partial class FormTable
+    {       
+        private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private FBA.LabelFBA label1;
+        private FBA.LabelFBA label3;
+        private FBA.TextBoxFBA tbID;
+        private FBA.LabelFBA label2;
+        private FBA.ComboBoxFBA tbIDFieldName;
+        private FBA.LabelFBA label4;
+        private FBA.ComboBoxFBA tbTypeStr;
+        private FBA.LabelFBA label5;
+        private FBA.TextBoxFBA tbEntityID;
+        private FBA.LabelFBA lbEntityID;
+        private FBA.TextBoxFBA tbTypeInt;
+        private FBA.LabelFBA lbType;
+        private FBA.LabelFBA lbTableEntityID;
+        private FBA.TextBoxFBA tbTableEntityID;
+        private FBA.ComboBoxFBA tbName;
+         
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) {
+                if (components != null) {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+        
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTable));
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbTableEntityID = new FBA.LabelFBA();
+            this.tbTableEntityID = new FBA.TextBoxFBA();
+            this.tbTypeInt = new FBA.TextBoxFBA();
+            this.lbType = new FBA.LabelFBA();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new FBA.LabelFBA();
+            this.label3 = new FBA.LabelFBA();
+            this.tbID = new FBA.TextBoxFBA();
+            this.label2 = new FBA.LabelFBA();
+            this.tbIDFieldName = new FBA.ComboBoxFBA();
+            this.label4 = new FBA.LabelFBA();
+            this.tbTypeStr = new FBA.ComboBoxFBA();
+            this.label5 = new FBA.LabelFBA();
+            this.tbEntityID = new FBA.TextBoxFBA();
+            this.lbEntityID = new FBA.LabelFBA();
+            this.tbName = new FBA.ComboBoxFBA();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnCancel);
+            this.panel2.Controls.Add(this.btnOk);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 181);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(393, 42);
+            this.panel2.TabIndex = 4;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnCancel.Image = global::FBA.Resource.Cancel_24;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.Location = new System.Drawing.Point(158, 5);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(112, 33);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "   Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOk.Image = global::FBA.Resource.OK_24;
+            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOk.Location = new System.Drawing.Point(275, 5);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(112, 33);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "  Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbTableEntityID);
+            this.panel1.Controls.Add(this.tbTableEntityID);
+            this.panel1.Controls.Add(this.tbTypeInt);
+            this.panel1.Controls.Add(this.lbType);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(393, 38);
+            this.panel1.TabIndex = 5;
+            // 
+            // lbTableEntityID
+            // 
+            this.lbTableEntityID.Enabled = false;
+            this.lbTableEntityID.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTableEntityID.Location = new System.Drawing.Point(119, 8);
+            this.lbTableEntityID.Name = "lbTableEntityID";
+            this.lbTableEntityID.Size = new System.Drawing.Size(105, 23);
+            this.lbTableEntityID.StarColor = System.Drawing.Color.Crimson;
+            this.lbTableEntityID.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.lbTableEntityID.StarOffsetX = 2;
+            this.lbTableEntityID.StarOffsetY = 0;
+            this.lbTableEntityID.StarShow = false;
+            this.lbTableEntityID.StarText = "*";
+            this.lbTableEntityID.TabIndex = 41;
+            this.lbTableEntityID.Text = "TableEntityID";
+            // 
+            // tbTableEntityID
+            // 
+            this.tbTableEntityID.AttrBrief = "Main1.TableEntityID";
+            this.tbTableEntityID.AttrBriefLookup = null;
+            this.tbTableEntityID.BackColor = System.Drawing.SystemColors.Info;
+            this.tbTableEntityID.DigitOnly = false;
+            this.tbTableEntityID.Enabled = false;
+            this.tbTableEntityID.ERRORIFNULL = null;
+            this.tbTableEntityID.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbTableEntityID.GroupEnabled = null;
+            this.tbTableEntityID.Location = new System.Drawing.Point(227, 5);
+            this.tbTableEntityID.Name = "tbTableEntityID";
+            this.tbTableEntityID.ObjectRef = null;
+            this.tbTableEntityID.SaveParam = false;
+            this.tbTableEntityID.SaveValueHistory = false;
+            this.tbTableEntityID.Size = new System.Drawing.Size(58, 25);
+            this.tbTableEntityID.TabIndex = 40;
+            this.tbTableEntityID.Text2 = null;
+            // 
+            // tbTypeInt
+            // 
+            this.tbTypeInt.AttrBrief = "Main1.Type";
+            this.tbTypeInt.AttrBriefLookup = null;
+            this.tbTypeInt.BackColor = System.Drawing.SystemColors.Info;
+            this.tbTypeInt.DigitOnly = false;
+            this.tbTypeInt.Enabled = false;
+            this.tbTypeInt.ERRORIFNULL = null;
+            this.tbTypeInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbTypeInt.GroupEnabled = null;
+            this.tbTypeInt.Location = new System.Drawing.Point(334, 6);
+            this.tbTypeInt.Name = "tbTypeInt";
+            this.tbTypeInt.ObjectRef = null;
+            this.tbTypeInt.SaveParam = false;
+            this.tbTypeInt.SaveValueHistory = false;
+            this.tbTypeInt.Size = new System.Drawing.Size(53, 25);
+            this.tbTypeInt.TabIndex = 39;
+            this.tbTypeInt.Text2 = null;
+            // 
+            // lbType
+            // 
+            this.lbType.Enabled = false;
+            this.lbType.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbType.Location = new System.Drawing.Point(291, 8);
+            this.lbType.Name = "lbType";
+            this.lbType.Size = new System.Drawing.Size(48, 23);
+            this.lbType.StarColor = System.Drawing.Color.Crimson;
+            this.lbType.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.lbType.StarOffsetX = 2;
+            this.lbType.StarOffsetY = 0;
+            this.lbType.StarShow = false;
+            this.lbType.StarText = "*";
+            this.lbType.TabIndex = 38;
+            this.lbType.Text = "Type";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = global::FBA.Resource.Grid_32;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(46, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 23);
+            this.label1.StarColor = System.Drawing.Color.Crimson;
+            this.label1.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label1.StarOffsetX = 2;
+            this.label1.StarOffsetY = 0;
+            this.label1.StarShow = false;
+            this.label1.StarText = "*";
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Table";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(6, 77);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 28);
+            this.label3.StarColor = System.Drawing.Color.Crimson;
+            this.label3.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label3.StarOffsetX = 2;
+            this.label3.StarOffsetY = 0;
+            this.label3.StarShow = true;
+            this.label3.StarText = "*";
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Name:";
+            // 
+            // tbID
+            // 
+            this.tbID.AttrBrief = "Main1.TableID";
+            this.tbID.AttrBriefLookup = null;
+            this.tbID.BackColor = System.Drawing.SystemColors.Info;
+            this.tbID.DigitOnly = false;
+            this.tbID.Enabled = false;
+            this.tbID.ERRORIFNULL = null;
+            this.tbID.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbID.GroupEnabled = null;
+            this.tbID.Location = new System.Drawing.Point(106, 42);
+            this.tbID.Margin = new System.Windows.Forms.Padding(4);
+            this.tbID.Name = "tbID";
+            this.tbID.ObjectRef = null;
+            this.tbID.SaveParam = false;
+            this.tbID.SaveValueHistory = false;
+            this.tbID.Size = new System.Drawing.Size(93, 25);
+            this.tbID.TabIndex = 26;
+            this.tbID.Text2 = null;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(6, 48);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 23);
+            this.label2.StarColor = System.Drawing.Color.Crimson;
+            this.label2.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label2.StarOffsetX = 2;
+            this.label2.StarOffsetY = 0;
+            this.label2.StarShow = false;
+            this.label2.StarText = "*";
+            this.label2.TabIndex = 25;
+            this.label2.Text = "ID";
+            // 
+            // tbIDFieldName
+            // 
+            this.tbIDFieldName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbIDFieldName.AttrBrief = "Main1.IDFieldName";
+            this.tbIDFieldName.AttrBriefLookup = null;
+            this.tbIDFieldName.AttrType = null;
+            this.tbIDFieldName.BackColor = System.Drawing.SystemColors.Info;
+            this.tbIDFieldName.ContextMenuEnabled = true;
+            this.tbIDFieldName.ERRORIFNULL = null;
+            this.tbIDFieldName.FloatOnly = false;
+            this.tbIDFieldName.FormattingEnabled = true;
+            this.tbIDFieldName.GroupEnabled = null;
+            this.tbIDFieldName.IntegerOnly = false;
+            this.tbIDFieldName.Location = new System.Drawing.Point(106, 104);
+            this.tbIDFieldName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbIDFieldName.Name = "tbIDFieldName";
+            this.tbIDFieldName.ObjectRef = null;
+            this.tbIDFieldName.ReadOnly = false;
+            this.tbIDFieldName.SaveParam = false;
+            this.tbIDFieldName.SaveValueHistory = false;
+            this.tbIDFieldName.Size = new System.Drawing.Size(281, 25);
+            this.tbIDFieldName.TabIndex = 29;
+            this.tbIDFieldName.Text2 = null;
+            this.tbIDFieldName.ValueHistoryInItems = false;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(6, 108);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 28);
+            this.label4.StarColor = System.Drawing.Color.Crimson;
+            this.label4.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label4.StarOffsetX = 2;
+            this.label4.StarOffsetY = 0;
+            this.label4.StarShow = true;
+            this.label4.StarText = "*";
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Field ID:";
+            // 
+            // tbTypeStr
+            // 
+            this.tbTypeStr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTypeStr.AttrBrief = null;
+            this.tbTypeStr.AttrBriefLookup = null;
+            this.tbTypeStr.AttrType = "INDEX";
+            this.tbTypeStr.BackColor = System.Drawing.SystemColors.Info;
+            this.tbTypeStr.ContextMenuEnabled = true;
+            this.tbTypeStr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tbTypeStr.ERRORIFNULL = null;
+            this.tbTypeStr.FloatOnly = false;
+            this.tbTypeStr.FormattingEnabled = true;
+            this.tbTypeStr.GroupEnabled = null;
+            this.tbTypeStr.IntegerOnly = false;
+            this.tbTypeStr.Items.AddRange(new object[] {
+            "Main",
+            "Historical"});
+            this.tbTypeStr.Location = new System.Drawing.Point(106, 135);
+            this.tbTypeStr.Margin = new System.Windows.Forms.Padding(4);
+            this.tbTypeStr.Name = "tbTypeStr";
+            this.tbTypeStr.ObjectRef = null;
+            this.tbTypeStr.ReadOnly = false;
+            this.tbTypeStr.SaveParam = false;
+            this.tbTypeStr.SaveValueHistory = false;
+            this.tbTypeStr.Size = new System.Drawing.Size(281, 25);
+            this.tbTypeStr.TabIndex = 31;
+            this.tbTypeStr.Text2 = null;
+            this.tbTypeStr.ValueHistoryInItems = false;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(6, 137);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 28);
+            this.label5.StarColor = System.Drawing.Color.Crimson;
+            this.label5.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.label5.StarOffsetX = 2;
+            this.label5.StarOffsetY = 0;
+            this.label5.StarShow = true;
+            this.label5.StarText = "*";
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Table Type:";
+            // 
+            // tbEntityID
+            // 
+            this.tbEntityID.AttrBrief = "Main1.EntityID";
+            this.tbEntityID.AttrBriefLookup = null;
+            this.tbEntityID.BackColor = System.Drawing.SystemColors.Info;
+            this.tbEntityID.DigitOnly = false;
+            this.tbEntityID.Enabled = false;
+            this.tbEntityID.ERRORIFNULL = null;
+            this.tbEntityID.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbEntityID.GroupEnabled = null;
+            this.tbEntityID.Location = new System.Drawing.Point(334, 41);
+            this.tbEntityID.Name = "tbEntityID";
+            this.tbEntityID.ObjectRef = null;
+            this.tbEntityID.SaveParam = false;
+            this.tbEntityID.SaveValueHistory = false;
+            this.tbEntityID.Size = new System.Drawing.Size(53, 25);
+            this.tbEntityID.TabIndex = 38;
+            this.tbEntityID.Text = "2";
+            this.tbEntityID.Text2 = null;
+            // 
+            // lbEntityID
+            // 
+            this.lbEntityID.Enabled = false;
+            this.lbEntityID.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbEntityID.Location = new System.Drawing.Point(263, 45);
+            this.lbEntityID.Name = "lbEntityID";
+            this.lbEntityID.Size = new System.Drawing.Size(68, 23);
+            this.lbEntityID.StarColor = System.Drawing.Color.Crimson;
+            this.lbEntityID.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.lbEntityID.StarOffsetX = 2;
+            this.lbEntityID.StarOffsetY = 0;
+            this.lbEntityID.StarShow = false;
+            this.lbEntityID.StarText = "*";
+            this.lbEntityID.TabIndex = 37;
+            this.lbEntityID.Text = "EntityID";
+            // 
+            // tbName
+            // 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.AttrBrief = "Main1.Name";
+            this.tbName.AttrBriefLookup = null;
+            this.tbName.AttrType = null;
+            this.tbName.BackColor = System.Drawing.SystemColors.Info;
+            this.tbName.ContextMenuEnabled = true;
+            this.tbName.ERRORIFNULL = null;
+            this.tbName.FloatOnly = false;
+            this.tbName.FormattingEnabled = true;
+            this.tbName.GroupEnabled = null;
+            this.tbName.IntegerOnly = false;
+            this.tbName.Location = new System.Drawing.Point(106, 73);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbName.Name = "tbName";
+            this.tbName.ObjectRef = null;
+            this.tbName.ReadOnly = false;
+            this.tbName.SaveParam = false;
+            this.tbName.SaveValueHistory = false;
+            this.tbName.Size = new System.Drawing.Size(281, 25);
+            this.tbName.TabIndex = 39;
+            this.tbName.Text2 = null;
+            this.tbName.ValueHistoryInItems = false;
+            this.tbName.Leave += new System.EventHandler(this.tbName_Leave);
+            // 
+            // FormTable
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(393, 223);
+            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.tbEntityID);
+            this.Controls.Add(this.lbEntityID);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tbTypeStr);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tbIDFieldName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbID);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
+            this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormNumber = 1;
+            this.FormUsual = true;         
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FormTable";
+            this.QueryText = new string[] {
+        "--(SectionBegin TableDelete) ",
+        "",
+        "   SELECT ",
+        "    --FK.CONSTRAINT_NAME as ForeignKey, ",
+        "      --FK.TABLE_CATALOG as FROM_TABLE_CATALOG,",
+        "      --FK.TABLE_SCHEMA  as FROM_TABLE_SCHEMA,",
+        "      FK.TABLE_NAME    as FROM_TABLE_NAME,",
+        "      FK.COLUMN_NAME   as FROM_COLUMN_NAME,",
+        "      --PK.TABLE_CATALOG as TO_TABLE_CATALOG,",
+        "      --PK.TABLE_SCHEMA  as TO_TABLE_SCHEMA,",
+        "      PK.TABLE_NAME    as TO_TABLE_NAME,",
+        "      PK.COLUMN_NAME   as TO_COLUMN_NAME",
+        "     -- INTO #Tabl1",
+        "    FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE PK",
+        resources.GetString("$this.QueryText"),
+        resources.GetString("$this.QueryText1"),
+        "    WHERE PK.TABLE_NAME = \'TableNameAttr\'",
+        "    ORDER BY FK.CONSTRAINT_NAME, PK.ORDINAL_POSITION",
+        "  ",
+        "--(SectionEnd TableDelete) "};
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Table";
+            this.Shown += new System.EventHandler(this.FormTable_Shown);
+            this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+    }
+}

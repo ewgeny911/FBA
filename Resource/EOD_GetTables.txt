@@ -1,0 +1,238 @@
+USE [DIASOFT_test]
+GO
+/****** Object:  StoredProcedure [dbo].[EOD_ContractIns]    Script Date: 24.10.2015 10:48:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Травин Е.В.
+-- Create date: 30.12.2014
+-- Description:	Получениие таблиц для составного атрибута
+/*
+   
+   exec [dbo].[EOD_GetTables] 23, 'Вариант.ВариантДогСтрах.Наим', 'Застрахованный', 'RelContFace', 'ID', 1
+   exec [dbo].[EOD_GetTables] 1, 'Вариант', 'Застрахованный', 'RelContFace', 'ID'
+   exec [dbo].[EOD_GetTables] 2, 'НаимSQL', 'Застрахованный', 'RelContFace', 'ID'
+   
+*/
+-- =============================================
+--EXEC [dbo].[EOD_GetTables] @SQLLevel, @ID, @EntityID, @AttrBrief, @EntityBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity	 
+
+ALTER PROCEDURE [dbo].[EOD_GetTables] (@SQLLevel int, 
+                                       @ID int,
+                                       @EntityID int,
+                                       @AttrBrief varchar(max), 
+                                       @EntityBrief varchar(max),                                     
+								  	                   @LinkTo varchar (100),  
+									                     @TableFieldID varchar(100),
+									                     @QueryLevel int,
+                                       @EntityBriefCalc varchar(100),
+                                       @Attr int, 
+                                       @Entity int) 
+AS
+  DECLARE @Res Table (Num int, AttrBrief varchar(max))
+  
+  --select * from @Res
+    --select * FROM dbo.mtAttr 
+  --return
+
+
+
+  DECLARE @JoinText varchar(max)
+  DECLARE @AttrBriefOne varchar(max) 
+  DECLARE @AttrCode varchar(max)
+  DECLARE @AttrTypeID int
+  DECLARE @TableType int
+  DECLARE @Field1 varchar(100)
+  DECLARE @Field2 varchar(100)
+  DECLARE @TableAlias varchar(100)
+  DECLARE @TableName varchar(100)
+  DECLARE @Num int
+  DECLARE @FieldAttr varchar(100)
+  DECLARE @AttrID int 
+
+  --INSERT INTO #Tables (EntityBriefCalc, Attr, Entity) VALUES ('222_cdfdfg', @Attr, @Entity)
+  IF @Entity = 1
+  BEGIN
+    --INSERT INTO #Tables (EntityBriefCalc, Attr, Entity) VALUES ('333_cdfdfg', @Attr, @Entity)
+    SET @Num = 1
+    INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,	
+		             @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity         
+  END
+ 
+  IF @Attr = 1
+  BEGIN
+    --INSERT INTO #Tables (EntityBriefCalc, Attr, Entity) VALUES ('444_cdfdfg', @Attr, @Entity)
+    --TRUNCATE TABLE #Tables
+    --DROP TABLE #Tables
+    --Разделяем составной атрибут на отдельные атрибуты 
+    
+    DECLARE @iPrev int = 1
+    DECLARE @i int   
+    SET @AttrBrief = @AttrBrief + '.'
+    SET @Num = 1
+    SET @iPrev = 0
+    SET @i = CHARINDEX('.', @AttrBrief)  
+    WHILE @i > 0
+    BEGIN        	
+      SET @AttrBriefOne = SUBSTRING(@AttrBrief, @iPrev, @i - @iPrev)
+	    --INSERT INTO @Res (Num, AttrBrief) VALUES (@Num, @AttrBriefOne)
+	     IF @AttrBriefOne = 'ИДОбъекта' 
+      BEGIN
+        INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,	
+		             @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity       
+      END ELSE
+      IF @AttrBriefOne = 'ИДСущностиОбъекта' 
+      BEGIN
+        INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,
+		             --@TableName, @TableType, @TableFieldID, @EntityID, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity   
+                 @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity             
+      END ELSE
+      IF @AttrBriefOne = 'СокрСущностиОбъекта'
+      BEGIN
+        INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID, 	
+		             --'enEntity', @TableType, 'ID', 'Brief', @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity
+                 @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity          
+      END ELSE
+      IF @AttrBriefOne = 'НаимСущностиОбъекта'
+      BEGIN
+        INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,
+		             --'enEntity', @TableType, 'ID', 'Name', @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity
+                 @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity    
+      END ELSE
+      IF @AttrBriefOne = 'НаимОбъекта'
+      BEGIN
+        INSERT INTO #Tables
+		      SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,
+		             --@TableName, @TableType, @TableFieldID, 'dbo.eo_ObjectName(CurrentEntityID, CurrentFaceID)', @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity          
+                 @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity 
+      END ELSE
+      BEGIN
+        INSERT INTO #Tables (EntityBriefCalc, Attr, Entity,  AttrBriefOne, LinkTo) VALUES ('555_cdfdfg', @Attr, @Entity, @AttrBriefOne, @LinkTo)
+        SELECT 
+	      @AttrID       = AttrID,
+	      @EntityBrief  = ISNULL(LinkTo, @EntityBrief),
+	      @AttrCode     = ISNULL(AttrCode, ''),
+        @AttrTypeID   = AttrTypeID,
+        @TableName    = TableName,
+        @TableType    = TableType,
+        @TableFieldID = TableFieldID,
+        @Field1       = Field1,
+        @Field2       = Field2,
+        @EntityID     = EntityID
+        FROM dbo.mtAttr 
+	      WHERE AttrBrief = @AttrBriefOne and EntityBrief = @EntityBrief
+
+        --Если нашли атрибут, то вставляем в #Result:
+	      IF @AttrID > 0
+	      BEGIN
+
+		      INSERT INTO #Tables
+		        SELECT @SQLLevel, @EntityBriefCalc, @Num, @ID, @EntityID, @JoinText, @AttrBrief, @AttrBriefOne, @LinkTo, @TableName, @AttrCode, @AttrTypeID,
+		               @TableType, @TableFieldID, @FieldAttr, @Field1, @Field2, @QueryLevel, @TableAlias, @Attr, @Entity                     
+          
+          
+          
+
+
+        END
+	      SET @AttrID = 0
+      END
+      
+
+
+      --Продолжение поиска точек
+      SET @iPrev = @i + 1
+	    SET @Num = @Num + 1
+	    SET @i = CHARINDEX('.', @AttrBrief, @i + 1) 
+    END
+    --return
+   
+    DECLARE @CycleCalc TABLE (iNum int, AttrCode varchar(max),  EntityBriefCalc varchar(100)) 
+
+    INSERT INTO @CycleCalc 
+      SELECT ROW_NUMBER () OVER (ORDER BY ID) as iNum, AttrCode FROM #Tables WHERE SQLLevel = @SQLLevel
+    
+    DECLARE @i1 int
+    DECLARE @i2 int
+    SET @i1 = 1
+    SET @i2 = (SELECT Max(iNum) FROM @CycleCalc)
+
+    WHILE @i1 <= @i2
+    BEGIN
+      SELECT @SQLLevel = SQLLevel,
+             @AttrCode = AttrCode, 
+             @EntityBriefCalc = EntityBriefCalc 
+      FROM @CycleCalc WHERE iNum = @i1
+      EXEC [dbo].[EOD_GetLex] @SQLLevel, @EntityBriefCalc, @AttrCode 
+    END
+    
+    /*IF @AttrCode <> ''
+    BEGIN
+      DECLARE @SQLLevelTemp int
+      DECLARE @EntityAlias varchar(100)
+      SET @EntityAlias = ''
+      SET @SQLLevelTemp = @SQLLevel + 1
+      EXEC [dbo].[EOD_GetLex] @SQLLevelTemp, @EntityBriefCalc, @AttrCode 
+    END
+    */
+
+
+     --Цикл по вычисляемым атрибутам2. 
+    /* DECLARE ListResult CURSOR FOR SELECT AttrCode FROM #Tables WHERE SQLLevel = 2 AND AttrTypeID = 1 --1-Вычисляемый атрибут.
+    SET @SQLLevel = 3
+    OPEN ListResult 
+    FETCH FROM ListResult INTO @AttrCode
+    WHILE @@Fetch_Status = 0
+    BEGIN
+      EXEC [dbo].[EOD_GetLex] @SQLLevel, @EntityAlias, @AttrCode 
+      FETCH FROM ListResult INTO @AttrCode
+    END
+    CLOSE ListResult
+    DEALLOCATE ListResult
+    */
+    
+     
+    /*
+    SET @AttrID = 0
+    DECLARE ListTables CURSOR FOR SELECT Num, AttrBrief FROM @Res ORDER BY Num
+    OPEN ListTables 
+    FETCH FROM ListTables INTO @Num, @AttrBriefOne
+    WHILE @@Fetch_Status = 0
+    BEGIN
+     
+
+
+      FETCH FROM ListTables INTO @Num, @AttrBriefOne
+    END
+    CLOSE ListTables
+    DEALLOCATE ListTables 
+    */
+
+    UPDATE #Tables SET AttrCode = REPLACE(AttrCode, CHAR(10), ' ')
+    UPDATE #Tables SET AttrCode = REPLACE(AttrCode, CHAR(13), ' ')
+    UPDATE #Tables SET AttrCode = REPLACE(AttrCode, 'ПсевдонимСущности', @EntityBriefCalc) WHERE ISNULL(@EntityBriefCalc, '') <> ''
+
+    
+
+  END
+
+
+            
+  --INSERT INTO #Tables0 SELECT * FROM #Tables
+ --SELECT * FROM #Result 
+ --SELECT * from dbo.mtAttr
+ --SELECT * from dbo.mtEntity
+
+  
+ 
+
+
+

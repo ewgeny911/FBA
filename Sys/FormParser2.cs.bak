@@ -1,0 +1,21 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 18.01.2018
+ * Время: 11:00
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{   
+    public partial class FormParser2 : FormSim
+    {
+        public FormParser2()
+        {             
+            InitializeComponent();                  
+        }
+    }
+}

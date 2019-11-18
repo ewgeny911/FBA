@@ -1,0 +1,77 @@
+fffff;1;SELECT;бшапюрэ;2;dddddd
+fffff;2;FROM;хг;2;dddddd
+fffff;3;WHERE;цде;2;dddddd
+fffff;4;GROUP BY;цпсоо;2;dddddd
+fffff;5;ORDER BY;сонпъд;2;dddddd
+fffff;6;ASC;бнгп;2;dddddd
+fffff;7;DESC;сашб;2;dddddd
+fffff;8;FOR;дкъ;2;dddddd
+fffff;9;LIKE;онднамн;2;dddddd
+fffff;10;AND;;2;dddddd
+fffff;11;BETWEEN;лефдс;2;dddddd
+fffff;12;UNION;назедхмхрэ;6;dddddd
+fffff;13;UNION ALL;назедхмхрэ бяе;6;dddddd
+fffff;14;HAVING;;2;dddddd
+fffff;15;,;;1;dddddd
+fffff;16;OVER;;8;dddddd
+fffff;17;INTO;;2;dddddd
+fffff;18;(;;1;dddddd
+fffff;19;);;1;dddddd
+fffff;20;+;;1;dddddd
+fffff;21;-;;1;dddddd
+fffff;22;*;;1;dddddd
+fffff;23;/;;1;dddddd
+fffff;24;<;;1;dddddd
+fffff;25;>;;1;dddddd
+fffff;26;OR;;2;dddddd
+fffff;27;?;;1;dddddd
+fffff;28;@;;2;dddddd
+fffff;29;TOP;оепбше;2;dddddd
+fffff;30;WITH;блеяре;2;dddddd
+fffff;31;=;;1;dddddd
+fffff;32;MAX;люйя;8;dddddd
+fffff;33;MIN;лхм;8;dddddd
+fffff;34;IN;;2;dddddd
+fffff;35;LEFT;кебне;2;dddddd
+fffff;36;RIGHT;опюбне;2;dddddd
+fffff;37;ON;;2;dddddd
+fffff;38;INNER JOIN;INNER JOIN;5;dddddd
+fffff;39;LEFT OUTER JOIN;LEFT OUTER JOIN;5;dddddd
+fffff;40;RIGHT OUTER JOIN;RIGHT OUTER JOIN;5;dddddd
+fffff;41;FULL  OUTER  JOIN;FULL  OUTER  JOIN;5;dddddd
+fffff;42;CROSS JOIN;CROSS JOIN;5;dddddd
+fffff;43;MERGE;;2;dddddd
+fffff;44;LOOP;;2;dddddd
+fffff;45;HASH;;2;dddddd
+fffff;46;INNER;;2;dddddd
+fffff;47;XML;;2;dddddd
+fffff;48;PATH;;8;dddddd
+fffff;49;CASE;яксвюи;2;dddddd
+fffff;50;WHEN;йнцдю;2;dddddd
+fffff;51;THEN;рнцдю;2;dddddd
+fffff;52;ELSE;хмюве;2;dddddd
+fffff;53;END;йнмеж;2;dddddd
+fffff;54;IS;;2;dddddd
+fffff;55;NOT;;2;dddddd
+fffff;56;NULL;;2;dddddd
+fffff;57;AS;йюй;2;dddddd
+fffff;58;DISTINCT;;2;dddddd
+fffff;59;OID;хд;4;dddddd
+fffff;60;EID;хдясы;4;dddddd
+fffff;61;EBRIEF;янйпясы;4;dddddd
+fffff;62;ENAME;хлъясы;4;dddddd
+fffff;63;ADATE;дюрююрп;4;dddddd
+fffff;64;ODATE;дюрюянярназейрю;4;dddddd
+fffff;65;ALLHIST;бяъхярнпхъ;4;dddddd
+fffff;66;ADATEHIST;дюрююрпхяр;4;dddddd
+fffff;67;SYSTYPE;яхярелмширхо;4;dddddd
+fffff;68;LIMIT;кхлхр;2;dddddd
+fffff;69;OFFSET;ядбхц;2;dddddd
+fffff;70;ENTITYALIAS;ояебднмхлясымнярх;2;dddddd
+fffff;71;!;;1;dddddd
+fffff;72;%;;1;dddddd
+fffff;73;ACTUAL;юйрсюкэмше;2;dddddd
+fffff;74;ARCHIVE;юпухбмше;2;dddddd
+fffff;75;DELETED;сдюкеммше;2;dddddd
+fffff;76;TEST;реярнбше;2;dddddd
+fffff;77;ONAME;хлъназейрю;4;dddddd

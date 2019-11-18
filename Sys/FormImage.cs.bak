@@ -1,0 +1,256 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 12.11.2017
+ * Время: 15:45
+ */
+ 
+using System;
+using System.Linq;   
+using System.Windows.Forms;
+using System.IO;
+                         
+namespace FBA
+{         
+    ///Запись и чтение изображенгий в/из БД.    
+    public partial class FormImage : Form
+    {                 
+        public FormImage()
+        {                
+            InitializeComponent();                
+            this.MdiParent = sys.FormMainObj;
+            this.Icon = this.MdiParent.Icon;  
+            ImageRefresh();            
+        }
+        
+        ///Обновление таблицы изображений.
+        private void ImageRefresh()
+        {
+            const string SQL = "SELECT ID, " +
+                    "UserChangeID, " +
+                    "UserCreateID, " +
+                    "DateChange, " +
+                    "DateCreate," +
+                    "Name, " +
+                    "FileName, " +
+                    "FileNameFull, " + 
+                    "SUBSTR(Image, 1, 50) AS Image, " +
+                    "Width, " +
+                    "Height, " +
+                    "Format " +
+                    "FROM arhImage";            
+             sys.SelectGV("Remote", SQL, dgvImage);   
+        }
+              
+        ///Добавить одно изображение. 
+        private void AddFile()
+        {                      
+            const string Title = "Выбор изображения";
+            const string Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*"; //формат загружаемого файла;
+            string FileNameFull = "";
+            string InitialDirectory = "";
+            if (!sys.OpenFileName(Title, Filter, InitialDirectory, ref FileNameFull)) return;
+            if (!ImageAdd(FileNameFull)) return;
+            ImageRefresh();
+            sys.SM("Изображение успешно загружено!", "Information");
+        }
+        
+        ///Добавить все изображения из папки.
+        private void AddDir()
+        {                  
+            const string InitialPath = @"C:\";
+            string DirName = "";
+            if (!sys.DirChoose(InitialPath, out DirName)) return;
+            const bool SubDirectories = false; //Вложенные подпапки не проверяем.
+            string[] files = sys.FileFind(DirName, "*.*", SubDirectories);
+            const string ImageFormat = ";.BMP;.JPG;.GIF;.PNG;";
+            var Progress1 = new FormProgress("Загрузка", "Загрузка изображений в базу данных", files.Count());
+            Progress1.Show();                                 
+            for (int i = 0; i < files.Count(); i++)
+            {
+                string FileNameFull = files[i];
+                string Format       = Path.GetExtension(FileNameFull).ToUpper();
+                if (ImageFormat.IndexOf(Format, StringComparison.OrdinalIgnoreCase) < 0) continue;
+                if (!ImageAdd(FileNameFull)) return;              
+                Progress1.Inc();
+                //Thread.Sleep(1000);
+            }
+            Progress1.Dispose();
+            ImageRefresh();
+            sys.SM("Bсе изображения успешно загружены в базу данных!", "Information");
+        }
+        
+        ///Загрузить картинку в БД.
+        private bool ImageAdd(string FileNameFull)
+        {
+            string FileData     = "";
+            string ErrorMessage = "";
+            string ImageWidth   = "";
+            string ImageHeight  = "";                               
+            const bool ShowMes = true;
+            if (!sys.FileReadToBase64(FileNameFull, out FileData, out ErrorMessage, ShowMes)) return false;
+            string ImageName     = Path.GetFileNameWithoutExtension(FileNameFull);  
+            string ImageFileName = Path.GetFileName(FileNameFull); 
+            string Format        = Path.GetExtension(ImageFileName).ToUpper();
+            try
+            {
+                var pictureBoxTemp = new System.Windows.Forms.PictureBox();
+                pictureBoxTemp.PictureBoxLoadFile(FileNameFull);
+                ImageWidth  = pictureBoxTemp.Image.Width.ToString();
+                ImageHeight = pictureBoxTemp.Image.Height.ToString();              
+            } catch (Exception ex)
+            {
+                sys.SM("Ошибка при открытии изображения: " + FileNameFull + sys.CR + ex.Message);
+                return false;
+            }
+                                      
+            string SQL = "INSERT INTO arhImage (" +
+                         "UserCreateID, DateCreate, Name, " +
+                         "FileName, FileNameFull, Image, " +
+                         "Width, Height, Format) " +
+                         "VALUES (" + sys.UserID + ", " + sys.DateTimeCurrent() + ",'" + ImageName + "'," +
+                         "'" + ImageFileName + "','" + FileNameFull +"','" + FileData +"'," +
+                         "'" + ImageWidth + "','" + ImageHeight + "','" + Format + "')";
+            if (!sys.Exec("Remote", SQL)) return false;
+            return true;
+        }
+               
+        ///Удалить изображение.  
+        private void ImageDel()
+        {
+            string ImageID   = sys.DGSelected(dgvImage, "ID"); 
+            string ImageName = sys.DGSelected(dgvImage, "Name");              
+            string SQL = "DELETE FROM arhImage WHERE ID = " + ImageID;
+            if (!sys.Exec("Remote", SQL)) return;
+            ImageRefresh();
+            pictureBox1.Image = global::FBA.Resource.no_foto_1;  
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            tbID.Text           = "";
+            tbSize.Text         = "";
+            tbFormat.Text       = "";
+            tbFileName.Text     = "";
+            tbFileNameFull.Text = "";
+            sys.SM("Изображение успешно удалено!", "Information");                         
+        }
+        
+        ///Меню, все команды.
+        private void tbImageRefresh_Click(object sender, EventArgs e)
+        {                                   
+            string SenderName = sys.GetSenderName(sender);
+            
+            //Обновить таблицу изображений.
+            if (SenderName == "tbImageRefresh") ImageRefresh();
+            
+            //Добавить изображение.            
+            if (SenderName == "tbImageAddFile") AddFile();
+            
+            //Добавить все изображения из папки.            
+            if (SenderName == "tbImageAddDir") AddDir();
+            
+            //Удалить изображение. 
+            if (SenderName == "tbImageDel") ImageDel();
+            
+            //Показать путь к файлу в темповой папке.
+            if (SenderName == "btnImagePath")
+            {                
+                if (tbFileNameFull.Text == "") return;
+                try
+                {
+                    string FileNamePath = Path.GetDirectoryName(tbFileNameFull.Text);
+                    System.Diagnostics.Process.Start(FileNamePath);
+               } catch {}
+            }                             
+        }
+        
+        ///Показ изображения.
+        private void SelectImage()
+        {
+            string ImageID   = sys.DGSelected(dgvImage, "ID"); 
+             
+            if (ImageID == "") return;
+            string FileData;
+            string ImageName;
+            string FileName;
+            string FileNameFull; 
+            string Format;
+            string ImageWidth;
+            string ImageHeight;
+            string SQL = "SELECT Image, Name, FileName, FileNameFull, " +
+                         "Format, Width, Height " +
+                         "FROM arhImage WHERE ID = " + ImageID;
+            if (!sys.GetValue7("Remote", SQL, 
+                               out FileData, 
+                               out ImageName, 
+                               out FileName, 
+                               out FileNameFull,
+                               out Format, 
+                               out ImageWidth, 
+                               out ImageHeight)) return;
+            if (FileData == "") 
+            {
+                sys.SM("Не найдено изображение в таблице изображений!");
+                return;
+            }               
+            string ErrorMessage;                        
+            string FileNameTemp = sys.PathTemp + FileName;
+               
+           
+            if (!sys.FileWriteFromBase64(FileData, FileNameTemp, out ErrorMessage, true)) return;
+            if (!File.Exists(FileNameTemp)) 
+            {
+                sys.SM("Не найдено изображение на диске. Имя файла: " + FileNameTemp);               
+                return;
+            }
+            tbID.Text           = ImageID;
+            tbSize.Text         = ImageWidth + "x" + ImageHeight;
+            tbFormat.Text       = Format;
+            tbFileName.Text     = FileName;
+            tbFileNameFull.Text = FileNameFull;
+            
+            try
+            {                 
+                pictureBox1.PictureBoxLoadFile(FileNameTemp);
+                ShowImage();
+            } catch (Exception ex)
+            {
+                sys.SM("Ошибка при открытии изображения: " + FileNameTemp + sys.CR + ex.Message);
+                return;
+            }
+        }
+        
+        private void ShowImage()
+        {
+           if ((pictureBox1.Image.Width < panelAutoScroll.Width) && (pictureBox1.Image.Height < panelAutoScroll.Height))
+           {               
+               pictureBox1.Dock = DockStyle.Fill;
+               panelAutoScroll.AutoScroll = false;
+               pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+           }                
+            else 
+            {   
+                if (checkBoxSize.Checked)
+                {
+                    pictureBox1.Dock = DockStyle.Fill;
+                    panelAutoScroll.AutoScroll = false;
+                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                    return;
+                }
+                pictureBox1.Dock = DockStyle.None;
+                panelAutoScroll.AutoScroll = true;
+                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            }
+        }
+        
+        ///При выборе изображения в таблице показываем его в pictureBox1.          
+        private void dgvImage_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectImage();
+        }
+        void checkBoxSize_CheckedChanged(object sender, EventArgs e)
+        {
+             ShowImage();
+        }      
+        
+    }
+}

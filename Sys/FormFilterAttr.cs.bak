@@ -1,0 +1,35 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 07.10.2017
+ * Время: 21:06
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+namespace FBA
+{
+    ///Свойства колонки настройки атрибута.
+    public partial class FormFilterAttr : FormSim
+    {            
+        ///Конструктор.
+        public FormFilterAttr(string AttrName, string AttrBrief, string AttrWidth, string AttrMask)
+        {              
+            InitializeComponent();           
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.tbName.Text  = AttrName;
+            this.tbBrief.Text = AttrBrief;
+            this.udWidth.Text = AttrWidth;
+            this.cbMask.Text  = AttrMask;            
+        }
+        
+        private void cbUniversalWordWrap_CheckedChanged(object sender, EventArgs e)
+        {
+            tbBrief.WordWrap = cbUniversalWordWrap.Checked;
+        }
+        
+    }
+}

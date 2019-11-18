@@ -1,0 +1,161 @@
+
+﻿/*
+ * Сделано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 17.12.2016
+ * Время: 23:38
+ */
+ 
+using System;
+using System.Linq;
+using System.Windows.Forms;  
+  
+namespace FBA
+{ 
+	///Форма входа в систему. Также возможна авторизация через командную строку.
+    public partial class FormEnter : FormSim
+	{	
+		public int StatusClose = 0;		   
+		public bool CloseDefault = true;
+		
+		///Конструктор
+		public FormEnter(bool CloseDefault = true)
+		{                                   									 	          						   			  		  
+		    //CloseDefault - если стоит true, то при закрыти формы входа закрываем ВСЮ ПРОГРАММУ, если не авторизовались.		  
+		    this.CloseDefault = CloseDefault;
+		    InitializeComponent();
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;      
+			
+            //Обновляем список подключений
+		    ConnectionListRefresh();		   
+		}
+  
+		///Из локальной базы загружаем список настроек соединения.	
+		private void ConnectionListRefresh()
+		{					
+			sys.CBSetDataSourceSQL("Local", cbConnection, "SELECT ConnectionName FROM arhConList ORDER BY ConnectionName");		    		  
+		    string ConnectionName;               
+            sys.GetValue2("Local", "SELECT ConnectionName, EnterMode FROM arhEnterLast WHERE SystemName = '" + sys.SystemName + "' ORDER BY EnterDate DESC LIMIT 1;", out ConnectionName, out sys.EnterMode);                
+            sys.CBSetStr(cbConnection, ConnectionName);
+            if (sys.EnterMode == "Work") cbEnterMode.SelectedIndex = 0;
+            if (sys.EnterMode == "Test") cbEnterMode.SelectedIndex = 1;
+            if (sys.EnterMode == "Dev")  cbEnterMode.SelectedIndex = 2;             
+		}				   
+				
+		///Кнопки Ok и Cancel.
+		private void BtnOkClick(object sender, EventArgs e)
+	    {				        			                		    		                       
+		    string SenderName = sys.GetSenderName(sender);
+            if (SenderName == "btnCancel") 
+            {
+                if (CloseDefault) Environment.Exit(0);
+                else Close();
+            }
+            EnterSystem();
+		}             
+		
+		///Вход в систему.
+		private bool EnterSystem()
+		{		             
+            string ConnectionName = sys.CBStr(cbConnection);           
+            if (cbEnterMode.SelectedIndex == 0) sys.EnterMode = "Work";
+            if (cbEnterMode.SelectedIndex == 1) sys.EnterMode = "Test";
+            if (cbEnterMode.SelectedIndex == 2) sys.EnterMode = "Dev";                        
+            
+            //Вход в систему - главный метод.
+            if (!sys.Enter(ConnectionName, sys.EnterMode, tbUserLogin.Text, tbUserPass.Text)) 
+            {               
+                DialogResult = DialogResult.None; 
+                return false;
+            }                               
+            
+            /*string Mes2 = 
+                    "Program2 sys.ConnectionID="    + sys.ConnectionID        + sys.CR +
+                    "Program2 sys.ConnectionName="  + sys.ConnectionName      + sys.CR + 
+                    "Program2 sys.UserForm="        + sys.UserForm            + sys.CR + 
+                    "Program2 sys.Mode="        + sys.Mode.ToString() + sys.CR;
+            sys.SM(Mes2); */
+            
+            if (sys.SystemName == "ClientApp") 
+            {
+                //string ResultMessage = "";               
+                //UpdateApp.UpdateProgram(false, out ResultMessage);
+                          
+                //Запуск формы, переменная sys.UserForm устанавливается в SystemEnter. 
+                Form form =  sys.FormGet(sys.FormMainName, sys.FormMainName); 
+                if (form.GetType().GetProperty("FormNumber") != null)
+                    sys.FormMainObj = (FormObj)form;
+                
+                if (sys.FormMainObj == null)
+                {
+                    DialogResult = DialogResult.None; 
+                    return false;
+                }
+                //Форма главная, если в имени есть слово Main.
+                if (sys.FormMainObj.Name.IndexOf("Main", StringComparison.Ordinal) == -1) //!= sys.FormTypeList.Main)
+                {
+                    DialogResult = DialogResult.None; 
+                    sys.SM("Форма не является главной форма запуска подсистемы!");
+                    return false;
+                }                                         
+            }
+            
+            StatusClose = 1; //1 - успешно.
+            return true;
+		}
+		
+		///Показ формы редактирования списка подключений.    
+		private void CbConnectionListCheckedChanged(object sender, EventArgs e)
+		{
+		    FormConList form = new FormConList();
+		    if (form.ShowDialog() !=  DialogResult.OK) return;		
+		    ConnectionListRefresh();
+            sys.CBSetStr(cbConnection, form.SelectConnectionName);
+		}
+		
+		///Выбор подключения из выпадающего CompboBox.
+		private void CbConnectionSelectedIndexChanged(object sender, EventArgs e)
+		{
+		    string SQL = "SELECT UserLogin, UserPass FROM arhConList WHERE ConnectionName = '" + sys.CBStr(cbConnection) + "';";		  
+			string UserLogin;
+			string UserPass;
+		    sys.conLite.GetValue2(SQL, out UserLogin, out UserPass);		               		    
+		    tbUserLogin.Text = UserLogin;
+		    tbUserPass.Text  = UserPass;		    
+		}		
+		
+		///Если пользователь нажал крестик на форме входа, то закрываем всю программу.
+		private void FormEnterFormClosing(object sender, FormClosingEventArgs e)
+		{	 	  
+		    if ((StatusClose == 0) && (CloseDefault)) Environment.Exit(0);		    
+		}
+		
+		///Подсвечиваем CapsLock.
+        private void Timer1Tick(object sender, EventArgs e)
+        {                                         
+           bool capsLockIsOn = Control.IsKeyLocked(Keys.CapsLock);
+           if (capsLockIsOn)
+           {
+               lbCapsLock.Text = "Caps Lock ON";
+               lbCapsLock.ForeColor = System.Drawing.Color.Red;
+               lbCapsLock.Visible = true;
+           } else
+           {                
+               lbCapsLock.Visible = false;
+           }
+        }
+        
+        private void FormEnter_Shown(object sender, EventArgs e)
+        {
+            //return;
+            if ((sys.MachineName == "COMP2879") || (sys.MachineName == "PC"))
+            {
+                if (!EnterSystem()) return;               
+                DialogResult = DialogResult.OK; 
+                Close();                
+            }         
+        }         
+	}
+}
+   

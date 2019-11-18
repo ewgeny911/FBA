@@ -1,0 +1,43 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 01.10.2017
+ * Время: 21:06
+ */
+ 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data; 
+namespace FBA
+{
+    ///Выбор атрибута.
+    public partial class FormGetAttr : FormSim
+    {       
+        public string EntityBrief;
+        public string EntityID;
+        public string AttrBrief;
+        public FormGetAttr(string EntityID)
+        {   
+            InitializeComponent();                   
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;             
+            cmtAttrList.LoadAttrTree(EntityID);
+            this.EntityBrief = cmtAttrList.EntityBrief;
+        }        
+        
+        private void PanelUserSelectedAttr(object sender, SelectAttrEventArgs e)
+        {               
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            AttrBrief = e.NewAttr;
+            Close();
+        }
+        
+        ///Закрытие формы выбора атрибута.
+        private void FormGetAttrFormClosing(object sender, FormClosingEventArgs e)
+        {
+            AttrBrief   = cmtAttrList.AttrBrief;     
+        }                                                                  
+    }
+}

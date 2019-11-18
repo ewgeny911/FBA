@@ -1,0 +1,73 @@
+
+﻿/*
+ * Сделано в SharpDevelop.
+ * Пользователь: Travin
+ * Дата: 14.12.2016
+ * Время: 11:20
+*/ 
+ 
+using System;   
+using System.Windows.Forms;
+ 
+namespace FBA
+{ 
+	public partial class FormUser : FormObj
+	{  
+		private string Operation = "";
+		private string UserID = "0";
+		private string Login  = "";
+		private string Pass   = "";
+		private string SQL = "";
+		public int StatusClose = 0;
+                      
+		public FormUser(string Operation, string UserID, string Login, string Name, string Pass, string Block)
+		{            
+			InitializeComponent();
+			this.Operation = Operation;
+			this.UserID  = UserID;
+			this.Login   = Login;
+			this.Pass    = Pass;
+			if (Operation != "Add") {
+				tbID.Text = UserID; 
+				tbLogin.Text = Login;
+				tbName.Text  = Name;           
+				tbPass.Text  = Pass;
+			}
+			SQL = "SELECT * FROM arhRole";
+			sys.SelectGV("Remote", SQL, dgvRole);                     
+			if (Block == "1") cbBlock.Checked = true; 			
+		}
+        
+		private void BtnOkClick(object sender, EventArgs e)
+		{            
+			StatusClose = 1;
+			string BlockStr = "0";
+			string RoleID = sys.DGSelected(dgvRole, "ID"); 
+			if (cbBlock.Checked) BlockStr = "1";
+			string UserPassNew = sys.GetUserPassCrypt(tbLogin.Text, tbPass.Text); 
+			SQL = "";
+			if (Operation == "Add") 					
+				SQL = "INSERT INTO arhUser (EntityID, Login, Name, Pass, RoleID, Block, DateCreate, DateChange) VALUES (102, '" + tbLogin.Text + "', '" + tbName.Text + "', '" + UserPassNew + "', " + RoleID + ", '" + BlockStr + "', " + sys.DateTimeCurrent() + ", " + sys.DateTimeCurrent() + ") ";			    
+			           
+			if (Operation == "Edit") 
+			{			   
+				SQL = "UPDATE arhUser SET " +
+				"Login  = '" + tbLogin.Text + "'," +
+				"Name   = '" + tbName.Text + "'," +
+				"Pass   = '" + UserPassNew + "'," +
+				"RoleID = " + RoleID + "," +
+				"Block  = '" + BlockStr + "'," +
+				"DateChange = " + sys.DateTimeCurrent() + " " +
+				"WHERE ID = " + UserID;			  
+			}
+			if (SQL != "") sys.Exec("Remote", SQL);
+			Close();        
+		}
+        
+		private void BtnCancelClick(object sender, EventArgs e)
+		{
+			StatusClose = 2;
+			Close();
+		}                 
+	}
+}

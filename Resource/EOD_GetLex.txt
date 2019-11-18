@@ -1,0 +1,494 @@
+ USE [DIASOFT_test]
+GO
+/****** Object:  StoredProcedure [dbo].[EOD_ContractIns]    Script Date: 24.10.2015 10:48:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Травин Е.В.
+-- Create date: 30.12.2014
+-- Description:	Парсер запроса
+/*
+  DECLARE @ParseStr varchar(max)
+  --SET @ParseStr =  'select НаимSQL FROM ФЛ WHERE ИДОБъекта = 23345' 
+  
+  SET @ParseStr =  'CASE ' +
+ 'WHEN ПсевдонимСущности.НаимСущностиОбъекта = ''Физическое лицо'' THEN ' +
+ ' (SELECT FL.ПолноеНаим_SQL FROM ФЛ FL WHERE FL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'ELSE ' +
+ ' (SELECT UL.СокращенноеНаим_SQL FROM ЮЛ UL WHERE UL.ИДОБъекта = ПсевдонимСущности.ИДОбъекта) ' +
+ 'END '
+
+  exec [dbo].[EOD_GetLex] 1, @ParseStr
+*/
+-- =============================================
+
+ALTER PROCEDURE [dbo].[EOD_GetLex] (@SQLLevel int, @EntityBriefCalc varchar(max), @ParseStr varchar(max)) 
+AS  
+  TRUNCATE TABLE #Words
+ 
+  --SET @SQLLevel = @SQLLevel + 1
+  --IF (@SQLLevel > 5)
+  --BEGIN
+  --  SELECT * FROM #Words
+  --  RETURN
+  --END
+  --select @ParseStr as ParseStr
+  --return
+  --DROP TABLE #Quotes1
+  --DROP TABLE #Words
+  --DROP TABLE #Words2
+  --DROP TABLE #Words2
+  
+  --DECLARE @ParseStr varchar(max)
+  --SET @ParseStr =  'select НаимSQL FROM ФЛ WHERE ИДОБъекта = 23345' 
+  DECLARE @ID int
+  DECLARE @i int
+  DECLARE @i1 int
+  DECLARE @i2 int
+  DECLARE @iPrev int
+  DECLARE @SubStr varchar(max)
+  DECLARE @StringPresent int --Означает что в запросе присутствуют строки 
+  DECLARE @DT1 datetime = GETDATE()
+
+  
+   /*
+   Типы Лексем - пока не применяется:
+   1 - Арифметические знаки, скобки. 
+   2 - Оператор SQL.
+   8 - Функция SQL. Напрмиер агрегатные MAX, COUNT, AVG.
+   3 - Строка в запросе SQL. Например SELECT * FROM ДогСтрах WHERE Номер = '7705001-00034'. '7705001-00034' - Это строка в запросе SQL.
+   4 - Алиас. 
+   5 - Атрибут.
+   6 - Сущность.  
+   */
+   --select * from LexTable
+  --===========================================================================================
+  --Убираем строки из запроса
+  SET @StringPresent = 0
+  SET @i = CHARINDEX('''', @ParseStr, 1) 
+  IF (@i > 0)
+  BEGIN
+    SET @StringPresent = 1
+	  DECLARE  @Quotes2 TABLE (Num int, QuotePosBegin int, QuotePosEnd int, QuoteStr varchar(max), SubStr varchar(max)) 
+    SET @iPrev = 0
+    SET @ID = 1 
+    WHILE @i > 0
+    BEGIN        	
+	  IF @ID&1=0 
+	  BEGIN	  
+	    SET @SubStr = ' ValueString' + CAST(@ID/2 AS varchar(10)) + ' '
+	    INSERT INTO @Quotes2 SELECT @ID/2, @iPrev, @i, SUBSTRING(@ParseStr, @iPrev, @i - @iPrev + 1), @SubStr
+	    SET @ParseStr = STUFF(@ParseStr, @iPrev, @i - @iPrev + 1, @SubStr)
+	  END	
+	  SET @iPrev = @i
+	  SET @ID = @ID + 1
+	  SELECT @i = CHARINDEX('''', @ParseStr, @i + 1) 
+    END
+  END
+
+  --===========================================================================================
+  --Убираем комментарии 1. Вот такие: /*  */
+  SET @i1 = CHARINDEX('/*', @ParseStr)
+  SET @i2 = CHARINDEX('*/', @ParseStr)  
+  WHILE (@i1 > 0) and (@i2 > 0)
+  BEGIN        	
+	SET @ParseStr = STUFF(@ParseStr, @i1, @i2 - @i1 + 2, '') 
+    SET @i1 = CHARINDEX('/*', @ParseStr, @i1)
+    SET @i2 = CHARINDEX('*/', @ParseStr, @i1)  
+  END
+  
+  --Убираем комментарии 2. Вот такие: --  
+  SET @i1 = CHARINDEX('--', @ParseStr)
+  SET @i2 = CHARINDEX(CHAR(13), @ParseStr, @i1) 
+  WHILE (@i1 > 0) and (@i2 > 0)
+  BEGIN        	
+	SET @ParseStr = STUFF(@ParseStr, @i1, @i2 - @i1 + 2, '') 
+    SET @i1 = CHARINDEX('--', @ParseStr, @i1)
+    SET @i2 = CHARINDEX(CHAR(13), @ParseStr, @i1)  
+  END
+  
+  --===========================================================================================
+  --Отделяем все знаки друг от друга, чтобы определить ключевые слова.
+  --Например если стоит вот так 1+(select, то после будет 1 + ( select
+  --Это нужно чтобы разделить на отдельные слова.
+  SET @ParseStr = REPLACE(@ParseStr, CHAR(13), '') 
+  SET @ParseStr = REPLACE(@ParseStr, CHAR(10), '') 
+  SET @ParseStr = REPLACE(@ParseStr, CHAR(9),  '')
+  SET @ParseStr = REPLACE(@ParseStr, '=', ' = ')
+  SET @ParseStr = REPLACE(@ParseStr, '*', ' * ')
+  SET @ParseStr = REPLACE(@ParseStr, '-', ' - ')
+  SET @ParseStr = REPLACE(@ParseStr, '+', ' + ')
+  SET @ParseStr = REPLACE(@ParseStr, '/', ' / ')
+  SET @ParseStr = REPLACE(@ParseStr, '\', ' \ ')
+  SET @ParseStr = REPLACE(@ParseStr, '(', ' ( ')
+  SET @ParseStr = REPLACE(@ParseStr, ')', ' ) ')
+  SET @ParseStr = REPLACE(@ParseStr, ',', ' , ')
+  SET @ParseStr = REPLACE(@ParseStr, '>', ' > ')
+  SET @ParseStr = REPLACE(@ParseStr, '<', ' < ')
+  SET @ParseStr = REPLACE(@ParseStr, '. *', '.*') --Меняем обратно если * означает выбор атрибутов.
+  SET @ParseStr = @ParseStr + ' '
+  
+  --=========================================================================================== 
+  --Разделяем на отдельные слова 
+  DECLARE  @Quotes1 TABLE (Num int, Lex varchar(max), QuoteStr varchar(max))   
+  SET @ID = 1
+  SET @iPrev = 0
+  SET @i = CHARINDEX(' ', @ParseStr)  
+  WHILE @i > 0
+  BEGIN        	
+    SET @SubStr = SUBSTRING(@ParseStr, @iPrev, @i - @iPrev)
+	  INSERT INTO @Quotes1 (Num, Lex) VALUES (@ID, @SubStr)
+	  SET @iPrev = @i
+	  SET @ID = @ID + 1
+	  SET @i = CHARINDEX(' ', @ParseStr, @i + 1)  
+  END  
+  --Этот вариант разделения на слова работает быстрее:
+  --declare @str varchar(max)
+  --set @str=''
+  --select @str=@str+' '+name from @t
+  --set @str='select '''+replace(ltrim(@str), ' ', ''' as City union all select ''')+''''
+  --exec(@str)
+
+  --===========================================================================================
+  --Этим запросом для каждой строки ставим её значение, так как выше мы заменили все строки на ValueString1, ValueString2 и т.д.
+  IF (@StringPresent = 1)
+    UPDATE @Quotes1 SET QuoteStr = Q2.QuoteStr FROM @Quotes2 Q2 WHERE Lex = Q2.SubStr  
+     
+  --Убираем все двойные пробелы. И ставим порядковый номер слова. 
+  --Позиция слова в изначальной строке пожалуй не нужна, поэтому эта информация теряется.
+  UPDATE @Quotes1 SET Lex =  LTRIM(RTRIM(Lex)) 
+  INSERT INTO #Words (ID, Lex, QuoteStr)
+    SELECT ROW_NUMBER () OVER (ORDER BY Num) as ID, Lex, QuoteStr from @Quotes1 where Lex <> ' '
+     
+  --===========================================================================================
+  --Находим для каждой открывающей скобки - закрывающую, а также номер вложенности. 
+  --Здесь уровень вложенности идет в обратном порядке.
+  --Здесь чем больше уровень вложенности тем номер меньше. В таком порядке мы бы считали вручную например арифметические выражения.
+  UPDATE #Words SET BracketOpen = ID WHERE Lex = '(' --Это так.. на всякий случай, потом нужно будет удалить  
+  SET @i = 1 --Уровень вложенности
+  DECLARE ListWord CURSOR FOR SELECT ID, Lex FROM #Words ORDER BY ID
+  OPEN ListWord 
+  FETCH FROM ListWord INTO @ID, @SubStr
+  WHILE @@Fetch_Status = 0
+  BEGIN 
+    IF @SubStr = ')'
+	  BEGIN
+	    SET @i1 = (select Max(ID) from #Words where Lex = '(' and BracketClose is null and ID < @ID)
+	    UPDATE #Words set BracketClose = @ID where ID = @i1
+      UPDATE #Words set BracketLevel = @i where ID between @i1 and @ID and BracketLevel is null
+	    SET @i = @i + 1
+	  END
+    FETCH FROM  ListWord INTO @ID, @SubStr
+  END
+  CLOSE ListWord
+  DEALLOCATE ListWord 
+  
+  --===========================================================================================
+  --Проставляем тип лексемы. Тип лексемы берется из таблицы dbo.LexTable
+  --Пример select * from dbo.LexTable (ID, Lex, LexType)
+  --47	SELECT	2
+  --48	THEN	  2
+  --49	TOP	    2
+  UPDATE #Words SET Lex = UPPER(#Words.Lex), #Words.LexType = L1.LexType, LexID = L1.ID FROM dbo.LexTable L1 WHERE UPPER(#Words.Lex) = L1.Lex 
+  
+  --Определение что это число
+  UPDATE  #Words SET LexType = 3 WHERE REPLACE(Lex,'.','') like REPLICATE('[0-9]', LEN(Lex) - SIGN(CHARINDEX('.', Lex))) 
+  
+  --Определение что это строка
+  UPDATE  #Words SET LexType = 4 WHERE QuoteStr IS NOT NULL
+  
+  --===========================================================================================
+  --Проставляем предыдущее слово и последующее, предыдущий тип лексемы и последующий, предыдущий ID лексемы и последующий ID.
+  --Получается всего 9 полей текущее, предыдущее, следующее - каждого по три: 
+  --Word, WordPrev, WordNext, 
+  --LexID, PrevLexID, NextLexID, 
+  --LexType, prevLexType, NextLexType.
+  --Простановка следующих символов W2.ID + 1:
+  UPDATE #Words SET PrevLex = W2.Lex, PrevLexType = W2.LexType, PrevLexID = W2.LexID 
+    FROM (SELECT ID, Lex, LexType, LexID from #Words) W2 WHERE #Words.ID = W2.ID + 1
+  
+  --Простановка предыдущих символов W2.ID - 1:
+  UPDATE #Words SET NextLex = W2.Lex, NextLexType = W2.LexType, NextLexID = W2.LexID 
+    FROM (SELECT ID, Lex, LexType, LexID from #Words) W2 WHERE #Words.ID = W2.ID - 1
+   
+  --===========================================================================================
+  --Далее несколько запросов для проставновки уровня подзапросов - поле QueryLevel.
+  --QueryLevel - самое важное поле. По нему определяется вся последующая логика. 
+  --Для того чтобы определить QueryLevel сначала проставим конец каждого подзапроса - поле QueryClose.
+  --QueryClose нужен только для того чтобы определить QueryLevel.
+  --47 = SELECT.
+  --Опредеяем для каждого SELECT где он заканчивается. Определяем как первый UNION на данном вложенном уровне. 50 = UNION.
+  UPDATE #Words SET QueryClose = (SELECT MIN(W2.ID) - 1 FROM #Words W2 WHERE W2.LexID = 50 AND W2.ID > #Words.ID AND #Words.BracketLevel = W2.BracketLevel) 
+                                  WHERE #Words.LexID = 47
+  --Если поиск разультата не дал - то считаем что конец запроса SELECT - это конец уровня вложенности по скобкам.
+  UPDATE #Words SET QueryClose = (SELECT MAX(ID) FROM #Words W2 WHERE #Words.BracketLevel = W2.BracketLevel) WHERE #Words.LexID = 47 AND #Words.QueryClose IS NULL
+  
+  --Если поиск не дал результатов, то считаем что конец - это конец всего запроса.
+  UPDATE #Words SET QueryClose = (SELECT MAX(ID) FROM #Words) WHERE  #Words.LexID = 47 AND QueryClose IS NULL
+
+  --А если запрос начинался не со скобки, то убираем её в конце.
+  --Это если у нас последний символ в подзапросе закрывающая скобка, а первый символ не открывающая скобка, то убираем скобку с конца.
+  --LexID: 2 = ( 
+  --LexID: 3 = )
+  UPDATE #Words SET QueryClose = QueryClose - 1 WHERE #Words.LexID = 47 AND PrevLexID <> 2 AND 3 = (SELECT LexID FROM #Words W2 WHERE W2.ID = #Words.QueryClose)
+  
+  --===========================================================================================
+  --Простановка уровня вложенности подзапросов - поле QueryLevel. 47 = SELECT.
+  --Ниже в запросе DESC нужен, так как в UPDATE работает с конца той таблицы из которой обновляем. 
+  DECLARE @QLevel TABLE (Num int, ID int, BracketLevel int, QueryClose int)
+  INSERT INTO @QLevel 
+    SELECT ROW_NUMBER () OVER (ORDER BY ID) AS Num, ID, BracketLevel, QueryClose FROM #Words WHERE LexID = 47 ORDER BY Num DESC 
+  
+  UPDATE #Words SET QueryLevel = t1.Num FROM @QLevel t1 WHERE #Words.ID between t1.ID and t1.QueryClose
+
+  --===========================================================================================
+  --Определение блоков SELECT, TOP, FROM, WHERE, GROUP, ORDER: 
+  --Сначала проставим всем записям конец текущего подзапроса.
+  UPDATE #Words SET BlockClose = (SELECT MAX(ID) FROM #Words W2 WHERE W2.ID >= #Words.ID AND W2.QueryLevel = #Words.QueryLevel)
+  --Определение блока SELECT. По умолчанию все SELECT, далее заменится на другие блоки если есть. 
+  --Т.к. SELECT обязан присутствовать всегда, другие блоки - не обязаны.
+  UPDATE #Words SET Block = 'SELECT'
+
+  --===========================================================================================
+  --Определение блока TOP. 49 = TOP.
+  UPDATE #Words SET Block = 'TOP' WHERE (LexID = 49 OR PrevLexID = 49)
+  UPDATE #Words SET Block = 'TOP' FROM 
+  (SELECT BracketOpen, BracketClose, QueryLevel FROM #Words WHERE PrevLexID = 49 AND LexID = 2) t1
+    WHERE ID BETWEEN t1.BracketOpen AND t1.BracketClose AND #Words.QueryLevel = t1.QueryLevel
+
+  --===========================================================================================
+  --Определение блока FROM. 26 = FROM. 2 = (. 3 = ). 50 = UNION.
+  UPDATE #Words SET Block = 'FROM' WHERE ID >= (SELECT MAX(ID) FROM #Words W2 
+    WHERE W2.QueryLevel = #Words.QueryLevel AND W2.LexID = 26) AND ISNULL(LexID, 0) NOT IN(2,3,50) -- AND ID <= BlockClose 
+  
+  --===========================================================================================
+  --Определение блока ON. 42 = ON. 52 = WHERE.  
+  SELECT ROW_NUMBER () OVER (ORDER BY ID) AS Num, ID, Lex, ID as ID2 into #Words2 from #Words WHERE Lex ='JOIN' OR Lex ='ON' OR Lex ='WHERE' ORDER BY ID 
+  UPDATE #Words2 SET ID2 = W2.ID FROM (SELECT Num, ID FROM #Words2) W2 WHERE #Words2.Num = W2.Num - 1
+  UPDATE #Words SET Block = 'ON' FROM #Words2 where #Words.ID between #Words2.ID and #Words2.ID2 and #Words2.Lex = 'ON'
+  DROP TABLE #Words2
+
+  --Определение блока WHERE. 52 = WHERE. 
+  UPDATE #Words SET Block = 'WHERE' WHERE ID >= (SELECT MAX(ID) FROM #Words W2 
+    WHERE W2.QueryLevel = #Words.QueryLevel AND W2.LexID = 52) AND ID <= BlockClose
+
+  --Определение блока GROUP BY. 28 = GROUP. 
+  UPDATE #Words SET Block = 'GROUP' WHERE ID >= (SELECT MAX(ID) FROM #Words W2 
+    WHERE W2.QueryLevel = #Words.QueryLevel AND W2.LexID = 28)-- AND ID <= BlockClose	  
+  
+  --Определение блока ORDER BY. 44 = ORDER. 
+  UPDATE #Words SET Block = 'ORDER' WHERE ID >= (SELECT MAX(ID) FROM #Words W2 
+    WHERE W2.QueryLevel = #Words.QueryLevel AND W2.LexID = 44)-- AND ID <= BlockClose	
+  --Остальные группы определяются аналогично, но возможно это не понадобится.
+
+  --===========================================================================================
+  --Определение псевдонимов (Alias). 15 = AS. 3 = ).
+  --Псевдонимы сущностей.
+  --UPDATE #Words SET Alias = NULL
+  UPDATE #Words SET Alias = 1 WHERE Block = 'FROM' AND LexID IS NULL AND PrevLexID IS NULL
+  --select * from #Words WHERE Block = 'FROM' AND LexID IS NULL AND PrevLexID IS NULL
+  --Превдонимы атрибутов. Например SELECT Номер 'Номер доп.соглашения' ИЛИ SELECT Номер AS 'Номер доп.соглашения'
+  UPDATE #Words SET Alias = 2 WHERE Block = 'SELECT' AND (LexType IS NULL OR LexType = 4) AND (PrevLexID = 15 OR PrevLexType IS NULL)  
+
+  --Псевдонимы выражений. Если встечается ситуация вот такая SELECT ... FROM (..) T1, T1-это псевдоним, то ищем его:
+  --Притом если вот так SELECT TOP(1 + 1) ИДОбъекта, то ИДОбъекта не будет алиасом.
+  UPDATE #Words SET Alias = 3 WHERE ID = (SELECT (W2.BracketClose + 1) FROM #Words W2 WHERE W2.LexID = 2 AND W2.PrevLexID = 26)
+    AND (SELECT W2.Block FROM #Words W2 WHERE W2.ID = #Words.ID - 1) <> 'TOP'
+  --Если встечается ситуация вот такая SELECT aaa, () as bbb FROM ... T1, bbb-это псевдоним, то ищем его:
+  UPDATE #Words SET Alias = 3 WHERE Block = 'SELECT' AND PrevLexID = 15 AND ISNULL(LexID, 0) <> 3
+
+  --===========================================================================================
+  --Проставление наименований используемых Сущностей. 26 = FROM.  
+  UPDATE #Words SET Entity = 1 FROM #Words WHERE Block = 'FROM' AND ISNULL(LexID, 0) not in(26,32,35)  AND ISNULL(Alias, 0) <> 1
+
+  --Проставление сокращения атрибутов в блоке SELECT. 15 = AS.
+  UPDATE #Words SET Attr = 1 FROM #Words WHERE Block = 'SELECT' AND LexType IS NULL AND Alias IS NULL
+  
+  --Проставление сокращения атрибутов в блоке WHERE. 15 = AS.
+  UPDATE #Words SET Attr = 1 FROM #Words WHERE Block IN('SELECT', 'WHERE', 'ON', 'GROUP','ORDER') AND LexType IS NULL AND Alias IS NULL
+
+  --===========================================================================================
+  --Находим для каждого атрибута с алиасом сокращение сущности, на который указывает алиас - это поле EntityBrief.
+  --AliasBrief показывает что в начале этого атрибута есть до первой точки - это алиас. В AliasBrief имя этого алиаса.
+  --Для того чтобы найти сущность для всех остальных нужно поискать в таблице атрибутов тех сущностей котрорые указаны в блоке FROM.
+  --UPDATE #Words SET EntityBrief = NULL
+  UPDATE #Words SET EntityBrief = t1.PrevLex, AliasBrief = t1.AliasName 
+  FROM (select PrevLex, Lex as AliasName from #Words W2 where Alias = 1 AND W2.QueryLevel = QueryLevel) t1  
+	WHERE CHARINDEX(t1.AliasName + '.', Lex) = 1 
+  
+  --Может быть такая ситуация SELECT Документ.Номер FROM Документ... 
+  UPDATE #Words SET EntityBrief = t1.Lex
+  FROM (select Lex from #Words W2 where W2.Entity = 1 AND W2.QueryLevel = QueryLevel) t1  
+	WHERE CHARINDEX(t1.Lex + '.', #Words.Lex) = 1 
+	 
+  --===========================================================================================  
+  --Это для всех атрибутов с алиасом.
+  UPDATE #Words SET AttrBrief = SUBSTRING(Lex, CHARINDEX('.', Lex) + 1, 1000) WHERE Attr = 1 AND AliasBrief IS NOT NULL
+  
+  --Может быть такая ситуация SELECT Документ.Номер FROM Документ...
+  --В данном случае в атрибуте первое слово до точки "Документ" нужно убрать, чтобы осталось только "Номер"
+  UPDATE #Words SET AttrBrief = SUBSTRING(AttrBrief, CHARINDEX('.', AttrBrief) + 1, 1000) 
+    WHERE Attr = 1 AND CHARINDEX(EntityBrief + '.', Lex) = 1 AND AliasBrief IS NOT NULL 
+  
+  --Это для всех атрибутов без алиаса.
+  UPDATE #Words SET AttrBrief = Lex WHERE Attr = 1 AND AliasBrief IS NULL
+
+  --===========================================================================================
+  --Получение первого РЕАЛЬНОГО атрибута до точки. Чтобы понять к какой сущности он относится. Это только атрибуты, в начале которых есть алиас. 
+  --Например1: SELECT ДС1.Номер FROM...  Здесь в FirstAttr занесется только Номер, потому что ДС1 - это не атрибут, а алиас.
+  --Например2: SELECT Страхователь.ИНН FROM ДогСтрах Здесь в FirstAttr занесется только Страхователь.
+  --Это нужно для того чтобы определить сущность для всех атрибутов для котрых не указан алиас вначале.
+  --UPDATE #Words SET FirstAttr = NULL 
+  UPDATE #Words SET FirstAttr = SUBSTRING(AttrBrief, 1, CHARINDEX('.', AttrBrief) - 1) WHERE CHARINDEX('.', AttrBrief) > 0
+  UPDATE #Words SET FirstAttr = AttrBrief WHERE CHARINDEX('.', AttrBrief) = 0
+  
+  --===========================================================================================
+  --UPDATE #Words SET EntityBrief = t1.EntityBrief FROM 
+  --  (SELECT at.EntityBrief from mtEntity en 
+  --     LEFT JOIN mtAttr at ON en.EnBrief1 = at.EntityBrief
+  --     INNER JOIN #Words ON #Words.Lex = en.EnBrief2 AND #Words.Entity = 1
+  --  ) t1
+   -- WHERE #Words.QueryLevel = t1.QueryLevel AND #Words.Attr = 1 AND #Words.EntityBrief IS NULL 
+  --  AND (#Words.FirstAttr = t1.AttrBrief) 
+  
+  
+  --Для атрибута берем первую попавшуюся сущность в которой есть атрибут с таким сокращением и из тех 
+  --сущностей которые указаны в блоке FROM текущего подзапроса. 
+  --Системных атрибутов нет в таблице атрибутов, поэтому их отдельно указываем, благо их немного.
+  --Здесь приходится соединять с таблицей mtEntity потому что атрибут может быть унаследован.
+  UPDATE #Words SET EntityBrief = t1.EntityBrief FROM 
+    (SELECT at.AttrBrief, at.EntityBrief, #Words.QueryLevel from mtEntity en 
+       LEFT JOIN mtAttr at ON en.EnBrief1 = at.EntityBrief
+       INNER JOIN #Words ON #Words.Lex = en.EnBrief2 AND #Words.Entity = 1
+    ) t1
+    WHERE #Words.QueryLevel = t1.QueryLevel AND #Words.Attr = 1 AND #Words.EntityBrief IS NULL 
+    AND (#Words.FirstAttr = t1.AttrBrief) 
+   
+  --Это для атрибутов котрые системные и которых нет в таблице mtAttr. 
+  UPDATE #Words SET EntityBrief = t1.Lex FROM 
+    (SELECT W2.Lex, W2.QueryLevel FROM #Words W2 WHERE W2.Entity = 1) t1
+    WHERE #Words.QueryLevel = t1.QueryLevel AND #Words.Attr = 1 AND #Words.EntityBrief IS NULL 
+    AND #Words.FirstAttr IN('ИДОбъекта', 'ИДСущностиОбъекта', 'НаимОбъекта', 'НаимСущностиОбъекта', 'ОбъектЗакрыт', 'СокрСущностиОбъекта')
+
+  --Это для вычисляемых атрибутов проставляем имя сущности. Чтобы потом использовать его вместо "ПсевдонимСущности"
+  UPDATE #Words SET EntityBriefCalc = t1.Lex FROM 
+  (SELECT W2.Lex, W2.QueryLevel FROM #Words W2 WHERE W2.Entity = 1) t1
+  WHERE t1.QueryLevel = #Words.QueryLevel AND @EntityBriefCalc IS NULL
+  
+  UPDATE #Words SET EntityBriefCalc = @EntityBriefCalc WHERE @EntityBriefCalc IS NOT NULL 
+  --===========================================================================================
+  --Проставляем EntityID, LinkTo, TableType, TableFieldID для всех первых атрибутов.
+  --select * from mtAttr
+  --UPDATE #Words SET EntityID = NULL, LinkTo = NULL, TableType = NULL, TableFieldID = NULL
+  UPDATE #Words SET EntityID = t1.EntityID, LinkTo = t1.TableName, 
+                    TableType = t1.TableType, TableFieldID = t1.TableFieldID
+    FROM (SELECT A1.EntityID, A1.TableName, A1.TableType, A1.TableFieldID, A1.EntityBrief FROM mtAttr A1 WHERE A1.TableType = 1) t1
+    WHERE #Words.EntityBrief = t1.EntityBrief AND #Words.Attr = 1
+ 
+  --Для сущностей находим таблицы и ключевое имя поля 
+  UPDATE #Words SET LinkTo = mtEntity.TableName, TableType = mtEntity.TableType, TableFieldID = mtEntity.IDFieldName
+    FROM mtEntity WHERE #Words.Entity = 1 AND #Words.Lex = mtEntity.EnBrief1
+  
+  --===========================================================================================
+  --Удаление временных таблиц и переменных. GO - Удаляет все переменные, в том числе табличные.
+  --но не удаляет временные таблицы.
+  --GO  
+  --===========================================================================================
+  
+  --Результат:
+  UPDATE #Words SET SQLLevel = @SQLLevel
+  --UPDATE #Words SET EntityAlias = @EntityAlias
+ 
+  
+    --select * from mtEntity
+  INSERT INTO #Lex SELECT * FROM #Words
+  --SELECT * FROM #Words ORDER BY ID
+  
+  --SELECT  ID, Lex, LexID, PrevLexID, NextLexID, EntityBrief, AttrBrief, AliasBrief, LinkTo, TableType, TableFieldID, EntityID, FirstAttr, Alias,
+	--	      Attr,  QueryLevel, Block, Entity, QuoteStr,  BracketOpen,  BracketClose,  BracketLevel, PrevLex, NextLex, LexType, PrevLexType,
+	--	      NextLexType, QueryClose, BlockClose	 	 	 
+  --FROM #Words ORDER BY ID 
+  
+  --return
+  --SELECT ID, AttrBrief, EntityBrief, LinkTo, TableFieldID, QueryLevel FROM #Words WHERE Attr = 1 ORDER BY ID
+  --return
+  --===========================================================================================
+  --Далее все атрибуты выбираем в курсор и цикл по ним, для того чтобы выяснить какие таблицы джойнить.
+  --SELECT ID, AttrBrief, EntityBrief, LinkTo, TableFieldID, QueryLevel FROM #Words WHERE Attr = 1 ORDER B
+  --DECLARE @ID int
+
+  DECLARE @EntityID int
+  DECLARE @AttrBrief varchar(100)
+  DECLARE @EntityBrief varchar(100)
+  DECLARE @LinkTo varchar(100)
+  DECLARE @TableFieldID varchar(100)
+  --DECLARE @EntityBriefCalc  varchar(100)
+  DECLARE @Attr int
+  DECLARE @Entity int
+  DECLARE @QueryLevel int
+  
+  DECLARE @AttrCycle TABLE (iNum int, SQLLevel int, ID int, EntityID int, AttrBrief varchar(100), EntityBrief varchar(100), 
+         LinkTo varchar(100), TableFieldID varchar(100), QueryLevel int, EntityBriefCalc varchar(100), Attr int, Entity int) 
+         
+         
+  INSERT INTO @AttrCycle
+    SELECT ROW_NUMBER () OVER (ORDER BY ID) as iNum, 
+         SQLLevel, ID, EntityID, AttrBrief, EntityBrief, 
+         LinkTo, TableFieldID, QueryLevel, EntityBriefCalc, Attr, Entity 
+    FROM #Words WHERE Attr = 1 OR Entity = 1
+  
+  SET @i1 = 1
+  SET @i2 = (SELECT Max(iNum) FROM @AttrCycle)
+
+  WHILE @i1 <= @i2
+  BEGIN
+    SELECT @SQLLevel     = SQLLevel, 
+           @ID           = ID, 
+           @EntityID     = EntityID, 
+           @AttrBrief    = AttrBrief, 
+           @EntityBrief  = EntityBrief, 
+           @LinkTo       = LinkTo, 
+           @TableFieldID = TableFieldID, 
+           @QueryLevel   = QueryLevel, 
+           @EntityBriefCalc = EntityBriefCalc, 
+           @Attr = Attr, 
+           @Entity = Entity
+           FROM @AttrCycle WHERE iNum = @i1
+    --INSERT INTO #Tables (SQLLevel, ID, EntityID, AttrBrief, LinkTo, TableFieldID, QueryLevel, EntityBriefCalc, Attr, Entity) VALUES (@SQLLevel, @ID, @EntityID, @AttrBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity)
+    --EXEC [dbo].[EOD_GetTables] (SELECT SQLLevel, ID, EntityID, AttrBrief, EntityBrief, LinkTo, TableFieldID, QueryLevel, EntityBriefCalc, Attr, Entity FROM #Words WHERE ID = @i)
+    EXEC [dbo].[EOD_GetTables] @SQLLevel, @ID, @EntityID, @AttrBrief, @EntityBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity	
+    SET @i1 = @i1 + 1
+  END
+
+  /*
+  DECLARE @EntityID int
+  DECLARE @AttrBrief varchar(100)
+  DECLARE @EntityBrief varchar(100)
+  DECLARE @LinkTo varchar(100)
+  DECLARE @TableFieldID varchar(100)
+  DECLARE @EntityBriefCalc  varchar(100)
+  DECLARE @Attr int
+  DECLARE @Entity int
+  DECLARE @QueryLevel int
+  DECLARE ListAttr CURSOR FOR SELECT SQLLevel, ID, EntityID, AttrBrief, EntityBrief, LinkTo, TableFieldID, QueryLevel, EntityBriefCalc, Attr, Entity FROM #Words WHERE Attr = 1 OR Entity = 1 ORDER BY ID
+  OPEN ListAttr 
+  FETCH FROM ListAttr INTO @SQLLevel, @ID, @EntityID, @AttrBrief, @EntityBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity
+  WHILE @@Fetch_Status = 0
+  BEGIN
+    EXEC [dbo].[EOD_GetTables] @SQLLevel, @ID, @EntityID, @AttrBrief, @EntityBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity	    
+    FETCH FROM ListAttr INTO @SQLLevel, @ID, @EntityID, @AttrBrief, @EntityBrief, @LinkTo, @TableFieldID, @QueryLevel, @EntityBriefCalc, @Attr, @Entity
+  END
+  CLOSE ListAttr
+  DEALLOCATE ListAttr
+  */
+
+  --SELECT * FROM LexTable
+
+  
+
+  
+
+  --select * from mtEntity order by EnBrief1

@@ -1,0 +1,233 @@
+
+﻿/*
+ * Создано в SharpDevelop.
+ * Пользователь: Травин
+ * Дата: 30.09.2017
+ * Время: 23:13
+ * 
+ 
+ */
+namespace FBA
+{
+    partial class FormValue
+    {
+        
+        
+        private System.ComponentModel.IContainer components = null;
+        public System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Button btnCancel;
+        public System.Windows.Forms.Button btnOk;          
+        public FBA.LabelFBA lbCap;
+        private System.Windows.Forms.CheckBox cbWordWrap;
+        public FBA.LabelFBA lbCount;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        public FastColoredTextBoxNS.FastColoredTextBox tbText;
+           
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) {
+                if (components != null) {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+        /// This method is required for Windows Forms designer support.
+        /// Do not change the method contents inside the source code editor. The Forms designer might
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lbCount = new FBA.LabelFBA();
+            this.cbWordWrap = new System.Windows.Forms.CheckBox();
+            this.lbCap = new FBA.LabelFBA();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tbText = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbText)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnOk);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.lbCount);
+            this.panel1.Controls.Add(this.cbWordWrap);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.panel1.Location = new System.Drawing.Point(0, 64);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(464, 41);
+            this.panel1.TabIndex = 4;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Image = global::FBA.Resource.OK_24;
+            this.btnOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOk.Location = new System.Drawing.Point(345, 5);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(112, 33);
+            this.btnOk.TabIndex = 0;
+            this.btnOk.Text = "  Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Image = global::FBA.Resource.Cancel_24;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.Location = new System.Drawing.Point(229, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(112, 33);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "   Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // lbCount
+            // 
+            this.lbCount.AutoSize = true;
+            this.lbCount.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCount.Location = new System.Drawing.Point(110, 15);
+            this.lbCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCount.Name = "lbCount";
+            this.lbCount.Size = new System.Drawing.Size(102, 17);
+            this.lbCount.StarColor = System.Drawing.Color.Crimson;
+            this.lbCount.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.lbCount.StarOffsetX = 2;
+            this.lbCount.StarOffsetY = 0;
+            this.lbCount.StarShow = false;
+            this.lbCount.StarText = "*";
+            this.lbCount.TabIndex = 9;
+            this.lbCount.Text = "Rows count: 0";
+            // 
+            // cbWordWrap
+            // 
+            this.cbWordWrap.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbWordWrap.Location = new System.Drawing.Point(7, 12);
+            this.cbWordWrap.Margin = new System.Windows.Forms.Padding(0);
+            this.cbWordWrap.Name = "cbWordWrap";
+            this.cbWordWrap.Size = new System.Drawing.Size(99, 24);
+            this.cbWordWrap.TabIndex = 11;
+            this.cbWordWrap.Tag = "SAVE";
+            this.cbWordWrap.Text = "WordWrap";
+            this.cbWordWrap.UseVisualStyleBackColor = true;
+            this.cbWordWrap.CheckedChanged += new System.EventHandler(this.cbWordWrap_CheckedChanged);
+            // 
+            // lbCap
+            // 
+            this.lbCap.AutoSize = true;
+            this.lbCap.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCap.Location = new System.Drawing.Point(4, 3);
+            this.lbCap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCap.Name = "lbCap";
+            this.lbCap.Size = new System.Drawing.Size(52, 17);
+            this.lbCap.StarColor = System.Drawing.Color.Crimson;
+            this.lbCap.StarFont = new System.Drawing.Font("Arial", 20F);
+            this.lbCap.StarOffsetX = 2;
+            this.lbCap.StarOffsetY = 0;
+            this.lbCap.StarShow = false;
+            this.lbCap.StarText = "*";
+            this.lbCap.TabIndex = 7;
+            this.lbCap.Text = "Param";
+            // 
+            // panel2
+            // 
+            this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.lbCap);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(464, 20);
+            this.panel2.TabIndex = 10;
+            // 
+            // panel3
+            // 
+            this.panel3.AutoSize = true;
+            this.panel3.Controls.Add(this.tbText);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 20);
+            this.panel3.MinimumSize = new System.Drawing.Size(440, 40);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(464, 44);
+            this.panel3.TabIndex = 12;
+            // 
+            // tbText
+            // 
+            this.tbText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbText.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.tbText.AutoIndentCharsPatterns = "";
+            this.tbText.AutoScrollMinSize = new System.Drawing.Size(2, 21);
+            this.tbText.BackBrush = null;
+            this.tbText.BackColor = System.Drawing.SystemColors.Info;
+            this.tbText.BookmarkColor = System.Drawing.Color.Red;
+            this.tbText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbText.BracketsHighlightStrategy = FastColoredTextBoxNS.BracketsHighlightStrategy.Strategy2;
+            this.tbText.CharHeight = 21;
+            this.tbText.CharWidth = 11;
+            this.tbText.CommentPrefix = "--";
+            this.tbText.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.tbText.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.tbText.FindEndOfFoldingBlockStrategy = FastColoredTextBoxNS.FindEndOfFoldingBlockStrategy.Strategy2;
+            this.tbText.Font = new System.Drawing.Font("Courier New", 14.25F);
+            this.tbText.IsReplaceMode = false;
+            this.tbText.LeftBracket = '(';
+            this.tbText.Location = new System.Drawing.Point(8, 6);
+            this.tbText.Name = "tbText";
+            this.tbText.Paddings = new System.Windows.Forms.Padding(0);
+            this.tbText.RightBracket = ')';
+            this.tbText.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.tbText.ShowLineNumbers = false;
+            this.tbText.Size = new System.Drawing.Size(449, 32);
+            this.tbText.TabIndex = 16;
+            this.tbText.VirtualSpace = true;
+            this.tbText.Zoom = 100;
+            // 
+            // FormValue
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(464, 105);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = global::FBA.Resource.DMS2;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(464, 143);
+            this.Name = "FormValue";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FormValue";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormValue_FormClosing);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbText)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+    }
+}

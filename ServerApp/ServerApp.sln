@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 5.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server.csproj", "{C833B42E-177A-440B-A5CC-CC6A589FD33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "..\ClientTemp\Client.csproj", "{2D38D5B2-ABE1-4D8C-97AA-943066FD939C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C833B42E-177A-440B-A5CC-CC6A589FD33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C833B42E-177A-440B-A5CC-CC6A589FD33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C833B42E-177A-440B-A5CC-CC6A589FD33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C833B42E-177A-440B-A5CC-CC6A589FD33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D38D5B2-ABE1-4D8C-97AA-943066FD939C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D38D5B2-ABE1-4D8C-97AA-943066FD939C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D38D5B2-ABE1-4D8C-97AA-943066FD939C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D38D5B2-ABE1-4D8C-97AA-943066FD939C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
