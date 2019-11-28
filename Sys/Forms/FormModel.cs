@@ -230,9 +230,9 @@ namespace FBA
             //Атрибут.
             if (componentStrip == "dgvAttr")
             {                            
-            	objID            = dgvAttr.DataGridViewSelected("ID");
-                string AttrBrief = dgvAttr.DataGridViewSelected("Brief");
-                string AttrName  = dgvAttr.DataGridViewSelected("Name");              
+            	objID            = dgvAttr.Value("ID");
+                string AttrBrief = dgvAttr.Value("Brief");
+                string AttrName  = dgvAttr.Value("Name");              
                 if (sender == cmModel_N4) LoadAttrList(entityID);                            
                 var f1 = new FormAttr(operation, entityID, objID, AttrBrief, AttrName);
                 f1.Icon = this.Icon;
@@ -245,8 +245,8 @@ namespace FBA
             //Таблица.
             if (componentStrip == "dgvTable")
             {                                
-                objID           = dgvTable.DataGridViewSelected("ID");      
-                string objName  = dgvTable.DataGridViewSelected("Name");                                     
+                objID           = dgvTable.Value("ID");      
+                string objName  = dgvTable.Value("Name");                                     
                 if (sender == cmModel_N4) LoadTableList(entityID);                                                       
                 var f1 = new FormTable(operation, objID, objName, entityID);
                 f1.Icon = this.Icon; 
@@ -256,11 +256,11 @@ namespace FBA
             //Метод.
             if (componentStrip == "dgvMethod")
             {                                
-                string methodID    = dgvMethod.DataGridViewSelected("ID"); 		
-				string action      = dgvMethod.DataGridViewSelected("Action"); 
-				string methodBrief = dgvMethod.DataGridViewSelected("Brief"); 
-				string methodValue = dgvMethod.DataGridViewSelected("Value"); 
-				string comment     = dgvMethod.DataGridViewSelected("Comment"); 	
+                string methodID    = dgvMethod.Value("ID"); 		
+				string action      = dgvMethod.Value("Action"); 
+				string methodBrief = dgvMethod.Value("Brief"); 
+				string methodValue = dgvMethod.Value("Value"); 
+				string comment     = dgvMethod.Value("Comment"); 	
 				string sql = "";
             	if (operation == Operation.Del)				
             	{	if (methodID == "") return;
@@ -294,13 +294,13 @@ namespace FBA
 				
 				var arrvp = new ValueParam[5];  
 				arrvp[0].captionValue = "Entity";
-	        	arrvp[0].isComboBox   = true;	
+	        	arrvp[0].componentType = ComponentType.ComboBox;	
 	        	arrvp[0].values       = null;
 	        	arrvp[0].value        = entityBrief;
 	        	arrvp[0].readOnly     = true;
 	            	
 	        	arrvp[1].captionValue = "Action";
-				arrvp[1].isComboBox   = true;	
+				arrvp[1].componentType = ComponentType.ComboBox;	
 	        	arrvp[1].values       = actionArr;
 	        	arrvp[1].value        = action;
 	        	arrvp[1].readOnly     = true;
@@ -477,8 +477,8 @@ namespace FBA
 
         private void dgvTable_DoubleClick(object sender, EventArgs e)
         {
-            string objID      = dgvTable.DataGridViewSelected("ID");           
-            string tableName  = dgvTable.DataGridViewSelected("Name");
+            string objID      = dgvTable.Value("ID");           
+            string tableName  = dgvTable.Value("Name");
             var f1 = new FormTable(Operation.Edit, CompEntityTreeFBA1.EntityID, objID,  tableName);
             f1.Icon = this.Icon;
             if (f1.ShowDialog() == DialogResult.OK) LoadAttrList(CompEntityTreeFBA1.EntityID);
@@ -486,9 +486,9 @@ namespace FBA
         
         private void DgvAttr_DoubleClick(object sender, EventArgs e)
         {                                                   
-            string objID     = dgvAttr.DataGridViewSelected("ID");
-            string attrBrief = dgvAttr.DataGridViewSelected("Brief");
-            string attrName  = dgvAttr.DataGridViewSelected("Name");              
+            string objID     = dgvAttr.Value("ID");
+            string attrBrief = dgvAttr.Value("Brief");
+            string attrName  = dgvAttr.Value("Name");              
             var f1 = new FormAttr(Operation.Edit, CompEntityTreeFBA1.EntityID, objID, attrBrief, attrName);
             f1.Icon = this.Icon;
             if (f1.ShowDialog() ==  DialogResult.OK) LoadAttrList(CompEntityTreeFBA1.EntityID);                       

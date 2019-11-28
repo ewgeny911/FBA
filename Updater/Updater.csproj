@@ -14,9 +14,9 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>..\Obj\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\..\Obj\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>..\sys\bin\Debug\Bin\</OutputPath>
+    <OutputPath>..\Bin\</OutputPath>
     <DebugType>Full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
@@ -31,7 +31,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <BaseIntermediateOutputPath>..\Obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>False</DebugSymbols>

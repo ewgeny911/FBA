@@ -521,12 +521,7 @@ namespace FBA
         /// PathForms = PathRoot + @"\Forms\"
         /// </summary>
         public static readonly string PathForms = PathRoot + @"\Forms\";
-        
-        /// <summary>
-        ///  PathDevelop = @"..\..\..\..\"
-        /// </summary>
-        public static readonly string PathDevelop = @"..\..\..\..\";
-        
+     
         /// <summary>
         /// PathTemplate = PathRoot + @"\Template\"
         /// </summary>
@@ -535,7 +530,12 @@ namespace FBA
         /// <summary>
         /// Папка проекта Debug. PathDebug = @"..\..\"; 
         /// </summary>
-        public static readonly string PathDebug = @"..\..\"; 
+        public static readonly string PathDebug = @"..\"; 
+        
+        /// <summary>
+        /// путь к файлу локальной базы данных"; 
+        /// </summary>
+        public static readonly string PathSQLite =  PathRoot + @"\DB\local.db3"; 
         
         /// <summary>
         /// Файл справки. PathHelp = PathRoot + @"\Help\chm\"
@@ -1127,5 +1127,29 @@ namespace FBA
 		/// </summary>
 		Dll			
 	}
+	
+	
+	/// <summary>
+	/// Тип компонента для формы ввода значений. Пока только три типа.
+	/// </summary>
+	public enum ComponentType
+	{
+		/// <summary>
+		/// ComboBox
+		/// </summary>
+		ComboBox,
+		
+		/// <summary>
+		/// TextBox
+		/// </summary>
+		TextBox,
+		
+		/// <summary>
+		/// CheckBox
+		/// </summary>
+		CheckBox		
+			
+	}
+	
 	
 }

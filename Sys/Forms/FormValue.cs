@@ -20,7 +20,7 @@ namespace FBA
 		/// <summary>
 		/// Количество создаваемых компонентов.
 		/// </summary>
-		private int countTextBox = 0;	
+		private int countComponent = 0;	
 
 		/// <summary>
 		/// Массив компонентов TextBox на форме FormValue. Для доступа извне.
@@ -32,16 +32,15 @@ namespace FBA
 		/// </summary>
 		public FBA.ComboBoxFBA[] comboBoxArray;
 		
-		private ValueParam[] arrvp;		
-		private bool AnchorBottom = false;		
-		private const int defaultHeightComboBox  = 25;
-		private const int defaultHeightLabel     = 17;
-		private const int defaultRightMargin     = 40;
-		private const int spaceAfterAllComponent = 120;
-		private const int firstTopLabel = 11;
-		private const int firstTopComboBox = 32;
-		private const int spaceBetweenComponent = 59;
+		/// <summary>
+		/// Массив компонентов ComboBox на форме FormValue. Для доступа извне.
+		/// </summary>
+		public FBA.CheckBoxFBA[] checkBoxArray;
 		
+		private ValueParam[] arrvp;		
+		private bool AnchorBottom = false;			
+		private const int defaultRightMargin     = 40;
+				
 		/// <summary>
 		/// Если нужно несколько разных компонентов
 		/// Вызывать так:
@@ -72,7 +71,8 @@ namespace FBA
 				if (w > 0) this.Width = w + defaultRightMargin;
             }
 			
-			textBoxArray = new FBA.TextBoxFBA[arrvp.Length];
+			checkBoxArray = new FBA.CheckBoxFBA[arrvp.Length];
+			textBoxArray  = new FBA.TextBoxFBA[arrvp.Length];
             comboBoxArray = new FBA.ComboBoxFBA[arrvp.Length];
 			for (int i = 0; i < arrvp.Length; i++)
             {
@@ -87,8 +87,9 @@ namespace FBA
 		/// <returns></returns>
 		public string GetValue(int NumberText)		
 		{
-			if (comboBoxArray[NumberText] != null) return comboBoxArray[NumberText].Text;
-			if (textBoxArray[NumberText] != null) return textBoxArray[NumberText].Text;
+			if (checkBoxArray[NumberText] != null) return checkBoxArray[NumberText].Text;
+			if (textBoxArray[NumberText]  != null) return textBoxArray[NumberText].Text;
+			if (comboBoxArray[NumberText] != null) return comboBoxArray[NumberText].Text;					
 			return null;
 		}
 		
@@ -97,6 +98,16 @@ namespace FBA
 		/// </summary>
 		private void CreateOneText(int n)
 		{					
+			const int leftComponent          = 13;
+			int widthComponent               = Width - defaultRightMargin;
+			const int firstTopLabel          = 11;
+		    const int firstTopComboBox       = 32;
+		    const int spaceAfterAllComponent = 120;
+		    const int defaultHeightComboBox  = 25;
+		    const int defaultHeightLabel     = 17;
+		    const int defaultHeightCheckBox  = 20;
+		    const int spaceBetweenComponent  = 59;
+		    
 			int addHeight = 0;
 			int countSetHeight = 0;
 			for (int i = 0; i < n; i++) 
@@ -104,35 +115,49 @@ namespace FBA
 				addHeight = addHeight + arrvp[i].height;
 				if (arrvp[i].height > 0) countSetHeight++;
 			}
-			if (addHeight > 0) addHeight = addHeight - (countSetHeight * defaultHeightComboBox);
-			const int leftPosition = 13;
-			countTextBox++;
+			if (addHeight > 0) addHeight = addHeight - (countSetHeight * defaultHeightComboBox);					
 			
-			//Для Label
-			const int xLabel = leftPosition;		
-			int yLabel       = ((countTextBox - 1) * spaceBetweenComponent) + firstTopLabel + addHeight; //11 - начальная позиция по вертикали.  
-			int widthLabel   = this.Width - defaultRightMargin;
-						
-			//Для ComboBox или TextBox
-			const int xTextBox = leftPosition;
-			int yTextBox       = ((countTextBox - 1) * spaceBetweenComponent) + firstTopComboBox + addHeight; //32 - начальная позиция по вертикали.
-			int widthTextBox   = this.Width - defaultRightMargin;
-			int heightParam = defaultHeightComboBox; //По умолчанию Height для ComboBox или TextBox.						
-			//System.Windows.Forms.ScrollBars scrolls = System.Windows.Forms.ScrollBars.None;
-			if (arrvp[n].height != 0) heightParam = arrvp[n].height;														
-			int formheight = yTextBox + arrvp[n].height + spaceAfterAllComponent;					
+			//Для Label	
+			int yLabel     = ((countComponent) * spaceBetweenComponent) + firstTopLabel    + addHeight; //11 - начальная позиция по вертикали.  			
+					 
+			//Для ComboBox или TextBox		
+			int yComponent = ((countComponent) * spaceBetweenComponent) + firstTopComboBox + addHeight; //32 - начальная позиция по вертикали.
+			
+			
+			int heightComponent = defaultHeightComboBox;										
+			if (arrvp[n].height != 0) heightComponent = arrvp[n].height;
+
+			
+			int formheight = yComponent + arrvp[n].height + spaceAfterAllComponent;					
 			if (formheight > Var.scrteenWorkingHeight) formheight = Var.scrteenWorkingHeight;
 			
-			this.Height = formheight;			
-			//this.sc = System.Windows.Forms.ScrollBars.Both;			
-			CreateLabel(n,  xLabel, yLabel,  widthLabel, defaultHeightLabel); 
-			if (!arrvp[n].isComboBox) CreateTextBox(n, xTextBox, yTextBox, widthTextBox, heightParam); 		                                  			
-			  else 
-			  {
-			  	ComboBoxFBA fb = CreateComboBox(n, xTextBox, yTextBox, widthTextBox, heightParam); 
-			  	   if (!String.IsNullOrEmpty(arrvp[n].msql))  fb.SetDataSourceMSQL(arrvp[n].msql);
-			  	   else if (!String.IsNullOrEmpty(arrvp[n].sql))  fb.SetDataSourceMSQL(arrvp[n].sql);
-			  }					
+			this.Height = formheight;		
+			
+			//CheckBox
+			if (arrvp[n].componentType == ComponentType.CheckBox) 
+			{
+				CreateCheckBox(n,  leftComponent, yLabel,  widthComponent, defaultHeightCheckBox);
+			}
+			
+			//TextBox			
+			if (arrvp[n].componentType == ComponentType.TextBox) 
+			{
+				CreateLabel(n,   leftComponent, yLabel,     widthComponent, defaultHeightLabel);
+				CreateTextBox(n, leftComponent, yComponent, widthComponent, heightComponent);
+			}
+			
+			//ComboBox
+			if (arrvp[n].componentType == ComponentType.ComboBox)
+			{
+			    CreateLabel(n,  leftComponent, yLabel,  widthComponent, defaultHeightLabel);
+				ComboBoxFBA fb = CreateComboBox(n, leftComponent, yComponent, widthComponent, heightComponent);
+			   
+			    //Установка DataSource
+			    if (!String.IsNullOrEmpty(arrvp[n].msql)) fb.SetDataSourceMSQL(arrvp[n].msql);
+			  	   else if (!String.IsNullOrEmpty(arrvp[n].sql)) fb.SetDataSourceMSQL(arrvp[n].sql);
+			}
+
+			if (arrvp[n].componentType != ComponentType.CheckBox) countComponent++;			
 		}
 				
 		/// <summary>
@@ -178,6 +203,37 @@ namespace FBA
 			Controls.Add(lbCap1);
 		}				
 		
+		
+		/// <summary>
+		/// Создание одного CheckBox.
+		/// </summary>
+		/// <param name="indexParam">Номер CheckBox</param>
+		/// <param name="xCheckBox">Координата X для CheckBox</param>
+		/// <param name="yCheckBox">Координата Y для CheckBox</param>
+		/// <param name="widthCheckBox">Ширина CheckBox</param>
+		/// <param name="heightCheckBox">Высота CheckBox</param>		
+		private CheckBox CreateCheckBox(int indexParam,
+			                     int xCheckBox,
+		                         int yCheckBox, 
+		                         int widthCheckBox, 
+		                         int heightCheckBox)
+		{			            			
+			
+			checkBoxArray[indexParam] = new FBA.CheckBoxFBA();	
+			checkBoxArray[indexParam].Checked = true;
+			checkBoxArray[indexParam].CheckState = System.Windows.Forms.CheckState.Checked;
+			checkBoxArray[indexParam].Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			checkBoxArray[indexParam].Location = new System.Drawing.Point(xCheckBox, yCheckBox);
+			checkBoxArray[indexParam].Name = "checkbox" + indexParam.ToString();	
+			checkBoxArray[indexParam].Size = new System.Drawing.Size(widthCheckBox, heightCheckBox);
+			checkBoxArray[indexParam].TabIndex = 5;
+			checkBoxArray[indexParam].Text = arrvp[indexParam].value;
+			checkBoxArray[indexParam].UseVisualStyleBackColor = true;								
+			Controls.Add(checkBoxArray[indexParam]);
+			checkBoxArray[indexParam].Enabled = !arrvp[indexParam].notEnabled;
+		    return checkBoxArray[indexParam];	
+		}		
+				
 		/// <summary>
 		/// Создание одного текстового поля TextBox.
 		/// </summary>	
@@ -200,6 +256,7 @@ namespace FBA
 			textBoxArray[indexParam].Location = new System.Drawing.Point(xTextBox, yTextBox);					
 			textBoxArray[indexParam].ReadOnly = arrvp[indexParam].readOnly;
 			textBoxArray[indexParam].WordWrap = arrvp[indexParam].wordwrap;
+			textBoxArray[indexParam].Enabled  = !arrvp[indexParam].notEnabled;
 						
 			if (AnchorBottom)
 			{
@@ -278,6 +335,7 @@ namespace FBA
 			comboBoxArray[indexParam].Text = arrvp[indexParam].value;
 			Controls.Add(comboBoxArray[indexParam]);
 			comboBoxArray[indexParam].ReadOnly = arrvp[indexParam].readOnly;
+			comboBoxArray[indexParam].Enabled  = !arrvp[indexParam].notEnabled;
 			return comboBoxArray[indexParam];					
 		}
 		
@@ -308,16 +366,16 @@ namespace FBA
 			SetWordWrap(this.Controls, cbWordWrap.Checked);
 		}		
 	}
-			
+	
 	/// <summary>
 	/// Класс для описания параметра формы FormValue.
 	/// </summary>
 	public struct ValueParam
-	{
+	{			
 		/// <summary>
 		/// Если компонент должен быть ComboBox-ом, то true.
 		/// </summary>
-		public bool isComboBox;
+		public ComponentType componentType;
 		
 		/// <summary>
 		///Тип значения
@@ -384,14 +442,41 @@ namespace FBA
 		/// Свойство Read only для TextBox и ComboBox.
 		/// </summary>
 		public bool readOnly;	
-					
+		
+		/// <summary>
+		/// Свойство Read only для TextBox и ComboBox.
+		/// </summary>
+		public bool notEnabled;	
+		
+		
+		/*public ValueParam(bool hh)
+		{
+			componentType = ComponentType.TextBox;		
+		    valueType = ValueType.String;				
+		    value = "";		
+		    captionValue = "";		
+		    values = null;				
+	        height = 100;		
+		    width = 100;				
+		    scrolls = System.Windows.Forms.ScrollBars.Both;		
+		    wordwrap = false;		
+		    msql = "";		
+		    sql = "";			
+		    defaultTextGray = "";		
+		    defaultTextGrayColor = Color.LightGray;	
+		    readOnly = false;			
+		    enabled = true;	
+			this.enabled = true;
+		}*/
+		
+		
 		/// <summary>
 		/// Скопировать один параметр в другой. Копирование по значению, а не по ссылке.
 		/// </summary>
 		/// <param name="vp">Параметр кода копируем значения из данного.</param>
 		public void CopyTo(ValueParam vp)
 		{
-			vp.isComboBox           = this.isComboBox;           //bool
+			vp.componentType        = this.componentType;        //ComponentType
 			vp.valueType            = this.valueType;            //ValueType
 			vp.value                = this.value;                //string
 			vp.captionValue         = this.captionValue;         //string

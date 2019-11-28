@@ -843,7 +843,7 @@ namespace FBA
             {
                 for (int c = 0; c < CountCols; c++)
                 {
-                    int ValueLen = DG.RowInt(r, c).Length; //DGV.Rows[r][c].ToString().Length;
+                    int ValueLen = DG.ValueByRowIndex(r, c).Length; //DGV.Rows[r][c].ToString().Length;
 
                     if (ValueLen == 0)
                         //if (DG.DGRowInt(r,c).GetType().ToString() == "System.DBNull")
@@ -859,12 +859,12 @@ namespace FBA
                             continue;
                         }
                     if (r > 0)
-                        if (DG.RowInt(r, c) == DG.RowInt(r - 1, c))  //Так не катит:  DG[r,c] == DG[r-1,c]
+                        if (DG.ValueByRowIndex(r, c) == DG.ValueByRowIndex(r - 1, c))  //Так не катит:  DG[r,c] == DG[r-1,c]
                         {
                             LineArr[c] = "99" + sep;
                             continue;
                         }
-                    LineArr[c] = ValueLen.ToString().Length.ToString("D2") + sep + ValueLen + sep + DG.RowInt(r, c) + sep;
+                    LineArr[c] = ValueLen.ToString().Length.ToString("D2") + sep + ValueLen + sep + DG.ValueByRowIndex(r, c) + sep;
                 }
                 DataArr[r] = string.Join(sep, LineArr);
             }
@@ -1685,10 +1685,9 @@ namespace FBA
             string SQL = sys.GetTextTableToDatabase(Var.con.ServerType, TableName, DT, true);                
             return Var.con.Exec(SQL);   
         }*/
-
          
         /// <summary>
-        /// /Получить DataTable с названиями столбцов в виде списка строк.
+        /// Получить DataTable с названиями столбцов в виде списка строк.
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="ch"></param>

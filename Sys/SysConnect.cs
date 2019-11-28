@@ -190,7 +190,8 @@ namespace FBA
         /// <returns>Если успешно, то true</returns>
         public bool ConnectionSetLocal()
         {              		      
-            FBAFile.GetPathSQLite(out ServerName);
+            //FBAFile.GetPathSQLite(out ServerName);
+            ServerName = FBAPath.PathSQLite;
             //return ConnectionInit(ServerType.SQLite, ServerName, "", "", "");    
             serverType    = ServerType.SQLite;  
 			ConnectionID = "0";            
@@ -221,7 +222,7 @@ namespace FBA
             sys.GetServerAppPort(serverName, out ServerAppName, out ServerAppPort);
             
             if (((serverName == "localhost") || (serverName == "")) && (serverType == ServerType.SQLite)) 
-            	FBAFile.GetPathSQLite(out serverName);
+            	 serverName = FBAPath.PathSQLite; //FBAFile.GetPathSQLite(out serverName);
             
             this.serverType    = serverType;            
             this.ServerName    = serverName;

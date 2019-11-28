@@ -206,8 +206,8 @@ namespace FBA
         /// <param name="e"></param>
         private void tbParamN1_Click(object sender, EventArgs e)
         {           
-            string UserID     = dgvUser.DataGridViewSelected("ID"); 
-            string ParamID    = dgvParam.DataGridViewSelected("ID"); 
+            string UserID     = dgvUser.Value("ID"); 
+            string ParamID    = dgvParam.Value("ID"); 
             
             //Add.
             if (sender == tbParamN1) ParamAdd(UserID);
@@ -234,7 +234,7 @@ namespace FBA
         ///Галка применить фильтр. 
         private void cbParamFilter_CheckedChanged(object sender, EventArgs e)
         {
-            string UserID   = dgvUser.DataGridViewSelected("ID"); 
+            string UserID   = dgvUser.Value("ID"); 
             if (UserID == "") return;
             if (cbParamFilter.Checked)
             {

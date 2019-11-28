@@ -62,6 +62,12 @@ namespace FBA
             	sql = "INSERT INTO fbaRole (EntityID, Name, Brief, DateCreate, DateChange) VALUES (103, '" + tbName.Text + "', '" + tbBrief.Text + "', " + sys.DateTimeCurrent() + ", " + sys.DateTimeCurrent() + ");"; 
                 sys.Exec(DirectionQuery.Remote, true, sql, out roleID);
             }
+            if (roleID == "") 
+            {
+            	sys.SM("Ошибка создания роли пользователя!");
+            	return;
+            }
+          
             if (Operation == Operation.Edit)
             {                             
                 sql = "UPDATE fbaRole SET " +
@@ -74,20 +80,24 @@ namespace FBA
             }                   
             string sqlinsert = "";
             string projectID    = ""; 
-            string rightID   = "";             
+            string rightID   = ""; 
+           
             sql = "DELETE FROM fbaRelRoleProject WHERE RoleID = " + roleID + "; " + Var.CR +
-                  "DELETE FROM fbaRelRoleRight WHERE RoleID = " + roleID + ";";
+              	  "DELETE FROM fbaRelRoleRight   WHERE RoleID = " + roleID + ";" + Var.CR;
+          
             for (int i = 0; i < DTForm2.Rows.Count; i++)
             {        	 	 
-        	 	projectID = dgvForm2.RowInt(i, "ID");   
+        	 	projectID = dgvForm2.ValueByRowIndex(i, "ID"); 
+        	 	if (projectID == "") break;
         	 	sqlinsert += "INSERT INTO fbaRelRoleProject (EntityID, ProjectID, RoleID, UserCreateID, DateCreate) " + 
-        	 		"VALUES (" + sys.GetEntityID("RelRoleProject") + ", " + projectID + ", " + roleID + ", " + Var.UserID  + ", " + sys.DateTimeCurrent() + "); \r\n";
+        	 		"VALUES (" + sys.GetEntityID("RelRoleProject") + ", " + projectID + ", " + roleID + ", " + Var.UserID  + ", " + sys.DateTimeCurrent() + ");" + Var.CR;
             }
             for (int i = 0; i < DTRight2.Rows.Count; i++)
             {                  
-                 rightID = dgvRight2.RowInt(i, "ID");   
+                 rightID = dgvRight2.ValueByRowIndex(i, "ID");  
+                 if (rightID == "") break;
                  sqlinsert += "INSERT INTO fbaRelRoleRight (EntityID, RightID, RoleID, UserCreateID, DateCreate) " + 
-                     "VALUES (" + sys.GetEntityID("RelRoleProject") + ", " + rightID + ", " + roleID + ", " + Var.UserID  + ", " + sys.DateTimeCurrent() + "); \r\n";                      
+                     "VALUES (" + sys.GetEntityID("RelRoleProject") + ", " + rightID + ", " + roleID + ", " + Var.UserID  + ", " + sys.DateTimeCurrent() + "); " + Var.CR;                      
             }
             
             sql += sqlinsert;
@@ -135,8 +145,8 @@ namespace FBA
         /// </summary>
         private void AddForm()
         {
-        	string RowID   = dgvForm1.DataGridViewSelected("ID");
-        	string RowName = dgvForm1.DataGridViewSelected("Name"); 
+        	string RowID   = dgvForm1.Value("ID");
+        	string RowName = dgvForm1.Value("Name"); 
         	DataRow[] dt;
         	dt = DTForm2.Select("Name='" + RowName + "'");
         	if (dt.Length > 0)
@@ -167,8 +177,8 @@ namespace FBA
                 for (int i = 0; i < DTForm1.Rows.Count; i++)
                 {
                     DataRow Row1 = DTForm2.NewRow(); 
-                    Row1["ID"]   = dgvForm1.RowInt(i, "ID");
-                    Row1["Name"] = dgvForm1.RowInt(i, "Name");            
+                    Row1["ID"]   = dgvForm1.ValueByRowIndex(i, "ID");
+                    Row1["Name"] = dgvForm1.ValueByRowIndex(i, "Name");            
                     DTForm2.Rows.Add(Row1);                         
                 }                                              
         	}
@@ -189,8 +199,8 @@ namespace FBA
         /// </summary>
         private void AddRight()
         {
-            string RowID   = dgvRight1.DataGridViewSelected("ID");
-            string RowName = dgvRight1.DataGridViewSelected("Name"); 
+            string RowID   = dgvRight1.Value("ID");
+            string RowName = dgvRight1.Value("Name"); 
             DataRow[] dt;
             dt = DTRight2.Select("Name='" + RowName + "'");
             if (dt.Length > 0)
@@ -222,8 +232,8 @@ namespace FBA
                 for (int i = 0; i < DTRight1.Rows.Count; i++)
                 {
                     DataRow Row1 = DTRight2.NewRow(); 
-                    Row1["ID"]   = dgvRight1.RowInt(i, "ID");
-                    Row1["Name"] = dgvRight1.RowInt(i, "Name");            
+                    Row1["ID"]   = dgvRight1.ValueByRowIndex(i, "ID");
+                    Row1["Name"] = dgvRight1.ValueByRowIndex(i, "Name");            
                     DTRight2.Rows.Add(Row1);                         
                 }                                              
             }

@@ -18,9 +18,9 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>..\Obj\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\..\Obj\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>..\sys\bin\Debug\Bin\</OutputPath>
+    <OutputPath>..\Bin\</OutputPath>
     <DebugType>Full</DebugType>
     <ApplicationIcon>..\Resource\Images\Program\ServerApp.ico</ApplicationIcon>
   </PropertyGroup>
@@ -36,7 +36,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <BaseIntermediateOutputPath>..\Obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>False</DebugSymbols>
@@ -49,7 +49,8 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="sys">
-      <HintPath>..\Sys\bin\Debug\Bin\sys.dll</HintPath>
+      <HintPath>..\Bin\sys.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

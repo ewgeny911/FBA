@@ -346,7 +346,11 @@ namespace FBA
         ///Событие. При показе любой формы проверяем наличие подключения, и если его нет, то устанавливаем.
         private void FormFBALoad(object sender, EventArgs e)
         {                          
-            if (Var.IsDesignMode) return;
+            
+        	//Событие. Когда форма показывается.        	     
+            if (this.FormSavePosition) LoadPosition();
+        	
+        	if (Var.IsDesignMode) return;
             //if (Var.FormMainObj != null)     this.Icon = Var.FormMainObj.Icon;            
             //else if (this.MdiParent != null) this.Icon = this.MdiParent.Icon; 
             //else if (this.Owner != null)     this.Icon = this.Owner.Icon;
@@ -464,9 +468,10 @@ namespace FBA
 
         ///Событие. Когда форма показывается.
         private void FormFBAShown(object sender, EventArgs e)
-        {          
-            if (Var.IsDesignMode) return;
-            if (this.FormSavePosition) LoadPosition();
+        {   
+               
+                 // 
+               
         }
 
     

@@ -98,7 +98,7 @@ namespace FBA
             //ObjectID = "2776312";
             //sys.DGValue()dgvStateDate.           
             //string StateDate = dgvStateDate.SelectedRows[0].Cells["StateDate"].Value.ToString(); 
-            string StateDate = dgvStateDate.DataGridViewSelected("StateDate");
+            string StateDate = dgvStateDate.Value("StateDate");
             string StateDateSQL = sys.ConvertDate4Server(StateDate);
             AddAttrToForm();
         }  

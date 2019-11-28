@@ -118,7 +118,7 @@ namespace FBA
 			this.btnCancel.Text = "Cancel    ";
 			this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.btnCancel.UseVisualStyleBackColor = false;
-			this.btnCancel.Click += new System.EventHandler(this.BtnOkClick);
+			this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
 			// 
 			// lbCapsLock
 			// 
@@ -166,6 +166,7 @@ namespace FBA
 			this.cbConnection.AttrBriefLookup = null;
 			this.cbConnection.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
 			this.cbConnection.ContextMenuEnabled = true;
+			this.cbConnection.DefaultTextGrayFont = null;
 			this.cbConnection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbConnection.ErrorIfNull = null;
 			this.cbConnection.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -294,6 +295,7 @@ namespace FBA
 			this.cbEnterMode.AttrBriefLookup = null;
 			this.cbEnterMode.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
 			this.cbEnterMode.ContextMenuEnabled = true;
+			this.cbEnterMode.DefaultTextGrayFont = null;
 			this.cbEnterMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbEnterMode.ErrorIfNull = null;
 			this.cbEnterMode.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

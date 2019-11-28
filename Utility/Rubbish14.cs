@@ -512,6 +512,33 @@
         }
         */
 //=============================================
+/*/// <summary>
+        /// Возвращает полный путь к клиенту ClientApp.exe.
+        /// </summary>
+        /// <param name="fileName">Полный путь к клиенту ClientApp.exe</param>
+        /// <returns>Если файл БД наден, то true</returns>
+        public static bool GetPathClient(out string fileName)
+        {
+            string applicationDirectory = System.Windows.Forms.Application.StartupPath;
+            fileName = applicationDirectory + @"\ClientApp.exe";
+            if (!File.Exists(fileName)) fileName = @"..\..\..\ClientApp\bin\Debug\ClientApp.exe";
+            if (!File.Exists(fileName))
+            {
+                sys.SM("File not found ClientApp.exe", MessageType.Information, "Entering to system");
+                return false;
+            }
+
+            //Функция GetFullPath возвращает полный путь относительно текущей папки.
+            Directory.SetCurrentDirectory(applicationDirectory);
+            string fileNameFull = System.IO.Path.GetFullPath(fileName);
+            if (!File.Exists(fileNameFull))
+            {
+                sys.SM("File not found ClientApp.exe:" + fileNameFull, MessageType.Information, "Entering to system");
+                return false;
+            }
+            fileName = fileNameFull;
+            return true;
+        }*/
 //=============================================
 //=============================================
 //=============================================

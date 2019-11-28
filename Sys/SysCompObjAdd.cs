@@ -155,7 +155,7 @@ namespace FBA
 			
 			for (int i = 0; i < dgvObj2.Rows.Count; i++)
             {                  
-                 string ObjID2 = dgvObj2.RowInt(i, "ID");   
+                 string ObjID2 = dgvObj2.ValueByRowIndex(i, "ID");   
                  sqlInsert += "INSERT INTO " + tableName+ " (" + fieldObj1 + "," + fieldObj2 + fields + ") VALUES " +
                      " (" + objID1 + ", " + ObjID2 + values + ");" + Var.CR;                      
             }           

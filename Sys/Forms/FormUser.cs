@@ -66,7 +66,7 @@ namespace FBA
 		{            
 			StatusClose = 1;
 			string blockStr = "0";
-			string roleID   = dgvRole.DataGridViewSelected("ID"); 
+			string roleID   = dgvRole.Value("ID"); 
 			if (cbBlock.Checked) blockStr = "1";
 			string userPassNew = sys.GetUserPassCrypt(tbLogin.Text, tbPass.Text); 
 			sql = "";

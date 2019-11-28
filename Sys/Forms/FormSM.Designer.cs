@@ -50,7 +50,7 @@ namespace FBA
         	this.panel3 = new System.Windows.Forms.Panel();
         	this.splitContainer1 = new System.Windows.Forms.SplitContainer();
         	this.TextBoxMes = new System.Windows.Forms.TextBox();
-        	this.tabControl1 = new System.Windows.Forms.TabControl();
+        	this.tabControl1 = new FBA.TabControlFBA();
         	this.tabPage1 = new System.Windows.Forms.TabPage();
         	this.panel1.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -215,6 +215,7 @@ namespace FBA
         	this.btnNext.Size = new System.Drawing.Size(28, 28);
         	this.btnNext.TabIndex = 6;
         	this.btnNext.UseVisualStyleBackColor = true;
+        	this.btnNext.Click += new System.EventHandler(this.BtnNextClick);
         	// 
         	// btnPrev
         	// 
@@ -225,6 +226,7 @@ namespace FBA
         	this.btnPrev.Size = new System.Drawing.Size(28, 28);
         	this.btnPrev.TabIndex = 5;
         	this.btnPrev.UseVisualStyleBackColor = true;
+        	this.btnPrev.Click += new System.EventHandler(this.BtnPrevClick);
         	// 
         	// panel3
         	// 
@@ -272,14 +274,31 @@ namespace FBA
         	// 
         	// tabControl1
         	// 
+        	this.tabControl1.AttrBrief = null;
         	this.tabControl1.Controls.Add(this.tabPage1);
         	this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
         	this.tabControl1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+        	this.tabControl1.GroupEnabled = null;
+        	this.tabControl1.HideTabs = false;
         	this.tabControl1.Location = new System.Drawing.Point(0, 0);
         	this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
         	this.tabControl1.Name = "tabControl1";
+        	this.tabControl1.Obj = null;
+        	this.tabControl1.SaveParam = false;
         	this.tabControl1.SelectedIndex = 0;
+        	this.tabControl1.SelectTabBackColor = System.Drawing.Color.Aqua;
+        	this.tabControl1.SelectTabFontColor = System.Drawing.Color.Black;
+        	this.tabControl1.SetSelectTabBackColor = false;
         	this.tabControl1.Size = new System.Drawing.Size(673, 154);
+        	this.tabControl1.StarColor = System.Drawing.Color.Crimson;
+        	this.tabControl1.StarFont = new System.Drawing.Font("Arial", 20F);
+        	this.tabControl1.StarOffsetX = 2;
+        	this.tabControl1.StarOffsetY = 0;
+        	this.tabControl1.StarPageIndex = 0;
+        	this.tabControl1.StarShow = false;
+        	this.tabControl1.StarText = "*";
+        	this.tabControl1.TabFontColor = System.Drawing.Color.Black;
         	this.tabControl1.TabIndex = 17;
         	// 
         	// tabPage1
@@ -332,7 +351,7 @@ namespace FBA
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private FBA.TabControlFBA tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox cbWordWrap;
         private System.Windows.Forms.TextBox TextBoxMes;

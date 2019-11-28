@@ -54,11 +54,11 @@ namespace FBA
 			//sys.SelectComboBox(DirectionQuery.Remote, SQL, frm.tbText1);
 			string[] entitlyList = sys.SQLToArray(DirectionQuery.Remote, sql);
 			
-			string entityBrief = dgvMethod.DataGridViewSelected("Entity"); 
-			string action      = dgvMethod.DataGridViewSelected("Action"); 
-			string methodBrief = dgvMethod.DataGridViewSelected("Brief"); 
-			string methodValue = dgvMethod.DataGridViewSelected("Value"); 
-			string comment     = dgvMethod.DataGridViewSelected("Comment"); 			
+			string entityBrief = dgvMethod.Value("Entity"); 
+			string action      = dgvMethod.Value("Action"); 
+			string methodBrief = dgvMethod.Value("Brief"); 
+			string methodValue = dgvMethod.Value("Value"); 
+			string comment     = dgvMethod.Value("Comment"); 			
 			string capForm = operation.ToString() + "entity method";
 			
 			
@@ -71,12 +71,12 @@ namespace FBA
 
 			var arrvp = new ValueParam[5];  
 			arrvp[0].captionValue = "Entity";
-        	arrvp[0].isComboBox = true;	
+        	arrvp[0].componentType = ComponentType.ComboBox;	
         	arrvp[0].values = entitlyList;
         	arrvp[0].value  = entityBrief;
             	
         	arrvp[1].captionValue = "Action";
-			arrvp[1].isComboBox = true;	
+			arrvp[1].componentType = ComponentType.ComboBox;	
         	arrvp[1].values = actionList;
         	arrvp[1].value  = action;
         	
@@ -146,14 +146,14 @@ namespace FBA
         ///При выборе текста в таблице показываем его. 
 		private void DgvMethodDoubleClick(object sender, EventArgs e)
 		{
-	 		string MethodID   = dgvMethod.DataGridViewSelected("ID"); 
+	 		string MethodID   = dgvMethod.Value("ID"); 
 			MethodAddOrEdit(Operation.Edit, MethodID);
 		}
 		
 		//Кнопки контекстного меню на таблице методов.
 		private void TbRefreshClick(object sender, EventArgs e)
 		{	  		
-            string MethodID   = dgvMethod.DataGridViewSelected("ID"); 
+            string MethodID   = dgvMethod.Value("ID"); 
              
  			//Обновить таблицу с методами.
             if (sender == tbRefresh) MethodRefresh();             

@@ -19,9 +19,8 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>..\Obj\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\..\Obj\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Bin\sys.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,13 +30,13 @@
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>bin\Debug\Bin\</OutputPath>
+    <OutputPath>..\Bin\</OutputPath>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>Full</DebugType>
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <BaseIntermediateOutputPath>..\Obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -52,53 +51,51 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\DotNetZip.dll</HintPath>
+    <Reference Include="DotNetZip">
+      <HintPath>..\Library\DotNetZip.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FastColoredTextBox">
-      <HintPath>bin\Debug\Bin\FastColoredTextBox.dll</HintPath>
+      <HintPath>..\Library\FastColoredTextBox.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>bin\Debug\Bin\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\Library\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Excel" />
     <Reference Include="Microsoft.Office.Interop.Word" />
     <Reference Include="Npgsql">
-      <HintPath>bin\Debug\Bin\Npgsql.dll</HintPath>
+      <HintPath>..\Library\Npgsql.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\NPOI.dll</HintPath>
+    <Reference Include="NPOI">
+      <HintPath>..\Library\NPOI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\NPOI.OOXML.dll</HintPath>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\Library\NPOI.OOXML.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\NPOI.OpenXml4Net.dll</HintPath>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\Library\NPOI.OpenXml4Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\NPOI.OpenXmlFormats.dll</HintPath>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\Library\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ParserDLL">
-      <HintPath>bin\Debug\Bin\ParserDLL.dll</HintPath>
+      <HintPath>..\Bin\ParserDLL.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SourceGrid, Version=4.40.6368.30434, Culture=neutral, PublicKeyToken=df6f5e538749e85d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bin\SourceGrid.dll</HintPath>
+    <Reference Include="Quartz">
+      <HintPath>..\Library\Quartz.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SourceGrid">
+      <HintPath>..\Library\SourceGrid.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,7 +109,8 @@
     </Reference>
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>bin\Debug\Bin\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\Library\System.Data.SQLite.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />

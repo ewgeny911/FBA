@@ -73,6 +73,7 @@ namespace FBA
         	this.MainMenu_N4_1 = new System.Windows.Forms.ToolStripMenuItem();
         	this.MainMenu_N4_2 = new System.Windows.Forms.ToolStripMenuItem();
         	this.fontDialog1 = new System.Windows.Forms.FontDialog();
+        	this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
         	this.cmCopy.SuspendLayout();
         	this.MainMenu.SuspendLayout();
         	this.SuspendLayout();
@@ -165,7 +166,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_16.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2_16.Image")));
         	this.MainMenu_N2_16.Name = "MainMenu_N2_16";
-        	this.MainMenu_N2_16.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N2_16.Size = new System.Drawing.Size(129, 22);
         	this.MainMenu_N2_16.Text = "Model";
         	this.MainMenu_N2_16.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -173,7 +174,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_24.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2_24.Image")));
         	this.MainMenu_N2_24.Name = "MainMenu_N2_24";
-        	this.MainMenu_N2_24.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N2_24.Size = new System.Drawing.Size(129, 22);
         	this.MainMenu_N2_24.Text = "Entity";
         	this.MainMenu_N2_24.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -181,7 +182,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_25.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2_25.Image")));
         	this.MainMenu_N2_25.Name = "MainMenu_N2_25";
-        	this.MainMenu_N2_25.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N2_25.Size = new System.Drawing.Size(129, 22);
         	this.MainMenu_N2_25.Text = "Attribute";
         	this.MainMenu_N2_25.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -189,7 +190,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_26.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2_26.Image")));
         	this.MainMenu_N2_26.Name = "MainMenu_N2_26";
-        	this.MainMenu_N2_26.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N2_26.Size = new System.Drawing.Size(129, 22);
         	this.MainMenu_N2_26.Text = "Table";
         	this.MainMenu_N2_26.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -197,16 +198,15 @@ namespace FBA
         	// 
         	this.MainMenu_N2_29.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2_29.Image")));
         	this.MainMenu_N2_29.Name = "MainMenu_N2_29";
-        	this.MainMenu_N2_29.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N2_29.Size = new System.Drawing.Size(129, 22);
         	this.MainMenu_N2_29.Text = "Method";
         	this.MainMenu_N2_29.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
         	// MainMenu_N2
         	// 
         	this.MainMenu_N2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.MainMenu_N2_11,
-			this.MainMenu_N2_12,
 			this.MainMenu_N1_1_2,
+			this.MainMenu_N2_23,
 			this.MainMenu_N2_13,
 			this.MainMenu_N2_15,
 			this.MainMenu_N2_17,
@@ -215,10 +215,12 @@ namespace FBA
 			this.MainMenu_N2_20,
 			this.MainMenu_N2_21,
 			this.MainMenu_N2_22,
-			this.MainMenu_N2_23,
 			this.MainMenu_N2_27,
 			this.MainMenu_N2_28,
-			this.MainMenu_N2_30});
+			this.MainMenu_N2_30,
+			this.toolStripMenuItem1,
+			this.MainMenu_N2_12,
+			this.MainMenu_N2_11});
         	this.MainMenu_N2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N2.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N2.Image")));
         	this.MainMenu_N2.Name = "MainMenu_N2";
@@ -241,7 +243,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_10.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N2_10.Name = "MainMenu_N2_10";
-        	this.MainMenu_N2_10.Size = new System.Drawing.Size(127, 22);
+        	this.MainMenu_N2_10.Size = new System.Drawing.Size(152, 22);
         	this.MainMenu_N2_10.Text = "Client";
         	this.MainMenu_N2_10.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -249,7 +251,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_9.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N2_9.Name = "MainMenu_N2_9";
-        	this.MainMenu_N2_9.Size = new System.Drawing.Size(127, 22);
+        	this.MainMenu_N2_9.Size = new System.Drawing.Size(152, 22);
         	this.MainMenu_N2_9.Text = "Server";
         	this.MainMenu_N2_9.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -257,7 +259,7 @@ namespace FBA
         	// 
         	this.MainMenu_N2_8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N2_8.Name = "MainMenu_N2_8";
-        	this.MainMenu_N2_8.Size = new System.Drawing.Size(127, 22);
+        	this.MainMenu_N2_8.Size = new System.Drawing.Size(152, 22);
         	this.MainMenu_N2_8.Text = "Updater";
         	this.MainMenu_N2_8.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -477,7 +479,7 @@ namespace FBA
         	this.MainMenu_N4_1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N4_1.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N4_1.Image")));
         	this.MainMenu_N4_1.Name = "MainMenu_N4_1";
-        	this.MainMenu_N4_1.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N4_1.Size = new System.Drawing.Size(113, 22);
         	this.MainMenu_N4_1.Text = "Help";
         	this.MainMenu_N4_1.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -486,7 +488,7 @@ namespace FBA
         	this.MainMenu_N4_2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.MainMenu_N4_2.Image = ((System.Drawing.Image)(resources.GetObject("MainMenu_N4_2.Image")));
         	this.MainMenu_N4_2.Name = "MainMenu_N4_2";
-        	this.MainMenu_N4_2.Size = new System.Drawing.Size(152, 22);
+        	this.MainMenu_N4_2.Size = new System.Drawing.Size(113, 22);
         	this.MainMenu_N4_2.Text = "About";
         	this.MainMenu_N4_2.Click += new System.EventHandler(this.MainMenu_N1_1Click);
         	// 
@@ -495,6 +497,11 @@ namespace FBA
         	this.fontDialog1.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
         	this.fontDialog1.FontMustExist = true;
         	this.fontDialog1.ShowApply = true;
+        	// 
+        	// toolStripMenuItem1
+        	// 
+        	this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+        	this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
         	// 
         	// FormUtility
         	// 
@@ -565,5 +572,6 @@ namespace FBA
         private System.Windows.Forms.ToolStripMenuItem MainMenu_N2_26;
         private System.Windows.Forms.ToolStripMenuItem MainMenu_N2_29;
         private System.Windows.Forms.ToolStripMenuItem MainMenu_N2_30;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }

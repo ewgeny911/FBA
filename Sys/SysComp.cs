@@ -184,8 +184,8 @@ namespace FBA
                 int[] rows = Selection.GetSelectionRegion().GetRowsIndex();
                 int[] cows = Selection.GetSelectionRegion().GetColumnsIndex();
                 if ((rows.Length > 0) && (cows.Length > 0)) dt = SelectedRowsToDataTable(false);
-                else dt = GetDataTable();
-            } else dt = GetDataTable();
+                else dt = GetDataSource();
+            } else dt = GetDataSource();
 
             var lines = new List<string>();
             lines = dt.GetDataTableAsText(Var.TAB, copyWithCaptions); //"\t" - Таблуляция
@@ -238,7 +238,7 @@ namespace FBA
             int[] rows = Selection.GetSelectionRegion().GetRowsIndex();
             int[] cows = Selection.GetSelectionRegion().GetColumnsIndex();
             if ((rows.Length > 1) || (cows.Length > 1)) dt = SelectedRowsToDataTable(false);         
-            else dt = GetDataTable();                  
+            else dt = GetDataSource();                  
             if (dt == null) return false;
             return sys.DataTableToExcel(dt);
         }
@@ -253,7 +253,7 @@ namespace FBA
             int[] rows = Selection.GetSelectionRegion().GetRowsIndex();
             int[] cows = Selection.GetSelectionRegion().GetColumnsIndex();
             if ((rows.Length > 1) || (cows.Length > 1)) dt = SelectedRowsToDataTable(false);
-            else dt = GetDataTable();
+            else dt = GetDataSource();
             string fileName = "temp.csv";
             if (!FBAFile.SaveFileName("Сохранение в CSV", "CSV Files|*.csv|Excel Files|*.xls;*.xlsx;|All Files|*.*", "", 0, ref fileName)) return false;
             bool resultSave = sys.DataTableToCSV(dt, fileName, false);
@@ -371,15 +371,7 @@ namespace FBA
             areaBottom = rows[rows.Length - 1];
         }
        
-        /// <summary>
-        /// Получение DataTable из FBA.GridFBA.
-        /// </summary>
-        /// <returns></returns>
-        public System.Data.DataTable GetDataTable()
-        {          
-            return((DevAge.ComponentModel.BoundDataView)DataSource).DataTable;
-        }
-  
+       
         /// <summary>
         /// Копирование выделенные строки из FBA.GridFBA в DataTable. 
         /// </summary>
@@ -502,6 +494,25 @@ namespace FBA
         }                              
         
         /// <summary>
+        /// Получение DataTable из FBA.GridFBA.
+        /// </summary>
+        /// <returns></returns>
+        public System.Data.DataTable GetDataSource()
+        {          
+            return((DevAge.ComponentModel.BoundDataView)DataSource).DataTable;
+        }
+          
+        /// <summary>
+        /// Атрибут     
+        /// </summary>		
+        //[DisplayName("DataSourse"), Description("DataSourse"), Category("FBA")]
+        //public System.Data.DataTable DataSourse { 
+        //	
+        //	get { return GetDataSource(); }
+        //	set { SetDataSource(value); this.Refresh(); }        
+        //}               
+        
+        /// <summary>
         /// В зависимости от типа выделения (строка, столбец или ячейка) выделяем цветом по индексу столбца и строки.
         /// Два отдельных цвета - для выделения и для выбора.
         /// </summary>
@@ -558,7 +569,7 @@ namespace FBA
             }                                	              
             int[] rows = rg.GetRowsIndex();
             int[] cols = rg.GetColumnsIndex();
-            System.Data.DataTable dt = GetDataTable();
+            System.Data.DataTable dt = GetDataSource();
             string infoText = "Rows count: " + dt.Rows.Count + Var.CR +
                        "Columns count: " + dt.Columns.Count + Var.CR +
                        "Selected Rows: " + rows.Length.ToString() + Var.CR +
@@ -1632,7 +1643,7 @@ namespace FBA
             DisplayMember = ValueMember;
             DataSource    = dt;            
         }                         
-        
+                  
         /// <summary>
         /// Присвоить ComboBox свойство DataSourse из запроса SQL. SQL должен возвращать одну колонку.
         /// </summary>
@@ -2087,8 +2098,8 @@ namespace FBA
         /// Привязанный объект ObjectRef.
         /// </summary>
         [DisplayName("Obj"), Description("ObjectRef"), Category("FBA")]
-        public ObjectRef Obj { get; set; }
-
+        public ObjectRef Obj { get; set; }     
+        
         /// <summary>
         /// Скрыть/показать вкладке TabPage в TabControl.
         /// </summary>       
@@ -2419,7 +2430,7 @@ namespace FBA
 		/// <param name="rowIndex">Индекс строки из котрой выбираем</param>   
 		/// <param name="columnName">Название колонки, из которой выбираем</param>   
         /// <returns></returns>
-        public string RowInt(int rowIndex, string columnName)
+        public string ValueByRowIndex(int rowIndex, string columnName)
         {
             return Rows[rowIndex].Cells[columnName].Value.ToString();
         }
@@ -2430,7 +2441,7 @@ namespace FBA
         /// <param name="rowIndex">Номер строки</param> 
 		/// <param name="columnIndex">Номер колонки</param>			
         /// <returns></returns>
-        public string RowInt(int rowIndex, int columnIndex)
+        public string ValueByRowIndex(int rowIndex, int columnIndex)
         {
             //return (DGV.DataSource as System.Data.DataTable).Rows[RowIndex][ColumnIndex].ToString();
             //if (DG.Rows[RowIndex].Cells[ColumnIndex].Value == null) return "";
@@ -2443,7 +2454,7 @@ namespace FBA
 		/// <param name="row">Строка тип DataGridViewRow</param>   
 		/// <param name="columnName">Название колонки, из которой выбираем</param>   
         /// <returns>Выбранное значение в dg</returns>
-        public string RowValue(DataGridViewRow row, string columnName)
+        public string ValueByRow(DataGridViewRow row, string columnName)
         {
             if (DataSource == null) return "";
             if (((System.Data.DataTable)DataSource).Rows.Count == 0) return "";
@@ -2468,7 +2479,7 @@ namespace FBA
         /// </summary>     
         /// <param name="columnName">Имя колонки из которой взять значение</param>
         /// <returns>Значение из ячейки</returns>
-        public string DataGridViewSelected(string columnName)
+        public string Value(string columnName)
         {            
             if (Rows == null) return "";
             if (Rows.Count == 0) return "";
@@ -2482,7 +2493,7 @@ namespace FBA
         /// </summary>     
         /// <param name="columnindex">Имя колонки из которой взять значение</param>
         /// <returns>Значение из ячейки</returns>
-        public string DataGridViewSelected(int columnindex)
+        public string Value(int columnindex)
         {            
             if (Rows == null) return "";
             if (Rows.Count == 0) return "";

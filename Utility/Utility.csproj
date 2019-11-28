@@ -14,10 +14,10 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>..\Obj\</IntermediateOutputPath>
+    <IntermediateOutputPath>..\..\Obj\</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
-    <OutputPath>..\sys\bin\Debug\Bin\</OutputPath>
+    <OutputPath>..\Bin\</OutputPath>
     <DebugType>Full</DebugType>
     <ApplicationIcon>..\Resource\Images\Program\Utility.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
@@ -38,7 +38,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <BaseIntermediateOutputPath>..\Obj\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\Obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -54,8 +54,9 @@
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="SourceGrid">
-      <HintPath>..\Sys\bin\Debug\Bin\SourceGrid.dll</HintPath>
+    <Reference Include="sys">
+      <HintPath>..\Bin\sys.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -73,12 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormTest2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormTest2.Designer.cs">
-      <DependentUpon>FormTest2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Rubbish11.cs" />
     <Compile Include="FormUtility.cs">
       <SubType>Form</SubType>
@@ -104,18 +99,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormTest2.resx">
-      <DependentUpon>FormTest2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormUtility.resx">
       <DependentUpon>FormUtility.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\sys\Sys.csproj">
-      <Project>{c86d7050-06d8-40dd-9e65-9e5a8a341f7f}</Project>
-      <Name>Sys</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

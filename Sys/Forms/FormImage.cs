@@ -122,8 +122,8 @@ namespace FBA
         ///Удалить изображение.  
         private void ImageDel()
         {
-            string ImageID   = dgvImage.DataGridViewSelected("ID"); 
-            string ImageName = dgvImage.DataGridViewSelected("Name");              
+            string ImageID   = dgvImage.Value("ID"); 
+            string ImageName = dgvImage.Value("Name");              
             string SQL = "DELETE FROM fbaImage WHERE ID = " + ImageID;
             if (!sys.Exec(DirectionQuery.Remote, SQL)) return;
             ImageRefresh();
@@ -168,7 +168,7 @@ namespace FBA
         ///Показ изображения.
         private void SelectImage()
         {
-            string ImageID   = dgvImage.DataGridViewSelected("ID"); 
+            string ImageID   = dgvImage.Value("ID"); 
              
             if (ImageID == "") return;
             string FileData;

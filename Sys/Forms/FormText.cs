@@ -119,7 +119,7 @@ namespace FBA
         ///Показ текста.
         private bool SelectText()
         {
-            string TextID   = dgvText.DataGridViewSelected("ID");             
+            string TextID   = dgvText.Value("ID");             
             if (TextID == "") return false;
             string FileData;
             string TextName;         
@@ -142,7 +142,7 @@ namespace FBA
         private void cmText_N1_Click(object sender, EventArgs e)
         {
            
-            string TextID   = dgvText.DataGridViewSelected("ID"); 
+            string TextID   = dgvText.Value("ID"); 
                            
             //Добавить текст.
             if ((sender == cmText_N1) || (sender == tbAdd)) TextAdd();

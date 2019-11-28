@@ -1308,7 +1308,7 @@ namespace FBA
                 sys.SM("Нет подключения к БД!");
                 return;
             }
-            string LicenseID   = dgvLicense.DataGridViewSelected("ID");
+            string LicenseID   = dgvLicense.Value("ID");
             if (LicenseID == "") return;
             string sql = "DELETE FROM fbaLicense WHERE ID = " + LicenseID;
             if (!Var.con.Exec(sql)) return;

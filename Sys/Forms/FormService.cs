@@ -139,6 +139,8 @@ namespace FBA
             //newForm |= (projectID == ""); //if (FormID == "") NewForm = true; 
 
             if (!ProjectSaveDLL(fileName, ref projectID, out newProject)) return false;
+            if (!ProjectdSaveZIP(projectName)) return false;
+                        
             string sql = "UPDATE fbaProject SET " +
                   "  Name             = '" + projectName + "'" +
             	  ", EntityID         = " + sys.GetEntityID("Project") +
@@ -157,7 +159,29 @@ namespace FBA
             if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
             return true;
         }
-                                    
+          
+
+        /// <summary>
+        /// Копируем проект в БД.
+        /// Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
+        /// </summary>
+        /// <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
+        /// <returns>Если успешно, то true</returns>
+        public static bool ProjectdSaveZIP(string projectName)
+        {
+            //Проект архивируется в файл ZIP. Далее файл ZIP записывается в БД в виде Base64.
+            string projectPath = FBAPath.PathForms + projectName;
+            string fileName = FBAPath.PathTemp + projectName + ".zip";
+            if (!FBAFile.DirZIP(true, projectPath, fileName)) return false;
+            const bool saveHashToEndFile = false;
+            string fileData;
+            string hashMD5;
+            if (!FBAFile.FileGetBase64WithHashMD5(fileName, saveHashToEndFile, out fileData, out hashMD5)) return false;
+            string sql = "UPDATE fbaProject SET ProjectZip = '" + fileData + "' WHERE Name = '" + projectName + "'";
+            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            return true;
+        } 
+                
 		/// <summary>
 		/// Чтение формы из БД из кодировки Base64. 
 		/// Ситуация: Есть на диске EXE, Есть DLL, то DLL удаляем, а EXE перпеименовываем в DLL. 
@@ -445,6 +469,7 @@ namespace FBA
         public static Form FormLoad(string projectName, string formName, FormAction formAction, out int formNumber, params object[] paramArray)
         {
             formNumber = 0;
+            
             Assembly assembly = ProjectLoad(projectName, Var.enterMode);
             if (assembly == null) return null;
             Object form = null;
@@ -457,8 +482,13 @@ namespace FBA
             //ConstructorParams
             //form = assembly.CreateInstance("FBA." + FormName, "");
             //form = assembly.CreateInstance("FBA." + FormName, args: paramArray);
-
-            Type type = assembly.GetType("FBA." + formName);
+            string objectName = "FBA." + formName;
+            Type type = assembly.GetType(objectName); 
+            if (type == null) 
+            {
+            	sys.SM("Ошибка создания объекта: " + objectName + Var.CR + "Сборка не найдена.");
+            	return null;
+            }
             form = Activator.CreateInstance(type, args: paramArray);
 
             if (form == null) return null;
@@ -702,18 +732,33 @@ namespace FBA
         /// Удаление формы из базы.
         /// </summary>
         /// <param name="projectID">ИД проекта</param>
+        /// <param name="typeDel">Тип удаления: 1-DB; 2-Disk; 3-DB,Disk; 4-DB,Disk,History</param>
         /// <returns>Если форма успешно удалена, то true</returns>
-        public bool ProjectDelete(string projectID)
+        public bool ProjectDelete(string projectID, int typeDel)
         {                              
-            if (projectID == "") return false;
-            string projectName;
-            if (!GetProjectName(projectID, out projectName)) return false;                        
-            string sql = "DELETE FROM fbaRelRoleProject WHERE ProjectID = " + projectID + ";" + Var.CR +
-                         "DELETE FROM fbaProjectHist WHERE ProjectID = "  + projectID + ";" + Var.CR + 
-                         "DELETE FROM fbaProject WHERE ID = "  + projectID + ";";
-            string errorMes;
-            FBAFile.DirDelete(FBAPath.PathForms + projectName, out errorMes, true);
-            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            if (projectID == "") return false;            
+            string projectName = dgvProject.Value("Name");
+             
+            if ((typeDel == 1) || (typeDel == 3) || (typeDel == 4))
+            {
+            	string sql = "DELETE FROM fbaRelRoleProject WHERE ProjectID = " + projectID + ";" + Var.CR +                        
+                             "DELETE FROM fbaProject WHERE ID = "  + projectID + ";";
+            	 if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            }
+            
+            if ((typeDel == 2) || (typeDel == 3) || (typeDel == 4))
+            {
+	            string errorMes;
+	            if (sys.SM("Удалить папку с проектом с диска?", MessageType.Question, "Удаление проекта"))
+	            	FBAFile.DirDelete(FBAPath.PathForms + projectName, out errorMes, true);
+            }
+            
+            if  (typeDel == 4)
+            {
+            	string sql = "DELETE FROM fbaProjectHist WHERE ProjectID = "  + projectID + ";" + Var.CR;
+            	 if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            }
+            
             RefreshProjectList(); 
             return true;             
         }              
@@ -943,8 +988,7 @@ namespace FBA
                   "CountRows    = CountRowsTest, " +
                   "Hash         = HashTest,      " +                    
                   "ProjectDLL   = ProjectDLLTest " +                             
-                  "WHERE ID = " + projectID + ";" + Var.CR + 
-                  
+                  "WHERE ID = " + projectID + ";" + Var.CR +                   
                   "INSERT INTO fbaProjectHist (" +
                   "EntityID, Name, Type, DEL, Block, DateCreate, UserCreateID, " +
                   "ProjectDLL, CountRows, ProjectID, Hash, Comment, ProjectZip) " +
@@ -991,8 +1035,8 @@ namespace FBA
         {                                                
             if (dgvProject.RowCount == 0) return;                            
             
-            string projectID   = dgvProject.DataGridViewSelected("ID");
-            string ProjectPath = dgvProject.DataGridViewSelected("ProjectPath");           
+            string projectID   = dgvProject.Value("ID");
+            string ProjectPath = dgvProject.Value("ProjectPath");           
             string projectName = Path.GetFileNameWithoutExtension(ProjectPath);            
                                                    
             //New.
@@ -1008,7 +1052,10 @@ namespace FBA
             if (sender == cmProjectN21_3) ProjectSetType(projectID, ProjectType.Dll);
             
             //Delete
-            if (sender == cmProjectN20) ProjectDelete(projectID);                 
+            if (sender == cmProjectN20_1) ProjectDelete(projectID, 1);                 
+            if (sender == cmProjectN20_2) ProjectDelete(projectID, 2);  
+            if (sender == cmProjectN20_3) ProjectDelete(projectID, 3);  
+            if (sender == cmProjectN20_4) ProjectDelete(projectID, 4);  
             
             //Export
             if (sender == cmProjectN19) ProjectExport(projectID);
@@ -1048,9 +1095,9 @@ namespace FBA
         /// <param name="e"></param>
         private void CmProjectHistN1Click(object sender, EventArgs e)
         {
-            if (dgvHist.RowCount == 0) return;                              
+            if (dgvHist.Rows.Count == 0) return;                              
                   
-            string projectHistID     = dgvHist.SelectedRows[0].Cells["ID"].Value.ToString();                                                      
+            string projectHistID = dgvHist.Value("ID"); //   m.SelectedRows[0].Cells["ID"].Value.ToString();
                         
             //Restore            
             if (sender == cmProjectHistN2) ProjectHistToTest(projectHistID);
@@ -1102,7 +1149,7 @@ namespace FBA
                 GetProjectID(tbProjectName.Text, out projectID);
             } else
             {
-                projectID = dgvProject.DataGridViewSelected("ID");                                  
+                projectID = dgvProject.Value("ID");                                  
             } 
             return projectID;
         }
@@ -1114,7 +1161,7 @@ namespace FBA
         private string GetCurrentProjectHistID()
         {                    
             if (dgvHist.Rows.Count == 0) return "0";
-            return dgvHist.DataGridViewSelected("ID");                                             
+            return dgvHist.Value("ID");                                             
         }              
              
         /// <summary>
@@ -1194,7 +1241,8 @@ namespace FBA
             dgvProject.Columns[1].Width = 200;
             return;           
         }
-                 
+         
+        
         /// <summary>
         /// Обновить таблицу истории формы.
         /// </summary>
@@ -1204,18 +1252,24 @@ namespace FBA
             if (projectID == "") return;
             string sql = "";                                             
             sql = "SELECT t1.ID, t1.Name, t1.Type, t1.DEL, t1.Block, t1.Hash, " + Var.CR +              
-                sys.GetSubString() + "(t1.ProjectDLL,    1, 50) AS ProjectDLL,                            " + Var.CR +
-                sys.GetSubString() + "(t1.ProjectZip, 1, 50) AS ProjectZip,                         " + Var.CR +
+                sys.GetSubString() + "(t1.ProjectDLL,    1, 50) AS ProjectDLL,       " + Var.CR +
+                sys.GetSubString() + "(t1.ProjectZip, 1, 50) AS ProjectZip,          " + Var.CR +
                 "t1.CountRows,                                                       " + Var.CR +
-                "t1.ProjectID,                                                          " + Var.CR +
-                "t2.Name AS UserCopy,                                                " + Var.CR +
-                "t1.DateCopy                                                         " + Var.CR +                     
-                "FROM fbaProjectHist t1                                                 " + Var.CR + 
-                "LEFT JOIN fbaUser t2 ON  t1.UserCopyID = t2.ID                      " + Var.CR + 
+                "t1.ProjectID,                                                       " + Var.CR +
+                "t2.Name AS UserChange,                                              " + Var.CR +
+            	"t3.Name AS UserCreate,                                              " + Var.CR +
+                "t1.DateCreate                                                       " + Var.CR +                     
+                "FROM fbaProjectHist t1                                              " + Var.CR + 
+                "LEFT JOIN fbaUser t2 ON  t1.UserChangeID = t2.ID                    " + Var.CR + 
+            	"LEFT JOIN fbaUser t3 ON  t1.UserCreateID = t3.ID                    " + Var.CR + 
                 "WHERE t1.ProjectID = " + projectID;                   
             System.Data.DataTable dt;
             sys.SelectDT(DirectionQuery.Remote, sql, out dt);
-            dgvHist.DataSource = dt;
-        }                
+            dgvHist.SetDataSource(dt);
+        }
+		void DeleteFromHistoryToolStripMenuItemClick(object sender, EventArgs e)
+		{
+	
+		}                
     }
 }

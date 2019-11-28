@@ -26,6 +26,8 @@ namespace FBA
         //a[1] = new int[l]{1,2,9};
         //a[2] = new int[m]{2,11,0,-4};
     	
+        private const int countPage = 10;
+        string[,] Errors = new string[countPage, 6];
     	/// <summary>
         /// Если нажата кнопка Ok, то true, Cancel = false
         /// </summary>
@@ -251,8 +253,7 @@ namespace FBA
 		/// Показ вкладки c модулями, в которых произошли ошибки.
 		/// </summary>
         private void ShowCodeFile()
-        {   
-            var Errors = new string[10, 5];
+        {               
             int Index = 0;
             string Forms = "'aaa'";                              
             for (int i = 0; i <= TextBoxMes.Lines.Count() - 1; i++)
@@ -277,113 +278,175 @@ namespace FBA
                     Forms += ",'" + FileNameFull + "'";                 //Все имена файлов.
                 }
                 Index++;
-                if (Index == 10) break;
+                if (Index == countPage) break;
             }
             if (Index == 0) return;
     
             TextBoxCode.SelectionHighlightingForLineBreaksEnabled = true;
           
             for (int i = 0; i <= Index; i++)
-            {                               
-                string ResultText;
-                int LinesCount;
-                string FileNameFull = Errors[i, 4];
-                if (FileNameFull == null) continue;
-                string FileName     = Errors[i, 1];
-                if (FBAFile.FileReadText(FileNameFull, true, out ResultText, out LinesCount))
-                	TabControlPageAdd(tabControl1, TextBoxCode, FileName, ResultText, Errors, i + 1); //потому что одна вкладка есть по умолчанию. Поэтому +1.
+            {                                                          
+                TabControlPageAdd(i); //потому что одна вкладка есть по умолчанию. Поэтому +1.
             }                                                                                                 
         }		
-              
+             
+        /// <summary>
+        /// Поиск вкладки по Tag = fileName
+        /// </summary>
+        /// <param name="fileName">Имя файла, которые отображается на вкладке</param>
+        /// <returns>Индекс вкладки</returns>
+        private int GetTabIndexByTagValue(string fileName)
+        {
+        	for (int i = 1; i < tabControl1.TabPages.Count; i++)
+        	{
+        		if ((string)tabControl1.TabPages[i].Tag == fileName) return i;
+        	}
+        	return -1;
+        }
+		
+        private void SetCurrentBookmarkForFileName(string fileName, int bookmark)
+        {
+        	for (int i = 0; i < countPage; i++)
+            {
+                if (Errors[i, 1] != fileName) continue;                           
+                Errors[i, 5] = bookmark.ToString();
+                return;
+            }
+        }
+        
+        private int GetCurrentBookmarkForFileName(string fileName)
+        {
+        	for (int i = 0; i < countPage; i++)
+            {
+                if (Errors[i, 1] != fileName) continue;                           
+                return Errors[i, 5].ToInt();                       
+            }
+        	return -1;
+        }
+        
+		/// <summary>
+        /// Поиск максимального предыдущего значения
+        /// </summary>
+        /// <param name="fileName">Имя файла с ошибкой</param>
+        /// <param name="currentErrorLine">Номер строки текущей ошибки</param>
+        /// <returns></returns>
+        private int GetPrevErrorLine(string fileName, int currentErrorLine)
+        {         
+        	int value = -1;
+        	for (int i = 0; i < countPage ; i++)
+            {
+                if (Errors[i, 1] != fileName) continue;  
+                int errorLine = Errors[i, 2].ToInt();
+                if (errorLine >= currentErrorLine) continue;
+                if ((errorLine > value) || (value == -1)) value = errorLine;
+            }
+        	if (value == -1) value = currentErrorLine;
+        	return value;
+        }
+        
+        /// <summary>
+        /// Поиск минимального предыдущего значения
+        /// </summary>
+        /// <param name="fileName">Имя файла с ошибкой</param>
+        /// <param name="currentErrorLine">Номер строки текущей ошибки</param>
+        /// <returns></returns>
+        private int GetNextErrorLine(string fileName, int currentErrorLine)
+        {                        
+        	int value = -1;
+        	for (int i = 0; i < countPage ; i++)
+            {
+                if (Errors[i, 1] != fileName) continue;  
+                int errorLine = Errors[i, 2].ToInt();            
+                if (errorLine <= currentErrorLine) continue;                
+                if ((value > errorLine) || (value == -1)) value = errorLine;
+            }
+        	if (value == -1) value = currentErrorLine;
+        	return value;        	        
+        }
+                  
         /// <summary>
         /// Добавление новой вкладки для редактора запросов.
-        /// </summary>
-        /// <param name="tabControlCode"></param>
-        /// <param name="textSQLExample"></param>
-        /// <param name="FileName"></param>
-        /// <param name="Code"></param>
-        /// <param name="Errors"></param>
-        /// <param name="indexPage"></param>
-        public void TabControlPageAdd(TabControl tabControlCode,                                              
-                                      FastColoredTextBox textSQLExample,                                                                                     
-                                      string FileName,
-                                      string Code,
-                                      string[,] Errors,
-                                      int indexPage)
+        /// </summary>       
+        /// <param name="indexError"></param>             
+        public void TabControlPageAdd(int indexError)
         {                                           
-            FastColoredTextBox fctb1 = null;  
-            System.Windows.Forms.TabPage tb = null; 
-            int findTab = -1;
-        	for (int i = 1; i < tabControlCode.TabPages.Count; i++)
-        	{
-        		if (tabControlCode.TabPages[i].Text.IndexOfEx(FileName) == 0)
-        		{        			
-        			       			
-        			fctb1 = (FastColoredTextBox) this.Controls.Find("textCode" + i, true).FirstOrDefault();
-        			if (fctb1 != null) 
-        			{
-        				findTab = i;
-        				tb = tabControlCode.TabPages[i];
-        			}
-        			
-        		}
-        	}
-        	
-        	if (findTab == -1)
-        	{
-	        	tabControlCode.TabPages.Add(FileName);
-	            fctb1 = new FastColoredTextBox();     
-	            tb = tabControlCode.TabPages[tabControlCode.TabPages.Count - 1];
-	            tb.Controls.Add(fctb1);
-	             
-        	}        	
-        	
-        	if (tb.Tag == null) tb.Tag = 0;
-        	tb.Tag = ((int)tb.Tag) + 1;
-        	tb.Text = FileName + " (" + tb.Tag + ")";
-           
-        	fctb1.Dock                          = textSQLExample.Dock;
-            fctb1.AutoCompleteBrackets          = textSQLExample.AutoCompleteBrackets;
-            fctb1.AutoScrollMinSize             = textSQLExample.AutoScrollMinSize;
-            fctb1.BookmarkColor                 = textSQLExample.BookmarkColor;
-            fctb1.BracketsHighlightStrategy     = textSQLExample.BracketsHighlightStrategy;
-            fctb1.Cursor                        = textSQLExample.Cursor;
-            fctb1.DisabledColor                 = textSQLExample.DisabledColor;
-            fctb1.FindEndOfFoldingBlockStrategy = textSQLExample.FindEndOfFoldingBlockStrategy;
-            fctb1.Font                          = textSQLExample.Font;
-            fctb1.Language                      = textSQLExample.Language;
-            fctb1.LeftBracket                   = textSQLExample.LeftBracket;
-            fctb1.RightBracket                  = textSQLExample.RightBracket;
-            //fctb1.Padding                       = textSQLExample.Padding;                
-            fctb1.SelectionColor                = Color.Red;//textSQLExample.SelectionColor;
-            fctb1.VirtualSpace                  = textSQLExample.VirtualSpace;
-            fctb1.Text                          = Code;
+            string fileName = Errors[indexError, 1];       
+            int indexPage = GetTabIndexByTagValue(fileName);            
+            if (indexPage > 0) return;
+                   
+        	string Code;
+       		int LinesCount;                   		
+            string FileNameFull = Errors[indexError, 4];
+            if (FileNameFull == null) return;	            
+            if (!FBAFile.FileReadText(FileNameFull, true, out Code, out LinesCount)) return;
+    		tabControl1.TabPages.Add(fileName);
+    		indexPage = tabControl1.TabPages.Count - 1;
+    		System.Windows.Forms.TabPage tb = tabControl1.TabPages[indexPage];        		
+    		tb.Tag = fileName;    		
+            var fctb1 = new FastColoredTextBox(); 
+    		tb.Controls.Add(fctb1);        			               
+            fctb1.Text = Code;
+            fctb1.Dock                          = TextBoxCode.Dock;
+            fctb1.AutoCompleteBrackets          = TextBoxCode.AutoCompleteBrackets;
+            fctb1.AutoScrollMinSize             = TextBoxCode.AutoScrollMinSize;
+            fctb1.BookmarkColor                 = TextBoxCode.BookmarkColor;
+            fctb1.BracketsHighlightStrategy     = TextBoxCode.BracketsHighlightStrategy;
+            fctb1.Cursor                        = TextBoxCode.Cursor;
+            fctb1.DisabledColor                 = TextBoxCode.DisabledColor;
+            fctb1.FindEndOfFoldingBlockStrategy = TextBoxCode.FindEndOfFoldingBlockStrategy;
+            fctb1.Font                          = TextBoxCode.Font;
+            fctb1.Language                      = TextBoxCode.Language;
+            fctb1.LeftBracket                   = TextBoxCode.LeftBracket;
+            fctb1.RightBracket                  = TextBoxCode.RightBracket;
+            //fctb1.Padding                       = TextBoxCode.Padding;                
+            fctb1.SelectionColor                = Color.Red;//TextBoxCode.SelectionColor;
+            fctb1.VirtualSpace                  = TextBoxCode.VirtualSpace;           
             fctb1.Name                          = "textCode" + indexPage;
-            fctb1.BackColor                     = textSQLExample.BackColor;
-            fctb1.CurrentLineColor              = textSQLExample.CurrentLineColor;
-            fctb1.VirtualSpace                  = textSQLExample.VirtualSpace;
-            fctb1.BorderStyle                   = textSQLExample.BorderStyle;
-            fctb1.ReadOnly                      = true;
-            int firstbookmark  = 0;
-            for (int i = 0; i <= indexPage - 1; i++)
+            fctb1.BackColor                     = TextBoxCode.BackColor;
+            fctb1.CurrentLineColor              = TextBoxCode.CurrentLineColor;
+            fctb1.VirtualSpace                  = TextBoxCode.VirtualSpace;
+            fctb1.BorderStyle                   = TextBoxCode.BorderStyle;
+            fctb1.ReadOnly                      = true;	                    
+    	    
+            int firstbookmark = 0;
+            int countError = 0;
+        	for (int i = 0; i < countPage; i++)
             {
-                if (Errors[i, 1] != FileName) continue;
+                if (Errors[i, 1] != fileName) continue;
+                countError++;                
                 int N = Errors[i, 2].ToInt(false);
-                if (N > 0) 
-                {
-                	fctb1.BookmarkLine(N - 1);
-                	//fctb1.LineNumberColor = Color.Beige;
-                	//fctb1.Navigate(N - 1); 
-                	//fctb1.SelectionStart = 1;
-                	//fctb1.SelectionLength = (fctb1.GetLineLength(N));
-                	//fctb1.SelectionColor = Color.Red;
-                	//fctb1.CurrentLineColor = Color.Red;
-                	if (firstbookmark == 0) firstbookmark = N - 1;
-                }
+                if (firstbookmark == 0) firstbookmark = N;
+                fctb1.BookmarkLine(N - 1);
+                fctb1.Navigate(N - 1); 
+                fctb1.CurrentLineColor = Color.Red;
+                tb.Text = fileName + " (" + countError + ")";                
             }
-            if (firstbookmark > 0) fctb1.Navigate(firstbookmark); 
+        	SetCurrentBookmarkForFileName(fileName, firstbookmark);
+        	fctb1.Navigate(firstbookmark);         
         }
-              
+        
+        private void BtnPrevClick(object sender, EventArgs e)
+		{  
+        	if (tabControl1.SelectedIndex < 0) return;
+        	string fileName = tabControl1.TabPages[tabControl1.SelectedIndex].Tag.ToString();
+        	int curentErrorLine = GetCurrentBookmarkForFileName(fileName);
+        	int N = GetPrevErrorLine(fileName, curentErrorLine);
+        	SetCurrentBookmarkForFileName(fileName, N);
+        	Control fctb1 = tabControl1.Controls.Find("textCode" + tabControl1.SelectedIndex, true).FirstOrDefault();
+        	if (fctb1 != null) ((FastColoredTextBox)fctb1).Navigate(N - 1);
+		}   
+
+        void BtnNextClick(object sender, EventArgs e)
+		{
+			if (tabControl1.SelectedIndex < 0) return;
+        	string fileName = tabControl1.TabPages[tabControl1.SelectedIndex].Tag.ToString();
+        	int curentErrorLine = GetCurrentBookmarkForFileName(fileName);
+        	int N = GetNextErrorLine(fileName, curentErrorLine);
+        	SetCurrentBookmarkForFileName(fileName, N);
+        	Control fctb1 = tabControl1.Controls.Find("textCode" + tabControl1.SelectedIndex, true).FirstOrDefault();
+        	if (fctb1 != null) ((FastColoredTextBox)fctb1).Navigate(N - 1);
+		}
+        
 		/// <summary>
 		/// Кнопка Ok.
 		/// </summary>
@@ -433,9 +496,13 @@ namespace FBA
             if (ControlName == "TextBoxCode") TextBoxCode.Text.CopyToClipboard();
         
         }
+        
 		void Button3Click(object sender, EventArgs e)
 		{
 			TextBoxCode.Navigate(15);
-		}                          
+		}
+		
+		
+		                       
     }
 }

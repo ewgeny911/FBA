@@ -6,13 +6,13 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{DC8F7E3A-4DDD-4C5E-B94A-1F80390AB7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormMain", "Sys\bin\Debug\Forms\FormMain\FormMain.csproj", "{BE40A3F3-FF44-41E2-A7E2-884D0E2D8042}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormMain", "Forms\FormMain\FormMain.csproj", "{BE40A3F3-FF44-41E2-A7E2-884D0E2D8042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormContract", "Sys\bin\Debug\Forms\FormContract\FormContract.csproj", "{AA3CFCA7-0D37-4A7F-8977-FCEFE87628C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormContract", "Forms\FormContract\FormContract.csproj", "{AA3CFCA7-0D37-4A7F-8977-FCEFE87628C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormReportSample", "Sys\bin\Debug\Forms\FormReportSample\FormReportSample.csproj", "{1BEAE483-C72C-47BD-A896-3E5E2A27B2A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormReportSample", "Forms\FormReportSample\FormReportSample.csproj", "{1BEAE483-C72C-47BD-A896-3E5E2A27B2A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodDocument", "Sys\bin\Debug\Forms\MethodDocument\MethodDocument.csproj", "{7990618F-12B8-48B0-97D7-10CE0D68063E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodDocument", "Forms\MethodDocument\MethodDocument.csproj", "{7990618F-12B8-48B0-97D7-10CE0D68063E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{AE25E0AD-714F-4E88-A77A-90EEE4FE96DA}"
 EndProject
@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserApp", "ParserApp\Pars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerApp", "ServerApp\ServerApp.csproj", "{C833B42E-177A-440B-A5CC-CC6A589FD33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sys", "sys\Sys.csproj", "{C86D7050-06D8-40DD-9E65-9E5A8A341F7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sys", "Sys\Sys.csproj", "{C86D7050-06D8-40DD-9E65-9E5A8A341F7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{CF4B4857-6E1A-4BC5-A8F0-B6827B02C1A0}"
 EndProject
@@ -34,11 +34,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserDLL", "ParserDLL\Pars
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{9D707440-83D2-4EF3-9E0C-1C05881D2AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLCustom", "Sys\bin\Debug\Template\DLLCustom\DLLCustom.csproj", "{75C88290-0C41-4766-AA53-A78E7473E432}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLCustom", "Template\DLLCustom\DLLCustom.csproj", "{75C88290-0C41-4766-AA53-A78E7473E432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormCustom", "Sys\bin\Debug\Template\FormCustom\FormCustom.csproj", "{D32AE4FD-4A61-4872-B56B-00D60004E663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormCustom", "Template\FormCustom\FormCustom.csproj", "{D32AE4FD-4A61-4872-B56B-00D60004E663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormMain", "Sys\bin\Debug\Template\FormMain\FormMain.csproj", "{DA0F4C7D-30F8-431F-A0A8-3A5ED97D6F51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormMain", "Template\FormMain\FormMain.csproj", "{DA0F4C7D-30F8-431F-A0A8-3A5ED97D6F51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

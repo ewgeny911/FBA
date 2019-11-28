@@ -65,7 +65,7 @@ namespace FBA
         ///Добавить шаблон отчета.  
         private void ReportEdit()
         {
-            string ReportID = dgvReport.DataGridViewSelected("ID");
+            string ReportID = dgvReport.Value("ID");
             if (ReportID == "") return;
             FormFBA F = new FormReportProperty(ReportID);
             if (F.ShowDialog() == DialogResult.OK) ReportRefresh();
@@ -75,8 +75,8 @@ namespace FBA
         private void ReportDel()
         {
             if (sys.SM("Вы хотите действительно удалить шаблон отчета?", MessageType.Question, "Удаление шаблона") == false) return;
-            string ReportID = dgvReport.DataGridViewSelected("ID");
-            string ReportName = dgvReport.DataGridViewSelected("Name");
+            string ReportID = dgvReport.Value("ID");
+            string ReportName = dgvReport.Value("Name");
             string sql = "DELETE FROM fbaReport WHERE ID = " + ReportID;
             if (!sys.Exec(DirectionQuery.Remote, sql)) return;
             ReportRefresh();                    
@@ -100,7 +100,7 @@ namespace FBA
         ///Показ шаблона отчета.
         private void SelectReport()
         {
-            string ReportID = dgvReport.DataGridViewSelected("ID");
+            string ReportID = dgvReport.Value("ID");
             if (ReportID == "") return;
             string FileName;
             string FileData;          

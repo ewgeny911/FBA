@@ -56,7 +56,7 @@ namespace FBA
         /// </summary>
         private void ErrorDel()
         {
-            string errorID = dgvError.DataGridViewSelected("ID");      
+            string errorID = dgvError.Value("ID");      
             string sql = "DELETE FROM fbaError WHERE ID = " + errorID;
             if (!sys.Exec(DirectionQuery.Remote, sql)) return;
             ErrorRefresh();
@@ -112,7 +112,7 @@ namespace FBA
         /// </summary>
         private void SelectError()
         {
-            string errorID = dgvError.DataGridViewSelected("ID");
+            string errorID = dgvError.Value("ID");
             if (errorID == "") return;
             var arr = new string[11];
             string sql = "SELECT " +

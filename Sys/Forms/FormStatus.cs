@@ -61,7 +61,7 @@ namespace FBA
         /// </summary>
         private void LoadStatusParent()
         {            
-            string statusEntityID = dgvEntity.DataGridViewSelected("ID");
+            string statusEntityID = dgvEntity.Value("ID");
             if (statusEntityID == "") statusEntityID = "0";
             string sql = string.Format(
                 "SELECT t1.ID, t2.Name FROM fbaStatusList t1 " +
@@ -76,7 +76,7 @@ namespace FBA
         /// </summary>
         private void LoadStatusChange()
         {                        
-            string StatusListID = dgvParent.DataGridViewSelected("ID");
+            string StatusListID = dgvParent.Value("ID");
             if (StatusListID == "") StatusListID = "0";
             string sql = string.Format(
                 "SELECT t1.ID, t2.Name FROM fbaStatusChange t1 " +
@@ -139,7 +139,7 @@ namespace FBA
             string sql = "SELECT Name FROM fbaStatus ORDER BY Name";
             string[,] values;
             if (!sys.InputValues(sql, true, false, out values)) return false;            
-            string statusEntityID = dgvEntity.DataGridViewSelected("ID");            
+            string statusEntityID = dgvEntity.Value("ID");            
             int maxY = values.GetLength(0);
             int maxX = values.GetLength(1); 
             const string EntityID = "234";
@@ -162,9 +162,9 @@ namespace FBA
         /// <returns>Если успешно, то true</returns>
         private bool ChangeAdd()
         {                               
-        	string statusEntityID    = dgvEntity.DataGridViewSelected("ID");   
-            string StatusListID    = dgvEntity.DataGridViewSelected("ID");  
-			string statusCurrentName = dgvChange.DataGridViewSelected("Name");             
+        	string statusEntityID    = dgvEntity.Value("ID");   
+            string StatusListID    = dgvEntity.Value("ID");  
+			string statusCurrentName = dgvChange.Value("Name");             
         	string sql = "SELECT * FROM fbaStatus WHERE ID IN (SELECT StatusID FROM fbaStatusList WHERE StatusEntityID = " + statusEntityID + ")" + Var.CR +
         		" AND ID NOT IN (SELECT StatusID FROM fbaStatusChange WHERE StatusEntityID = " + statusEntityID + " AND StatusListID = " + StatusListID + ")" + Var.CR +         	        	        	        	     
         		" AND Name <> '" + statusCurrentName + "'";
@@ -192,7 +192,7 @@ namespace FBA
         /// <returns>Если успешно, то true</returns>
         private bool EntityDel()
         {           
-            string statusEntityID =  dgvEntity.DataGridViewSelected("ID");
+            string statusEntityID =  dgvEntity.Value("ID");
             string sql = string.Format(
                 "DELETE FROM fbaStatusChange WHERE StatusEntityID = {0};" + Var.CR +
                 "DELETE FROM fbaStatusList WHERE StatusEntityID = {0};" + Var.CR +
@@ -208,7 +208,7 @@ namespace FBA
         /// <returns></returns>
         private bool ParentDel()
         {           
-            string StatusListID =  dgvParent.DataGridViewSelected("ID");
+            string StatusListID =  dgvParent.Value("ID");
             string sql = string.Format(
                 "DELETE FROM fbaStatusChange WHERE StatusListID = {0};" + Var.CR +
                 "DELETE FROM fbaStatusList WHERE ID = {0};", StatusListID);               
@@ -224,7 +224,7 @@ namespace FBA
         /// <returns></returns>
         private bool ChangeDel()
         {           
-            string statusChangeID =  dgvChange.DataGridViewSelected("ID");
+            string statusChangeID =  dgvChange.Value("ID");
             string sql = string.Format(
                 "DELETE FROM fbaStatusChange WHERE ID = {0};", statusChangeID);                      
             if (!sys.Exec(DirectionQuery.Local, sql)) return false;

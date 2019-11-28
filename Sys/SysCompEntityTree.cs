@@ -241,7 +241,7 @@ namespace FBA
         ///Выбор сущности в фильтре сущностей.
         private void dgvFind_CellClick(object sender, DataGridViewCellEventArgs e)
         {                                                                        
-            string selName = dgvFind.DataGridViewSelected("Name");             
+            string selName = dgvFind.Value("Name");             
             dgvFind.Visible = false;
             TreeNode selectedNode = sys.SearchNode(selName, treeViewEntity.Nodes[0], SearchParam.Exact, false);//пытаемся найти в поле Text
             if (selectedNode == null) return;                     

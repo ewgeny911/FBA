@@ -24,8 +24,7 @@ namespace FBA
 	/// Description of SysEnter.
 	/// </summary>
 	public partial class sys
-	{
-		 
+	{		 
         #region Region. Вход в систему.
   
 		/// <summary>
@@ -129,8 +128,7 @@ namespace FBA
 
             if (!(sys.Enter(connectionName, Var.enterMode, "", ""))) Environment.Exit(0); ;
         }
-   
-                
+                   
         /// <summary>
         /// Получить зашифрованный пароль пользователя.
         /// </summary>

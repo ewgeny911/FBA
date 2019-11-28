@@ -270,7 +270,7 @@ namespace FBA
         /// <param name="e"></param>
         private void DgvList_DoubleClick(object sender, EventArgs e)
         {
-            filter.FilterID = dgvList.DataGridViewSelected("ID");                  
+            filter.FilterID = dgvList.Value("ID");                  
             FilterLoad();
             FilterSet(0);
         }
@@ -568,9 +568,9 @@ namespace FBA
         /// <param name="e"></param>
         private void CmFilterListN1_Click(object sender, EventArgs e)
         {           
-            string filterID         = dgvList.DataGridViewSelected("ID");
-            string filterName       = dgvList.DataGridViewSelected( "Name");
-            string filterGlobalStr  = dgvList.DataGridViewSelected("Global");
+            string filterID         = dgvList.Value("ID");
+            string filterName       = dgvList.Value( "Name");
+            string filterGlobalStr  = dgvList.Value("Global");
 
             int filterGlobal = 1;
             if (filterGlobalStr == "No") filterGlobal = 0;
@@ -1121,7 +1121,7 @@ namespace FBA
             int N = 0;
             for (int i = 0; i < dgvAttr.Rows.Count; i++)
             {
-                string attrBriefExist = dgvAttr.RowInt(i, 1);
+                string attrBriefExist = dgvAttr.ValueByRowIndex(i, 1);
                 if (attrBrief == attrBriefExist) N++;               
             }
             if (N == 0) return attrName;            
@@ -1156,11 +1156,11 @@ namespace FBA
         private bool AttrProperties(int rowIndex)
         {               
             if (rowIndex == -1) return false; 
-            string attrName  = dgvAttr.RowInt(rowIndex, "Name");
-            string attrBrief = dgvAttr.RowInt(rowIndex, "Brief");             
-            string attrWidth = dgvAttr.RowInt(rowIndex, "Width"); 
-            string attrMask  = dgvAttr.RowInt(rowIndex, "Mask"); 
-            string attrSort  = dgvAttr.RowInt(rowIndex, "Sort");              
+            string attrName  = dgvAttr.ValueByRowIndex(rowIndex, "Name");
+            string attrBrief = dgvAttr.ValueByRowIndex(rowIndex, "Brief");             
+            string attrWidth = dgvAttr.ValueByRowIndex(rowIndex, "Width"); 
+            string attrMask  = dgvAttr.ValueByRowIndex(rowIndex, "Mask"); 
+            string attrSort  = dgvAttr.ValueByRowIndex(rowIndex, "Sort");              
             var frm = new FormFilterAttr(attrName, attrBrief, attrWidth, attrMask, attrSort);
             if (frm.ShowDialog() != DialogResult.OK) return false;                                   
             dgvAttr.Rows[rowIndex].Cells["Name"].Value  = frm.tbName.Text;
@@ -1198,10 +1198,10 @@ namespace FBA
             //	if (cbMax.Text != "Unlimited") MaxRecords = "TOP " + cbMax.Text;
             //}            
             //AttrAttr.Append("SELECT " + MaxRecords);                       
-            attrAttr.Append(dgvAttr.RowInt(0, 1) + " AS '" + dgvAttr.RowInt(0, 0) + "'");
+            attrAttr.Append(dgvAttr.ValueByRowIndex(0, 1) + " AS '" + dgvAttr.ValueByRowIndex(0, 0) + "'");
             //AttrAttr.Append("  " + dgvAttr[0, 1] + " AS '" + dgvAttr[0, 0] + "'");
             for (int i = 1; i < dgvAttr.Rows.Count; i++)             
-                attrAttr.Append(", " + dgvAttr.RowInt(i, 1) + " AS '" + dgvAttr.RowInt(i, 0) + "'");
+                attrAttr.Append(", " + dgvAttr.ValueByRowIndex(i, 1) + " AS '" + dgvAttr.ValueByRowIndex(i, 0) + "'");
             
             //if ((Var.con.serverTypeRemote == ServerType.SQLite) || (Var.con.serverTypeRemote == ServerType.Postgre))
             //{
@@ -1219,10 +1219,10 @@ namespace FBA
             const string orderStr = "";
             for (int i = 0; i < dgvAttr.Rows.Count; i++)  
             {
-                if ((dgvAttr.RowInt(i, 3) == "Up") || (dgvAttr.RowInt(i, 3) == "Down"))
+                if ((dgvAttr.ValueByRowIndex(i, 3) == "Up") || (dgvAttr.ValueByRowIndex(i, 3) == "Down"))
                 {
-                    if (dgvAttr.RowInt(i, 3) == "Up")
-                        attrAttr.Append(orderStr.AddRightComma() + dgvAttr.RowInt(i, 3));
+                    if (dgvAttr.ValueByRowIndex(i, 3) == "Up")
+                        attrAttr.Append(orderStr.AddRightComma() + dgvAttr.ValueByRowIndex(i, 3));
                 }
             }
             if (attrAttr.Length > 0) return " ORDER BY " + attrAttr.ToString(); 
@@ -1281,7 +1281,7 @@ namespace FBA
             if (sender == cmAttrN2)      dgvAttr.RowDown(rowIndex); 
             if (sender == cmAttrN3)      AttrProperties(rowIndex);
             if (dgvAttr.Rows.Count == 0) AddObjectIDColumn();
-            else if (dgvAttr.RowInt(0, 1).ToUpper() != ParserData.KeyBriefUpper.ObjectID.ToUpper()) AddObjectIDColumn();
+            else if (dgvAttr.ValueByRowIndex(0, 1).ToUpper() != ParserData.KeyBriefUpper.ObjectID.ToUpper()) AddObjectIDColumn();
         }
        
         ///Если произошла ошибка при чтении атрибутов, то столбы удаляются. Поэтому нужно их добавить снова.
@@ -1337,7 +1337,7 @@ namespace FBA
             filter.ColumnWidth = new int[dgvAttr.Rows.Count];
             for (int i = 0; i < dgvAttr.Rows.Count; i++)
             {
-                filter.ColumnWidth[i] = dgvAttr.RowInt(i, "Width").ToInt();
+                filter.ColumnWidth[i] = dgvAttr.ValueByRowIndex(i, "Width").ToInt();
             }                      
         }
         

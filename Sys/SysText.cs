@@ -329,7 +329,8 @@ namespace FBA
         /// <returns>Номер символа, ск которого найдено вхождение, если не найдено, то -1.</returns>
         public static int IndexOfEx(this string inputStr, string value)
         {            
-            return inputStr.IndexOf(value, StringComparison.OrdinalIgnoreCase);                    
+        	if (string.IsNullOrEmpty(value)) return -1;
+        	return inputStr.IndexOf(value, StringComparison.OrdinalIgnoreCase);
         }              
         
         /// <summary>
@@ -491,7 +492,17 @@ namespace FBA
             if (N == -1) return inputStr;
             return inputStr.Substring(0, N);
         }
-              
+           
+
+		//public static string Part(this string inputStr, string beginStr, string endStr, string TypePart)
+        //{                          
+		//	if (TypePart == "FirstBeginString...LastEndStringReturnNulIfNotFind")
+				//return "";
+				//return "FBALN_RS"
+		//		return "LB_V_FN_RS"
+        //}
+        
+        
         /// <summary>
         /// Для типа bool. Функции ToInt(). 
         /// </summary>
@@ -1693,7 +1704,7 @@ namespace FBA
         {                              
         	        	
         	var arrvp = new ValueParam[1];
-        	arrvp[0].isComboBox = false;
+        	arrvp[0].componentType = ComponentType.TextBox;	
 		    arrvp[0].value = valueText; 		  
 		    arrvp[0].captionValue = capText; 
 		    arrvp[0].defaultTextGray = "ttyuyui";
@@ -1727,7 +1738,7 @@ namespace FBA
                                        ref string valueText2)
         {                       
             var arrvp = new ValueParam[2];                     
-        	arrvp[0].isComboBox = false;	
+        	arrvp[0].componentType = ComponentType.TextBox;		
 			arrvp[0].wordwrap   = false;  
             arrvp[0].CopyTo(arrvp[1]);			
             arrvp[0].captionValue = capText1;	    		  		   	

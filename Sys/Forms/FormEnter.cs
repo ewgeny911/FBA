@@ -25,18 +25,17 @@ namespace FBA
 		/// <summary>
 		/// Если стоит true, то при закрыти формы входа закрываем ВСЮ ПРОГРАММУ, если не авторизовались.	
 		/// </summary>
-		public bool CloseDefault = true;
+		//public bool CloseDefault;
 				
 		/// <summary>
 		/// Конструктор	
 		/// </summary>
 		/// <param name="CloseDefault"></param>
-		public FormEnter(bool CloseDefault = true)
-		{                                   									 	          						   			  		  		    	 
-		    this.CloseDefault = CloseDefault;
+		public FormEnter()
+		{                                   									 	          						   			  		  		    	 		    
 		    InitializeComponent();
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;      
+			//this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            //this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;      
 			
             //Обновляем список подключений
 		    ConnectionListRefresh();		   
@@ -71,20 +70,25 @@ namespace FBA
 		}				   					
 		
 		/// <summary>
-		/// Кнопки Ok и Cancel.
+		/// Кнопка Ok.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void BtnOkClick(object sender, EventArgs e)
-	    {				        			                		    		                       		  
-            if (sender == btnCancel) 
-            {
-                if (CloseDefault) Environment.Exit(0);
-                else Close();
-            }
-            EnterSystem();
+	    {				        			                		    		                       		         
+			if (EnterSystem()) Close();
 		}             
-			
+		
+		/// <summary>
+		/// Кнопка Cancel.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>		
+		private void BtnCancelClick(object sender, EventArgs e)
+		{
+	 		Environment.Exit(0);    
+		}
+		
 		/// <summary>
 		/// Вход в систему.
 		/// </summary>
@@ -128,11 +132,9 @@ namespace FBA
                     return false;
                 }
                 //Форма главная, если в имени есть слово Main.
-                if (Var.FormMainObj.Name.IndexOf("Main", StringComparison.Ordinal) == -1) //!= sys.FormTypeList.Main)
-                {
-                    DialogResult = DialogResult.None; 
-                    sys.SM("Форма не является главной форма запуска подсистемы!");
-                    return false;
+                if (Var.FormMainObj.Name.IndexOf("Main", StringComparison.Ordinal) == -1) 
+                {                   
+                    sys.SM("Внимание! Форма не является главной формой запуска подсистемы!", MessageType.Warning);                   
                 }                                         
             }
             
@@ -171,7 +173,7 @@ namespace FBA
 		/// <param name="e"></param>
 		private void FormEnterFormClosing(object sender, FormClosingEventArgs e)
 		{	 	  
-		    if ((StatusClose == 0) && (CloseDefault)) Environment.Exit(0);		    
+			if (StatusClose == 0) Environment.Exit(0); 
 		}
 		
 		///Подсвечиваем CapsLock.
@@ -204,6 +206,8 @@ namespace FBA
                 Close();                
             }*/
         }
+		
+		
 		
     }
 }

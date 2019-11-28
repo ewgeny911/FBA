@@ -107,7 +107,7 @@ namespace FBA
 		/// <param name="e"></param>
 		private void BtnDelClick(object sender, EventArgs e)
 		{
-			 string id = dgvConnectionList.DataGridViewSelected("ID");
+			 string id = dgvConnectionList.Value("ID");
 			 string sql = "DELETE FROM fbaConList WHERE ID = " + id;	
 			 Var.conLite.Exec(sql);
              ConnectionListRefresh();     			 
@@ -131,7 +131,7 @@ namespace FBA
 		///При навигации по таблице списку подключений показываем значения параметров.
 		private void UpdateFormText()
 		{			  
-			string id   = dgvConnectionList.DataGridViewSelected("ID");
+			string id   = dgvConnectionList.Value("ID");
 			if (id  == "") return;
 		    string sql;
 		    string connectionName;
@@ -181,7 +181,7 @@ namespace FBA
 		///Сохранение текущего подключения.
 		private void BtnSaveClick(object sender, EventArgs e)
 		{			
-			string id = dgvConnectionList.DataGridViewSelected("ID");
+			string id = dgvConnectionList.Value("ID");
 			if (id == "") 
 			{
 				ConnectionAdd();

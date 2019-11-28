@@ -804,26 +804,7 @@
         }*/
 //=================================================================	
         
-        // <summary>
-        // Копируем проект в БД.
-        // Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
-        // </summary>
-        // <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
-        // <returns>Если успешно, то true</returns>
-        /*public static bool ProjectWriteToDataBase(string projectName)
-        {
-            //Проект архивируется в файл ZIP. Далее файл ZIP записывается в БД в виде Base64.
-            string projectPath = sys.PathForms + projectName;
-            string fileName = sys.PathTemp + projectName + ".zip";
-            if (!sys.DirZIP(true, projectPath, fileName)) return false;
-            const bool saveHashToEndFile = false;
-            string fileData;
-            string hashMD5;
-            if (!sys.FileGetBase64WithHashMD5(fileName, saveHashToEndFile, out fileData, out hashMD5)) return false;
-            string sql = "UPDATE fbaProject SET ProjectZip = '" + fileData + "' WHERE Name = '" + projectName + "'";
-            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
-            return true;
-        }*/  
+     
 //=================================================================	
 
         //Получить текст *.cs модуля формы.

@@ -31,7 +31,6 @@ namespace FBA
         {
         	this.components = new System.ComponentModel.Container();
         	System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        	System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         	this.dgvProject = new FBA.DataGridViewFBA();
         	this.cmProject = new System.Windows.Forms.ContextMenuStrip(this.components);
         	this.cmProjectN27 = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +45,8 @@ namespace FBA
         	this.cmProjectN21_2 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN21_3 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN20 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_1 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_2 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN30 = new System.Windows.Forms.ToolStripMenuItem();
         	this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
         	this.cmProjectN19 = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,18 +62,19 @@ namespace FBA
         	this.tabControl1 = new System.Windows.Forms.TabControl();
         	this.tbProject = new System.Windows.Forms.TabPage();
         	this.tbHist = new System.Windows.Forms.TabPage();
-        	this.dgvHist = new FBA.DataGridViewFBA();
+        	this.dgvHist = new FBA.GridFBA();
         	this.cmProjectHist = new System.Windows.Forms.ContextMenuStrip(this.components);
         	this.cmProjectHistN2 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectHistN3 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectHistN4 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_3 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_4 = new System.Windows.Forms.ToolStripMenuItem();
         	((System.ComponentModel.ISupportInitialize)(this.dgvProject)).BeginInit();
         	this.cmProject.SuspendLayout();
         	this.panel1.SuspendLayout();
         	this.tabControl1.SuspendLayout();
         	this.tbProject.SuspendLayout();
         	this.tbHist.SuspendLayout();
-        	((System.ComponentModel.ISupportInitialize)(this.dgvHist)).BeginInit();
         	this.cmProjectHist.SuspendLayout();
         	this.SuspendLayout();
         	// 
@@ -137,7 +139,7 @@ namespace FBA
 			this.toolStripMenuItem6,
 			this.cmProjectN29});
         	this.cmProject.Name = "cmForm";
-        	this.cmProject.Size = new System.Drawing.Size(230, 336);
+        	this.cmProject.Size = new System.Drawing.Size(230, 358);
         	this.cmProject.Text = "Show code work";
         	// 
         	// cmProjectN27
@@ -200,30 +202,48 @@ namespace FBA
         	// cmProjectN21_1
         	// 
         	this.cmProjectN21_1.Name = "cmProjectN21_1";
-        	this.cmProjectN21_1.Size = new System.Drawing.Size(106, 22);
+        	this.cmProjectN21_1.Size = new System.Drawing.Size(152, 22);
         	this.cmProjectN21_1.Text = "Main";
         	this.cmProjectN21_1.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN21_2
         	// 
         	this.cmProjectN21_2.Name = "cmProjectN21_2";
-        	this.cmProjectN21_2.Size = new System.Drawing.Size(106, 22);
+        	this.cmProjectN21_2.Size = new System.Drawing.Size(152, 22);
         	this.cmProjectN21_2.Text = "App";
         	this.cmProjectN21_2.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN21_3
         	// 
         	this.cmProjectN21_3.Name = "cmProjectN21_3";
-        	this.cmProjectN21_3.Size = new System.Drawing.Size(106, 22);
+        	this.cmProjectN21_3.Size = new System.Drawing.Size(152, 22);
         	this.cmProjectN21_3.Text = "Dll";
         	this.cmProjectN21_3.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN20
         	// 
+        	this.cmProjectN20.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.cmProjectN20_1,
+			this.cmProjectN20_2,
+			this.cmProjectN20_3,
+			this.cmProjectN20_4});
         	this.cmProjectN20.Name = "cmProjectN20";
         	this.cmProjectN20.Size = new System.Drawing.Size(229, 22);
         	this.cmProjectN20.Text = "Delete";
-        	this.cmProjectN20.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN20_1
+        	// 
+        	this.cmProjectN20_1.Name = "cmProjectN20_1";
+        	this.cmProjectN20_1.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_1.Text = "Delete from Database";
+        	this.cmProjectN20_1.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN20_2
+        	// 
+        	this.cmProjectN20_2.Name = "cmProjectN20_2";
+        	this.cmProjectN20_2.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_2.Text = "Delete from Disk";
+        	this.cmProjectN20_2.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN30
         	// 
@@ -361,41 +381,20 @@ namespace FBA
         	// 
         	// dgvHist
         	// 
-        	this.dgvHist.AllowUserToAddRows = false;
-        	this.dgvHist.AllowUserToDeleteRows = false;
-        	this.dgvHist.AllowUserToOrderColumns = true;
-        	this.dgvHist.AllowUserToResizeRows = false;
-        	dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-        	this.dgvHist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-        	this.dgvHist.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-        	this.dgvHist.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
-        	this.dgvHist.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-        	this.dgvHist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-        	this.dgvHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        	this.dgvHist.CommandAdd = false;
-        	this.dgvHist.CommandDel = false;
-        	this.dgvHist.CommandEdit = false;
-        	this.dgvHist.CommandExportToExcel = false;
-        	this.dgvHist.CommandFilter = false;
-        	this.dgvHist.CommandRefresh = false;
-        	this.dgvHist.CommandSaveASCSV = false;
+        	this.dgvHist.ClipboardMode = SourceGrid.ClipboardMode.Copy;
         	this.dgvHist.ContextMenuStrip = this.cmProjectHist;
+        	this.dgvHist.DeleteQuestionMessage = "Are you sure to delete all the selected rows?";
         	this.dgvHist.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.dgvHist.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-        	this.dgvHist.EnableHeadersVisualStyles = false;
-        	this.dgvHist.GroupEnabled = null;
+        	this.dgvHist.EnableSort = false;
+        	this.dgvHist.FixedRows = 1;
         	this.dgvHist.Location = new System.Drawing.Point(4, 4);
         	this.dgvHist.Margin = new System.Windows.Forms.Padding(1);
-        	this.dgvHist.MultiSelect = false;
         	this.dgvHist.Name = "dgvHist";
-        	this.dgvHist.Obj = null;
-        	this.dgvHist.PassedSec = null;
-        	this.dgvHist.ReadOnly = true;
-        	this.dgvHist.RowHeadersVisible = false;
-        	this.dgvHist.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-        	this.dgvHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        	this.dgvHist.SelectionMode = SourceGrid.GridSelectionMode.Row;
         	this.dgvHist.Size = new System.Drawing.Size(584, 320);
         	this.dgvHist.TabIndex = 16;
+        	this.dgvHist.TabStop = true;
+        	this.dgvHist.ToolTipText = "";
         	// 
         	// cmProjectHist
         	// 
@@ -404,7 +403,7 @@ namespace FBA
 			this.cmProjectHistN3,
 			this.cmProjectHistN4});
         	this.cmProjectHist.Name = "cmFormHist";
-        	this.cmProjectHist.Size = new System.Drawing.Size(163, 92);
+        	this.cmProjectHist.Size = new System.Drawing.Size(163, 70);
         	// 
         	// cmProjectHistN2
         	// 
@@ -430,6 +429,20 @@ namespace FBA
         	this.cmProjectHistN4.Text = "Copy as New";
         	this.cmProjectHistN4.Click += new System.EventHandler(this.CmProjectHistN1Click);
         	// 
+        	// cmProjectN20_3
+        	// 
+        	this.cmProjectN20_3.Name = "cmProjectN20_3";
+        	this.cmProjectN20_3.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_3.Text = "Delete from Database and Disk";
+        	this.cmProjectN20_3.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN20_4
+        	// 
+        	this.cmProjectN20_4.Name = "cmProjectN20_4";
+        	this.cmProjectN20_4.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_4.Text = "Delete from Database and Disk and History";
+        	this.cmProjectN20_4.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
         	// ProjectService
         	// 
         	this.ClientSize = new System.Drawing.Size(600, 392);
@@ -445,7 +458,6 @@ namespace FBA
         	this.tabControl1.ResumeLayout(false);
         	this.tbProject.ResumeLayout(false);
         	this.tbHist.ResumeLayout(false);
-        	((System.ComponentModel.ISupportInitialize)(this.dgvHist)).EndInit();
         	this.cmProjectHist.ResumeLayout(false);
         	this.ResumeLayout(false);
 
@@ -462,7 +474,7 @@ namespace FBA
         private System.Windows.Forms.ToolStripMenuItem cmProjectN22;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN18;
         private System.Windows.Forms.TabPage tbHist;
-        private FBA.DataGridViewFBA dgvHist;
+        private FBA.GridFBA dgvHist;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN20;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN21;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN21_1;
@@ -484,5 +496,9 @@ namespace FBA
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN29;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN30;
+        private System.Windows.Forms.ToolStripMenuItem cmProjectN20_1;
+        private System.Windows.Forms.ToolStripMenuItem cmProjectN20_2;
+        private System.Windows.Forms.ToolStripMenuItem cmProjectN20_3;
+        private System.Windows.Forms.ToolStripMenuItem cmProjectN20_4;
     }
 }
