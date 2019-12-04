@@ -107,6 +107,7 @@ namespace FBA
             fileNameDLL = FBAPath.PathApp + projectName + ".dll";
             findEXE = File.Exists(fileNameEXE);
             findDLL     = File.Exists(fileNameDLL);
+            
             return (findEXE || findDLL);
         }
        

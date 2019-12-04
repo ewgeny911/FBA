@@ -22,29 +22,29 @@ namespace FBA
             if (id == "") return;
             this.ID = id;
                   
-            string Name;
-            string Brief;
-            string FileName;
-            string FileNameFull;
-            string Format;
-            string Comment;
-            string SQL = "SELECT ID, Name, Brief, FileName, FileNameFull, Format, Comment " +
+            string name;
+            string brief;
+            string fileName;
+            string fileNameFull;
+            string format;
+            string comment;
+            string sql = "SELECT ID, Name, Brief, FileName, FileNameFull, Format, Comment " +
                          "FROM fbaReport WHERE ID = " + id;
-            if (!sys.GetValue(DirectionQuery.Remote, SQL,
+            if (!sys.GetValue(DirectionQuery.Remote, sql,
                 out id,
-                out Name,
-                out Brief,
-                out FileName,
-                out FileNameFull,
-                out Format,
-                out Comment
+                out name,
+                out brief,
+                out fileName,
+                out fileNameFull,
+                out format,
+                out comment
             )) return;
             if (id == "") return;  
-            tbName.Text     = Name;
-            tbBrief.Text    = Brief;
-            tbFileName.Text = FileNameFull;
-            tbFormat.Text   = Format;
-            tbComment.Text  = Comment;
+            tbName.Text     = name;
+            tbBrief.Text    = brief;
+            tbFileName.Text = fileNameFull;
+            tbFormat.Text   = format;
+            tbComment.Text  = comment;
         }
             
         /// <summary>
@@ -54,8 +54,8 @@ namespace FBA
         /// <returns></returns>
         private string GetReportType(string Format)
         {
-            if (Format.IndexOf(".XLS") > -1) return "Excel";
-            if (Format.IndexOf(".DOC") > -1) return "Word";
+            if (Format.IndexOf(".XLS", System.StringComparison.OrdinalIgnoreCase) > -1) return "Excel";
+            if (Format.IndexOf(".DOC", System.StringComparison.OrdinalIgnoreCase) > -1) return "Word";
             return "";
         }
    
@@ -65,20 +65,20 @@ namespace FBA
         /// <returns></returns>
         private bool ReportInsert()
         {
-            string FileData = "";
-            string ErrorMes = "";
-            string ReportFileNameFull = tbFileName.Text;
-            const bool ShowMes = true;
-            if (ReportFileNameFull != "")
+            string fileData = "";
+            string errorMes = "";
+            string reportFileNameFull = tbFileName.Text;
+            const bool showMes = true;
+            if (reportFileNameFull != "")
             {
-            	if (!FBAFile.FileReadToBase64(ReportFileNameFull, out FileData, out ErrorMes, ShowMes)) return false;  
+            	if (!FBAFile.FileReadToBase64(reportFileNameFull, out fileData, out errorMes, showMes)) return false;  
             }
-            string ReportName     = tbName.Text;
-            string ReportBrief    = tbBrief.Text;            
-            string ReportFileName = Path.GetFileName(ReportFileNameFull);
-            string Format         = tbFormat.Text;
-            string Comment        = tbComment.Text;
-            string ReportType     = GetReportType(Format);
+            string reportName     = tbName.Text;
+            string reportBrief    = tbBrief.Text;            
+            string reportFileName = Path.GetFileName(reportFileNameFull);
+            string format         = tbFormat.Text;
+            string comment        = tbComment.Text;
+            string reportType     = GetReportType(format);
 
             string SQL = "INSERT INTO fbaReport (" +
                          "EntityID, DateCreate, UserCreateID, " +
@@ -87,9 +87,9 @@ namespace FBA
                          "Comment, ReportType)" +
                          "VALUES (" +
                          "113," + sys.DateTimeCurrent() + "," + Var.UserID  + "," + 
-                         "'" + Format + "','" + ReportBrief + "','" + ReportName + "'," +
-                         "'," + ReportFileName + "','" + ReportFileNameFull + "','" + FileData + "'," +
-                         "'," + Comment + "','" + ReportType  + "')";
+                         "'" + format + "','" + reportBrief + "','" + reportName + "'," +
+                         "'," + reportFileName + "','" + reportFileNameFull + "','" + fileData + "'," +
+                         "'," + comment + "','" + reportType  + "')";
                          
             if (!sys.Exec(DirectionQuery.Remote, SQL)) return false;
             return true;
@@ -101,31 +101,31 @@ namespace FBA
         /// <returns>Если успешно, то true</returns>
         private bool ReportUpdate()
         {
-            string FileData = "";
-            string ErrorMes = "";
-            string ReportFileNameFull = tbFileName.Text;
-            const bool ShowMes = true;
-            if (!FBAFile.FileReadToBase64(ReportFileNameFull, out FileData, out ErrorMes, ShowMes)) return false;
-            string ReportName     = tbName.Text;
-            string ReportBrief    = tbBrief.Text;
-            string ReportFileName = Path.GetFileName(ReportFileNameFull);
-            string Format         = tbFormat.Text;
-            string Comment        = tbComment.Text;
-            string ReportType     = GetReportType(Format);
-            string SQL = "UPDATE fbaReport " +
+            string fileData = "";
+            string errorMes = "";
+            string reportFileNameFull = tbFileName.Text;
+            const bool showMes = true;
+            if (!FBAFile.FileReadToBase64(reportFileNameFull, out fileData, out errorMes, showMes)) return false;
+            string reportName     = tbName.Text;
+            string reportBrief    = tbBrief.Text;
+            string reportFileName = Path.GetFileName(reportFileNameFull);
+            string format         = tbFormat.Text;
+            string comment        = tbComment.Text;
+            string reportType     = GetReportType(format);
+            string sql = "UPDATE fbaReport " +
                          "SET " +
                          "DateChange    = " + sys.DateTimeCurrent() +
                          ",UserChangeID = " + Var.UserID  + 
-                         ",Format       = '" + Format + "'" +
-                         ",Brief        = '" + ReportBrief + "'" +
-                         ",Name         = '" + ReportName + "'" +
-                         ",FileName     = '" + ReportFileName + "'" +
-                         ",FileNameFull = '" + ReportFileNameFull + "'" +
-                         ",FileData     = '" + FileData + "'" +
-                         ",Comment      = '" + Comment + "'" +
-                         ",ReportType   = '" + ReportType + "'" +
+                         ",Format       = '" + format + "'" +
+                         ",Brief        = '" + reportBrief + "'" +
+                         ",Name         = '" + reportName + "'" +
+                         ",FileName     = '" + reportFileName + "'" +
+                         ",FileNameFull = '" + reportFileNameFull + "'" +
+                         ",FileData     = '" + fileData + "'" +
+                         ",Comment      = '" + comment + "'" +
+                         ",ReportType   = '" + reportType + "'" +
                          " WHERE ID = " + ID;
-            if (!sys.Exec(DirectionQuery.Remote, SQL)) return false;
+            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
             return true;
         }
         
@@ -146,12 +146,12 @@ namespace FBA
         /// <param name="e"></param>
         private void tbFileName_EditClick(object sender, EventArgs e)
         {//"CSV Files|*.csv|All Files|*.*"
-            const string Title = "Выбор шаблона отчета";
-            const string Filter = "Office Files|*.XLS;*.XLSX;*.DOC;*.DOCX)|All files|*.*"; //формат загружаемого файла;
-            string FileNameFull = "";    
-            if (!FBAFile.OpenFileName(Title, Filter, "", ref FileNameFull)) return;       
-            tbFileName.Text = FileNameFull;
-            tbFormat.Text = Path.GetExtension(FileNameFull).ToUpper();   
+            const string title = "Выбор шаблона отчета";
+            const string filter = "Office Files|*.XLS;*.XLSX;*.DOC;*.DOCX)|All files|*.*"; //формат загружаемого файла;
+            string fileNameFull = "";    
+            if (!FBAFile.OpenFileName(title, filter, "", ref fileNameFull)) return;       
+            tbFileName.Text = fileNameFull;
+            tbFormat.Text = Path.GetExtension(fileNameFull).ToUpper();   
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

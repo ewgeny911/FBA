@@ -53,8 +53,8 @@ namespace FBA
                              "Атрибуты");                        
             
             //Сохранение на диск отчкета и его показ.
-            //rep.SaveToExcel("", true);
-            rep.ExportToPDF("", "", true);
+            rep.SaveToExcel("", true);
+            //rep.ExportToPDF("", "", true);
         }
         
         private void buttonFBA2_Click(object sender, EventArgs e)
@@ -71,7 +71,6 @@ namespace FBA
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);            
             Application.Run(new FormReportSample());
-        }
-        
+        }      
     }
 }

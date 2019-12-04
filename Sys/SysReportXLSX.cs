@@ -14,7 +14,7 @@ using NPOI.XSSF.UserModel;
 using DataTable = System.Data.DataTable;
 using IFont = NPOI.SS.UserModel.IFont;
 using System.Threading;
-//using Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Word;
 
 namespace FBA
 {    
@@ -1131,13 +1131,13 @@ namespace FBA
             }
 
             string ext = "";
-            if (fileName.ToUpper().EndsWith(".XLS"))
+            if (fileName.EndsWith(".XLS", System.StringComparison.OrdinalIgnoreCase))
             {
                 string ch = fileName.Right(1);
                 if (ch == "S") fileName = fileName + "X";
                 else fileName = fileName + "x";
             }
-            if (fileName.ToUpper().EndsWith(".XLSX")) ext = ".XLSX";
+            if (fileName.EndsWith(".XLSX", System.StringComparison.OrdinalIgnoreCase)) ext = ".XLSX";
             if (ext == "") fileName = fileName + ".xlsx";
 
             string fileNameFullNew = "";
@@ -1153,7 +1153,7 @@ namespace FBA
             catch (Exception ex)
             {
                 errorCount++;
-                if (ShowError) sys.SM("Ошибка сохранения файла Excel: " + fileNameFullNew + Var.CR + ex.Message);
+                if (ShowError) sys.SM("Ошибка создания файла отчета: " + fileNameFullNew + Var.CR + ex.Message);
                 return false;
             }
             
@@ -1161,7 +1161,14 @@ namespace FBA
             ReportOutputFullFileNameXLS = fileNameFullNew;
             
             //Запись книги отчета на диск.
-            book.Write(fs);            
+            try
+            {
+            	book.Write(fs);
+            }            
+            catch (Exception ex)
+			{
+				sys.SM("Ошибка записи отчёта на диск: " + fileNameFullNew + Var.CR + ex.Message);
+			}
             if (fs != null) fs.Close();
 
             //Если форма прогресса ещё не закрыта, то закроем.

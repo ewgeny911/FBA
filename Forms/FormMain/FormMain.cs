@@ -38,7 +38,7 @@ using System.Net.Sockets;
 //using System.Collections;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
-using FBA;
+//using FBA;
 //using Akka;
 //using Akka.Actor;
 
@@ -133,7 +133,7 @@ namespace FBA
             {
                 int FormNumberLocal = 0;
                 object[] ParamArray = null; //new object[1];
-                ProjectService.FormShow("FormReportSample", "FormReportSample", out FormNumberLocal, ParamArray);
+                ProjectService.FormShow("FormReport", "FormReport", out FormNumberLocal, ParamArray);
             }
 
             //Открыть документы по ссылке.
@@ -143,7 +143,7 @@ namespace FBA
                                  
                 if (!sys.InputValue("List of values", "Input links:", SizeMode.Large, ValueType.String, ref ValueText)) return;
                 string[] ListObjectID = ValueText.Split('\n');
-                sys.ShowDirectorySimple("ДогСтрах", "FormContract", "FormContractCard", null, ListObjectID, null, null);
+                sys.ShowDirectorySimple("ДогСтрах", "FormContract", "FormContract", null, ListObjectID, null, null);
             }
             
             //Открыть справку

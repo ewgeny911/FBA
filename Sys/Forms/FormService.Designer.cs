@@ -35,6 +35,7 @@ namespace FBA
         	this.cmProject = new System.Windows.Forms.ContextMenuStrip(this.components);
         	this.cmProjectN27 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN28 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN31 = new System.Windows.Forms.ToolStripMenuItem();
         	this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
         	this.cmProjectN24 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN23 = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,8 @@ namespace FBA
         	this.cmProjectN20 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN20_1 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN20_2 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_3 = new System.Windows.Forms.ToolStripMenuItem();
+        	this.cmProjectN20_4 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectN30 = new System.Windows.Forms.ToolStripMenuItem();
         	this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
         	this.cmProjectN19 = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +70,6 @@ namespace FBA
         	this.cmProjectHistN2 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectHistN3 = new System.Windows.Forms.ToolStripMenuItem();
         	this.cmProjectHistN4 = new System.Windows.Forms.ToolStripMenuItem();
-        	this.cmProjectN20_3 = new System.Windows.Forms.ToolStripMenuItem();
-        	this.cmProjectN20_4 = new System.Windows.Forms.ToolStripMenuItem();
         	((System.ComponentModel.ISupportInitialize)(this.dgvProject)).BeginInit();
         	this.cmProject.SuspendLayout();
         	this.panel1.SuspendLayout();
@@ -122,6 +123,7 @@ namespace FBA
         	this.cmProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.cmProjectN27,
 			this.cmProjectN28,
+			this.cmProjectN31,
 			this.toolStripMenuItem4,
 			this.cmProjectN24,
 			this.cmProjectN23,
@@ -139,7 +141,7 @@ namespace FBA
 			this.toolStripMenuItem6,
 			this.cmProjectN29});
         	this.cmProject.Name = "cmForm";
-        	this.cmProject.Size = new System.Drawing.Size(230, 358);
+        	this.cmProject.Size = new System.Drawing.Size(230, 380);
         	this.cmProject.Text = "Show code work";
         	// 
         	// cmProjectN27
@@ -155,6 +157,12 @@ namespace FBA
         	this.cmProjectN28.Size = new System.Drawing.Size(229, 22);
         	this.cmProjectN28.Text = "Load project from Work";
         	this.cmProjectN28.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN31
+        	// 
+        	this.cmProjectN31.Name = "cmProjectN31";
+        	this.cmProjectN31.Size = new System.Drawing.Size(229, 22);
+        	this.cmProjectN31.Text = "Load project from Test";
         	// 
         	// toolStripMenuItem4
         	// 
@@ -202,21 +210,21 @@ namespace FBA
         	// cmProjectN21_1
         	// 
         	this.cmProjectN21_1.Name = "cmProjectN21_1";
-        	this.cmProjectN21_1.Size = new System.Drawing.Size(152, 22);
+        	this.cmProjectN21_1.Size = new System.Drawing.Size(106, 22);
         	this.cmProjectN21_1.Text = "Main";
         	this.cmProjectN21_1.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN21_2
         	// 
         	this.cmProjectN21_2.Name = "cmProjectN21_2";
-        	this.cmProjectN21_2.Size = new System.Drawing.Size(152, 22);
+        	this.cmProjectN21_2.Size = new System.Drawing.Size(106, 22);
         	this.cmProjectN21_2.Text = "App";
         	this.cmProjectN21_2.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN21_3
         	// 
         	this.cmProjectN21_3.Name = "cmProjectN21_3";
-        	this.cmProjectN21_3.Size = new System.Drawing.Size(152, 22);
+        	this.cmProjectN21_3.Size = new System.Drawing.Size(106, 22);
         	this.cmProjectN21_3.Text = "Dll";
         	this.cmProjectN21_3.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
@@ -244,6 +252,20 @@ namespace FBA
         	this.cmProjectN20_2.Size = new System.Drawing.Size(357, 22);
         	this.cmProjectN20_2.Text = "Delete from Disk";
         	this.cmProjectN20_2.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN20_3
+        	// 
+        	this.cmProjectN20_3.Name = "cmProjectN20_3";
+        	this.cmProjectN20_3.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_3.Text = "Delete from Database and Disk";
+        	this.cmProjectN20_3.Click += new System.EventHandler(this.CmFormN14Click);
+        	// 
+        	// cmProjectN20_4
+        	// 
+        	this.cmProjectN20_4.Name = "cmProjectN20_4";
+        	this.cmProjectN20_4.Size = new System.Drawing.Size(357, 22);
+        	this.cmProjectN20_4.Text = "Delete from Database and Disk and History";
+        	this.cmProjectN20_4.Click += new System.EventHandler(this.CmFormN14Click);
         	// 
         	// cmProjectN30
         	// 
@@ -429,20 +451,6 @@ namespace FBA
         	this.cmProjectHistN4.Text = "Copy as New";
         	this.cmProjectHistN4.Click += new System.EventHandler(this.CmProjectHistN1Click);
         	// 
-        	// cmProjectN20_3
-        	// 
-        	this.cmProjectN20_3.Name = "cmProjectN20_3";
-        	this.cmProjectN20_3.Size = new System.Drawing.Size(357, 22);
-        	this.cmProjectN20_3.Text = "Delete from Database and Disk";
-        	this.cmProjectN20_3.Click += new System.EventHandler(this.CmFormN14Click);
-        	// 
-        	// cmProjectN20_4
-        	// 
-        	this.cmProjectN20_4.Name = "cmProjectN20_4";
-        	this.cmProjectN20_4.Size = new System.Drawing.Size(357, 22);
-        	this.cmProjectN20_4.Text = "Delete from Database and Disk and History";
-        	this.cmProjectN20_4.Click += new System.EventHandler(this.CmFormN14Click);
-        	// 
         	// ProjectService
         	// 
         	this.ClientSize = new System.Drawing.Size(600, 392);
@@ -500,5 +508,6 @@ namespace FBA
         private System.Windows.Forms.ToolStripMenuItem cmProjectN20_2;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN20_3;
         private System.Windows.Forms.ToolStripMenuItem cmProjectN20_4;
+        private System.Windows.Forms.ToolStripMenuItem cmProjectN31;
     }
 }

@@ -71,20 +71,16 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\Library\NPOI.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Bin\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\Library\NPOI.OOXML.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Bin\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\Library\NPOI.OpenXml4Net.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Bin\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\Library\NPOI.OpenXmlFormats.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Bin\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="ParserDLL">
       <HintPath>..\Bin\ParserDLL.dll</HintPath>

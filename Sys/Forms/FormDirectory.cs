@@ -21,18 +21,18 @@ namespace FBA
 		/// <summary>
         /// Фильтр. Внутри этого объекта все даные фильтра.
         /// </summary>
-		public FilterObj Filter = new FilterObj();
+		public FilterObj filter = new FilterObj();
         
 		/// <summary>
 		/// Форма поиска.
 		/// </summary>
 		//public System.Data.DataTable DT = new System.Data.DataTable();
-        private FormSearch FSearch;      
+        private FormSearch dtSearch;      
         
         /// <summary>
         /// Параметры открытия формы справочника. Описаны в DirectoryParams.
         /// </summary>
-        public DirectoryParams ListParams;
+        public DirectoryParams listParams;
         
         /// <summary>
         /// 
@@ -43,7 +43,7 @@ namespace FBA
         /// Переменная, чтобы определить что при получени фокуса ввода компонентом cbFastSearch
         /// больше не нужно читать историю поиска, она уже была прочитана ранее.
         /// </summary>
-        public bool WasSetHistorySearch = false; 
+        public bool wasSetHistorySearch = false; 
          
 		/// <summary>
         /// Конструктор. Установка MdiParent. 
@@ -62,7 +62,7 @@ namespace FBA
         public FormDirectory(string caption, ref DirectoryParams dirparams)
         {
             InitializeComponent();
-            this.ListParams = dirparams;                
+            this.listParams = dirparams;                
             if (string.IsNullOrEmpty(caption))
             {            
             	if (dirparams.EntityBrief != "") caption = caption + dirparams.EntityBrief;
@@ -86,15 +86,15 @@ namespace FBA
 			tb_N6.Visible = dirparams.ButtonSearch;  //AllowUpdate; //Delete
 			
             btnCancel.Visible   = tb_N4.Visible; //Если доступно изменение, то кнопка Cancel видима.
-            Filter.ListObjectID = dirparams.ListObjectID;
-            Filter.EntityBrief  = dirparams.EntityBrief;
-            Filter.ColumnWidth  = dirparams.ColumnWidth;
+            filter.ListObjectID = dirparams.ListObjectID;
+            filter.EntityBrief  = dirparams.EntityBrief;
+            filter.ColumnWidth  = dirparams.ColumnWidth;
             
             if (dirparams.showMode == ShowMode.Filter) Action(CommandType.Filter);
             if (dirparams.showMode == ShowMode.ExecMSQL)
             {                
-                FormFilter.FilterRead(ref Filter, false);
-                if ((Filter.FullQuerySQL == "") || (Filter.AttrSelect == "")) Action(CommandType.Filter);             
+                FormFilter.FilterRead(ref filter, false);
+                if ((filter.FullQuerySQL == "") || (filter.AttrSelect == "")) Action(CommandType.Filter);             
             }
          
             if (dirparams.showMode == ShowMode.ExecSQL)  Action(CommandType.ExecSQL);             
@@ -188,26 +188,26 @@ namespace FBA
         private void FillArraySelected(int IndexColumnID)
         {                           
         	//Массив с идентификаторами выделенных строк. Идентификаторы - это не ИДОбъекта, а внутренние идентификаторы грида.
-            int[] SelectedRows =  grid1.Selection.GetSelectionRegion().GetRowsIndex();
-            ListParams.ReturnSelectedRowsCount = SelectedRows.Length; //Это равно gridView1.SelectedRowsCount;
+            int[] selectedRows =  grid1.Selection.GetSelectionRegion().GetRowsIndex();
+            listParams.ReturnSelectedRowsCount = selectedRows.Length; //Это равно gridView1.SelectedRowsCount;
             
             //В этом массиве будут все ИДОБъекта выделенных записей в таблице.
-            ListParams.ReturnArraySelectedID = new string[ListParams.ReturnSelectedRowsCount];      
-            for (int iRow = 0; iRow < SelectedRows.Length; iRow++)
+            listParams.ReturnArraySelectedID = new string[listParams.ReturnSelectedRowsCount];      
+            for (int iRow = 0; iRow < selectedRows.Length; iRow++)
             {                
-                ListParams.ReturnArraySelectedID[iRow] = grid1.Value(SelectedRows[iRow], 0);                
+                listParams.ReturnArraySelectedID[iRow] = grid1.Value(selectedRows[iRow], 0);                
             }
-            if (SelectedRows.Length > 0)
+            if (selectedRows.Length > 0)
             {
-                ListParams.ReturnObjectID = ListParams.ReturnArraySelectedID[0];
+                listParams.ReturnObjectID = listParams.ReturnArraySelectedID[0];
                 //Если в FormDirectory передан NeedAttr, то нужно посмотреть отображается ли такой атрибут в таблице.
                 //Это для того, что не посылаьт ещё один запрос на получение значения NeedAttr по ИДОбъекта.
                 //NeedAttr передается в эту форму (FormDirectory), если эта форма показывается из компонента EditFBA. 
                 //И в поле EditFBA нужно отобразить тот атрибут сущности, который там указан в AttrBrief.
-                if (!sys.IsEmpty(ListParams.ReturnAttrBrief))
+                if (!sys.IsEmpty(listParams.ReturnAttrBrief))
                 {
-                    string Value = grid1.Value(0, ListParams.ReturnAttrBrief);
-                    if (Value != null) ListParams.ReturnAttrValue = Value;
+                    string Value = grid1.Value(0, listParams.ReturnAttrBrief);
+                    if (Value != null) listParams.ReturnAttrValue = Value;
                     //Если Value будет равно NULL, то в компоненте EditFBA выполнится запрос поиска значения атрибута по переданному отсюда Params.ReturnObjectID .
                 }
             }
@@ -235,38 +235,38 @@ namespace FBA
             {
                 if (!FormFilter.Filter(
                     this,
-                    ListParams.EntityBrief,
+                    listParams.EntityBrief,
                     grid1.Left,
                     grid1.Top,
-                    ref Filter,
-                    ListParams.OuterWHERE
+                    ref filter,
+                    listParams.OuterWHERE
                 ))
                 {
                     FilterSet = false;
                     return;
                 }
                 FilterSet = true;
-                RefreshGridForm(DirectionQuery.Remote, grid1, Filter);         
+                RefreshGridForm(DirectionQuery.Remote, grid1, filter);         
             }  
             
         	if (commandType == CommandType.ExecSQL)
             {
                 
                 FilterSet = false;
-                Filter.FullQuerySQL = ListParams.СustomSQLQuery;
-                RefreshGridForm(DirectionQuery.Remote, grid1, Filter);         
+                filter.FullQuerySQL = listParams.СustomSQLQuery;
+                RefreshGridForm(DirectionQuery.Remote, grid1, filter);         
             }  
         	
         	if (commandType == CommandType.ExecMSQL)
             {                
                 FilterSet = false;
-                Filter.FullQuerySQL = sys.Parse(ListParams.СustomMSQLQuery);
-                RefreshGridForm(DirectionQuery.Remote, grid1, Filter);         
+                filter.FullQuerySQL = sys.Parse(listParams.СustomMSQLQuery);
+                RefreshGridForm(DirectionQuery.Remote, grid1, filter);         
             } 
         	
             if (commandType == CommandType.Refresh)
             {
-                RefreshGridForm(DirectionQuery.Remote, grid1, Filter);                
+                RefreshGridForm(DirectionQuery.Remote, grid1, filter);                
             }
             
             if (commandType == CommandType.Add)
@@ -276,77 +276,78 @@ namespace FBA
             
             if (commandType == CommandType.Edit)
             {
-                this.ListParams.ObjectID = grid1.Value(0, true);
-                if (ListParams.DoubleClickReturn) Close();
+                this.listParams.ObjectID = grid1.Value(0, true);
+                if (listParams.DoubleClickReturn) Close();
 
                 //показываем форму свойств выбранного объекта.  
-                EditObject(this.ListParams.ObjectID);             
+                EditObject(this.listParams.ObjectID);             
             }  
             
             if (commandType == CommandType.Del)
             {
-                int CountDeleted = 0;
-                string ObjectCaption = "";
-            	string[] ArrID = grid1.GetSelectedValues(0, true);
-                if (ArrID == null) return;
-                if (ArrID.Length == 0) return;
-                string EntityName = sys.GetEntityName("", ListParams.EntityBrief);
+                int countDeleted = 0;
+                string objectCaption = "";
+            	string[] arrID = grid1.GetSelectedValues(0, true);
+                if (arrID == null) return;
+                if (arrID.Length == 0) return;
+                string entityName = sys.GetEntityName("", listParams.EntityBrief);
                 
-                if (EntityName != "") ObjectCaption = EntityName;
-                if (ArrID.Length == 1) ObjectCaption = ObjectCaption + " ИД Объекта " + ArrID[0];
-                else ObjectCaption = ObjectCaption = ObjectCaption + " Всего объектов " + ArrID.Length.ToString();
+                if (entityName != "") objectCaption = entityName;
+                if (arrID.Length == 1) objectCaption = objectCaption + " ИД Объекта " + arrID[0];
+                else objectCaption = objectCaption = objectCaption + " Всего объектов " + arrID.Length.ToString();
 
-                if (!sys.SM("Вы действительно ходите удалить " + ObjectCaption, MessageType.Question)) return;
+                if (!sys.SM("Вы действительно ходите удалить " + objectCaption, MessageType.Question)) return;
                 
                 
-                if (ArrID.Length == 1)
+                if (arrID.Length == 1)
                 {
-                    ObjectCaption = "'" + EntityName + "'. ИД Объекта " + ArrID[0];                   
+                    objectCaption = "'" + entityName + "'. ИД Объекта " + arrID[0];                   
             		var Obj = new FBA.ObjectRef(); 
-            		if (!Obj.DeleteObject(DirectionQuery.Remote, "Contract", ArrID[0])) return;
-                    CountDeleted = 1;
-                    sys.SM(ObjectCaption + " удален", MessageType.Information);
+            		if (!Obj.DeleteObject(DirectionQuery.Remote, "Contract", arrID[0])) return;
+                    countDeleted = 1;
+                    sys.SM(objectCaption + " удален", MessageType.Information);
                 }
 
-                if (ArrID.Length > 1)
+                if (arrID.Length > 1)
                 {
-                    var Progress1 = new FormProgress("Удаление", "Удаление объектов" + EntityName, ArrID.Length);
-                    for (int i = 0; i < ArrID.Length; i++)
+                    var progress1 = new FormProgress("Удаление", "Удаление объектов" + entityName, arrID.Length);
+                    progress1.Show();
+                    for (int i = 0; i < arrID.Length; i++)
                     {
-                        ObjectCaption = "'" + EntityName + "'. ИД Объекта " + ArrID[i];
+                        objectCaption = "'" + entityName + "'. ИД Объекта " + arrID[i];
                         var Obj = new FBA.ObjectRef(); 
-                        if (!Obj.DeleteObject(DirectionQuery.Remote, "Contract", ArrID[i])) return;
-                        CountDeleted++;                                             
-                        Progress1.Inc();
+                        if (!Obj.DeleteObject(DirectionQuery.Remote, "Contract", arrID[i])) return;
+                        countDeleted++;                                             
+                        progress1.Inc();
                     }
-                    Progress1.Dispose();
+                    progress1.Dispose();
 
-                    if (CountDeleted == ArrID.Length)
+                    if (countDeleted == arrID.Length)
                     {
-                        ObjectCaption = "Все объекты " + EntityName + " удалены. Всего: " + CountDeleted;
-                        sys.SM(ObjectCaption, MessageType.Information);
+                        objectCaption = "Все объекты " + entityName + " удалены. Всего: " + countDeleted;
+                        sys.SM(objectCaption, MessageType.Information);
                     }
-                    if (CountDeleted < ArrID.Length)
+                    if (countDeleted < arrID.Length)
                     {
-                        ObjectCaption = "Объекты " + EntityName + " удалены. Всего: " + CountDeleted + " из " + ArrID.Length.ToString();
-                        sys.SM(ObjectCaption, MessageType.Warning);
+                        objectCaption = "Объекты " + entityName + " удалены. Всего: " + countDeleted + " из " + arrID.Length.ToString();
+                        sys.SM(objectCaption, MessageType.Warning);
                     }
-                    if (CountDeleted == 0)
+                    if (countDeleted == 0)
                     {
-                        ObjectCaption = "Объекты " + EntityName + " удалены не были.";
-                        sys.SM(ObjectCaption);
+                        objectCaption = "Объекты " + entityName + " удалены не были.";
+                        sys.SM(objectCaption);
                     }
                     
-                    if (CountDeleted > 0)
-                        if (sys.SM("Обновить содержимое справочника " + EntityName + "?", MessageType.Question)) RefreshGridForm(DirectionQuery.Remote, grid1, Filter); ;
+                    if (countDeleted > 0)
+                        if (sys.SM("Обновить содержимое справочника " + entityName + "?", MessageType.Question)) RefreshGridForm(DirectionQuery.Remote, grid1, filter); ;
                 }
             }
-            if (commandType == CommandType.ShowSQL)          sys.SM(Filter.FullQuerySQL, MessageType.Information);               
-            if (commandType == CommandType.ShowMSQL)         sys.SM(Filter.FullQueryMSQL, MessageType.Information);             
+            if (commandType == CommandType.ShowSQL)          sys.SM(filter.FullQuerySQL, MessageType.Information);               
+            if (commandType == CommandType.ShowMSQL)         sys.SM(filter.FullQueryMSQL, MessageType.Information);             
             if (commandType == CommandType.Details)          grid1.GridInformation();
             if (commandType == CommandType.ExportToExcel)    grid1.SourceGridToExcel();
             if (commandType == CommandType.ExportToCSV)      grid1.SourceGridToCSV();
-            if (commandType == CommandType.Search)           FSearch = FormSearch.FormSearchShow(this.Name,  null, grid1);
+            if (commandType == CommandType.Search)           dtSearch = FormSearch.FormSearchShow(this.Name,  null, grid1);
 
             if (commandType == CommandType.Copy)             grid1.CopyRegion(false, false);
             if (commandType == CommandType.CopyAll)          grid1.CopyRegion(true, true); 
@@ -368,7 +369,7 @@ namespace FBA
 
             if (commandType == CommandType.Cancel)
             {
-                this.ListParams.ObjectID = "";
+                this.listParams.ObjectID = "";
                 this.Close();
             }
      
@@ -376,11 +377,11 @@ namespace FBA
             if (commandType == CommandType.CopyDocumentLink)
             {
                 var links = new StringBuilder();
-                string[] ArrID = grid1.GetSelectedValues(0, true);
-                if (ArrID.Length == 0) return;
-                for (int i = 0; i < ArrID.Length; i++)
+                string[] arrID = grid1.GetSelectedValues(0, true);
+                if (arrID.Length == 0) return;
+                for (int i = 0; i < arrID.Length; i++)
                 {
-                    links.Append("FBALink.Entity:" + ListParams.EntityBrief + ",ObjectID:" + ArrID[i] + Var.CR);
+                    links.Append("FBALink.Entity:" + listParams.EntityBrief + ",ObjectID:" + arrID[i] + Var.CR);
                 }
                 links.ToString().CopyToClipboard();
             }
@@ -491,17 +492,17 @@ namespace FBA
         private void EditObject(string id)
         {                
         	if (string.IsNullOrEmpty(id)) return;
-            if ((ListParams.FormProject == "") || (ListParams.FormName == ""))
+            if ((listParams.FormProject == "") || (listParams.FormName == ""))
             {
                 FillArraySelected(0);
-                if (ListParams.CloseAfterSelect) this.Close();
+                if (listParams.CloseAfterSelect) this.Close();
             }
             else
             {   //показываем форму свойств выбранного объекта.               
                 int formNumber = 0;
                 var obj = new object[1];
                 obj[0] = id;
-                ProjectService.FormShow(ListParams.FormProject, ListParams.FormName, out formNumber, obj);         
+                ProjectService.FormShow(listParams.FormProject, listParams.FormName, out formNumber, obj);         
             }
         }  
         
@@ -613,9 +614,9 @@ namespace FBA
         /// <param name="e"></param>
         private void cbFastSearch_Enter(object sender, EventArgs e)
         {      
-        	if (WasSetHistorySearch) return;
+        	if (wasSetHistorySearch) return;
             FormSearch.GetHistorySearch(cbFastSearch);
-            WasSetHistorySearch = true;
+            wasSetHistorySearch = true;
         }
 
         /// <summary>

@@ -661,8 +661,8 @@ namespace FBA
 				if (s == "<CTRL> + F12") 
 				{
 				    if (!Var.UserIsAdmin) return true;
-				    if (!ProjectService.ProjectWriteToDataBase(this.Name)) return false;
-                    if (!ProjectService.ProjectWriteToDataBase(this.Name)) return false;
+				    if (!ProjectService.ProjectAndDLLWriteToDataBase(this.Name)) return false;
+                    if (!ProjectService.ProjectAndDLLWriteToDataBase(this.Name)) return false;
                     sys.SM("Форма и проект сохранены в базу данных!", MessageType.Information, "Сохранение формы в БД"); 
 				}
 				

@@ -1363,7 +1363,8 @@ namespace FBA
         {               	
         	int countDeleted = 0;
             string objectCaption = "";
-        	var progress1 = new FormProgress("Deleting", "Deletion of objects." + entityBrief, arrID.Length);            
+        	var progress1 = new FormProgress("Deleting", "Deletion of objects." + entityBrief, arrID.Length); 
+        	progress1.Show();
         	for (int i = 0; i < arrID.Length; i++)
             {
                 objectCaption = "'" + entityBrief + "'. Object ID " + arrID[i];     

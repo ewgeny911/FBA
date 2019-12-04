@@ -9,6 +9,7 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace FBA
 {
     public partial class FormContractFilter : Form
@@ -32,9 +33,7 @@ namespace FBA
             string WHERE = " (1=1) ";
             if (cbID.Checked) WHERE = WHERE + " AND (ObjectID = '" + tbID.Text + "') ";
             if (cbNumber.Checked) WHERE = WHERE + " AND (Number IN('" + tbNumber.Text + "')) ";
-            if (cbType.Checked) WHERE = WHERE + " AND (contracttype = " + tbType.Text + ") ";
-            //const string AddCond = ""; //((Form10)FormRef).textBoxParam1.Text;
-            //WHERE = WHERE + " AND " + AddCond;
+            if (cbType.Checked) WHERE = WHERE + " AND (contracttype = " + tbType.Text + ") ";              
             //sys.SM(WHERE);
             return WHERE;
         }

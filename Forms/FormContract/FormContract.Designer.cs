@@ -487,7 +487,7 @@ namespace FBA
         	this.FormSavePosition = true;
         	this.Name = "FormContract";
         	this.ShowInTaskbar = false;
-        	this.Text = "FormContractCard";
+        	this.Text = "FormContract";
         	this.tabControl1.ResumeLayout(false);
         	this.tabPage1.ResumeLayout(false);
         	this.tabPage1.PerformLayout();

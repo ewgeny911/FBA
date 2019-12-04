@@ -28,6 +28,7 @@ namespace FBA
         	this.buttonFBA1 = new FBA.ButtonFBA();
         	this.buttonFBA2 = new FBA.ButtonFBA();
         	this.button1 = new System.Windows.Forms.Button();
+        	this.button2 = new System.Windows.Forms.Button();
         	this.SuspendLayout();
         	// 
         	// buttonFBA1
@@ -69,21 +70,32 @@ namespace FBA
         	this.button1.Text = "TO PDF";
         	this.button1.UseVisualStyleBackColor = true;
         	// 
+        	// button2
+        	// 
+        	this.button2.Location = new System.Drawing.Point(40, 13);
+        	this.button2.Name = "button2";
+        	this.button2.Size = new System.Drawing.Size(75, 23);
+        	this.button2.TabIndex = 6;
+        	this.button2.Text = "button2";
+        	this.button2.UseVisualStyleBackColor = true;
+        	// 
         	// FormReportSample
         	// 
         	this.ClientSize = new System.Drawing.Size(389, 140);
+        	this.Controls.Add(this.button2);
         	this.Controls.Add(this.button1);
         	this.Controls.Add(this.buttonFBA2);
         	this.Controls.Add(this.buttonFBA1);
         	this.FormMDIParent = "MainForm";
         	this.FormSavePosition = true;
         	this.Name = "FormReportSample";
-        	this.Text = "ReportSample";
+        	this.Text = "Report";
         	this.ResumeLayout(false);
 
         }
         private ButtonFBA buttonFBA1;
         private ButtonFBA buttonFBA2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

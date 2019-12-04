@@ -42,38 +42,165 @@ namespace FBA
             RefreshProjectList();
         }  
 	
-        #region Region. Сохранение формы и проекта.
-        
+        #region Region. Сохранение формы и проекта.        
+         
+		/// <summary>
+        /// Проверяем наличие пользовательского проекта в базе.
+        /// </summary>
+        /// <param name="projectName">Имя проекта</param>
+        /// <param name="showMes">Показываьт сообщение об ошибках</param>
+        /// <param name="projectID">ИД проекта в БД</param>
+        /// <returns>Если проект найден, то true</returns>
+        public static bool CheckProjectExistsSimple(string projectName, bool showMes, out string projectID)
+        {
+            projectID = "";
+            if (projectName == "") return false;
+            string sql = "SELECT ID FROM fbaProject WHERE Name = '" + projectName + "'; ";
+            projectID = sys.GetValue(DirectionQuery.Remote, sql);
+            if (projectID == "")
+            {
+                if (showMes) sys.SM("В базе данных не найден проект: " + projectName, MessageType.Error, "Поиск формы");
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
-        /// Запись формы в БД в кодировке Base64. Всегда записываем как Test, поэтому параметра EnterMode здесь нет.
+        /// Проверка наличия модуля в БД. Возвращаем параметры модуля ProjectType, GUIDBD, TextQuery.
+        /// </summary>
+        /// <param name="projectName">Имя проекта</param>
+        /// <param name="enterMode">Тип входа: Work, Test, Develop</param>
+        /// <param name="projectType">Тип проекта: Main, App, Dll</param>
+        /// <param name="hashMD5">MD5</param>
+        /// <param name="projectDel">Признак, что проект помечен на удаление</param>
+        /// <returns>Если проект найден, то true</returns>
+        public static bool CheckProjectExist(string projectName, EnterMode enterMode, out ProjectType projectType, out string hashMD5, out bool projectDel)
+        {                                        
+            projectType = ProjectType.NotAssigned;
+            hashMD5 = "";
+            projectDel = false;   
+            if (projectName == "") return false;
+            string sql = "";                   
+            if (enterMode == EnterMode.Test)
+            	sql = "SELECT Type, HashTest, " + sys.GetISNULL(Var.con.serverTypeRemote) + "(DEL, 0) AS DEL FROM fbaProject WHERE Name = '" + projectName + "'";
+            else sql = "SELECT Type, Hash, " + sys.GetISNULL(Var.con.serverTypeRemote) + "(DEL, 0) AS DEL FROM fbaProject WHERE Name = '" + projectName + "'";            
+            string del;
+            string type;
+            bool result = sys.GetValue(DirectionQuery.Remote, sql, out type, out hashMD5, out del);
+            if (type == "Main") projectType = ProjectType.Main;
+            if (type == "Dll")  projectType = ProjectType.Dll;
+            if (type == "App")  projectType = ProjectType.App;
+            projectDel = del.ToBool();
+            return result;
+        }
+                
+        /// <summary>
+        /// Копируем проект в БД в поля Test.
+        /// Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
+        /// </summary>
+        /// <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
+        /// <returns>Если успешно, то true</returns>
+        public static bool ProjectAndDLLWriteToDataBase(string projectName)
+        {                   
+        	//Установка соединения с локальной базой SQLIte. Без неё не работаем.
+            sys.ConnectLocal();
+            sys.ConnectRemote();
+    
+            string fileNameEXE;
+            string fileNameDLL;
+            bool findEXE;
+            bool findDLL;
+            FBAFile.GetPathProject(projectName, out fileNameEXE, out fileNameDLL, out findEXE, out findDLL);                                          
+            string fileNameDLLNew = "";
+         
+            if (findDLL)
+            {               
+                fileNameDLLNew = FBAPath.PathTemp + projectName + ".dll";
+            } else
+            {
+            	if (findEXE) sys.SM("Не верный тип проекта. " + Var.CR + "Проект должен быть DLL, в данный момент проект скомпилирован как EXE!");
+            	else sys.SM("Не найден файл проекта " + projectName + " на диске! ");            		
+            	return false;
+            }            
+                        
+            string projectType = "Dll";          
+            if (projectName.IndexOf("Main", StringComparison.Ordinal) > -1) projectType = "Main";
+                                   
+            //Копирование файла так как нужно записать в конец файла MD5, а вызов сохранения делал сам файл EXE, 
+            //и сам файл себя изменить не может. Поэтому копируем в темповую папку Temp и далее работаем с копией. 
+            string errorMes;
+            if (!FBAFile.FileCopy(fileNameDLL, fileNameDLLNew, FileOverwrite.Overwrite, Var.ShowMes, out errorMes)) return false;
+            
+            bool isNewProject = true;
+			string projectID = "";			
+            CheckProjectExistsSimple(projectName, false, out projectID);
+            
+            //public static bool CheckProjectExistInDataBase(string projectName, EnterMode enterMode, out ProjectType projectType, out string hashMD5, out bool projectDel)
+        
+            if (projectID != "") isNewProject = true;
+            if (!ProjectSaveDLL(fileNameDLLNew, ref projectID)) return false;
+            if (!ProjectdSaveZIP(projectName, projectID)) return false;
+                        
+            string sql = "UPDATE fbaProject SET " +
+                  "  Name             = '" + projectName + "'" +
+            	  ", EntityID         = " + sys.GetEntityID("Project") +
+                  ", DateChangeTest   = " + sys.DateTimeCurrent() + " " +
+                  ", UserChangeTestID = " + Var.UserID  +
+                  ", Type             = '" + projectType + "'" +           
+                  " WHERE ID = " + projectID + "; \r\n";
+
+            if (isNewProject)
+            {
+                sql += "UPDATE fbaProject SET DateCreateTest = " + sys.DateTimeCurrent() +
+                       ", UserCreateTestID = " + Var.UserID  +
+                       ", Type             = '" + projectType + "'" +
+                       " WHERE ID = " + projectID + "; \r\n";
+            }
+            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            return true;
+        }          
+
+        /// <summary>
+        /// Копируем проект в БД.
+        /// Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
+        /// Проект архивируется в файл ZIP. Далее файл ZIP записывается в БД в виде Base64.
+        /// </summary>
+        /// <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
+        /// <param name="projectID">ИД записи в таблице fbaProject</param>
+        /// <returns>Если успешно, то true</returns>
+        public static bool ProjectdSaveZIP(string projectName, string projectID)
+        {            
+            string projectPath = FBAPath.PathForms + projectName;
+            string fileName = FBAPath.PathTemp + projectName + ".zip";
+            if (!FBAFile.DirZIP(true, projectPath, fileName)) return false;
+            const bool saveHashToEndFile = false;
+            string fileData;
+            string hashMD5;
+            if (!FBAFile.FileGetBase64WithHashMD5(fileName, saveHashToEndFile, out fileData, out hashMD5)) return false;
+            string sql = "UPDATE fbaProject SET ProjectZip = '" + fileData + "' WHERE ID = '" + projectID + "'";
+            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            return true;
+        } 
+          
+   		/// <summary>
+        /// Запись проекта (файла DLL) в БД в кодировке Base64. Всегда записываем как Test, поэтому параметра EnterMode здесь нет.
         /// Записываем перед записью файла в базу HashMD5 в конец файла, 
         /// для того чтобы после сравнивать два файла с одинаковыми именами.    
         /// </summary>
         /// <param name="fileName">Имя файла проекта EXE или DLL</param>
-        /// <param name="projectID">ИД проекта в БД</param>
-        /// <param name="newProject">Если проект новый и в БД не был ранее записан, то true</param>
+        /// <param name="projectID">ИД проекта в БД</param>     
         /// <returns>Если запись успешная, то true</returns>
-        private static bool ProjectSaveDLL(string fileName, ref string projectID, out bool newProject)
+        private static bool ProjectSaveDLL(string fileName, ref string projectID)
         {              
             string projectName = Path.GetFileNameWithoutExtension(fileName);
-            string sql = "";
-            newProject = false;
-            
+            string sql = "";                       
             //Получить файл в виде Base64. Если SaveHashToEndFile, то в конец файла будет добавлен MD5 файла (32 байта).
             const bool saveHashToEndFile = true;
             string fileData;
             string hashMD5;
             if (!FBAFile.FileGetBase64WithHashMD5(fileName, saveHashToEndFile, out fileData, out hashMD5)) return false;
-
-            bool needUpdate = false;
-            if (sys.IsEmptyID(projectID))            
-            {
-                ProjectExists(projectName, false, out projectID);
-                if (projectID != "") needUpdate = true;
-            }
-            else needUpdate = true;
-            newProject = !needUpdate;         
-            if (needUpdate)
+                
+            if (projectID != "")
             {
                 sql = "UPDATE fbaProject SET ProjectDLLTest = '" + fileData + "', HashTest = '" + hashMD5 + "' WHERE id = " + projectID + "; ";
                 if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
@@ -87,101 +214,73 @@ namespace FBA
             }                                                               
             return true;
         }                                     
-                  
+          
         /// <summary>
-        /// Копируем проект в БД.
-        /// Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
-        /// </summary>
-        /// <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
-        /// <returns>Если успешно, то true</returns>
-        public static bool ProjectWriteToDataBase(string projectName)
-        {                   
-        	//Установка соединения с локальной базой SQLIte. Без неё не работаем.
-            sys.ConnectLocal();
-            sys.ConnectRemote();
-    
-            string fileNameEXE;
-            string fileNameDLL;
+		///Чтение формы из БД из кодировки Base64. 
+		///Если forceLoad=true, то просто загружаем проект и Dll из БД (из work или test в зависимости от enterMode), не обращая внимание ни на MD5, на на режим запуска (Develop, Test, Work) ни на то, что на диске уже может быть. И все.
+		///Если режим Develop, то если проекта нет, то загружаем из БД и файл Dll и проект. Если проект есть, то выдаем ошибку, что проект не скомпилирован в Dll!
+		///Если режим Test или Work, то если файла Dll нет, то загружаем из БД из тестовой или рабочей версии и файл Dll. Проект не загружаем.
+		///Если режим Test или Work, то если файл Dll есть, то проверяем MD5. Если не совпадает, то загружаем из БД из тестовой или рабочей версии и файл Dll. Проект не загружаем.	
+		/// </summary>
+		/// <param name="projectName">Имя проекта</param>
+		/// <param name="enterMode">Тип входа: Work, Test, Develop</param>
+		/// <param name="forceLoad">Если принудительная загрузка (ForceLoad - true), то загружаем из БД, не обращая внимание ни на MD5, ни на наличие файла</param>
+		/// <param name="fileName">Имя файла DLL проекта</param>
+		/// <returns>Если успешно, то true</returns>
+        public static bool ProjectGetFileName(string projectName, EnterMode enterMode, bool forceLoad, out string fileName)
+        {                                
+            fileName = "";
+ 			string fileNameEXE;
+            string fileNameDLL; 
             bool findEXE;
             bool findDLL;
-            if (!FBAFile.GetPathProject(projectName, out fileNameEXE, out fileNameDLL, out findEXE, out findDLL))
+ 			ProjectType projectType;
+            string hashMD5;
+            bool projectDel; 
+			bool needLoad = false;            
+            if (forceLoad) enterMode = EnterMode.Work;
+			//string erroMes = "Ошибка загрузки проекта из базы данных!";    
+
+			FBAFile.GetPathProject(projectName, out fileNameEXE, out fileNameDLL, out findEXE, out findDLL);
+			
+			if (!CheckProjectExist(projectName, enterMode, out projectType, out hashMD5, out projectDel)) return false;
+			
+			if ((!findDLL) || (forceLoad)) needLoad = true;
+			else
+			{
+				if (enterMode != EnterMode.Develop)
+				{
+					string hashmd5BD = Crypto.FileHashMD5Read(fileNameDLL); //Пример HashMD5: 9924E53BC7DC4584954601F15023F40C
+                	needLoad = (hashmd5BD != hashMD5);
+				} else 	needLoad = false;
+			}
+			
+			//needLoad |= (forceLoad); //if (ForceLoad) NeedLoad = true;  
+            if (needLoad)
             {
-                sys.SM("Не найден файл проекта " + projectName);
+                //Чтение проекта из БД из кодировки Base64.                          
+                string fieldName = "";
+                if (enterMode == EnterMode.Work) fieldName = "ProjectDLL";
+                else fieldName = "ProjectDLLTest";
+
+                string SQL = "SELECT " + fieldName + " FROM fbaProject WHERE Name = '" + projectName + "' ; ";
+                string FileData = sys.GetValue(DirectionQuery.Remote, SQL);
+
+                //Записываем форму на диск. Форма в виде текста в FileData в Base64.          
+                const bool showMes = true;
+                string errorMes;
+                if (!FBAFile.FileWriteFromBase64(FileData, fileNameDLL, out errorMes, showMes)) return false;
+            }
+
+            if (!File.Exists(fileNameDLL))
+            {
+                sys.SM("Ошибка загрузки проекта: " + fileNameDLL);
                 return false;
             }
-
-            string fileSourceName = "";
-            string fileName = "";
-
-            if (findDLL)
-            {
-                fileSourceName = fileNameDLL;
-                fileName = FBAPath.PathTemp + projectName + ".dll";
-            }
-            if (findEXE)
-            {
-                fileSourceName = fileNameEXE;
-                fileName = FBAPath.PathTemp + projectName + ".exe";
-            }
-
-            string projectType = "App";
-            if (projectName.IndexOf("DLL", StringComparison.Ordinal) > -1) projectType = "DLL";
-            if (projectName.IndexOf("Main", StringComparison.Ordinal) > -1) projectType = "Main";
-
-            //Копирование файла так как нужно записать в конец файла MD5, а вызов сохранения делал сам файл EXE, 
-            //и сам файл себя изменить не может. Поэтому копируем в темповую папку Temp и далее работаем с копией. 
-            string errorMes;
-            if (!FBAFile.FileCopy(fileSourceName, fileName, FileOverwrite.Overwrite, Var.ShowMes, out errorMes)) return false;
-                                                
-            bool newProject; // = false;
-            string projectID = "";
-            //ProjectExists(projectName, false, out projectID);
-            //newForm |= (projectID == ""); //if (FormID == "") NewForm = true; 
-
-            if (!ProjectSaveDLL(fileName, ref projectID, out newProject)) return false;
-            if (!ProjectdSaveZIP(projectName)) return false;
-                        
-            string sql = "UPDATE fbaProject SET " +
-                  "  Name             = '" + projectName + "'" +
-            	  ", EntityID         = " + sys.GetEntityID("Project") +
-                  ", DateChangeTest   = " + sys.DateTimeCurrent() + " " +
-                  ", UserChangeTestID = " + Var.UserID  +
-                  ", Type             = '" + projectType + "'" +           
-                  " WHERE ID = " + projectID + "; \r\n";
-
-            if (newProject)
-            {
-                sql += "UPDATE fbaProject SET DateCreateTest = " + sys.DateTimeCurrent() +
-                       ", UserCreateTestID = " + Var.UserID  +
-                       ", Type             = '" + projectType + "'" +
-                       " WHERE ID = " + projectID + "; \r\n";
-            }
-            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
+            fileName = fileNameDLL;
             return true;
-        }
-          
-
-        /// <summary>
-        /// Копируем проект в БД.
-        /// Архивируется папка проекта в ZIP и записывается в БД в виде Base64.
-        /// </summary>
-        /// <param name="projectName">Имя проекта - это имя папки с проектом, но без пути</param>
-        /// <returns>Если успешно, то true</returns>
-        public static bool ProjectdSaveZIP(string projectName)
-        {
-            //Проект архивируется в файл ZIP. Далее файл ZIP записывается в БД в виде Base64.
-            string projectPath = FBAPath.PathForms + projectName;
-            string fileName = FBAPath.PathTemp + projectName + ".zip";
-            if (!FBAFile.DirZIP(true, projectPath, fileName)) return false;
-            const bool saveHashToEndFile = false;
-            string fileData;
-            string hashMD5;
-            if (!FBAFile.FileGetBase64WithHashMD5(fileName, saveHashToEndFile, out fileData, out hashMD5)) return false;
-            string sql = "UPDATE fbaProject SET ProjectZip = '" + fileData + "' WHERE Name = '" + projectName + "'";
-            if (!sys.Exec(DirectionQuery.Remote, sql)) return false;
-            return true;
-        } 
-                
+        }		
+        
 		/// <summary>
 		/// Чтение формы из БД из кодировки Base64. 
 		/// Ситуация: Есть на диске EXE, Есть DLL, то DLL удаляем, а EXE перпеименовываем в DLL. 
@@ -197,7 +296,7 @@ namespace FBA
 		/// <param name="forceLoad">Если принудительная загрузка (ForceLoad - true), то загружаем из БД, не обращая внимание ни на MD5, ни на наличие файла</param>
 		/// <param name="fileName">Имя файла EXE или DLL проекта</param>
 		/// <returns>Если успешно, то true</returns>
-        public static bool ProjectGetFileName(string projectName, EnterMode enterMode, bool forceLoad, out string fileName)
+        /*public static bool ProjectGetFileName(string projectName, EnterMode enterMode, bool forceLoad, out string fileName)
         {                                
             fileName = "";
  			string fileNameEXE;
@@ -299,7 +398,9 @@ namespace FBA
             fileName = fileNameDLL;
             return true;
         }
-
+		*/
+		
+		
         /// <summary>
         /// Восстановить проект из БД. Файл читается из БД, далее преобразуется в нормальный вид из Base64 и записывается на диск.
         /// Далее папка с проектом удаляется и восстапнавливается из архива zip.        
@@ -315,6 +416,7 @@ namespace FBA
                                                    bool restoreFromHist)
         {
             string sql = "";
+            if (string.IsNullOrEmpty(projectName)) return false;
             if (restoreFromHist)
             {
                 sql = "SELECT ProjectZip FROM fbaProjectHist WHERE Name = '" + projectName + "' AND ID = " + projectHistID;
@@ -343,6 +445,21 @@ namespace FBA
         #region Region. Загрузка модулей.
 
         /// <summary>
+        /// Выясняем сколько открыто экземпляров формы с названием FormName.
+        /// Поиск ведется в том числе среди свернутых и скрытых форм (Hide, Visible=false). 
+        /// </summary>
+        /// <param name="formName">Имя формы</param>
+        /// <returns></returns>
+        public static int FormGetNumber(string formName)
+        {
+            int formNumber = 1;
+            foreach (KeyValuePair<string, FormFBA> kvp in Var.ListForm)
+            {
+                if (formName == kvp.Value.Name) formNumber++;
+            }
+            return formNumber;
+        }
+        /// <summary>
         /// Загрузка DLL прикладного приложения (подсистемы).
         /// </summary>
         /// <param name="projectName">Имя проекта. Это имя файла DLL или EXE</param>
@@ -360,8 +477,7 @@ namespace FBA
             string fileName;
                                              
             if (!ProjectService.ProjectGetFileName(projectName, enterMode, false, out fileName)) return null;
-           
-            
+                       
             //Если нет, то загружаем.
             if (fileName == "") return null;
             try
@@ -376,35 +492,7 @@ namespace FBA
             return assembly;
         }
    
-        /// <summary>
-        /// Проверка наличия модуля в БД. Возвращаем параметры модуля ProjectType, GUIDBD, TextQuery.
-        /// </summary>
-        /// <param name="projectName">Имя проекта</param>
-        /// <param name="enterMode">Тип входа: Work, Test, Develop</param>
-        /// <param name="projectType">Тип проекта: Main, App, Dll</param>
-        /// <param name="hashMD5">MD5</param>
-        /// <param name="projectDel">Признак, что проект помечен на удаление</param>
-        /// <returns>Если проект найден, то true</returns>
-        public static bool CheckProjectExistInDataBase(string projectName, EnterMode enterMode, out ProjectType projectType, out string hashMD5, out bool projectDel)
-        {                                        
-            projectType = ProjectType.NotAssigned;
-            hashMD5 = "";
-            projectDel = false;   
-            if (projectName == "") return false;
-            string sql = "";                   
-            if (enterMode == EnterMode.Test)
-            	sql = "SELECT Type, HashTest, " + sys.GetISNULL(Var.con.serverTypeRemote) + "(DEL, 0) AS DEL FROM fbaProject WHERE Name = '" + projectName + "'";
-            else sql = "SELECT Type, Hash, " + sys.GetISNULL(Var.con.serverTypeRemote) + "(DEL, 0) AS DEL FROM fbaProject WHERE Name = '" + projectName + "'";            
-            string del;
-            string type;
-            bool result = sys.GetValue(DirectionQuery.Remote, sql, out type, out hashMD5, out del);
-            if (type == "Main") projectType = ProjectType.Main;
-            if (type == "Dll")  projectType = ProjectType.Dll;
-            if (type == "App")  projectType = ProjectType.App;
-            projectDel = del.ToBool();
-            return result;
-        }
-        
+       
         /// <summary>
         /// Поиск загруженной сборки.
         /// </summary>
@@ -674,43 +762,8 @@ namespace FBA
         }
 
         #endregion Region. Способ подгрузки формы через Dynamic.            
-        
-        /// <summary>
-        /// Проверяем наличие пользовательского проекта в базе.
-        /// </summary>
-        /// <param name="projectName">Имя проекта</param>
-        /// <param name="showMes">Показываьт сообщение об ошибках</param>
-        /// <param name="projectID">ИД проекта в БД</param>
-        /// <returns>Если проект найден, то true</returns>
-        public static bool ProjectExists(string projectName, bool showMes, out string projectID)
-        {
-            projectID = "";
-            if (projectName == "") return false;
-            string sql = "SELECT ID FROM fbaProject WHERE Name = '" + projectName + "'; ";
-            projectID = sys.GetValue(DirectionQuery.Remote, sql);
-            if (projectID == "")
-            {
-                if (showMes) sys.SM("В базе данных не найден проект: " + projectName, MessageType.Error, "Поиск формы");
-                return false;
-            }
-            return true;
-        }
-               
-        /// <summary>
-        /// Выясняем сколько открыто экземпляров формы с названием FormName.
-        /// Поиск ведется в том числе среди свернутых и скрытых форм (Hide, Visible=false). 
-        /// </summary>
-        /// <param name="formName">Имя формы</param>
-        /// <returns></returns>
-        public static int FormGetNumber(string formName)
-        {
-            int formNumber = 1;
-            foreach (KeyValuePair<string, FormFBA> kvp in Var.ListForm)
-            {
-                if (formName == kvp.Value.Name) formNumber++;
-            }
-            return formNumber;
-        }
+                              
+        #region Region. Удаление проекта или DLL.        
         
         /// <summary>
         /// Пометить проект на удаление.
@@ -729,7 +782,7 @@ namespace FBA
         }              
               
         /// <summary>
-        /// Удаление формы из базы.
+        /// Удаление проекта из базы.
         /// </summary>
         /// <param name="projectID">ИД проекта</param>
         /// <param name="typeDel">Тип удаления: 1-DB; 2-Disk; 3-DB,Disk; 4-DB,Disk,History</param>
@@ -762,18 +815,66 @@ namespace FBA
             RefreshProjectList(); 
             return true;             
         }              
-              
-        /// <summary>
-        /// Удалить запись из истории проектов.
+                 
+        #endregion Region. Удаление проекта или DLL.  
+         
+         /// <summary>
+        /// Сохранить все. Это запись в БД всей папки проекта.
         /// </summary>
-        /// <param name="projectHistID">ИД записи истории изменения проекта</param>
-        /// <returns></returns>
-        public bool ProjectHistDelete(string projectHistID)
+        /// <param name="projectName"></param>
+        private void SaveProjectAndDLL(string projectName)
+        {                                        
+        	if (!ProjectAndDLLWriteToDataBase(projectName)) 
+        	{
+        		sys.SM("Ошибка при сохранении проекта в базу данных!");  
+        		return;
+        	}
+            sys.SM("Форма и проект сохранены в базу данных!", MessageType.Information, "Сохранение в БД");                  
+        }        
+
+		/// <summary>
+        /// Загрузка проекта.   
+        /// </summary>
+        /// <param name="projectName">Имя проекта</param>
+        private bool LoadProjectAndDLL(string projectName, EnterMode entermode, bool showMes)
+        {                                               
+            string fileName;
+            if (!ProjectReadFromDataBase(projectName, projectName, "", false)) return false;   //Это чтение из БД всей папки проекта.
+            if (!ProjectGetFileName(projectName, entermode, true, out fileName)) return false; //Это чтение из БД файла dll проекта.
+            if (showMes) sys.SM("Проект и файл Dll загружен из базы данных!", MessageType.Information, "Загрузка из БД");
+            return true;
+        }
+                                               
+        /// <summary>
+        /// Получить имя текущей выделенного проекта.
+        /// </summary>
+        /// <returns>Имя проекта</returns>
+        private string GetCurrentProjectID()
         {
-            if (projectHistID == "") return false;
-            return sys.Exec(DirectionQuery.Remote, "DELETE FROM fbaProjectHist WHERE ProjectID = " + projectHistID);
-        }                            
-        
+            string projectID = "0";           
+            if (dgvProject.Rows.Count == 0) 
+            {             
+                GetProjectID(tbProjectName.Text, out projectID);
+            } else
+            {
+                projectID = dgvProject.Value("ID");                                  
+            } 
+            return projectID;
+        }                       
+             
+        /// <summary>
+        /// Показать код выделенной формы.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TabControl1SelectedIndexChanged(object sender, EventArgs e)
+        {                                           
+            if (tabControl1.SelectedIndex == 1)
+            {
+                RefreshProjectHist();
+            }                                  
+        }  
+                       
         /// <summary>
         /// Создание нового проекта
         /// </summary>
@@ -1037,7 +1138,7 @@ namespace FBA
             
             string projectID   = dgvProject.Value("ID");
             string ProjectPath = dgvProject.Value("ProjectPath");           
-            string projectName = Path.GetFileNameWithoutExtension(ProjectPath);            
+            string projectName = dgvProject.Value("Name");            //Path.GetFileNameWithoutExtension(ProjectPath);            
                                                    
             //New.
             if (sender == cmProjectN24) ProjectNew();
@@ -1080,8 +1181,12 @@ namespace FBA
             //Save
             if (sender == cmProjectN27)  SaveProjectAndDLL(projectName);
             
-            //Load
-            if (sender == cmProjectN28)  LoadProjectAndDLL(projectName);
+            //Load Work
+            if (sender == cmProjectN28)  LoadProjectAndDLL(projectName, EnterMode.Work, true);
+            
+            //Load Test
+            if (sender == cmProjectN31)  LoadProjectAndDLL(projectName, EnterMode.Test, true);
+         
             //================================
 
             //Referesh
@@ -1103,80 +1208,12 @@ namespace FBA
             if (sender == cmProjectHistN2) ProjectHistToTest(projectHistID);
             
             //Delete                
-            if (sender == cmProjectHistN3) ProjectHistDelete(projectHistID);
+            if (sender == cmProjectHistN3) ProjectDelete(projectHistID, 4);
             
             //Copy as New
             if (sender == cmProjectHistN4) CopyAsNew("", projectHistID);
         }
-             
-        /// <summary>
-        /// Сохранить все. Это запись в БД всей папки проекта.
-        /// </summary>
-        /// <param name="projectName"></param>
-        private void SaveProjectAndDLL(string projectName)
-        {                                        
-        	if (!ProjectWriteToDataBase(projectName)) 
-        	{
-        		sys.SM("Ошибка при сохранении проекта в базу данных!");  
-        		return;
-        	}
-            sys.SM("Форма и проект сохранены в базу данных!", MessageType.Information, "Сохранение в БД");                  
-        }        
-
-		/// <summary>
-        /// Загрузка проекта.   
-        /// </summary>
-        /// <param name="projectName">Имя проекта</param>
-        private void LoadProjectAndDLL(string projectName)
-        {                                               
-            string fileName;
-            ProjectReadFromDataBase(projectName, projectName, "", false); //Это чтение из БД всей папки проекта.   
-            const bool forceLoad = true;
-            EnterMode enterMode = EnterMode.Work;
-            ProjectGetFileName(projectName, enterMode, forceLoad, out fileName); //Это чтение из БД файла exe или dll проекта.
-            sys.SM("Проект загружен из базы данных!", MessageType.Information, "Загрузка из БД");
-        }
-                                               
-        /// <summary>
-        /// Получить имя текущей выделенного проекта.
-        /// </summary>
-        /// <returns>Имя проекта</returns>
-        private string GetCurrentProjectID()
-        {
-            string projectID = "0";           
-            if (dgvProject.Rows.Count == 0) 
-            {             
-                GetProjectID(tbProjectName.Text, out projectID);
-            } else
-            {
-                projectID = dgvProject.Value("ID");                                  
-            } 
-            return projectID;
-        }
-            
-        /// <summary>
-        /// Получить имя текущей выделенной формы из истории.
-        /// </summary>
-        /// <returns></returns>
-        private string GetCurrentProjectHistID()
-        {                    
-            if (dgvHist.Rows.Count == 0) return "0";
-            return dgvHist.Value("ID");                                             
-        }              
-             
-        /// <summary>
-        /// Показать код выделенной формы.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TabControl1SelectedIndexChanged(object sender, EventArgs e)
-        {                                           
-            if (tabControl1.SelectedIndex == 1)
-            {
-                RefreshProjectHist();
-            }                                  
-        }  
-            
+                             
         /// <summary>
         /// Обновить список проектов
         /// </summary>
@@ -1240,8 +1277,7 @@ namespace FBA
             dgvProject.DataSource = DT;
             dgvProject.Columns[1].Width = 200;
             return;           
-        }
-         
+        }         
         
         /// <summary>
         /// Обновить таблицу истории формы.
@@ -1267,9 +1303,6 @@ namespace FBA
             sys.SelectDT(DirectionQuery.Remote, sql, out dt);
             dgvHist.SetDataSource(dt);
         }
-		void DeleteFromHistoryToolStripMenuItemClick(object sender, EventArgs e)
-		{
-	
-		}                
+		              
     }
 }
