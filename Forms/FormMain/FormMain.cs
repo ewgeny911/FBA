@@ -70,7 +70,7 @@ namespace FBA
             if (sender == MainMenu_N1_1) sys.ChangeUserPass();
             if (sender == MainMenu_N1_2) Environment.Exit(0);
             
-            if (sender == MainMenu_N2_1) sys.ShowDirectorySimple("Contract", "FormContract", "FormContractCard", null, null, null, null);
+            if (sender == MainMenu_N2_1) sys.ShowDirectorySimple("Договор", "FormContract", "FormContract", null, null, null, null);
             if (sender == MainMenu_N2_2) sys.ShowDirectorySimple("Face", null, null, null, null, null, null);
             if (sender == MainMenu_N2_3)
             { 
@@ -143,7 +143,7 @@ namespace FBA
                                  
                 if (!sys.InputValue("List of values", "Input links:", SizeMode.Large, ValueType.String, ref ValueText)) return;
                 string[] ListObjectID = ValueText.Split('\n');
-                sys.ShowDirectorySimple("ДогСтрах", "FormContract", "FormContract", null, ListObjectID, null, null);
+                sys.ShowDirectorySimple("Contract", "FormContract", "FormContract", null, ListObjectID, null, null);
             }
             
             //Открыть справку

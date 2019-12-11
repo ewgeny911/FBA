@@ -311,11 +311,11 @@ namespace FBA
         }
 
         ///Функции получения данных для MSSQL, Postgre, SQLite. Результат в DataGridView.  
-        public static bool SelectGV2(DirectionQuery direction, string SQL, DataGridViewFBA Grid)
+        public static bool SelectGV2(DirectionQuery direction, string sql, DataGridViewFBA Grid)
         {
             DateTime dt1 = DateTime.Now;
             System.Data.DataTable DT;
-            bool flag = SelectDT(direction, SQL, out DT);
+            bool flag = SelectDT(direction, sql, out DT);
             if (!flag) return false;
             Grid.DataSource = DT;
             DateTime dt2 = DateTime.Now;
@@ -324,13 +324,13 @@ namespace FBA
         }
 
         ///Функция получения данных для MSSQL, Postgre, SQLite. Результат в DataTable. Возвращает только одну таблицу.             
-        public static bool SelectDT(DirectionQuery direction, string SQL, out System.Data.DataTable DT)
+        public static bool SelectDT(DirectionQuery direction, string sql, out System.Data.DataTable dt)
         {       
-        	DT = null;
+        	dt = null;
             System.Data.DataSet DS;
-            if (!SelectDS(direction, SQL, out DS)) return false;
+            if (!SelectDS(direction, sql, out DS)) return false;
             if ((DS == null) || (DS.Tables.Count == 0)) return false;         
-            DT = DS.Tables[0];
+            dt = DS.Tables[0];
             return true;
         }
 
@@ -1728,7 +1728,7 @@ namespace FBA
         }
         
         /// <summary>
-        /// Получение списка колонок DT через точку с запятой. 
+        /// Получение списка колонок DT через разделитель separator. 
         /// </summary>
         /// <param name="dt">System.Data.DataTable</param>
         /// <param name="separator">Символ разделитель между колонками, напрмиер точка с запятой</param>
@@ -1738,7 +1738,23 @@ namespace FBA
             string[] columnNames = dt.Columns.Cast<DataColumn>().Select(col => col.Caption).ToArray();
             return string.Join(separator, columnNames);
         }
-            
+        
+		/// <summary>
+        /// Получение списка колонок DT через разделитель separator. 
+        /// </summary>
+        /// <param name="dt">System.Data.DataTable</param>        
+        /// <param name="separator">Символ разделитель между колонками, напрмиер точка с запятой</param>
+        /// <param name="rowNumber">Номер строки, значения которой нужно вернуть через separator</param>
+        /// <returns>Строка, содержащая все колонки разделённые символом разделителем</returns>
+        public static string DataTableRowValueWithSeparator(this System.Data.DataTable dt, string separator, int rowNumber)
+        {    
+            var values = new string[dt.Columns.Count];
+        	for (int j = 0; j < dt.Columns.Count; j++)
+        		values[j] = dt.Rows[rowNumber][j].ToString();
+        	return string.Join(separator, values);
+        	
+        } 
+                      
         /// <summary>
         /// Изменить порядок столбцов DataTable Пример: DT.SetColumnsOrder("Qty", "Unit", "Id");
         /// </summary>

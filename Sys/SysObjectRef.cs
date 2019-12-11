@@ -621,7 +621,7 @@ namespace FBA
         }
               
         /// <summary>
-        /// Показ созданного массива. Для отладки. 
+        /// Показ созданного массива. Только для отладки. 
         /// </summary>
         /// <param name="arrayName">Имя массива Ent, Ref</param>
         public void ShowArray(string arrayName)
@@ -1406,12 +1406,13 @@ namespace FBA
             string attrLookup;
             string setting;
             string errorMes = "Ошибка установки свойства: " + tagStr + " Устанавливаемое значение: " + value;
-            sys.ParseTag(tagStr, out queryName, out attr, out attrLookup, out setting);
+            sys.ParseTag(tagStr, out queryName, out attr, out attrLookup, out setting);  
+            if (attr == "") errorMes += "Не найден запрос или атрибут: " + tagStr + Var.CR + 
+            	                        "Необходимо указывать через точку имя запроса, затем значение, пример: Main1.Face";
             for (int i = 0; i < RefCount; i++)
             {            
             	if ((Ref[i, iQueryName] == queryName) && (Ref[i, iAttr] == attr))
-                {
-                   
+                {                   
                 	Control control = form.Controls.Find(Ref[i, iName], true).FirstOrDefault();
                     if (control != null) 
                     {
@@ -2067,8 +2068,9 @@ namespace FBA
 	        //const int tInsert      = 14; //Собранный запрос для сущности/таблицы.
 	        //const int tDelete      = 15; //Собранный запрос для сущности/таблицы.
 	        
-            //Все дело в сортировке.
-            //Сначала из общего массива атрибутов в ParserData.ArAttrParent, собираем в массив все таблицы, 
+            //Перед тем как составить список SQL запросов для записи объекта, нужно получить список таблиц в правильном порядке.
+            //Так как порядок играет роль - сначала нужно записать в таблицу родителя, затем потомка, потом потомка от потомка и т.д.
+            //Поэтому сначала из общего массива атрибутов в ParserData.ArAttrParent, собираем в массив все таблицы, 
             //которые так или иначе могут быть задействованы в сохранении объекта сущности.
             //Это для ускорения, для того, чтобы не гонять по большой таблице ParserData.ArAttrParent несколько циклов. Это для ускорения.
             //В результате по большому массиву ParserData.ArAttrParent нужен всего один проход цикла.
@@ -2266,7 +2268,7 @@ namespace FBA
                 //if (Ref[j, iAttr]      == Ref[j, iIDFieldName]) continue; //Поле автоинкремента в таблице игнорируем.               
                 if (Ref[i, iValueSave]   == "") continue;
                  
-                //Для каждого атрибута своя stateDate. Это нужно в случае, если сторичных таблиц несколько.
+                //Для каждого атрибута своя StateDate. Это нужно в случае, если сторичных таблиц несколько.
                 stateDate = Ref[i, iStateDate];
                 if (stateDate == "") stateDate = "1900-01-01 00:00:00";  
                 
@@ -2275,12 +2277,12 @@ namespace FBA
                 {
 	                if (insertFields != "") insertFields += ", ";
 	                if (insertValues != "") insertValues += ", ";
-	                insertFields = insertFields + Ref[i, iAttr];
+	                insertFields = insertFields + Ref[i, iFieldName];
 	                insertValues = insertValues + Ref[i, iValueSave];                                                      
                 }
                 //Для UPDATE формируем всегда.   				                             
                 if (updateValues != "") updateValues += ", ";
-                updateValues = updateValues + Ref[i, iAttr] + " = " + Ref[i, iValueSave];    
+                updateValues = updateValues + Ref[i, iFieldName] + " = " + Ref[i, iValueSave];    
  				
                 fieldCount++;
             }  
@@ -2289,7 +2291,7 @@ namespace FBA
             if (fieldCount == 0) 
             {            	            
             	//Если данных для INSERT или UPDATE нет, то делается INSERT, но только в случае, если команда INSERT и это первая главная таблица. 
-            	if  ((command == SQLCommand.Insert) && (firstInsertID)) //при UDATE не возвращаем INSERT.
+            	if  ((command == SQLCommand.Insert) && (firstInsertID)) //при UPDATE не возвращаем INSERT.
             		sql = "INSERT INTO " + tableName + " (" + insertFields + ") VALUES (" + insertValues + "); " + Var.CR;
                                    
             } else
@@ -2300,10 +2302,7 @@ namespace FBA
             		//UPDATE
 		            if (command == SQLCommand.Update)
 					{				               			           		
-						sql= "UPDATE " + tableName + " SET " + updateValues + " WHERE " + idFieldName + " = " + objectID + ";" + Var.CR;	               			               		            	        
-						//if ((tableType == "Hist") && (stateDate != ""))	           				        				
-						//  sqlUpdate = "UPDATE " + tableName + " SET " + UpdateValues + " WHERE " + IDFieldName + " = " + objectID + " AND StateDate = '" + stateDate + "';" + Var.CR;							            	          
-					}
+						sql= "UPDATE " + tableName + " SET " + updateValues + " WHERE " + idFieldName + " = " + objectID + ";" + Var.CR;	               			               		            	        					}
 		            
 		            //INSERT
 		            if (command == SQLCommand.Insert)
@@ -2311,13 +2310,27 @@ namespace FBA
 						sql = "INSERT INTO " + tableName + " (" + insertFields + ") VALUES (" + insertValues + "); " + Var.CR; //SELECT SCOPE_IDENTITY() AS ID " +                                                                                           
 		            }
             	}
-	                              	         
+	                        	            	           
 	            if (tableType == "Hist") //Если таблица историчная, то тут всегда один код. Независимо от того операция INSERT или UPDATE.       	                	           	            
-            	{	            			            			            
-            		 sql =  "INSERT INTO " +  tableName + " (" + idFieldName + ", EntityID, StateDate) " + Var.CR +
-    			         "SELECT " + objectID + ", " + entityID + ", '" + stateDate + "' WHERE NOT EXISTS " + Var.CR +
-    					 "(SELECT 1 FROM " + tableName + " WHERE " + idFieldName + " = " + objectID + " AND EntityID = " + entityID + " AND StateDate = '" + stateDate + "');" + Var.CR +
-            		     "UPDATE " + tableName + " SET " + updateValues + " WHERE " + idFieldName + " = " + objectID + " AND StateDate = '" + stateDate + "';" + Var.CR;	        					
+            	{	            			            			            	            	
+	            	sql = "SELECT * FROM " + tableName + " WHERE " + idFieldName + " = " + objectID + Var.CR + 
+  					      "AND StateDate = (SELECT MAX(StateDate) FROM " + tableName + " WHERE " + idFieldName + " = " + objectID + " AND StateDate < '" + stateDate + "') " + Var.CR +     
+                          "AND NOT EXISTS (SELECT 1 FROM " + tableName + " WHERE " + idFieldName + " = " + objectID + " AND EntityID = " + entityID + " AND StateDate = '" + stateDate + "');";
+	            	System.Data.DataTable dt;
+	            	sys.SelectDT(DirectionQuery.Remote, sql, out dt);
+	            	sql = "";
+	            	if (dt.Rows.Count > 0)
+	            	{
+	            		dt.Rows[0]["StateDate"] = stateDate;
+	            		string allFields = dt.DataTableCaptionWithSeparator(",");
+	            		string allValues = dt.DataTableRowValueWithSeparator(",", 1);
+	            		sql = sql + "INSERT INTO " +  tableName + " (" + allFields +") VALUES (" + allValues + "); ";
+	            	}
+	            		            		            
+	            	//sql =  "INSERT INTO " +  tableName + " (" + idFieldName + ", EntityID, StateDate) " + Var.CR +
+    			    //     "SELECT " + objectID + ", " + entityID + ", '" + stateDate + "' WHERE NOT EXISTS " + Var.CR +
+    				//sql = sql + "(SELECT 1 FROM " + tableName + " WHERE " + idFieldName + " = " + objectID + " AND EntityID = " + entityID + " AND StateDate = '" + stateDate + "');" + Var.CR +            		                 		
+            		sql = sql + "UPDATE " + tableName + " SET " + updateValues + " WHERE " + idFieldName + " = " + objectID + " AND StateDate = '" + stateDate + "';" + Var.CR;
             	}	            			          
             } 
             

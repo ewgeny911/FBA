@@ -28,6 +28,7 @@ namespace FBA
         {
         	this.tabControl1 = new System.Windows.Forms.TabControl();
         	this.tabPage1 = new System.Windows.Forms.TabPage();
+        	this.button1 = new System.Windows.Forms.Button();
         	this.label1 = new FBA.LabelFBA();
         	this.textBoxFBA5 = new FBA.TextBoxFBA();
         	this.label23 = new FBA.LabelFBA();
@@ -65,6 +66,7 @@ namespace FBA
         	// tabPage1
         	// 
         	this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+        	this.tabPage1.Controls.Add(this.button1);
         	this.tabPage1.Controls.Add(this.label1);
         	this.tabPage1.Controls.Add(this.textBoxFBA5);
         	this.tabPage1.Controls.Add(this.label23);
@@ -87,6 +89,16 @@ namespace FBA
         	this.tabPage1.Size = new System.Drawing.Size(589, 239);
         	this.tabPage1.TabIndex = 0;
         	this.tabPage1.Text = "Property";
+        	// 
+        	// button1
+        	// 
+        	this.button1.Location = new System.Drawing.Point(92, 208);
+        	this.button1.Name = "button1";
+        	this.button1.Size = new System.Drawing.Size(75, 23);
+        	this.button1.TabIndex = 75;
+        	this.button1.Text = "button1";
+        	this.button1.UseVisualStyleBackColor = true;
+        	this.button1.Click += new System.EventHandler(this.Button1Click);
         	// 
         	// label1
         	// 
@@ -140,7 +152,7 @@ namespace FBA
         	// 
         	// EditFBA9
         	// 
-        	this.EditFBA9.AttrBrief = "Main1.Contactor.Name";
+        	this.EditFBA9.AttrBrief = "Main1.Контрагент.Name";
         	this.EditFBA9.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
         	this.EditFBA9.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
         	this.EditFBA9.ButtonDeleteVisible = true;
@@ -194,7 +206,7 @@ namespace FBA
         	// 
         	// EditFBA7
         	// 
-        	this.EditFBA7.AttrBrief = "Main1.DocType.Name";
+        	this.EditFBA7.AttrBrief = "Main1.ТипДокумента.Name";
         	this.EditFBA7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
         	this.EditFBA7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
         	this.EditFBA7.ButtonDeleteVisible = true;
@@ -262,7 +274,7 @@ namespace FBA
         	// 
         	// EditFBA5
         	// 
-        	this.EditFBA5.AttrBrief = "Main1.Filial.Name";
+        	this.EditFBA5.AttrBrief = "Main1.Филиал.Name";
         	this.EditFBA5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
         	this.EditFBA5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
         	this.EditFBA5.ButtonDeleteVisible = true;
@@ -495,11 +507,36 @@ namespace FBA
         	this.tabPage2.PerformLayout();
         	this.ResumeLayout(false);
 
+            this.DoubleBuffered = true;
+        	this.FormSavePosition = true;
+        	this.Name = "FormContract";
+        	this.ShowInTaskbar = false;
+        	this.Text = "FormContract";
+        	this.tabControl1.ResumeLayout(false);
+        	this.tabPage1.ResumeLayout(false);
+        	this.tabPage1.PerformLayout();
+        	this.tabPage2.ResumeLayout(false);
+        	this.tabPage2.PerformLayout();
+        	this.ResumeLayout(false);
+
+            this.DoubleBuffered = true;
+        	this.FormSavePosition = true;
+        	this.Name = "FormContract";
+        	this.ShowInTaskbar = false;
+        	this.Text = "FormContract";        	
+        	this.tabControl1.ResumeLayout(false);
+        	this.tabPage1.ResumeLayout(false);
+        	this.tabPage1.PerformLayout();
+        	this.tabPage2.ResumeLayout(false);
+        	this.tabPage2.PerformLayout();
+        	this.ResumeLayout(false);
+
         }
         private System.Windows.Forms.Button btnSave;
         private TextBoxFBA textBoxFBA1;
         private FBA.LabelFBA label5;
         private EditFBA EditFBA9;  
+        private System.Windows.Forms.Button button1;
         private EditFBA EditFBA7;
         private FBA.LabelFBA label10;    
         private EditFBA EditFBA5;
@@ -511,6 +548,6 @@ namespace FBA
         private FBA.DateTimePickerFBA dateTimePickerFBA3;
         private TextBoxFBA textBoxFBA5;
         private FBA.LabelFBA label23;
-        private FBA.LabelFBA label1;
+        private FBA.LabelFBA label1;       
     }
 }

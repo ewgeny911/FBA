@@ -549,7 +549,7 @@ namespace FBA
             setting = (dotArray1.Count() > 1) ? dotArray1[1].ToUpper().Trim() : "";
             string[] dotArray2 = dotArray1[0].Split('.');
             if (dotArray2.Length > -1) queryName = dotArray2[0];
-            if (dotArray2.Length > 0) attr = dotArray2[1];
+            if (dotArray2.Length > 1) attr = dotArray2[1];
             for (int i = 2; i < dotArray2.Length; i++)
             {
                 if (attrLookup != "") attrLookup = attrLookup + ".";

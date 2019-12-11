@@ -32,7 +32,7 @@ namespace FBA
             const string StateDate = "";
             
             
-            Obj.SetQueryEntity(this, "Main1", "Contract", ID, StateDate, DirectionQuery.Remote);
+            Obj.SetQueryEntity(this, "Main1", "Договор", ID, StateDate, DirectionQuery.Remote);
             Obj.Read();
             Text = Obj.GetObjectName("Main1");
         }
@@ -42,10 +42,13 @@ namespace FBA
         {        
             //Obj.ShowArrayAll(); 
             //Пример записи объекта
-        	if (this.Obj.Write())
+            //Obj["Main1.DateStart"] = "2019-12-01 00:00:00";
+            //Obj["StartDate"] = "2019-12-01 00:00:00";
+            //Obj.SetStateDate("Main1", "2017-05-05 00:00:00");
+        	if (Obj.Write())
             {                
-                ID = this.Obj.GetObjectID("Main1");               
-                this.Text = this.Obj.GetObjectName("Main1");
+                ID = Obj.GetObjectID("Main1");               
+                this.Text = Obj.GetObjectName("Main1");
             };
         }
 
@@ -67,6 +70,10 @@ namespace FBA
 		void TextBoxFBA5KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 	
+		}
+		void Button1Click(object sender, EventArgs e)
+		{
+			Obj.ShowArray("Ref");
 		}
 
  
